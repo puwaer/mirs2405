@@ -1,0 +1,14 @@
+1) index.cgi の日本語コードは EUC で記述する必要ある。
+したがって index-utf8.cgi で編集したものを nkf -e で日本語コードを EUC に変換する。
+
+【コマンド使用例】
+
+nkf -e index-utf8.cgi > index.cgi
+
+
+2) workrecordのデータ格納領域のパーミッションについて
+cgi/record/data　ディレクトリにはwww-dataが内容を書き込むのでグループをwww-dataにしておき、グループの書き込み権限を付与しておく
+
+サーバの管理者権限が必要なので、教員が対応する
+
+

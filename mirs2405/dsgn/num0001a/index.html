@@ -1,0 +1,481 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MIRS2405-DSGN-0001 システム提案</title>
+    <link rel=stylesheet href="../../style.css" type="text/css">
+    <link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+    <script>
+      setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+    </script>
+
+  </head>
+
+  <body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+    <table class="table010">
+      <tr>
+        <th>名称</th>
+        <td class="title">システム提案書</td>
+      </tr>
+      <tr>
+        <th>番号</th>
+        <td class="title">MIRS2405-DSGN-0001</td>
+      </tr>
+    </table>
+    <br>
+
+    <table class="table010">
+      <tr>
+        <th>版数</th>
+        <th>最終更新日</th>
+        <th>作成</th>
+        <th>承認</th>
+        <th>改訂記事</th>
+      </tr>
+
+      <tr>
+        <!--版数(特に何もないならば"A01"でよい) -->
+        <td>A01</td>
+        <!--この記事の最終更新日。形式は"YYYY.MM.DD"-->
+        <td>2024.06.21</td>
+        <!--この記事を書いた人の名前-->
+        <td>幸航輝</td>
+        <!--承認者を書く(特にいないなら何も書かなくてよい)-->
+        <td>香川真人</td>
+        <!--改定記事(特に何もなければ初版でよい)-->
+        <td>初版</td>
+      </tr>
+    </table>
+
+    <h3>目次</h3>
+    <ul>
+      <li>
+        <a href="#1">1.はじめに</a>
+        <br>
+      </li>
+      <li>
+        <a href="#2">2.プロジェクトテーマ</a>
+        <br>
+      </li>
+      <li>
+        <a href="#3">3.製品について</a>
+        <br>
+      </li>
+      <li>
+        <a href="#4">4.主な機能</a>
+        <br>
+      </li>
+      <li>
+        <a href="#5">5.外観イメージ</a>
+        <br>
+      </li>
+      <li>
+        <a href="#6">6.開発項目</a>
+        <br>
+      </li>
+      <li>
+        <a href="#7">7.購入予定物品</a>
+        <br>
+      </li>
+    </ul>
+    <br>
+    <hr>
+
+    <a name="1">
+      <h2>1.はじめに</h2>
+    </a>
+    <h3>1.1.背景・ニーズ</h3>
+    <dl>
+      <dd>
+        <p>
+          配布物を配っている人がいたとき、それをコミュニケーションの観点から受け取りづらい。これは、様々な場面で似た事例は発生する。<br>
+          客引きロボット導入に向けた社会実験という論文より図1のようなことが示されている。<br>
+          <img src="../picture/pic1.png" width="350": block; margin: auto;>
+          <p class="fig">図1.Ratio of visited passers by for cake shop</p>
+          <p style="font-size: 8px;">図１,出典:
+            <a href="https://www.jstage.jst.go.jp/article/jrsj/35/4/35_35_334/_pdf" style="font-size: 8px;">
+              Field Trial for Social Robots that Invite Visitors to Stores</a>
+          </p>
+          この論文から分かること<br> 
+
+          <ul>
+            <li>調査をしたすべての店で立ち止まり率が大きく向上した（1.36％→14.84％）</li>
+            <li>配布物を確認する確率が大きく上昇した</li>
+            <li>ロボットを用いた集客で購買行動を行った客の比率が上がった（左図より2.40％→3.22％、約100人増加）</li>
+          </ul>        
+          この論文の結論より<br> 
+          <ul>
+            <li>一目見てもらいたい</li>
+            <li>配布物を自分で確認してもらいたい</li>
+            <li>その後のアクションに繋げたい</li>
+          </ul>
+          <p>このようなケースでロボットを用いるのは<strong style="font-size: 15px;">非常に有効</strong>である。<br> 
+        </p>
+      </dd>
+    </dl>
+    <br>
+
+    <h3>1.2.提案</h3>
+    <dl>
+      <dd>
+        <p>
+          物の配布の具体例を以下に示す<br>
+          <ul>
+            <li>チラシ配り</li>
+            <li>ティッシュ配り</li>
+            <li>夏のイベントのうちわ、瞬間冷却パック</li>
+            <li>冬のイベントのカイロ</li>
+            <li>高専祭のビンゴカード(身近な例)</li>
+          </ul>
+          以上より、<br>
+          物を配るという仕事の需要は未だに<strong style="font-size: 15px;">衰えておらず</strong><br>
+          むしろロボットの担う業務として<strong style="font-size: 15px;">適任</strong>であると考えられる。<br>
+          <br>
+        </p>
+      </dd>
+    </dl>
+    <br>
+
+
+    <a name="2">
+      <h2>2.プロジェクトテーマ・コンセプト</h2>
+    </a>
+    <dl>
+      <dd>
+        <br>
+        <center>
+          <font face="Arial" size="9" color="#000000">𝔊𝔘𝔏𝔏ℭ</font>
+          <div style="font-size: 14px;"><strong style="font-size: 19px;">G</strong>ive <strong style="font-size: 19px;">You L</strong>ink <strong style="font-size: 19px;">L</strong>ife <strong style="font-size: 19px;">C</strong>onnection</div>
+          <br>
+          <p>
+            GULLC(ガルク)は、衰えない</br>
+            <h3>"物を配る"</h3>
+            という需要に</br>
+            <h3>"ヒトより効果的に"</h3>
+            技術で答えるロボットです</br>
+          </p>
+        </br>
+          <img src="../../gullc_rogo.jpg" width="400": block; margin: auto;>
+          <p>図2.プロジェクトロゴ</p>
+        </center>
+      </dd>
+    </dl>
+    <br>
+
+    <a name="3">
+      <h2>3.製品について</h2>
+    </a>
+    <h3>3.1.コンセプト</h3>
+    <dl>
+      <dd>
+        <p>
+          𝔊𝔘𝔏𝔏ℭのコンセプトを以下に示す<br>
+          <h4>衰えない<strong class="text">"物を配る"</strong>という需要に<strong class="text">"ヒトより効果的に"</strong>技術で答える<br></h4>
+          <br>
+        </p>
+      </dd>
+    </dl>
+
+    <h3>3.2.特徴</h3>
+    <dl>
+      <dd>
+        <p>
+          上記を実現するためにロボットに搭載する特徴を以下に示す。<br>
+          <ul>
+            <li>自律して人に物を渡す</li>
+            <li>自律して物を認識</li>
+            <li>自律して物を取得</li>
+          </ul>
+        </p>
+      </dd>
+    </dl>
+    <br>
+
+    <a name="4">
+      <h2>4.主な機能</h2>
+    </a>
+
+    <h3>4.1.物を配る機能</h3>
+    <d1>
+      <dd>
+        ロボットに搭載する6つ機能を以下に示す<br>
+        <p>
+          <h3>1.人に物を渡す</h3>
+          <img src="../picture/pic7.png" width="200": block; margin: auto;>
+          <p class="fig">図3.人に物を渡す,イメージ図</p>
+          <br>
+
+          <h3>2.人を認識</h3>
+          <img src="../picture/pic6.png" width="200": block; margin: auto;>
+          <p class="fig">図4.人を認識,イメージ図</p>
+          <br>
+          
+          <h3>3.自律して対象を選択</h3>
+          <img src="../picture/pic5.png" width="300": block; margin: auto;>
+          <p class="fig">図5.自律して対象を選択,イメージ図</p>
+          <br>
+          
+          <h3>4.自動に人の受け取りやすい高さで渡す</h3>
+          <img src="../picture/pic3.png" width="300": block; margin: auto;>
+          <p class="fig">図6.自動に人の受け取りやすい高さで渡す,イメージ図</p>
+          <br>
+
+          <h3>5.自律して人をしばらくの間追従</h3>
+          <img src="../picture/pic2.png" width="300": block; margin: auto;>
+          <p class="fig">図7.自律して人をしばらくの間追従,イメージ図</p>
+          <br>
+
+          <h3>6.配布物を補充</h3>
+          <img src="../picture/pic4.png" width="300": block; margin: auto;>
+          <p class="fig">図8.配布物を補充,イメージ図</p>
+          <br>
+
+
+        </p>
+      </dd>
+    </d1>
+    <br>
+
+
+    <a name="5">
+      <h2>5.外観イメージ</h2>
+    </a>
+    <dl>
+      <dd>
+        <p>
+          外観図を図9,10,11,12に示す。
+          <center>
+            <img src="../picture/external1.png" width="300": block; margin: auto;>
+            <p class="fig">図9.外観図1</p>
+          </center>
+          <br>
+          <br>
+
+          <center>
+            <img src="../picture/external2.png" width="300": block; margin: auto;>
+            <p class="fig">図10.外観図2</p>
+          </center>
+          <br>
+          <br>
+
+          <center>
+            <img src="../picture/external3.png" width="300": block; margin: auto;>
+            <p class="fig">図11.外観図3</p>
+          </center>
+          <br>
+          <br>
+
+          <center>
+            <img src="../picture/external4.png" width="300": block; margin: auto;>
+            <p class="fig">図12.外観図4</p>
+          </center>
+        </p>
+      </dd>
+    </dl>
+    <br>
+
+    <a name="6">
+      <h2>6.開発項目</h2>
+    </a>
+    <dl>
+      <dd>
+        <p style="text-align:center;">表1.開発項目</p>
+        <table class="table010">
+          <tr>
+            <th>機能</th>
+            <th>優先度</th>
+            <th>開発項目</th>
+            <th>詳細機能</th>
+          </tr>
+          <tr>
+            <td rowspan="3">ものの受け渡し機能</td>
+            <td rowspan="3">A</td>
+            <td>ロボットアーム</td>
+            <td>ロボットアームによる受け渡し</td>
+          </tr>
+          <tr>
+            <td>物体認識</td>
+            <td>配布する物体の分類</td>
+          </tr>
+          <tr>
+            <td>人間認識(感知,分類,追尾)</td>
+            <td>配る対象の分類<br>
+              配布物に応じた対象の決定<br>
+              対象を追尾し配布物を渡す
+            </td>
+          </tr>
+
+          <tr>
+            <td rowspan="2">自立走行機能</td>
+            <td rowspan="2">A</td>
+            <td>自律走行</td>
+            <td>LiDARおよびエンコーダによる自己位置推定<br>
+                超音波センサによる衝突回避
+            </td>
+          </tr>
+          <tr>
+            <td>人間感知</td>
+            <td>機械学習を用いた人の認識<br>
+                人間の追尾と回避
+            </td>
+          </tr>
+
+          <tr>
+            <td rowspan="2">エレベータの乗降</td>
+            <td rowspan="2">B</td>
+            <td>ロボットアーム</td>
+            <td>アームによるボタンの押下<br>
+                目的地に応じたボタンの押し分け
+            </td>
+          </tr>
+          <tr>
+            <td>物体認識</td>
+            <td>ボタンの位置認識<br>
+                ドアの開閉の認識
+            </td>
+          </tr>
+
+          <tr>
+            <td rowspan="3">配布物補充機能</td>
+            <td rowspan="3">B</td>
+            <td>自己位置推定</td>
+            <td>配布物の保管場所への自律移動</td>
+          </tr>          
+          <tr>
+            <td>ロボットアーム</td>
+            <td>アームを用いた自動補充</td>
+          </tr>          
+          <tr>
+            <td>物体認識</td>
+            <td>補充が必要な配布物を自動で認識</td>
+          </tr>
+
+          <tr>
+            <td rowspan="1">マニュアルモード</td>
+            <td rowspan="1">B</td>
+            <td>リモコン</td>
+            <td>リモコンで操作できる機能<br>
+                自律走行不能な状況に陥った際の安全策
+              </td>
+          </tr>
+
+          <tr>
+            <td rowspan="2">校内案内機能</td>
+            <td rowspan="2">C</td>
+            <td>音声案内</td>
+            <td>合成音声を用いた音声案内</td>
+          </tr>
+          <tr>
+            <td>表示案内</td>
+            <td>ディスプレイ等への地図やイベント情報、ロボットのステータスの表示</td>
+          </tr>
+
+          <tr>
+            <td rowspan="3">写真撮影機能</td>
+            <td rowspan="3">C</td>
+            <td>ロボットアーム</td>
+            <td>客のスマホを用いた写真撮影</td>
+          </tr>
+          <tr>
+            <td>音声案内</td>
+            <td>合成音声を用いた音声案内</td>
+          </tr>
+          <tr>
+            <td>表示案内</td>
+            <td>写真の撮影方法(ロボットの使い方)の表示</td>
+          </tr>
+          </table>
+      </br>
+      </dd>
+    </dl>
+    <br>
+
+    <a name="7">
+      <h2>7.購入予定物品</h2>
+    </a>
+    <dl>
+      <dd>
+        <p style="text-align:center;">表2.購入予定物品</p>
+          <table class="table010">
+            <tr>
+              <th>物品</th>
+              <th>型番</th>
+              <th>購入先</th>
+              <th>価格</th>
+              <th>個数</th>
+              <th>小計</th>
+            </tr>
+            <tr>
+              <td>24vDCギアモーター 100kg.cm/32rpm</td>
+              <td>-</td>
+              <td><a href="https://www.omc-stepperonline.com/ja/%E3%83%96%E3%83%A9%E3%82%B7%E4%BB%98%E3%81%8D-24v-dc-%E3%82%AE%E3%82%A2%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC100kg-cm-32rpm-w-149-1-%E8%A7%92%E5%B9%B3%E3%82%AE%E3%82%A2%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9-fga-43246000-g149">stepperonline</td>
+              <td>2,058</td>
+              <td>2</td>
+              <td>4,116</td>
+            </tr>
+            <tr>
+              <td>シリアルバスサーボ 4~7.4V/300°/19kg</td>
+              <td>SCS215</td>
+              <td><a href="https://www.switch-science.com/products/7488">switch-science</td>
+              <td>2,420</td>
+              <td>2</td>
+              <td>4,840</td>
+            </tr>
+            <tr>
+              <td>タイミングベルト 7.9(mm)x939.8(mm)</td>
+              <td>370XL031</td>
+              <td><a href="https://www.monotaro.com/g/00384182/">モノタロウ</td>
+              <td>1,969</td>
+              <td>1</td>
+              <td>1,969</td>
+            </tr>
+            <tr>
+              <td>リニアシャフト 100mm</td>
+              <td>MYSAA10×100</td>
+              <td><a href="https://www.monotaro.com/p/3296/5414/?t.q=%8A%DB%96_%208mm">モノタロウ</td>
+              <td>527</td>
+              <td>1</td>
+              <td>527</td>
+            </tr>
+            <tr>
+              <td>リニアシャフト 200mm</td>
+              <td>SN10-200-S</td>
+              <td><a href="https://www.monotaro.com/p/7606/0304/?fem1=1">モノタロウ</td>
+              <td>1,529</td>
+              <td>1</td>
+              <td>1,529</td>
+            </tr>
+            <tr>
+              <td>合計金額</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>14,036</td>
+            </tr>
+            <tr>
+              <td>残金</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>5,964</td>
+            </tr>
+          </table>
+      </dd>
+    </dl>
+    <br>
+
+
+    <br>
+    <hr>
+    <br>
+    <address>
+      <a href="http://www2.denshi.numazu-ct.ac.jp/mirsdoc2/" target="_self">MIRS DATABASE</a>
+    </address>
+
+  </body>
+</html>
