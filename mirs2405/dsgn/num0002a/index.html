@@ -71,15 +71,15 @@
         <br>
       </li>
       <li>
-        <a href="#ch4">3-1. メカ二クス</a>
+        <a href="#ch4">　3.1. メカ二クス</a>
         <br>
       </li>
       <li>
-        <a href="#ch5">3-2. エレクトロニクス</a>
+        <a href="#ch5">　3.2. エレクトロニクス</a>
         <br>
       </li>
       <li>
-        <a href="#ch6">3-3. ソフトウェア</a>
+        <a href="#ch6">　3.3. ソフトウェア</a>
         <br>
       </li>
       <li>
@@ -167,8 +167,7 @@
         
         <div>
         <h2 id="ch3">3. システム構成</h2>
-
-        <b>3-1. メカトロニクス</b>
+        <h3>3.1.メカトロニクス</h3>
         <div>
             <center>
                 <table>
@@ -183,42 +182,10 @@
                             </tr>
                         </table>
                     </center>
-            <center>
-                <table>
-                            <tr>
-                                <td><img src="カメラ角度調整機構図.png" width="600" ></td>
-                                
-                    </tr>
-                    <td></td>
-                    <tr>
-                    <td align="center">fig.2 カメラ角度調整機構図</td>
-                                
-                            </tr>
-                        </table>
-                    </center>
-            <center>
-                <table>
-                            <tr>
-                                <td><img src="昇降部分.png" width="600" ></td>
-                                
-                    </tr>
-                    <td></td>
-                    <tr>
-                    <td align="center">fig.3 </td>
-                                
-                            </tr>
-                        </table>
-                    </center>
-            PuNITでは３つの機構を用いている。以下にそれぞれの機構の説明を加える。<br>
-            ・カメラ角度調整機構(fig.2)<br>
-            <ul> カメラを3Dプリンタ製のマウントに固定し、マウントごと両サイドからサーボモータで回転させて角度を調整する。</ul> 
-            ・昇降機能(fig.３)<br>
-            <ul> ナットに固定した歯車がモーターによって回転することにより、ボルトを伝って昇降する</ul>    
-    
         </div>
 
         <div>
-        <b>3-2. エレクトロニクス</b>
+        <h3>3.2.エレクトロニクス</h3>
         <div>
             全体の基本接続図をfig.2に示す。
 	        <center>
@@ -234,79 +201,7 @@
             </center>    
             表1に電源仕様を示す。
             <table class="table010">
-                <caption><center>表1.電源仕様</center></caption>
-                 <tr>
-                    <th>供給元</th>
-                    <th>供給電源電圧</th>
-                    <th>供給先</th>
-                 </tr>       
-                 <tr>
-                     <td>制御用バッテリ</td>
-                     <td>5.0V</td>
-                     <td>Raspberry Pi</td>
-                 </tr>
-                 <tr>
-                    <td>駆動用バッテリ</td>
-                    <td>7.2V</td>
-                    <td>モータドライバ</td>    
-                </tr>
-                
-            </table>
-            表2に表示部・操作部を示す。            
-            <table class="table010">
-                <caption><center>表2.表示部・操作部仕様</center></caption>
-                 <tr>
-                    <th>名称</th>
-                    <th>使用用途</th>
-                 </tr>       
-                 <tr>
-                     <td>緊急停止スイッチ</td>
-                     <td>緊急時にロボットを動作を強制停止させる</td>
-                 </tr>
-                 
-            </table>
-            表3にセンサ・I/F仕様を示す。
-            <table class="table010">
-                <caption><center>表3.センサ・I/F仕様</center></caption>
-                 <tr>
-                    <th>名称</th>
-                    <th>使用用途</th>
-                    <th>通信・接続方式</th>
-                 </tr>       
-                 <tr>
-                     <td>撮影用カメラ</td>
-                     <td>授業風景などの写真を撮影する</td>
-                     <td>USB</td>
-                 </tr>
-                 <tr>
-                    <td>RP LiDAR</td>
-                    <td>障害物といった周囲の情報を読み込み、高度な走行を実現する</td>
-                    <td>USB</td>    
-                </tr>
-                <tr>
-                    <td>超音波センサ</td>
-                    <td>障害物を検知する（LiDARの代替策）</td>
-                    <td>デジタルI/O  I2C</td>    
-                </tr>
-                <tr>
-                    <td>タッチセンサ</td>
-                    <td>衝突を検知する</td>
-                    <td>デジタルI/O</td>    
-                </tr>
-                <tr>
-                    <td>スピーカー（検討中）</td>
-                    <td>写真撮影時やコミュニケーションをとるときなどに使用</td>
-                    <td>USB</td>    
-                </tr>
-                <tr>
-                    <td>フォトリフレクタ</td>
-                    <td>ライントレース走行にて使用</td>
-                    <td>デジタルI/O</td>    
-                </tr>
-            </table>
-            表4に駆動系の仕様を示す。
-            <table class="table010">
-                <caption><center>表4.駆動系仕様</center></caption>
+                <caption><center>表2.駆動系仕様</center></caption>
                  <tr>
                     <th>名称</th>
                     <th>使用用途</th>
@@ -325,17 +220,18 @@
                 <tr>
                     <td>サーボモータ(2個)</td>
                     <td>カメラの向きを変える</td>
-  
                 </tr>
             </table>
-	        <br>
-            
+	        <br>    
        </div>
-       <b>3-3. ソフトウェア</b>
+
+       
+       <h3>3.3.ソフトウェア</h3>
+       <div>ソフトウェアのシステム構成を以下に示す。</div>
        <table class="table010">
         <caption>
             <center>
-                表5.ソフトウェア機能概要
+                表3.ソフトウェア機能概要
             </center>
         </caption>
         <tr>
@@ -344,68 +240,53 @@
             <th>詳細</th>
         </tr>
         <tr>
-            <td rowspan="4">jetson nano</td>
-            <td>顔学習</td>
-            <td>事前に顔写真を登録し、学習させる</td>
+            <td rowspan="3">-</td>
+            <td>ソフトウェア統合</td>
+            <td></td>
         </tr>
         <tr>
-            <td>顔認証</td>
-            <td>学習データをもとに、撮影した写真において顔認証を行う</td>
+            <td>全体統合</td>
+            <td></td>
         </tr>
         <tr>
-            <td>raspiとの送受信</td>
-            <td>raspiから写真を受け取る。顔認証後、アップロードの可否などのデータをraspiに送信する</td>
+            <td>デバイス間通信(Arduino⇆Raspberry Pi⇆Jetson Nano)</td>
+            <td></td>
         </tr>
         <tr>
-            <td>ロボット起動</td>
-            <td>ロボットを起動させたらスタンドアローンで動作できるようにする</td>
+            <td rowspan="2">arduino uno</td>
+            <td>走行体制御プログラム</td>
+            <td></td>
         </tr>
         <tr>
-            <td rowspan="6">Raspberry Pi</td>
-            <td>走行</td>
-            <td>各センサを用い、教室などの撮影場所へ移動する</td>
+            <td>ロボットアーム制御プログラム</td>
+            <td></td>
         </tr>
         <tr>
-            <td>写真撮影</td>
-            <td>カメラの画角を調整し、webカメラで写真を作成する</td>
+            <td rowspan="2">raspberry pi</td>
+            <td>I/O操作・監視プログラム</td>
+            <td></td>
         </tr>
         <tr>
-            <td>jetsonとの送受信</td>
-            <td>撮影した写真をjetsonに転送する・顔認証の結果をjetsonから受け取る</td>
+            <td>ロボットアーム角度計算プログラム</td>
+            <td></td>
         </tr>
         <tr>
-            <td>Driveへの写真の転送</td>
-            <td>Google Driveに撮影した写真を転送する</td>
+            <td rowspan="3">jetson nano</td>
+            <td>画像認識</td>
+            <td></td>
         </tr>
         <tr>
-            <td>SpreadSheetへのデータ入力</td>
-            <td>撮影した写真のデータをSpreadSheetに入力する</td>
+            <td>対話型AI</td>
+            <td></td>
         </tr>
         <tr>
-            <td>Driveの画像&データ削除</td>
-            <td>削除申請に基づき、Drive上の画像とデータを削除する</td>
+            <td>SRAM(RPLiDAR)</td>
+            <td></td>
         </tr>
         <tr>
-            <td rowspan="3">Arduino Mega</td>
-            <td>モータ制御</td>
-            <td>走行用および撮影カメラ昇降用モータの制御を行う</td>
-        </tr>
-        <tr>
-            <td>raspiとの通信</td>
-            <td>削除申請に基づき、Drive上の画像とデータを削除する</td>
-        </tr>
-        <tr>
-            <td>緊急停止</td>
-            <td>緊急停止スイッチを押すと、ロボットが緊急停止する。スイッチを戻して再びロボットを起動すると停止前の動きをリセットして新しく通常の動作を行う</td>
-        </tr>
-        <tr>
-            <td rowspan="2">Web</td>
-            <td>写真の自動アップロード</td>
-            <td>Google apps scriptを用いてWebサイトに写真のアップロードを行う</td>
-        </tr>
-        <tr>
-            <td>Webサイト</td>
-            <td>HTML,CSS等を用いて、Webサイトの装飾を行う</td>
+            <td rowspan="1">Web</td>
+            <td>Webアプリ</td>
+            <td></td>
         </tr>
     </table>
     </div>
@@ -521,11 +402,6 @@
         </dd>
       </dl>
       <br>
-	   
-      
-   
-    
-
     <br>
     <hr>
     <br>
