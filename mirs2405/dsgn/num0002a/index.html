@@ -1,0 +1,475 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MIRS2405-DSGN-0001 システム提案</title>
+    <link rel=stylesheet href="../../style.css" type="text/css">
+    <link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+    <script>
+      setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+    </script>
+
+  </head>
+
+  <body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+
+    <table class="table010">
+        <tr>
+          <th>名称</th>
+          <td class="title">基本設計書</td>
+        </tr>
+        <tr>
+          <th>番号</th>
+          <td class="title">MIRS2405-DSGN-0002</td>
+        </tr>
+      </table>
+      <br>
+  
+      <table class="table010">
+        <tr>
+          <th>版数</th>
+          <th>最終更新日</th>
+          <th>作成</th>
+          <th>承認</th>
+          <th>改訂記事</th>
+        </tr>
+  
+        <tr>
+          <!--版数(特に何もないならば"A01"でよい) -->
+          <td>A01</td>
+          <!--この記事の最終更新日。形式は"YYYY.MM.DD"-->
+          <td>2024.0.19</td>
+          <!--この記事を書いた人の名前-->
+          <td>幸航輝</td>
+          <!--承認者を書く(特にいないなら何も書かなくてよい)-->
+          <td></td>
+          <!--改定記事(特に何もなければ初版でよい)-->
+          <td>初版</td>
+        </tr>
+      </table>
+
+<!-- ここから本文-->
+    <br>
+    <hr>
+    <br>
+
+    <h3>目次</h3>
+    <ul>
+      <li>
+        <a href="#ch1">1.システム概要</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch2">2.機能・性能</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch3">3.システム構成</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch4">3-1. メカ二クス</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch5">3-2. エレクトロニクス</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch6">3-3. ソフトウェア</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch7">4. 開発工程表</a>
+        <br>
+      </li>
+      <li>
+        <a href="#ch8">5. 購入物品一覧</a>
+        <br>
+      </li>
+    </ul>
+    <br>
+    <hr>
+
+        <div>
+            <h2 is="ch1">1. システム概要</h2>
+		    <br>
+            <br>
+        </div>
+
+        <div>
+            <h2 id="ch2">2. 性能・機能</h2>
+            gullcは以下の機能・性能を備えている。<br>
+            <h3>2.1.物を配る機能</h3>
+            <d1>
+              <dd>
+                物を配る機能を実現するために以下の4つの機能を実現する<br>
+                <p>
+                  <h3>1.対象を選択する機能</h3>
+                  ・配布物に応じて依頼主が対象の優先度を選択する（男性向けの配布物は男性を対象に…など）<br>
+                  ・配布物の効果と配布の効率を向上させる<br>
+                  <br>
+                  <img src="../picture/pic4.png" width="300": block; margin: auto;>
+                  <p class="fig">図3.対象を選択する,イメージ図</p>
+                  <br>
+        
+                  <h3>2.しばらくの間追従する機能</h3>
+                  ・ロボットが渡す対象を選択→対象を一定時間追従する<br>
+                  ・対象に認識してもらうことで配布の効率を向上させる<br>
+                  <img src="../picture/pic6.png" width="200": block; margin: auto;>
+                  <img src="../picture/pic6.png" width="200": block; margin: auto;>
+                  <p class="fig">図4.人を認識,イメージ図</p>
+                  <br>
+                  
+                  <h3>3.受け取りやすい高さで手渡しする機能</h3>
+                  <img src="../picture/pic5.png" width="300": block; margin: auto;>
+                  <p class="fig">図5.自律して対象を選択,イメージ図</p>
+                  <br>
+                  
+                  <h3>4.配布物を補充する機能</h3>
+                  <img src="../picture/pic3.png" width="300": block; margin: auto;>
+                  <p class="fig">図6.自動に人の受け取りやすい高さで渡す,イメージ図</p>
+                  <br>
+        
+                  <h3>5.自律して人をしばらくの間追従</h3>
+                  <img src="../picture/pic2.png" width="300": block; margin: auto;>
+                  <p class="fig">図7.自律して人をしばらくの間追従,イメージ図</p>
+                  <br>
+        
+                  <h3>6.配布物を補充</h3>
+                  <img src="../picture/pic4.png" width="300": block; margin: auto;>
+                  <p class="fig">図8.配布物を補充,イメージ図</p>
+                  <br>        
+        </div>
+        
+        <div>
+        <h2 id="ch3">3. システム構成</h2>
+
+        <b>3-1. メカトロニクス</b>
+        <div>
+            <center>
+                <table>
+                            <tr>
+                                <td><img src="all_robot.png" width="400" ></td>
+                                
+                    </tr>
+                    <td></td>
+                    <tr>
+                    <td align="center">fig.1 全体図</td>
+                                
+                            </tr>
+                        </table>
+                    </center>
+            <center>
+                <table>
+                            <tr>
+                                <td><img src="カメラ角度調整機構図.png" width="600" ></td>
+                                
+                    </tr>
+                    <td></td>
+                    <tr>
+                    <td align="center">fig.2 カメラ角度調整機構図</td>
+                                
+                            </tr>
+                        </table>
+                    </center>
+            <center>
+                <table>
+                            <tr>
+                                <td><img src="昇降部分.png" width="600" ></td>
+                                
+                    </tr>
+                    <td></td>
+                    <tr>
+                    <td align="center">fig.3 </td>
+                                
+                            </tr>
+                        </table>
+                    </center>
+            PuNITでは３つの機構を用いている。以下にそれぞれの機構の説明を加える。<br>
+            ・カメラ角度調整機構(fig.2)<br>
+            <ul> カメラを3Dプリンタ製のマウントに固定し、マウントごと両サイドからサーボモータで回転させて角度を調整する。</ul> 
+            ・昇降機能(fig.３)<br>
+            <ul> ナットに固定した歯車がモーターによって回転することにより、ボルトを伝って昇降する</ul>    
+    
+        </div>
+
+        <div>
+        <b>3-2. エレクトロニクス</b>
+        <div>
+            全体の基本接続図をfig.2に示す。
+	        <center>
+                <table>
+                    <tr>
+                        <td><img src="エレキ配線図.png" width="800" height="500"></td>          
+                    </tr>
+                    <td></td>
+                    <tr>
+                        <td align="center">fig.4 全体の基本接続図</td>         
+                    </tr>
+                </table>
+            </center>    
+            table1に電源仕様を示す。
+            <table class="table010">
+                <caption><center>table.1 電源仕様</center></caption>
+                 <tr>
+                    <th>供給元</th>
+                    <th>供給電源電圧</th>
+                    <th>供給先</th>
+                 </tr>       
+                 <tr>
+                     <td>制御用バッテリ</td>
+                     <td>5.0V</td>
+                     <td>Raspberry Pi</td>
+                 </tr>
+                 <tr>
+                    <td>駆動用バッテリ</td>
+                    <td>7.2V</td>
+                    <td>モータドライバ</td>    
+                </tr>
+                
+            </table>
+            table2に表示部・操作部を示す。            
+            <table class="table010">
+                <caption><center>table.2 表示部・操作部仕様</center></caption>
+                 <tr>
+                    <th>名称</th>
+                    <th>使用用途</th>
+                 </tr>       
+                 <tr>
+                     <td>緊急停止スイッチ</td>
+                     <td>緊急時にロボットを動作を強制停止させる</td>
+                 </tr>
+                 
+            </table>
+            table3にセンサ・I/F仕様を示す。
+            <table class="table010">
+                <caption><center>table.3 センサ・I/F仕様</center></caption>
+                 <tr>
+                    <th>名称</th>
+                    <th>使用用途</th>
+                    <th>通信・接続方式</th>
+                 </tr>       
+                 <tr>
+                     <td>撮影用カメラ</td>
+                     <td>授業風景などの写真を撮影する</td>
+                     <td>USB</td>
+                 </tr>
+                 <tr>
+                    <td>RP LiDAR</td>
+                    <td>障害物といった周囲の情報を読み込み、高度な走行を実現する</td>
+                    <td>USB</td>    
+                </tr>
+                <tr>
+                    <td>超音波センサ</td>
+                    <td>障害物を検知する（LiDARの代替策）</td>
+                    <td>デジタルI/O  I2C</td>    
+                </tr>
+                <tr>
+                    <td>タッチセンサ</td>
+                    <td>衝突を検知する</td>
+                    <td>デジタルI/O</td>    
+                </tr>
+                <tr>
+                    <td>スピーカー（検討中）</td>
+                    <td>写真撮影時やコミュニケーションをとるときなどに使用</td>
+                    <td>USB</td>    
+                </tr>
+                <tr>
+                    <td>フォトリフレクタ</td>
+                    <td>ライントレース走行にて使用</td>
+                    <td>デジタルI/O</td>    
+                </tr>
+            </table>
+            table4に駆動系の仕様を示す。
+            <table class="table010">
+                <caption><center>table4. 駆動系仕様</center></caption>
+                 <tr>
+                    <th>名称</th>
+                    <th>使用用途</th>
+                 </tr>   
+
+                 <tr>
+                     <td>走行用モータ</td>
+                     <td>撮影場所等への移動をする</td>
+                  
+                 </tr>
+                 <tr>
+                    <td>昇降用モータ</td>
+                    <td>カメラの高さ調整をする</td>
+               
+                </tr>
+                <tr>
+                    <td>サーボモータ(2個)</td>
+                    <td>カメラの向きを変える</td>
+  
+                </tr>
+            </table>
+	        <br>
+            
+       </div>
+       <b>3-3. ソフトウェア</b>
+       <table class="table010">
+        <caption>
+            <center>
+                table.5 ソフトウェア機能概要
+            </center>
+        </caption>
+        <tr>
+            <th>動作環境</th>
+            <th>機能</th>
+            <th>詳細</th>
+        </tr>
+        <tr>
+            <td rowspan="4">jetson nano</td>
+            <td>顔学習</td>
+            <td>事前に顔写真を登録し、学習させる</td>
+        </tr>
+        <tr>
+            <td>顔認証</td>
+            <td>学習データをもとに、撮影した写真において顔認証を行う</td>
+        </tr>
+        <tr>
+            <td>raspiとの送受信</td>
+            <td>raspiから写真を受け取る。顔認証後、アップロードの可否などのデータをraspiに送信する</td>
+        </tr>
+        <tr>
+            <td>ロボット起動</td>
+            <td>ロボットを起動させたらスタンドアローンで動作できるようにする</td>
+        </tr>
+        <tr>
+            <td rowspan="6">Raspberry Pi</td>
+            <td>走行</td>
+            <td>各センサを用い、教室などの撮影場所へ移動する</td>
+        </tr>
+        <tr>
+            <td>写真撮影</td>
+            <td>カメラの画角を調整し、webカメラで写真を作成する</td>
+        </tr>
+        <tr>
+            <td>jetsonとの送受信</td>
+            <td>撮影した写真をjetsonに転送する・顔認証の結果をjetsonから受け取る</td>
+        </tr>
+        <tr>
+            <td>Driveへの写真の転送</td>
+            <td>Google Driveに撮影した写真を転送する</td>
+        </tr>
+        <tr>
+            <td>SpreadSheetへのデータ入力</td>
+            <td>撮影した写真のデータをSpreadSheetに入力する</td>
+        </tr>
+        <tr>
+            <td>Driveの画像&データ削除</td>
+            <td>削除申請に基づき、Drive上の画像とデータを削除する</td>
+        </tr>
+        <tr>
+            <td rowspan="3">Arduino Mega</td>
+            <td>モータ制御</td>
+            <td>走行用および撮影カメラ昇降用モータの制御を行う</td>
+        </tr>
+        <tr>
+            <td>raspiとの通信</td>
+            <td>削除申請に基づき、Drive上の画像とデータを削除する</td>
+        </tr>
+        <tr>
+            <td>緊急停止</td>
+            <td>緊急停止スイッチを押すと、ロボットが緊急停止する。スイッチを戻して再びロボットを起動すると停止前の動きをリセットして新しく通常の動作を行う</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Web</td>
+            <td>写真の自動アップロード</td>
+            <td>Google apps scriptを用いてWebサイトに写真のアップロードを行う</td>
+        </tr>
+        <tr>
+            <td>Webサイト</td>
+            <td>HTML,CSS等を用いて、Webサイトの装飾を行う</td>
+        </tr>
+    </table>
+    </div>
+
+    <div>
+        <h2 id="ch7">4. 開発工程表</h2>
+        以下に開発工程表のリンクを示す。<br>
+        <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303/dsgn/num0002a/基本設計ガントチャートMIRS2303.pdf" target="_self">MIRS2303 開発工程表</a><br>
+    </div>
+
+    <h2 id="ch8">5. 購入物品一覧</h2>
+    <table class="table010">
+        <caption>
+            <center>
+                table.6 購入物品一覧
+            </center>
+        </caption>
+        <tr>
+            <th>品名</th>
+            <th>単価</th>
+            <th>個数</th>
+            <th>用途</th>
+            <th>小計</th>
+            <th>備考</th>
+            <th>URL</th>
+        </tr>
+        <tr>
+            <td>φ8寸切りボルト(１ｍ)</td>
+            <td>722</td>
+            <td>1</td>
+            <td>昇降用</td>
+            <td>722</td>
+            <td></td>
+            <td><a href="https://onl.bz/15afQu3">https://onl.bz/15afQu3</a></td>
+        </tr>
+        <tr>
+            <td>ゴムロール</td>
+            <td>395</td>
+            <td>1</td>
+            <td>タイヤの制作</td>
+            <td>395</td>
+            <td></td>
+            <td><a href="https://www.monotaro.com/p/2706/8737/">https://www.monotaro.com/p/2706/8737/</a></td>
+        </tr>
+        <tr>
+            <td>L字金具</td>
+            <td>62</td>
+            <td>15</td>
+            <td>角材の固定</td>
+            <td>930</td>
+            <td></td>
+            <td><a href="https://www.monotaro.com/p/7649/6404/?t.q%3D76496404=">https://onl.sc/1Wt5bQr</a></td>
+        </tr>
+        <tr>
+            <td>micro SDカード(32GB)</td>
+            <td>813</td>
+            <td>1</td>
+            <td>jetson nano用</td>
+            <td>813</td>
+            <td></td>
+            <td><a href="https://onl.la/VEM1jtK">https://onl.la/VEM1jtK</a></td>
+        </tr>
+        <tr>
+            <td>RPLiDAR A1M8-R6</td>
+            <td>14,916</td>
+            <td>1</td>
+            <td>走行&障害物検知用</td>
+            <td>14,916</td>
+            <td></td>
+            <td><a href="https://ssci.to/8544">https://ssci.to/8544</a></td>
+        </tr>
+    </table>
+	   
+      
+   
+    
+
+    <br>
+    <hr>
+    <br>
+
+    <address>
+        <a href="http://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303" target="_self">MIRS2303ドキュメント管理台帳へ</a>
+    </address>
+
+</body>
+</html>
