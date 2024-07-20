@@ -191,7 +191,7 @@
         <div>
         <h3>3.2.エレクトロニクス</h3>
         <div>
-            全体の基本接続図を表.2に示す。
+            全体の接続図を図8に示す。
 	        <center>
                 <table>
                     <tr>
@@ -199,33 +199,57 @@
                     </tr>
                     <td></td>
                     <tr>
-                        <td align="center">fig.4 全体の基本接続図</td>         
+                        <td align="center">図8 全体の接続図</td>         
                     </tr>
                 </table>
             </center>    
             表1に電源仕様を示す。
             <table class="table010">
-                <caption><center>表3.駆動系仕様</center></caption>
+                <caption><center>表1 各種電源仕様</center></caption>
                  <tr>
                     <th>名称</th>
-                    <th>使用用途</th>
+                    <th>供給先</th>
+                    <th>出力電圧[V]</th>
+                    <th>最大出力電流[A]</th>
+                    <th>必要個数</th>
                  </tr>   
 
                  <tr>
-                     <td>走行用モータ</td>
-                     <td>撮影場所等への移動をする</td>
+                     <td>サーボモーター用電源回路</td>
+                     <td>SCS215 ×2</td>
+                     <td>7.2</td>
+                     <td>5</td>
+                     <td>1</td>
                   
                  </tr>
+
                  <tr>
-                    <td>昇降用モータ</td>
-                    <td>カメラの高さ調整をする</td>
+                    <td>ターンテーブル用降圧回路</td>
+                    <td>KS5N-IG36P</td>
+                    <td>12</td>
+                    <td>5</td>
+                    <td>1</td>
                
                 </tr>
+
                 <tr>
-                    <td>サーボモータ(2個)</td>
-                    <td>カメラの向きを変える</td>
+                  <td>関節モーター用降圧回路</td>
+                  <td>JC-578VB or LC-578VB</td>
+                  <td>12</td>
+                  <td>30</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>ポンプ駆動用降圧回路</td>
+                  <td>RS-540SH</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>1</td>
                 </tr>
             </table>
+            図8ではモータ用降圧回路を1つのブロックで示しているが、実際は表1の通りターンテーブル用降圧回路、ポンプ駆動用降圧回路を一つずつ、関節モーター用降圧回路を3つ製作する。<br>
+
 	        <br>    
        </div>
 
@@ -288,7 +312,7 @@
             <td></td>
         </tr>
         <tr>
-            <td>SRAM(RPLiDAR)</td>
+            <td>SLAM(RPLiDAR)</td>
             <td></td>
         </tr>
         <tr>
