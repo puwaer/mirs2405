@@ -249,7 +249,10 @@
                 </tr>
             </table>
             図8ではモータ用降圧回路を1つのブロックで示しているが、実際は表1の通りターンテーブル用降圧回路、ポンプ駆動用降圧回路を一つずつ、関節モーター用降圧回路を3つ製作する。<br>
-
+            <p>・サーボモーター用電源回路</p>
+            　サーボモーター用の電源回路はNJM2360ADを用いたDCDCコンバータとする。<br>
+            <p>・ターンテーブル,関節モーター,ポンプ駆動用降圧回路</p>
+            　これらの回路も降圧チョッパ方式であるが、スイッチングはPICマイコンで行う。<br>
 	        <br>    
        </div>
 
@@ -414,13 +417,95 @@
                 <td>1</td>
                 <td>1,199</td>
               </tr>
+
+              <tr>
+                <td>DCDCコンバータ制御用IC NJM2360AD</td>
+                <td>NJM2360AD</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g112365/">秋月電子通商</td>
+                <td>70</td>
+                <td>1</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>丸ピンICソケット 8P</td>
+                <td>2227MC-08-03</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g100035/">秋月電子通商</td>
+                <td>15</td>
+                <td>1</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>電解コンデンサ 50V 470μF (1テープ)</td>
+                <td>ELXJ500ETD471MK25S</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g107766/">秋月電子通商</td>
+                <td>100</td>
+                <td>1</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>トロイダルコイル 68μH 9A</td>
+                <td>TCV-680M-9A-8026</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g106690/">秋月電子通商</td>
+                <td>100</td>
+                <td>1</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>トロイダルコイル 470μH 9A</td>
+                <td>TCV-471M-9A-8026</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g106732/">秋月電子通商</td>
+                <td>150</td>
+                <td>1</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>ショットキーダイオード SBM1045VSS</td>
+                <td>SBM1045VSS</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g106168/">秋月電子通商</td>
+                <td>40</td>
+                <td>6</td>
+                <td>240</td>
+              </tr>
+              <tr>
+                <td>トランジスタ TTA1452B</td>
+                <td>TTA1452BS4X(S</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g115119/">秋月電子通商</td>
+                <td>120</td>
+                <td>1</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>NチャネルパワーMOSFET 2SK2232</td>
+                <td>2SK2232(F)</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g102414/">秋月電子通商</td>
+                <td>100</td>
+                <td>5</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>デライトトロイダルコア FT-50-J</td>
+                <td>FT-50-J</td>
+                <td><a href="https://akizukidenshi.com/catalog/g/g116917/">秋月電子通商</td>
+                <td>160</td>
+                <td>4</td>
+                <td>640</td>
+              </tr>
+              <tr>
+                <td>ポリエステル銅線2.0mm 10m (PEW2.0L10)</td>
+                <td>PEW2.0L10</td>
+                <td><a href="https://www.marutsu.co.jp/pc/i/46693/">マルツ</td>
+                <td>2371</td>
+                <td>1</td>
+                <td>2,371</td>
+              </tr>
+
               <tr>
                 <td>合計金額</td>
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td>9,454</td>
+                <td>13,670</td>
               </tr>
               <tr>
                 <td>残金</td>
@@ -428,7 +513,7 @@
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td>10,546</td>
+                <td>6,330</td>
               </tr>
             </table>
         </dd>
