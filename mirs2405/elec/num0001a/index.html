@@ -1,0 +1,464 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2303-ELEC-0001 MIRS2303 エレクトロニクス詳細設計書</title>
+<link rel=stylesheet href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303/style.css" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico" type="image/vnd.microsoft.icon">
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}", 10000)
+</script>
+
+</head>
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+<img src="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303/PuNITロゴ.png" width="100" height="100"><br>
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2303 エレクトロニクス詳細設計書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2303-ELEC-0001</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>A01</td>
+<td>2024. 1. 17</td>
+<td>佐藤柊哉、村井陽向、金子桃花</td>
+<td>大沼　巧</td>
+<td>初版</td>
+</tr>
+<tr>
+    <td>A02</td>
+    <td>2023. 10. 31</td>
+    <td>佐藤柊哉、村井陽向、金子桃花</td>
+    <td>大沼　巧</td>
+    <td>第2版</td>
+</tr>
+<tr>
+    <td>A03</td>
+    <td>2023. 11. 10</td>
+    <td>佐藤柊哉、村井陽向、金子桃花</td>
+    <td>大沼　巧</td>
+    <td>第3版</td>
+    </tr>
+
+</table>
+
+<!-- <p>ドキュメント内目次<a href="#" onclick="elm=document.getElementById('docnum');if(elm.style.display=='inline'){elm.style.display='none';}else{elm.style.display='inline';}">+</a></p>
+<div id="docnum" style="display:none;"> -->
+<h3>目次<h3>
+<a href = "#elec1">1.はじめに</a><br>
+<a href = "#elec2">2.システム構成</a><br>
+<a href = "#elec3">3.回路図</a><br>
+<a href = "#elec3-1">&nbsp;&nbsp;3-1.電源ボード</a><br>
+<a href = "#elec3-2">&nbsp;&nbsp;3-2.緊急停止ボタン</a><br>
+<a href = "#elec3-3">&nbsp;&nbsp;3-3.Aruduino Mega</a><br>
+<a href = "#elec3-4">&nbsp;&nbsp;3-4.RaspberryPI</a><br>
+<a href = "#elec3-4">&nbsp;&nbsp;3-5.Jetson　Nano</a><br>
+<a href = "#elec4">4.使用物品</a><br>
+
+<br>
+<h2><a name = elec1>1.はじめに</a></h2>
+本ドキュメントはPuNITの詳細設計書、エレクトロニクスについてのドキュメントである。<br>
+<br>
+
+<br>
+<h2><a name = elec2>2.システム構成</a></h2>
+システム構成をfig.1に示す。<br>
+<br>
+<center>
+
+    <img src="  エレキ配線図フォトリフレクタ追加.png" width="1042" height="555"><br><br>
+    fig.1 システム構成
+</center>
+
+
+<br>
+<h2><a name = elec3>3.回路図</a></h2>
+以下に、電源ボード、Aruduino　Mega、RaspberryPI、Jetson nano、フォトリフレクタの回路図を示す。<br>
+<br>
+
+
+<h3><a name = ch3-1>&nbsp;&nbsp;3-1.電源ボード</a></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;電源ボードの回路図をfig.2に示す。<br>
+
+<center>
+
+    <img src="power_board.png" width="1042" height="555"><br><br>
+    fig.2 電源ボード回路図
+</center>
+
+<h3><a name = ch3-1>&nbsp;&nbsp;3-2.緊急停止ボタン</a></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;緊急停止ボタンの回路図をfig.3に示す。<br>
+
+<center>
+
+    <img src="EMS_button.png" width="900" height="400"><br><br>
+    fig.3 緊急停止ボタン回路図
+</center>
+
+<br>
+
+<h3><a name = ch3-2>&nbsp;&nbsp;3-3.Arduino Mega</a></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;ArduinoMegaの回路図をfig.4に示す。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;また、ピンの接続デバイスをtable.1に示す。<br>
+
+<center>
+
+    <img src="回路図ArduinoMega.png" width="1042" height="555"><br><br>
+    fig.4 Arduino Mega回路図
+</center>
+
+<br>
+<center>
+
+table.1 Arduino Megaの接続デバイス
+<table class="table010">
+    <tr>
+        <th>ピン番号</th>
+        <th>接続デバイス</th>
+        <th>IN/OUT</th>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>移動用モータドライバ(右) PWM</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>移動用モータドライバ(左) PWM</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>4</td>
+        <td>サーボモータ1 PWM</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>5</td>
+        <td>昇降用モータドライバ PWM</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>6</td>
+        <td>サーボモータ2 PWM</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>19</td>
+        <td>昇降用エンコーダ A相</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>20</td>
+        <td>移動用エンコーダ(右) A相</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>21</td>
+        <td>移動用エンコーダ(左) A相</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>28</td>
+        <td>移動用エンコーダ(右) B相</td>
+        <td>IN</td>
+    </tr>
+    
+    <tr>
+        <td>34</td>
+        <td>移動用エンコーダ(左) B相</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>40</td>
+        <td>昇降用エンコーダ B相</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>44</td>
+        <td>移動用モータドライバ(右) DIR</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>46</td>
+        <td>移動用モータドライバ(左) DIR</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>48</td>
+        <td>昇降用モータドライバ DIR</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>A5</td>
+        <td>バッテリー電圧</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>A0</td>
+        <td>フォトリフレクタ左</td>
+        <td>IN</td>
+    </tr>
+    <tr>
+        <td>A2</td>
+        <td>フォトリフレクタ右</td>
+        <td>IN</td>
+    </tr>
+</table>
+</center>
+
+<br>
+<h3><a name = ch3-3>&nbsp;&nbsp;3-4.RaspberryPi</a></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;RaspberryPIの回路図をfig.5に示す。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;また、ピンの接続デバイスをtable.2に示す。<br>
+
+<center>
+
+    <img src="ラズパイ回路図.png" width="1042" height="555"><br><br>
+    fig.5 RaspberryPi回路図
+</center>
+
+<br>
+<center>
+
+table.2 RaspberryPiの接続デバイス
+<table class="table010">
+    <tr>
+        <th>ピン番号</th>
+        <th>表示名</th>
+        <th>接続デバイス</th>
+        <th>IN/OUT</th>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>GPIO2</td>
+        <td>I2Cレベル変換器(SDA)</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>5</td>
+        <td>GPIO3</td>
+        <td>I2Cレベル変換器(SCL)</td>
+        <td>OUT</td>
+    </tr>
+
+    <tr>
+        <td>40</td>>
+        <td>GPIO21</td>
+        <td>タッチセンサ1</td>
+        <td>IN</td>
+    </tr>
+
+
+    <tr>
+        <td>39</td>
+        <td>GND</td>
+        <td>タッチセンサ1GND</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>26</td>
+        <td>GPIO7</td>
+        <td>タッチセンサ2</td>
+        <td>IN</td>
+    </tr>
+
+
+    <tr>
+        <td>25</td>
+        <td>GND</td>
+        <td>タッチセンサ2GND</td>
+        <td></td>
+    </tr>
+    
+    <tr>
+        <td>8</td>
+        <td>GPIO14</td>
+        <td>Jetson(RXD)</td>
+        <td>IN</td>
+    </tr>
+
+    <tr>
+        <td>10</td>
+        <td>GPIO15</td>
+        <td>Jetson(TXD)</td>
+        <td>OUT</td>
+    </tr>
+
+ 
+   
+</table>
+</center>
+
+<br>
+<h3><a name = ch3-4>&nbsp;&nbsp;3-5.Jetson Nano</a></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Jetson Nanoの回路図をfig.6に示す。Jetson Nanoのピン数は40ピンあるが簡略化のために使用するピンのみ示している。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;また、ピンの接続デバイスをtable.3に示す。<br>
+<center>
+
+    <img src="jetsonnano_new.png" width="1042" height="555"><br><br>
+    fig.6 Jetson Nano回路図
+</center>
+
+<br>
+<center>
+
+    table.3 Jetson Nano接続デバイス
+    <table class="table010">
+        <tr>
+            <th>ピン番号</th>
+            <th>ピン名</th>
+            <th>接続デバイス(ピン番号)</th>
+            <th>IN/OUT</th>
+        </tr>
+    
+        <tr>
+            <td>10</td>
+            <td>UART_RXD</td>
+            <td>RaspberryPI GPIO14/TXD(8番)</td>
+            <td>IN</td>
+        </tr>
+        
+        
+        <tr>
+            <td>8</td>
+            <td>UART_TXD</td>
+            <td>RaspberryPI GPIO15/RXD(10番)</td>
+            <td>OUT</td>
+        </tr>
+    
+        <tr>
+            <td>6</td>
+            <td>GND</td>
+            <td>RaspberryPI GND(6番)</td>
+            <td></td>
+        </tr>
+    
+     
+       
+    </table>
+</center>
+
+<br>
+
+
+<h2><a name = elec2>4.使用物品</a></h2>
+使用物品をtable.5に示す。<br>
+<br>
+<center>
+
+    table.5 使用物品
+    <table class="table010">
+        <tr>
+            <th>物品名</th>
+            <th>個数</th>
+            <th>備考</th>
+            <th>サイトURL</th>
+        </tr>
+    
+        <tr>
+            <td>microSDHC 32GB</td>
+            <td>1</td>
+            <td>購入済(813円)</td>
+            <td><a href ="https://www.monotaro.com/g/04924467/?t.q=32gb">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>ArduinoMega</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://akizukidenshi.com/catalog/g/gM-07381/">販売ページ</a></td>
+        </tr>
+        
+        <tr>
+            <td>ArduinoMegaシールド基盤</td>
+            <td>1</td>
+            <td>mirs2101のものを流用</td>
+            <td><a href ="https://www.switch-science.com/products/1020">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>Jetson Nano</td>
+            <td>1</td>
+            <td>鄭先生から借用</td>
+            <td><a href ="https://www.switch-science.com/products/6239">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>昇降用モータ1:5</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+        </tr>
+
+        <tr>
+            <td>サーボモータ</td>
+            <td>2</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://akizukidenshi.com/catalog/g/gM-08761/">販売ページ</a></td>
+        </tr>
+
+        <tr>
+            <td>スピーカー</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://houjin.biccamera.com/product/detail.aspx?sku=16532134">販売ページ</a></td>
+        </tr>
+
+        <tr>
+            <td>MicroUSB(USB A-MicroB)ケーブル</td>
+            <td>1</td>
+            <td>ブースの備品を借用</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>緊急停止ボタン</td>
+            <td>1</td>
+            <td>ブースの備品を借用</td>
+            <td></td>
+        </tr>
+       
+    </table>
+</center>
+
+
+<br><br><br>
+<hr>
+
+<address>
+<a href="http://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303" target="_self">MIRS2303ドキュメント管理台帳へ</a>
+</address>
+
+
+</BODY></html>
