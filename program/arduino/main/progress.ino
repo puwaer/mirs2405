@@ -5,5 +5,6 @@
 // hand_check() ものを持っているか確認
 // run_ToHome()　定位置へ戻る
 // item_get()　armに配達物を補充
+//arm_open() アームのモータの初期処理
 
 //各種割り込み処理

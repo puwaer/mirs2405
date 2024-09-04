@@ -11,7 +11,6 @@
 #define PIN_BATT    19 
 
 
-
 float crawler_length  = 250.0; //クローラーの長さ[mm]
 float PPR             = 4096.0;
 float run_PP          = crawler_length / PPR; //1パルス当たりの走行距離[mm]

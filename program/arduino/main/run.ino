@@ -29,10 +29,18 @@ void run_ToPerson(float x, float y){
   theta = atan2(y, x);
   run_tur(theta, omega);
 
-  dist_l = r;
-  dist_r = r;
-  vel_l = vel;
-  vel_r = vel;
+  if(abs(theta) < (M_PI/2)){
+    dist_l = r;
+    dist_r = r * 2.011 / 2;
+    vel_l = vel;
+    vel_r = vel;
+  }
+  else{
+    dist_l = -r;
+    dist_r = -r * 2.011 / 2;
+    vel_l = -vel;
+    vel_r = -vel;
+  }
   
   run_st(vel_l, dist_l, vel_r, dist_r);
   
@@ -83,13 +91,14 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
 
 void run_tur(float angle, float ang_vel) {
   float L_velocity, R_velocity, L_displacement, R_displacement;
-  if(angle < 0){
+  
+  if((((-M_PI/2) <= angle) && (angle <= 0)) || ((M_PI/2) <= angle)){
     L_velocity      = 0.5 * ang_vel;
     R_velocity      = -0.5 * ang_vel;
     L_displacement  = 1.235 * angle / 2 / M_PI;
     R_displacement  = -1.235 * angle / 2 / M_PI;
   }
-  else if(angle >= 0){
+  else if(((0 < angle) && (angle < (M_PI/2))) || (angle < (-M_PI/2))){
     L_velocity      = -0.5 * ang_vel;
     R_velocity      = 0.5 * ang_vel;
     L_displacement  = -1.235 * angle / 2 / M_PI;
