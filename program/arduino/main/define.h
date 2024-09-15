@@ -40,6 +40,6 @@ int   pwm_limitter_H  = 80;
 int   pwm_limitter_L  = -80;
 int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
-int   dead_zone       = 30;
+int   dead_zone       = 40;
 
 int   T_GIVE          = 100;  //[sec]
