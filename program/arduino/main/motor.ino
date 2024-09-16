@@ -1,4 +1,3 @@
-
 void motor_stop(){
   analogWrite(PIN_PWM_L, 0);
   analogWrite(PIN_PWM_R, 0);

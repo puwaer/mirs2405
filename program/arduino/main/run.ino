@@ -1,6 +1,6 @@
 float r      = 0; //[m]
 float theta  = 0; //[rad]
-float omega  = 5; //5段階
+float omega  = 5; //[m/rad]
 float dist   = 0; //[m]
 float vel    = 1; //[m/s]
 
