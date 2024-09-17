@@ -4,9 +4,10 @@
 #include <math.h>
 
 static float check = 0;
+static float handcheck = 0;
 
-static float x_coordinate = 0;
-static float y_coordinate = 0;
+static float x_coordinate = 0; //[m]
+static float y_coordinate = 0; //[m]
 
 static float arm_angle1 = 0;
 static float arm_angle2 = 0;
@@ -23,11 +24,16 @@ void setup(){
   io_open();
   encoder_open();
   motor_open();
+  arm_open();
   raspi_open();
   MsTimer2::set(1000, timer_cnt);
 }
 
 void loop(){
+  
+  run_debug();
+
+  /*
   while(1){
     switch(state){
       case WAIT:
@@ -47,4 +53,7 @@ void loop(){
     }
     delay(control_period);
   }
+  */
+  
+  exit(0);
 }

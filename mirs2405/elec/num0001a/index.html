@@ -1,0 +1,336 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-ELEC-0001 MIRS2405 エレクトロニクス詳細設計書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 エレクトロニクス詳細設計書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-ELEC-0001</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>A01</td>
+<td>2024.9.1</td>
+<td>宇佐見祥</td>
+<td>    </td>
+<td>初版</td>
+</tr>
+</table>
+
+<br>
+
+<h3>目次</h3>
+    <ul>
+        <li><a href = "#elec1">1. はじめに</a><br> </li>
+        <li><a href = "#elec2">2. 全体接続図</a><br></li>
+        <li><a href = "#elec3">3. システム構成</a><br></li>
+        <li><a href = "#elec3-1"> 3-1.回路全体</a><br></li>
+        <li><a href = "#elec3-2"> 3-2.電源回路</a><br></li>
+        <li><a href = "#elec3-2-1"> 3-2-1.PICマイコン電源回路</a><br></li>
+        <li><a href = "#elec3-2-2"> 3-2-2.バッテリー電圧測定回路</a><br></li>
+        <li><a href = "#elec3-2-3"> 3-2-3.ジョイント1・2駆動モーター用降圧回路</a><br></li>
+        <li><a href = "#elec3-2-4"> 3-2-4.ターンテーブル・吸引モーター用降圧回路</a><br></li>
+        <li><a href = "#elec3-2-5"> 3-2-5.サーボモーター用電源回路</a><br></li>
+        <li><a href = "#elec3-2-6"> 3-2-6.電源回路制御用マイコン</a><br></li>
+        <li><a href = "#elec3-3"> 3-3.Aruduino UNO</a><br></li>
+        <li><a href = "#elec3-4">3-4.RaspberryPI</a><br></li>
+        <li><a href = "#elec3-5">3-5.Jetson Nano</a><br></li>
+        <li><a href = "#elec4">4.使用物品</a><br></li>
+    </ul>
+
+<br>
+<h2><a name = elec1>1.はじめに</a></h2>
+本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭのエレクトロニクス詳細設計書である。<br>
+<br>
+
+<br>
+<h2><a name = elec2>2.全体接続図</a></h2>
+全体の接続図をfig.1に示す。<br>
+<br>
+<center>
+
+    <img src="../picture/エレキ接続図.png" width="786"><br><br>
+    fig.1 全体接続図
+</center>
+<br>
+・モバイルバッテリーはマイコンボードへの電源供給のみを行う。<br>
+・LiFePOバッテリーで各モーターの駆動を行う。<br>
+
+<br>
+<h2><a name = elec3>3.システム構成</a></h2>
+各項目でそれぞれの回路の動作を解説する。<br>
+<br>
+
+
+<h3><a name = elec3-1>3-1.回路全体</a></h3>
+全体の回路図をfig.2に示す。<br>
+
+<center>
+
+    <img src="../picture/全体ツナギ.png" width="800"><br>
+    fig.2 全体回路図
+</center>
+<br>
+/*説明*/
+
+<h3><a name = elec3-2>3-2.電源回路</a></h3>
+電源の回路図をfig.3に示す。<br>
+
+<center>
+    <img src="../picture/電源ツナギ.png" width="800"><br>
+    fig.3 電源回路図
+</center>
+<br>
+
+<h4><a name = elec3-2-1>3-2-1.PICマイコン電源回路</a></h4>
+回路図をfig.4に示す。<br>
+<center>
+    <img src="../picture/マイコン電源部回路図_詳細設計用.png" width="400"><br>
+    fig.4 マイコン電源部回路図
+</center>
+NJM7805を使用し5Vを供給する。<br>
+<br>
+
+<h4><a name = elec3-2-2>3-2-2.バッテリー電圧測定回路</a></h4>
+回路図をfig.5に示す。<br>
+<center>
+    <img src="../picture/電圧測定部回路図_詳細設計用.png" width="400"><br>
+    fig.5 電圧測定部回路図
+</center>
+LiFePOバッテリーの両端子に分圧抵抗を接続する。<br>
+Arduino_LVD端子をArduinoのアナログピンに接続し、低電圧を検出する。<br>
+<br>
+
+<h4><a name = elec3-2-3>3-2-3.ジョイント1・2駆動モーター用降圧回路</a></h4>
+回路図をfig.6に示す。<br>
+<center>
+    <img src="../picture/モーター降圧回路_詳細設計用.png" width="800"><br>
+    fig.6 降圧チョッパ部回路図
+</center>
+
+電源の入力はLiFePOバッテリーである。<br>
+出力にはモータードライバを接続し、12Vを供給する。<br>
+最大出力電流は24A (JC-578VA,LC-578VA のストール電流) としている。<br>
+出力側には分圧抵抗を接続し、OVD端子電圧をPICマイコンのADコンバータから過電圧検出を行う。<br>
+ゲート信号はPICマイコンから出力する。出力された信号はArduinoのMCPSP出力と比較される。<br>
+MCPSPはバッテリー電圧が正常な場合はHIGHを出力し、異常があればLOWとなる。<br>
+MCPSPがHIGHのときのみゲートを駆動し、それ意外のときはMOSFETをターンオフする。<br>
+過電流保護のためヒューズ(30A遮断)を挿入している。<br>
+<br>
+
+<h4><a name = elec3-2-4>3-2-4.ターンテーブル・吸引モーター用降圧回路</a></h4>
+回路構成はジョイント1・2駆動モーター用降圧回路と同一。<br>
+出力に二つのモータードライバを並列に接続する。
+<br>
+
+<h4><a name = elec3-2-5>3-2-5.サーボモーター用電源回路</a></h4>
+回路図をfig.7に示す。<br>
+<center>
+    <img src="../picture/サーボ電源回路図_詳細設計用.png" width="800"><br>
+    fig.7 サーボ電源回路図
+</center>
+
+NJM2360ADを使用した降圧DCDCコンバータ回路である。<br>
+出力電圧7.4V、最大出力電圧は5Aとしている。<br>
+<br>
+
+<h4><a name = elec3-2-6>3-2-6.電源回路制御用マイコン</a></h4>
+電源回路の制御にはPIC16F1938を使用する。<br>
+使用するI/Oと機能をtable.1に示す。
+<center>
+
+    table.1 PICマイコンI/O
+    <table class="table010">
+        <tr>
+            <th>ピン番号</th>
+            <th>入出力</th>
+            <th>機能</th>
+        </tr>
+    
+        <tr>
+            <td>RA0</td>
+            <td>I</td>
+            <td>OVD1入力</td>
+        </tr>
+
+        <tr>
+            <td>RA1</td>
+            <td>I</td>
+            <td>OVD2入力</td>
+        </tr>
+
+        <tr>
+            <td>RA2</td>
+            <td>I</td>
+            <td>OVD3入力</td>
+        </tr>
+
+        <tr>
+            <td>RA3</td>
+            <td>I</td>
+            <td>OVD4入力</td>
+        </tr>
+
+        <tr>
+            <td>RA4</td>
+            <td>O</td>
+            <td>ターンテーブル・吸引モーター用降圧回路ゲート信号出力</td>
+        </tr>
+
+        <tr>
+            <td>RB0</td>
+            <td>O</td>
+            <td>ジョイント1・2駆動モーター用降圧回路ゲート信号出力</td>
+        </tr>
+    
+        
+    </table>
+    </center>
+    
+<br>
+
+<h3><a name = elec3-3>3-3.Arduino UNO</a></h3>
+Arduino UNOの回路図をfig.xに示す。<br>
+<center>
+
+    <img src="../../gullc_rogo.jpg" width="200""><br>
+    fig.x Arduino UNO
+</center>
+<br>
+<h3><a name = elec3-4>3-4.RaspberryPI</a></h3>
+RaspberryPIの回路図をfig.xに示す。<br>
+<center>
+
+    <img src="../../gullc_rogo.jpg" width="200""><br>
+    fig.x RaspberryPI
+</center>
+<br>
+
+<h3><a name = elec3-5>3-5.Jetson Nano</a></h3>
+Jetson Nanoの回路図をtable.xに示す。<br>
+<center>
+
+    <img src="../../gullc_rogo.jpg" width="200"><br>
+    fig.x Jetson Nano回路図
+</center>
+<br>
+
+
+<br>
+
+
+<h2><a name = elec4>4.使用物品</a></h2>
+使用物品をtable.5に示す。<br>
+<br>
+<center>
+
+    table.5 使用物品
+    <table class="table010">
+        <tr>
+            <th>物品名</th>
+            <th>個数</th>
+            <th>備考</th>
+            <th>サイトURL</th>
+        </tr>
+    
+        <tr>
+            <td>microSDHC 32GB</td>
+            <td>1</td>
+            <td>購入済(813円)</td>
+            <td><a href ="https://www.monotaro.com/g/04924467/?t.q=32gb">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>ArduinoMega</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://akizukidenshi.com/catalog/g/gM-07381/">販売ページ</a></td>
+        </tr>
+        
+        <tr>
+            <td>ArduinoMegaシールド基盤</td>
+            <td>1</td>
+            <td>mirs2101のものを流用</td>
+            <td><a href ="https://www.switch-science.com/products/1020">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>Jetson Nano</td>
+            <td>1</td>
+            <td>鄭先生から借用</td>
+            <td><a href ="https://www.switch-science.com/products/6239">販売ページ</a></td>
+        </tr>
+    
+        <tr>
+            <td>昇降用モータ1:5</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+        </tr>
+
+        <tr>
+            <td>サーボモータ</td>
+            <td>2</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://akizukidenshi.com/catalog/g/gM-08761/">販売ページ</a></td>
+        </tr>
+
+        <tr>
+            <td>スピーカー</td>
+            <td>1</td>
+            <td>mirs2101のものを借用</td>
+            <td><a href ="https://houjin.biccamera.com/product/detail.aspx?sku=16532134">販売ページ</a></td>
+        </tr>
+
+        <tr>
+            <td>MicroUSB(USB A-MicroB)ケーブル</td>
+            <td>1</td>
+            <td>ブースの備品を借用</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>緊急停止ボタン</td>
+            <td>1</td>
+            <td>ブースの備品を借用</td>
+            <td></td>
+        </tr>
+       
+    </table>
+</center>
+
+
+<br><br><br>
+<hr>
+
+<address>
+    <a href="http://www2.denshi.numazu-ct.ac.jp/mirsdoc2/" target="_self">MIRS DATABASE</a>
+</address>
+
+
+</BODY></html>

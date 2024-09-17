@@ -1,6 +1,6 @@
 float r      = 0; //[m]
 float theta  = 0; //[rad]
-float omega  = 1; //[m/rad]
+float omega  = 5; //[m/rad]
 float dist   = 0; //[m]
 float vel    = 1; //[m/s]
 
@@ -24,15 +24,29 @@ int pwm_rn_d;
 int pwm_l;
 int pwm_r;
 
+
 void run_ToPerson(float x, float y){
   r = powf(powf(x,2)+powf(y,2), 0.5);
   theta = atan2(y, x);
   run_tur(theta, omega);
 
-  dist_l = r;
-  dist_r = r;
-  vel_l = vel;
-  vel_r = vel;
+  
+
+  if(abs(theta) < (M_PI/2)){
+    dist_l = r;
+    dist_r = r * 2.011 / 2;
+    vel_l = vel;
+    vel_r = vel;
+  }
+  else{
+    dist_l = -r;
+    dist_r = -r * 2.011 / 2;
+    vel_l = -vel;
+    vel_r = -vel;
+  }
+
+   motor_stop();
+  delay(1000);
   
   run_st(vel_l, dist_l, vel_r, dist_r);
   
@@ -78,23 +92,40 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
       motor_stop();
       break;
     }
-  }
+    motor_run_l(pwm_l);
+    motor_run_r(pwm_r);
+  } 
 }
 
 void run_tur(float angle, float ang_vel) {
   float L_velocity, R_velocity, L_displacement, R_displacement;
-  if(angle < 0){
+
+  if(((-M_PI/2) <= angle) && (angle <= 0)){
     L_velocity      = 0.5 * ang_vel;
     R_velocity      = -0.5 * ang_vel;
     L_displacement  = 1.235 * angle / 2 / M_PI;
     R_displacement  = -1.235 * angle / 2 / M_PI;
   }
-  else if(angle >= 0){
+  else if((M_PI/2) <= angle){
+    L_velocity      = 0.5 * ang_vel;
+    R_velocity      = -0.5 * ang_vel;
+    L_displacement  = 1.235 * angle / 2 / M_PI - (1.235 / 4);
+    R_displacement  = -(1.235 * angle / 2 / M_PI - (1.235 / 4));
+  }
+  else if(((0 < angle) && (angle < (M_PI/2)))){
     L_velocity      = -0.5 * ang_vel;
     R_velocity      = 0.5 * ang_vel;
     L_displacement  = -1.235 * angle / 2 / M_PI;
     R_displacement  = 1.235 * angle / 2 / M_PI;
   }
+  else if(angle < (-M_PI/2)){
+    L_velocity      = -0.5 * ang_vel;
+    R_velocity      = 0.5 * ang_vel;
+    L_displacement  = -(1.235 * angle / 2 / M_PI - (1.235 / 4));
+    R_displacement  = 1.235 * angle / 2 / M_PI - (1.235 / 4);
+  }
+
+  
   
   control_initialize(L_velocity, R_velocity, L_displacement, R_displacement, &target_velocity_l, &target_velocity_r, &target_displacement_l, &target_displacement_r);
   while(1){
@@ -129,6 +160,43 @@ void run_tur(float angle, float ang_vel) {
       motor_stop();
       break;
     }
+
+    
+
+    Serial.print("    target displacement L : ");
+    Serial.print(target_displacement_l);
+    Serial.print("mm    target displacement R : ");
+    Serial.print(target_displacement_r);
+    Serial.print("mm");
+    
+    Serial.print("    displacement L : ");
+    Serial.print(displacement_l);
+    Serial.print("mm  R : ");
+    Serial.print(displacement_r);
+    Serial.print("mm");
+    
+    /*Serial.print("    target velocity L : ");
+    Serial.print(target_velocity_l);
+    Serial.print("mm/s    target velocity R : ");
+    Serial.print(target_velocity_r);
+    Serial.print("mm/s");
+    /*
+    Serial.print("    velocity L : ");
+    Serial.print(velocity_l);
+    Serial.print("mm/s  R : ");
+    Serial.print(velocity_r);
+    Serial.print("mm/s    pwm L : ");
+    Serial.print(pwm_l);
+    Serial.print(" R : ");
+    Serial.print(pwm_r);
+    */
+    Serial.println();
+    
+    
+    
+    motor_run_l(pwm_l);
+    motor_run_r(pwm_r);
+    
   }
 }
 
