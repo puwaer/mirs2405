@@ -1,3 +1,4 @@
+//int型の配列Aの末尾にnを追加する関数
 /*void appendToArray(int **A, int *array_size, int n) {
   // 新しいサイズのためにメモリを再割り当て
   *A = realloc(*A, (*array_size + 1) * sizeof(int));
