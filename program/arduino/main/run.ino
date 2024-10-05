@@ -30,20 +30,11 @@ void run_ToPerson(float x, float y){
   theta = atan2(y, x);
   run_tur(theta, omega);
 
-  
-
-  if(abs(theta) < (M_PI/2)){
     dist_l = r;
-    dist_r = r * 2.011 / 2;
+    dist_r = r * ratio_dis_RperL;
     vel_l = vel;
     vel_r = vel;
-  }
-  else{
-    dist_l = -r;
-    dist_r = -r * 2.011 / 2;
-    vel_l = -vel;
-    vel_r = -vel;
-  }
+  
 
    motor_stop();
   delay(1000);
@@ -100,29 +91,17 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
 void run_tur(float angle, float ang_vel) {
   float L_velocity, R_velocity, L_displacement, R_displacement;
 
-  if(((-M_PI/2) <= angle) && (angle <= 0)){
+  if((-M_PI <= angle) && (angle <= 0)){
     L_velocity      = 0.5 * ang_vel;
     R_velocity      = -0.5 * ang_vel;
-    L_displacement  = 1.235 * angle / 2 / M_PI;
-    R_displacement  = -1.235 * angle / 2 / M_PI;
+    L_displacement  = one_round_meter * angle / 2 / M_PI;
+    R_displacement  = -one_round_meter * angle / 2 / M_PI;
   }
-  else if((M_PI/2) <= angle){
-    L_velocity      = 0.5 * ang_vel;
-    R_velocity      = -0.5 * ang_vel;
-    L_displacement  = 1.235 * angle / 2 / M_PI - (1.235 / 4);
-    R_displacement  = -(1.235 * angle / 2 / M_PI - (1.235 / 4));
-  }
-  else if(((0 < angle) && (angle < (M_PI/2)))){
+  else if((0 < angle) && (angle < (M_PI))){
     L_velocity      = -0.5 * ang_vel;
     R_velocity      = 0.5 * ang_vel;
-    L_displacement  = -1.235 * angle / 2 / M_PI;
-    R_displacement  = 1.235 * angle / 2 / M_PI;
-  }
-  else if(angle < (-M_PI/2)){
-    L_velocity      = -0.5 * ang_vel;
-    R_velocity      = 0.5 * ang_vel;
-    L_displacement  = -(1.235 * angle / 2 / M_PI - (1.235 / 4));
-    R_displacement  = 1.235 * angle / 2 / M_PI - (1.235 / 4);
+    L_displacement  = -one_round_meter * angle / 2 / M_PI;
+    R_displacement  = one_round_meter * angle / 2 / M_PI;
   }
 
   

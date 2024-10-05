@@ -29,9 +29,12 @@ void setup(){
   MsTimer2::set(1000, timer_cnt);
 }
 
+int a = 0;
+
 void loop(){
   
   run_debug();
+  
 
   /*
   while(1){

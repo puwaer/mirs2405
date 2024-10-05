@@ -1,3 +1,81 @@
+/*void check_serial(){
+    int inc_bytes[64] = {-1,};
+
+    if(Serial.available() > 0){
+        if(Serial.read() == 255){
+            int sread = 0;
+            int idx = 0;
+            while(1){
+                while(Serial.available() < 1){}
+                sread = (int)Serial.read();
+                if(sread == 254){
+                    break;
+                }else if(sread != -1){
+                    inc_bytes[idx] = sread;
+                    idx += 1;
+                }
+            }
+        }
+    }
+
+    if(inc_bytes[0] == -1){
+      return;
+    }
+    switch(inc_bytes[0]){
+        case 1:
+            // ***();
+            break;
+        
+        case 2:
+            
+            break;
+        
+        case 3:
+            
+            break;
+        
+        case 4:
+            
+            break;
+        
+        case 5:
+            
+            break;
+        
+        case 6:
+            
+            break;
+        
+        case 7:
+            
+            break;
+        
+        case 8:
+            
+            break;
+        
+        case 9:
+            
+            break;
+        
+        case 10:
+            
+            break;
+
+        case 11:
+            
+            break;
+
+        default:
+            break;
+    }
+
+
+}*/
+
+
+
+
 int buffer_size = 9;
 
 byte received_data[9];

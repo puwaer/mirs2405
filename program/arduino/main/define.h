@@ -35,6 +35,9 @@ float Kp_displacement_r = 0.12;
 float Ki_displacement_r = 0.0027;
 float Kd_displacement_r = 0;
 
+float ratio_dis_RperL = 2.011 / 2;
+float one_round_meter = 1.235;
+
 int   control_period  = 10;
 int   pwm_limitter_H  = 80;
 int   pwm_limitter_L  = -80;
