@@ -55,11 +55,11 @@
         <li><a href = "#elec3-2"> 3-2.電源回路</a><br></li>
         <li><a href = "#elec3-2-1"> 3-2-1.PICマイコン電源回路</a><br></li>
         <li><a href = "#elec3-2-2"> 3-2-2.バッテリー電圧測定回路</a><br></li>
-        <li><a href = "#elec3-2-3"> 3-2-3.12V系電源回路</a><br></li>
+        <li><a href = "#elec3-2-3"> 3-2-3.電源回路12V系</a><br></li>
         <li><a href = "#elec3-2-4"> 3-2-4.サーボモーター用電源回路</a><br></li>
         <li><a href = "#elec3-2-5"> 3-2-5.ゲートドライブ回路</a><br></li>
         <li><a href = "#elec3-2-6"> 3-2-6.電源回路制御用マイコン</a><br></li>
-        <li><a href = "#elec3-3"> 3-3.Aruduino UNO</a><br></li>
+        <li><a href = "#elec3-3"> 3-3.Raspberry Pi pico</a><br></li>
         <li><a href = "#elec3-4">3-4.RaspberryPI</a><br></li>
         <li><a href = "#elec3-5">3-5.Jetson Nano</a><br></li>
         <li><a href = "#elec4">4.使用物品</a><br></li>
@@ -76,12 +76,12 @@
 <br>
 <center>
 
-    <img src="../picture/エレキ接続図.png" width="786"><br><br>
+    <img src="../picture/MIRSの接続図.png" width="786"><br><br>
     fig.1 全体接続図
 </center>
 <br>
-・モバイルバッテリーはマイコンボードへの電源供給のみを行う。<br>
-・LiFePOバッテリーで各モーターの駆動を行う。<br>
+モバイルバッテリーでRaspberryPi pico、Raspberry Pi、Jetsonへの電源供給をし、<br>
+LiFePOバッテリーはモーターと降圧コンバータ制御回路の電源供給を行う。<br>
 
 <br>
 <h2><a name = elec3>3.システム構成</a></h2>
@@ -94,7 +94,7 @@
 
 <center>
 
-    <img src="../picture/全体ツナギ_600W_DCDC.png" width="800"><br>
+    <img src="../picture/全体ツナギ_600W_DCDC.png" width="1000"><br>
     fig.2 全体回路図
 </center>
 <br>
@@ -106,7 +106,7 @@
 電源の回路図をfig.3に示す。<br>
 
 <center>
-    <img src="../picture/全体ツナギ_600W_DCDC.png" width="800"><br>
+    <img src="../picture/全体ツナギ_600W_DCDC.png" width="1000"><br>
     fig.3 電源回路図
 </center>
 <br>
@@ -129,23 +129,23 @@ NJM7805を使用し5Vを供給する。<br>
     fig.5 電圧測定部回路図
 </center>
 LiFePOバッテリーの両端子に分圧抵抗を接続する。<br>
-Arduino_VD端子をArduinoのアナログピンに接続し、バッテリー電圧を監視する。<br>
+BATTVD端子をPICマイコンのアナログピンに接続し、バッテリー電圧を監視する。<br>
+バッテリー電圧が低すぎる場合は降圧コンバータの出力を切る。<br>
 <br>
 
-<h4><a name = elec3-2-3>3-2-3.12V系電源回路</a></h4>
+<h4><a name = elec3-2-3>3-2-3.電源回路12V系</a></h4>
 回路図をfig.6に示す。<br>
 <center>
     <img src="../picture/モーター降圧回路_詳細設計用.png" width="800"><br>
-    fig.6 降圧チョッパ部回路図
+    fig.6 降圧コンバータ部回路図
 </center>
 
 電源の入力はLiFePOバッテリーである。<br>
 出力にはモータードライバを接続し、12Vを供給する。<br>
-最大出力電流は50Aとしている。<br>
 出力側には分圧抵抗を接続し、OVD端子電圧をPICマイコンのADコンバータから過電圧検出を行う。<br>
+検出電圧を用いて出力が12V一定になるように制御し、任意設定の閾値を超えた場合は出力を切る。<br>
 ゲート制御はPICマイコンで行う<br>
-過電流保護のためヒューズ(50A遮断)を挿入している。<br>
-MOSFET,FWDは定格電流の関係からそれぞれ2パラ,4パラで使用する。<br>
+SBDは4パラで使用する。<br>
 平滑コイルも定格電流の関係から6パラで使用する。<br>
 <br>
 
@@ -187,38 +187,20 @@ Nch-MOSFETをハイサイドで駆動するため、フローティング電源�
     
         <tr>
             <td>RA0</td>
-            <td>I</td>
-            <td>OVD1入力</td>
+            <td>IN</td>
+            <td>OVD入力</td>
         </tr>
 
         <tr>
             <td>RA1</td>
-            <td>I</td>
-            <td>OVD2入力</td>
-        </tr>
-
-        <tr>
-            <td>RA2</td>
-            <td>I</td>
-            <td>OVD3入力</td>
-        </tr>
-
-        <tr>
-            <td>RA3</td>
-            <td>I</td>
-            <td>OVD4入力</td>
-        </tr>
-
-        <tr>
-            <td>RA4</td>
-            <td>O</td>
-            <td>ターンテーブル・吸引モーター用降圧回路ゲート信号出力</td>
+            <td>IN</td>
+            <td>BATTVD入力</td>
         </tr>
 
         <tr>
             <td>RB0</td>
-            <td>O</td>
-            <td>ジョイント1・2駆動モーター用降圧回路ゲート信号出力</td>
+            <td>OUT</td>
+            <td>降圧コンバータゲート信号出力</td>
         </tr>
     
         
@@ -227,12 +209,12 @@ Nch-MOSFETをハイサイドで駆動するため、フローティング電源�
     
 <br>
 
-<h3><a name = elec3-3>3-3.Arduino UNO</a></h3>
-Arduino UNOの回路図をfig.xに示す。<br>
+<h3><a name = elec3-3>3-3.Raspberry Pi pico</a></h3>
+Raspberry Pi picoの回路図をfig.xに示す。<br>
 <center>
 
     <img src="../../gullc_rogo.jpg" width="200""><br>
-    fig.x Arduino UNO
+    fig.x Raspberry Pi pico
 </center>
 <br>
 <h3><a name = elec3-4>3-4.RaspberryPI</a></h3>
@@ -272,64 +254,10 @@ Jetson Nanoの回路図をtable.xに示す。<br>
         </tr>
     
         <tr>
-            <td>microSDHC 32GB</td>
+            <td>Nch-パワーMOSFET TK3R2E06PL</td>
             <td>1</td>
-            <td>購入済(813円)</td>
-            <td><a href ="https://www.monotaro.com/g/04924467/?t.q=32gb">販売ページ</a></td>
-        </tr>
-    
-        <tr>
-            <td>ArduinoMega</td>
-            <td>1</td>
-            <td>mirs2101のものを借用</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/gM-07381/">販売ページ</a></td>
-        </tr>
-        
-        <tr>
-            <td>ArduinoMegaシールド基盤</td>
-            <td>1</td>
-            <td>mirs2101のものを流用</td>
-            <td><a href ="https://www.switch-science.com/products/1020">販売ページ</a></td>
-        </tr>
-    
-        <tr>
-            <td>Jetson Nano</td>
-            <td>1</td>
-            <td>鄭先生から借用</td>
-            <td><a href ="https://www.switch-science.com/products/6239">販売ページ</a></td>
-        </tr>
-    
-        <tr>
-            <td>昇降用モータ1:5</td>
-            <td>1</td>
-            <td>mirs2101のものを借用</td>
-        </tr>
-
-        <tr>
-            <td>サーボモータ</td>
-            <td>2</td>
-            <td>mirs2101のものを借用</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/gM-08761/">販売ページ</a></td>
-        </tr>
-
-        <tr>
-            <td>スピーカー</td>
-            <td>1</td>
-            <td>mirs2101のものを借用</td>
-            <td><a href ="https://houjin.biccamera.com/product/detail.aspx?sku=16532134">販売ページ</a></td>
-        </tr>
-
-        <tr>
-            <td>MicroUSB(USB A-MicroB)ケーブル</td>
-            <td>1</td>
-            <td>ブースの備品を借用</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>緊急停止ボタン</td>
-            <td>1</td>
-            <td>ブースの備品を借用</td>
-            <td></td>
+            <td>120円</td>
+            <td><a href ="https://akizukidenshi.com/catalog/g/g113792/">販売ページ</a></td>
         </tr>
        
     </table>
