@@ -49,6 +49,7 @@ def main():
         try:
             estimated_age = age_analysis(frame)
             cv2.putText(frame, f"Age: {estimated_age}", (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            print(estimated_age)
         except Exception as e:
             print("年齢推定エラー:", str(e))
 
@@ -56,6 +57,7 @@ def main():
         try:
             estimated_gender = gender_analysis(frame)
             cv2.putText(frame, f"Gender: {estimated_gender}", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            print(estimated_gender)
         except Exception as e:
             print("性別推定エラー:", str(e))
 
