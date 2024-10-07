@@ -3,6 +3,7 @@ static float err_count_r;
 static float pre_count_l;
 static float pre_count_r;
 
+//クローラーの初期化
 void control_initialize(float a, float b, float c, float d, float *e, float *f, float *g, float *h){
   encoder_reset();
   PID_reset();
