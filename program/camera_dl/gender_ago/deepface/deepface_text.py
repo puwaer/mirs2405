@@ -2,7 +2,7 @@ import cv2
 from deepface import DeepFace
 
 # 顔認証のためのユーザー情報（顔画像へのパス）
-user_image_path = "path_to_user_image.jpg"
+#user_image_path = "path_to_user_image.jpg"
 
 # 表情推定を行う関数
 def emotion_analysis(image):
