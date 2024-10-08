@@ -54,6 +54,6 @@ void loop(){
     delay(control_period);
   }
   */
-  
+  motor_stop();
   exit(0);
 }
