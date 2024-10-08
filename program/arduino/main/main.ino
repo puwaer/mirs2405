@@ -1,5 +1,5 @@
 #include "define.h"
-#include <MsTimer2.h>
+//#include <MsTimer2.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -26,13 +26,13 @@ void setup(){
   motor_open();
   arm_open();
   raspi_open();
-  MsTimer2::set(1000, timer_cnt);
+  //MsTimer2::set(1000, timer_cnt);
 }
 
 void loop(){
   
   run_debug();
-  
+
   /*
   while(1){
     switch(state){

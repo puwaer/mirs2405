@@ -1,7 +1,7 @@
 void wait(){
   raspi_receive_person(&check);
   if(check == 1){
-    timer(1);
+    //timer(1);
     check = 0;
     state = GIVE;
   }
@@ -13,7 +13,7 @@ void give(){
   run_ToPerson(x_coordinate, y_coordinate);
 
   if((T >= T_GIVE) || (hand_check() == 0)){
-    timer(0);
+    //timer(0);
     state = REFILL;
   }
 }

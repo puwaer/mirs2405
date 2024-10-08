@@ -4,6 +4,7 @@ void run_debug(){
   y_coordinate = 2;
   run_ToPerson(x_coordinate, y_coordinate);
   
+  
 }
 
 void show_XXX(){
