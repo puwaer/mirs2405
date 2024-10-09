@@ -45,4 +45,3 @@ int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
 int   dead_zone       = 50;
 
-int   T_GIVE          = 100;  //[sec]
