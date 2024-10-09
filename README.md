@@ -1,1 +1,1 @@
-愛は有限なのだから
+Translate to Japanese
