@@ -35,13 +35,13 @@ float Kp_displacement_r = 0.12;
 float Ki_displacement_r = 0;
 float Kd_displacement_r = 0;
 
-float ratio_dis_RperL = 2 / 2;
-float one_round_meter = 1.35;
+float ratio_dis_RperL = 2 / 2;  //直線時の右クローラと左クローラの移動距離比
+float one_round_meter = 1.35;   //一回転時の片クローラの移動距離[m]
 
-int   control_period  = 10;
-int   pwm_limitter_H  = 80;
-int   pwm_limitter_L  = -80;
+int   control_period  = 10;     //制御周期
+int   pwm_limitter_H  = 80;     //pwmの最大値
+int   pwm_limitter_L  = -80;    //pwmの最小値
 int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
-int   dead_zone       = 50;
+int   dead_zone       = 50;     //pwmの最小値(絶対値)
 
