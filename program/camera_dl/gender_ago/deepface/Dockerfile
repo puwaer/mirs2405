@@ -12,9 +12,14 @@ RUN apt-get update && \
 
 # OpenCVとDeepFaceのインストール
 RUN pip install --no-cache-dir opencv-python-headless deepface
+RUN pip install tf-keras
+RUN pip install tensorflow==2.5.0
+RUN pip install numpy>=1.22.4
+
+
 
 # アプリケーションのコードをコンテナにコピー
-COPY . /app/
+COPY /src/. /app/
 
 # メインスクリプトを実行
 #CMD ["python", "your_script_name.py"]
