@@ -41,5 +41,4 @@ def main():
         matrix = receive_matrix(ser)
         print("Received Matrix:", matrix)
 
-if __name__ == "__main__":
     main()
