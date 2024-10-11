@@ -19,7 +19,7 @@ RUN pip install numpy>=1.22.4
 
 
 # アプリケーションのコードをコンテナにコピー
-COPY /src/. /app/
+COPY /. /app/
 
 # メインスクリプトを実行
 #CMD ["python", "your_script_name.py"]
