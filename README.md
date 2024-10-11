@@ -1,1 +1,1 @@
-mirs2405のプログラムです
+Translate to Japanese

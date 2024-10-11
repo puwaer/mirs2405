@@ -31,10 +31,6 @@ void motor_open(){
   motor_stop();
 }
 
-void arm_open(){
-  
-}
-
 void raspi_open(){
   Serial.begin(115200);
   

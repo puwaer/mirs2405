@@ -1,4 +1,0 @@
-dockerイメージのビルド
-docker build -t age-gender-recognition .
-Dockerコンテナの実行
-docker run -v $(pwd):/app -it age-gender-recognition --input /path/to/your/video.mp4

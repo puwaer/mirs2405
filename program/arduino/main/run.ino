@@ -1,8 +1,8 @@
 float r      = 0; //[m]
 float theta  = 0; //[rad]
-float omega  = 5; //[m/rad]
+float omega  = 1; //[m/rad]
 float dist   = 0; //[m]
-float vel    = 1; //[m/s]
+float vel    = 0.5; //[m/s]
 
 float dist_l = 0;
 float dist_r = 0;
@@ -27,18 +27,22 @@ int pwm_r;
 
 void run_ToPerson(float x, float y){
   r = powf(powf(x,2)+powf(y,2), 0.5);
-  theta = atan2(y, x);
+  if(y == 0){
+    if(x >= 0) theta = 0;
+    else if(x < 0) theta = M_PI;
+  }
+  else theta = atan2(y, x);
+
   run_tur(theta, omega);
-
-    dist_l = r;
-    dist_r = r * ratio_dis_RperL;
-    vel_l = vel;
-    vel_r = vel;
+  
+  dist_l = r;
+  dist_r = r * ratio_dis_RperL;
+  vel_l = vel;
+  vel_r = vel;
   
 
-   motor_stop();
+  motor_stop();
   delay(1000);
-  
   run_st(vel_l, dist_l, vel_r, dist_r);
   
 }
@@ -83,6 +87,11 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
       motor_stop();
       break;
     }
+    Serial.print("pwm L : ");
+    Serial.print(pwm_l);
+    Serial.print(" R : ");
+    Serial.println(pwm_r);
+
     motor_run_l(pwm_l);
     motor_run_r(pwm_r);
   } 
@@ -94,10 +103,10 @@ void run_tur(float angle, float ang_vel) {
   if((-M_PI <= angle) && (angle <= 0)){
     L_velocity      = 0.5 * ang_vel;
     R_velocity      = -0.5 * ang_vel;
-    L_displacement  = one_round_meter * angle / 2 / M_PI;
-    R_displacement  = -one_round_meter * angle / 2 / M_PI;
+    L_displacement  = -(one_round_meter * angle / 2 / M_PI);
+    R_displacement  = -(-one_round_meter * angle / 2 / M_PI);
   }
-  else if((0 < angle) && (angle < (M_PI))){
+  else if((0 < angle) && (angle <= (M_PI))){
     L_velocity      = -0.5 * ang_vel;
     R_velocity      = 0.5 * ang_vel;
     L_displacement  = -one_round_meter * angle / 2 / M_PI;
@@ -142,7 +151,7 @@ void run_tur(float angle, float ang_vel) {
 
     
 
-    Serial.print("    target displacement L : ");
+    /*Serial.print("    target displacement L : ");
     Serial.print(target_displacement_l);
     Serial.print("mm    target displacement R : ");
     Serial.print(target_displacement_r);
@@ -164,11 +173,11 @@ void run_tur(float angle, float ang_vel) {
     Serial.print(velocity_l);
     Serial.print("mm/s  R : ");
     Serial.print(velocity_r);
-    Serial.print("mm/s    pwm L : ");
+    */Serial.print("mm/s    pwm L : ");
     Serial.print(pwm_l);
     Serial.print(" R : ");
     Serial.print(pwm_r);
-    */
+    
     Serial.println();
     
     
