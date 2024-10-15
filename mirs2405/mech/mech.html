@@ -1,0 +1,717 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-MECH-0001 MIRS2405 メカニクス詳細設計書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 メカニクス詳細設計書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-MECH-0001</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>A01</td>
+<td>2024.10.14</td>
+<td>横山翔琉</td>
+<td>    </td>
+<td>初版</td>
+</tr>
+</table>
+
+<br>
+
+<h3>目次</h3>
+    <ul>
+        <li><a href = "#mech1">1. はじめに</a><br> </li>
+        <li><a href = "#mech2">2. 全体図</a><br></li>
+        <li><a href = "#mech3">3. システム構成</a><br></li>
+        <li><a href = "#mech3-1-1">3-1-1. Assy一覧</a><br></li>
+        <li><a href = "#mech3-1-2">3-1-2. 組み立て手順</a><br></li>
+        <li><a href = "#mech3-2-1"> 3-2-1. Arm Basis Asdy</a><br></li>
+        <li><a href = "#mech3-2-2"> 3-2-2. Basis Assy</a><br></li>
+        <li><a href = "#mech3-2-3"> 3-2-3. Arm Assy</a><br></li>
+        <li><a href = "#mech3-2-4"> 3-2-4. Control Box Assy</a><br></li>
+        <li><a href = "#mech3-2-5"> 3-2-5. CuGo V3 Assy</a><br></li>
+        <li><a href = "#mech3-2-6"> 3-2-6. Air Chuck Assy</a><br></li>
+        <li><a href = "#mech3-2-7"> 3-2-7. Gripper Assy</a><br></li>
+        <li><a href = "#mech4">4. 購入物品</a><br></li>
+        <li><a href = "#mech5">5. 参考文献</a><br></li>
+    </ul>
+
+<br>
+<h2><a name = mech1>1. はじめに</a></h2>
+本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭのメカニクス詳細設計書である。<br>
+<br>
+
+
+<br>
+<h2><a name = mech2>2. 全体図</a></h2>
+全体図をfig.1に示す。<br>
+<br>
+<center>
+    <img src="../picture/MIRS2405.png" width="100"><br><br>
+    fig.1 全体図
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h2><a name = mech3>3. システム構成</a></h2>
+本機は7つのAssyによって構成されている。<br>
+・ターンテーブルの回転とロボットアームの駆動を行うArm Basis Assy<br>
+・各Assyを固定し接続するための基礎となるBasis Assy<br>
+・ロボットアームの腕となるArm Assy<br>
+・制御を担うコンピュータの保護と冷却を行うControl Box Assy<br>
+・走行体であるCuGo V3 Assy<br>
+・重なねて保管された紙を一枚ずつ給紙するAir Chuck Assy<br>
+・物をつかむためロボットアームの手となるGripper Assy<br>
+Gripper Assyはつかみたい物に応じて交換することができる。標準では紙をつかむための仕様である。<br>
+<br>
+
+
+<h3><a name = mech3-1-1>3-1-1. Assy一覧</a></h3>
+Assy一覧をfig.2に示す。<br>
+<br>
+<center>
+    <img src="../picture/Assy List.png" width="100"><br>
+    fig.2 Assy一覧
+</center>
+<br>
+
+
+<h3><a name = mach3-1-2>3-1-2. 組み立て手順</a></h3>
+本項目では各Assy同士の組み立て手順を解説する。<br>
+各Assyの組み立てについては3-2-1 ~ 3-2-6で詳細な解説を行う。<br>
+<br>
+
+
+<h4><a name = mech3-2-1>3-2-1. Arm Basis Assy</a></h4>
+Arm Basis Assyをfig.3に示す。<br>
+<br>
+<center>
+    <img src="../picture/Arm Basis Assy1.png" width="388"><img src="../picture/Arm Basis Assy2.png" width="300"><img src="../picture/Arm Basis Assy3.png" width="419"><br>
+    fig.3 Arm Basis Assy
+</center>
+<br>
+Arm Basis Assy部品リストをtable.1に示す。<br>
+<br>
+<center>
+    table.1 Arm Basis Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>詳細</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Turn Table Top</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Turn Table Top.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>KS5N-IG36P Mount 1</td>
+            <td>1</td>
+            <td><a href ="../dimensions/KS5N-IG36P Mount 1.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>THS70160</td>
+            <td>1</td>
+            <td><a href ="https://www.monotaro.com/p/3946/2062/">リンク</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>KS5N-IG36P Mount 2</td>
+            <td>1</td>
+            <td><a href ="../dimensions/KS5N-IG36P Mount 2.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>IG36P-721</td>
+            <td>1</td>
+            <td><a href ="https://www.shayangye.com/en/ig-36p">リンク</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>KS5N</td>
+            <td>1</td>
+            <td><a href ="https://nichibo-motor.jp/product/content/32">リンク</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Arm Mount Plate Right</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Arm Mount Plate Right.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Arm Mount Plate Left</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Arm Mount Plate Left.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>[J,L]C-578VA Mount</td>
+            <td>3</td>
+            <td><a href ="../dimensions/[J,L]C-578VA Mount.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Mabuchi LC-578VA</td>
+            <td>1</td>
+            <td><a href ="https://www.mabuchi-motor.co.jp/product/pdf/LC-578VB.pdf">リンク</a></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Mabuchi JC-578VA</td>
+            <td>2</td>
+            <td><a href ="https://www.mabuchi-motor.co.jp/product/pdf/JC-578VB.pdf">リンク</a></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>[J,L]C-578VA Joint</td>
+            <td>3</td>
+            <td><a href ="../dimensions/[J,L]C-578VA Joint.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>[J,L]C-578VA Joint Spacer</td>
+            <td>3</td>
+            <td><a href ="../dimensions/[J,L]C-578VA Joint Spacer.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Shaft Arm Joint 0-1 Gear</td>
+            <td>2</td>
+            <td><a href ="../dimensions/Shaft Arm Joint 0-1 Gear.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>628-H_214</td>
+            <td>3</td>
+            <td><a href ="https://jp.misumi-ec.com/vona2/detail/221005190774/?HissuCode=628-H&msockid=02dc7910a6c3680417de6d76a7b9694d">リンク</a></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>φ8 x 19.7mm Aluminum Bar</td>
+            <td>2</td>
+            <td><a href ="../dimensions/φ8 x 19.7mm Aluminum Bar.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Shaft Arm Joint 0-1</td>
+            <td>2</td>
+            <td><a href ="../dimensions/Shaft Arm Joint 0-1.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>φ8 x 26.0mm Aluminum Bar</td>
+            <td>1</td>
+            <td><a href ="../dimensions/φ8 x 26.0mm Aluminum Bar.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Timing Pulley Motor</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Timing Pulley Motor.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Timing Pulley Motor Gear</td>
+            <td>2</td>
+            <td><a href ="../dimensions/Timing Pulley Motor Gear.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>Timing Pulley Motor Wall</td>
+            <td>2</td>
+            <td><a href ="../dimensions/Timing Pulley Motor Wall.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>LM0.8-20 IG36P Joint</td>
+            <td>1</td>
+            <td><a href ="../dimensions/LM0.8-20 IG36P Joint.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>LM0.8-20 Additional Work</td>
+            <td>1</td>
+            <td><a href ="https://www.monotaro.com/p/8980/3132/?msockid=02dc7910a6c3680417de6d76a7b9694d">リンク</a></td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>Timing Pulley Motor Wall Spacer</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Timing Pulley Motor Wall Spacer.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>25</td>
+            <td>Potentionmeter Bot</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Potentionmeter Bot.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Aluminum Square Pipe 10mm x 10mm x 56mm</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Aluminum Square Pipe 10mm x 10mm x 56mm.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>27</td>
+            <td>Potentionmeter Mount</td>
+            <td>1</td>
+            <td><a href ="../dimensions/Potentionmeter Mount.pdf">図面</a></td>
+        </tr>
+        <tr>
+            <td>28</td>
+            <td>Potentionmeter</td>
+            <td>2</td>
+            <td></td>
+        </tr>
+    </table>
+</center>
+<br>
+ショップURLの記載がない部品については3Dプリンタや手加工によって制作した部品である。<br>
+6番はターンテーブル、10番と外側の11番はロボットアームの第一関節、内側の11番はロボットアームの第二関節を駆動する。<br>
+第二関節へはタイミングベルトで動力を伝えている。<br>
+取り付けの順番について。9番に対して13番、10番、12番、14番、15番の順で取り付ける必要がある。<br>
+反対側も同様に9番に対して13番、11番、12番、14番、15番の順で取り付ける必要がある。<br>
+他の部品については特に順番を意識して取り付けなくてもよい。<br>
+<br>
+
+
+<h4><a name = mech3-2-2>3-2-2. Basis Assy</a></h4>
+Basis Assyをfig.4に示す。<br>
+<br>
+<center>
+    <img src="../picture/Basis Assy.png" width="100"><br>
+    fig.4 Basis Assy
+</center>
+<br>
+Basis Assy部品リストをtable.2に示す。<br>
+<br>
+<center>
+    table.2 Basis Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>aaa</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bbb</td>
+            <td>1</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h4><a name = mech3-2-3>3-2-3. Arm Assy</a></h4>
+Arm Assyをfig.5に示す。<br>
+<br>
+<center>
+    <img src="../picture/Arm Assy.png" width="100"><br>
+    fig.5 Arm Assy
+</center>
+<br>
+Arm Assy部品リストをtable.3に示す。<br>
+<br>
+<center>
+    table.3 Arm Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>aaa</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bbb</td>
+            <td>1</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h4><a name = mech3-2-4>3-2-4. Control Box Assy</a></h4>
+Control Box Assyをfig.6に示す。<br>
+<br>
+<center>
+    <img src="../picture/Control Box Assy.png" width="100"><br>
+    fig.6 Control Box Assy
+</center>
+<br>
+Control Box Assy部品リストをtable.4に示す。<br>
+<br>
+<center>
+    table.4 Basis Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>aaa</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bbb</td>
+            <td>1</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h4><a name = mech3-2-5>3-2-5. CuGo V3 Assy</a></h4>
+CuGo V3 Assyをfig.7に示す。<br>
+<br>
+<center>
+    <img src="../picture/CuGo V3 Assy.png" width="100"><br>
+    fig.7 CuGo V3 Assy
+</center>
+<br>
+CuGo V3 Assy部品リストをtable.5に示す。<br>
+<br>
+<center>
+    table.5 CuGo V3 Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>NFS5-2020-500</td>
+            <td>6</td>
+            <td><a href ="https://jp.misumi-ec.com/vona2/detail/110311092599/?HissuCode=NFS5-2020&rid=dj_sub43_detail_1_110311092599_e08_110302683830_b">リンク</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>CuGo V3 Right</td>
+            <td>1</td>
+            <td><a href ="https://cuborex.com/product/?id=12">リンク</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>CuGo V3 Left</td>
+            <td>1</td>
+            <td><a href ="https://cuborex.com/product/?id=12">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h4><a name = mech3-2-6>3-2-6. Air Chuck Assy</a></h4>
+Air Chuck Assyをfig.8に示す。<br>
+<br>
+<center>
+    <img src="../picture/Air Chuck Assy.png" width="100"><br>
+    fig.8 Air Chuck Assy
+</center>
+<br>
+Air Chuck Assy部品リストをtable.6に示す。<br>
+<br>
+<center>
+    table.6 Air Chuck Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>aaa</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bbb</td>
+            <td>1</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h4><a name = mech3-2-7>3-2-7. Gripper Assy</a></h4>
+Gripper Assyをfig.9に示す。<br>
+<br>
+<center>
+    <img src="../picture/Gripper Assy.png" width="100"><br>
+    fig.9 Gripper Assy
+</center>
+<br>
+Gripper Assy部品リストをtable.7に示す。<br>
+<br>
+<center>
+    table.7 Gripper Assy部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>aaa</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bbb</td>
+            <td>1</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+。<br>
+。<br>
+<br>
+
+
+<h2><a name = mech4>4. 購入物品</a></h2>
+購入物品をtable.8に示す。<br>
+<br>
+<center>
+    table.8 購入物品
+    <table class="table010">
+        <tr>
+            <th>物品名</th>
+            <th>単価</th>
+            <th>個数</th>
+            <th>小計</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>0円</td>
+            <td>1</td>
+            <td>0円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>合計</td>
+            <td>0円</td>
+            <td></td>
+        </tr>
+       
+    </table>
+</center>
+<br>
+
+
+<h2><a name = mech5>5.参考文献</a></h2>
+<address>
+    <a href="" target="_self"></a>
+</address>
+<address>
+    <a href="" target="_self"></a>
+</address>
+
+
+<br><br><br>
+<hr>
+
+<address>
+    <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/" target="_self">MIRS2405ドキュメント管理台帳へ</a>
+</address>
+
+
+</BODY></html>
