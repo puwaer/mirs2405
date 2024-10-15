@@ -19,6 +19,7 @@ def gender_analysis(image):
     result = DeepFace.analyze(image, actions=['gender'], enforce_detection=False)
     return result[0]['gender']
 
+
 # メイン処理
 def main():
     # カメラからの映像を取得
