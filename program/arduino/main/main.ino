@@ -1,9 +1,6 @@
 #include "define.h"
-#include <stdio.h>
-#include <math.h>
 
-static float x_coordinate = 0; //[m]
-static float y_coordinate = 0; //[m]
+
 
 void setup(){
   confirmation_device();
