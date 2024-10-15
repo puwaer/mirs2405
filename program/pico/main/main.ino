@@ -1,6 +1,11 @@
 #include "define.h"
 #include <stdio.h>
 #include <math.h>
+#include <arduino.h>
+#include <Servo.h>
+
+Servo scs_1;
+Servo scs_2;
 
 static float x_coordinate = 0; //[m]
 static float y_coordinate = 0; //[m]
@@ -12,7 +17,6 @@ void setup() {
   motor_open();
   arm_open();
   raspi_open();
-
   Serial.begin(115200);
 }
 
