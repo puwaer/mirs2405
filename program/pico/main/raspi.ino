@@ -28,7 +28,11 @@ void check_raspy(){
     }
     switch(inc_bytes[0]){
         case 1:
+            run_debug();
+            break;
             
+        case 2:
+
             break;
         default:
             break;

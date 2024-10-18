@@ -1,14 +1,28 @@
-#define PIN_ENC_A_L  2
-#define PIN_ENC_B_L  4
-#define PIN_ENC_A_R  3
-#define PIN_ENC_B_R  7
-#define PIN_DIR_R    8
-#define PIN_PWM_R    9
-#define PIN_DIR_L   12
-#define PIN_PWM_L   11
-#define PIN_SW      10
-#define PIN_LED     13
-#define PIN_BATT    19 
+#define PIN_ENC_A_L   1
+#define PIN_ENC_A_R   2
+#define PIN_ENC_B_L   4  
+#define PIN_ENC_B_R   5
+#define PIN_DIR_R     6
+#define PIN_DIR_L     7
+#define PIN_PWM_R     9 
+#define PIN_PWM_L     10
+
+#define PIN_SCS215_1_PWM    8   //第三関節
+#define PIN_SCS215_2_PWM    9   //第四関節
+
+#define PIN_LC578VA_PWM     14  //第一関節右
+#define PIN_LC578VA_DIR     18
+
+#define PIN_JC578VA_1_PWM   15  //第一関節左
+#define PIN_JC578VA_1_DIR   19
+
+#define PIN_INFRARED_LED    22  //赤外線近接センサー
+#define PIN_PHOTOREFLECTOR  28 
+
+#define PIN_POTENTIOMETER_R 26  //ポテンショメータ右
+#define PIN_POTENTIOMETER_L 27  //ポテンショメータ左
+
+#define PIN_BATT    19    
 
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
@@ -44,4 +58,6 @@ int   pwm_limitter_L  = -80;    //pwmの最小値
 int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
 int   dead_zone       = 50;     //pwmの最小値(絶対値)
+
+
 
