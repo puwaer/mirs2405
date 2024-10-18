@@ -16,10 +16,3 @@ def send_xyz(ser, position):
 def close_serial(ser):
     """シリアル通信を閉じる"""
     ser.close()
-
-
-#mainでの使用
-position = np.array[0, 0, 0]
-ser = init_serial()
-send_xyz(ser, position)
-close_serial()

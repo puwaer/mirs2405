@@ -11,23 +11,10 @@ def init_serial(port='/dev/ttyUSB0', baudrate=9600):
     return ser
 
 def receive_position(ser):
-    """シリアル通信で送られてきた1次元行列（x, y, z座標）を受信"""
-    position = struct.unpack('fff', ser.read(12))
-    return np.array(position, dtype=np.float32)
-
-def receive_joint_angle(ser):
-    """シリアル通信で送られてきた1次元行列（アーム第1、第３、第４関節回転角度）を受信"""
-    joint_angle = struct.unpack('fff', ser.read(12))
-    return np.array(joint_angle, dtype=np.float32)
+    """シリアル通信で送られてきた1次元行列（x, y, z座標、アーム第1、第３、第４関節回転角度）を受信"""
+    position_angles = struct.unpack('fff', ser.read(12))
+    return np.array(position_angles, dtype=np.float32)
 
 def close_serial(ser):
     """シリアル通信を閉じる"""
     ser.close()
-
-
-
-
-
-
-
-
