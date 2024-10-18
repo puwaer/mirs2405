@@ -7,22 +7,18 @@
 #define PIN_PWM_R     9 
 #define PIN_PWM_L     10
 
-#define PIN_SCS215_1_PWM    8   //第三関節
-#define PIN_SCS215_2_PWM    9   //第四関節
+#define PIN_JOINT_1_R_PWM   14  //第一関節
+#define PIN_JOINT_1_L_PWM   15
+#define PIN_JOINT_1_R_DIR   18
+#define PIN_JOINT_1_L_DIR   19
+#define PIN_JOINT_1_POT     26
 
-#define PIN_LC578VA_PWM     14  //第一関節右
-#define PIN_LC578VA_DIR     18
+#define PIN_JOINT_3_PWM    8   //第三関節
 
-#define PIN_JC578VA_1_PWM   15  //第一関節左
-#define PIN_JC578VA_1_DIR   19
+#define PIN_JOINT_4_PWM    9   //第四関節
 
 #define PIN_INFRARED_LED    22  //赤外線近接センサー
-#define PIN_PHOTOREFLECTOR  28 
-
-#define PIN_POTENTIOMETER_R 26  //ポテンショメータ右
-#define PIN_POTENTIOMETER_L 27  //ポテンショメータ左
-
-#define PIN_BATT    19    
+#define PIN_PHOTOREFLECTOR  28    
 
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
