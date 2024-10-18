@@ -118,7 +118,7 @@ void control_convolution(int a, int b, int c, int d, float e, float f, float g, 
   }
 }
 
-void run_ToPerson(float x, float y){
+void run_To(float x, float y){
   r = powf(powf(x,2)+powf(y,2), 0.5);
   if(y == 0){
     if(x >= 0) theta = 0;
@@ -134,17 +134,10 @@ void run_ToPerson(float x, float y){
   vel_r = vel;
   
 
-  motor_stop();
   delay(1000);
   run_st(vel_l, dist_l, vel_r, dist_r);
   
 }
-
-void run_ToHome(){
-  
-}
-
-
 
 void run_st(float L_velocity, float L_displacement, float R_velocity, float R_displacement) {
   control_initialize(L_velocity, R_velocity, L_displacement, R_displacement, &target_velocity_l, &target_velocity_r, &target_displacement_l, &target_displacement_r);
@@ -158,21 +151,25 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
     
     if(target_displacement_l > 0 && target_displacement_r > 0){
       if(target_displacement_l < displacement_l && target_displacement_r < displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l > 0 && target_displacement_r < 0){
       if(target_displacement_l < displacement_l || target_displacement_r > displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l < 0 && target_displacement_r > 0){
       if(target_displacement_l > displacement_l || target_displacement_r < displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l < 0 && target_displacement_r < 0){
       if(target_displacement_l > displacement_l && target_displacement_r > displacement_r){
+        motor_stop();
         break;
       }
     }
@@ -219,21 +216,25 @@ void run_tur(float angle, float ang_vel) {
     
     if(target_displacement_l > 0 && target_displacement_r > 0){
       if(target_displacement_l < displacement_l && target_displacement_r < displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l > 0 && target_displacement_r < 0){
       if(target_displacement_l < displacement_l || target_displacement_r > displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l < 0 && target_displacement_r > 0){
       if(target_displacement_l > displacement_l || target_displacement_r < displacement_r){
+        motor_stop();
         break;
       }
     }
     if(target_displacement_l < 0 && target_displacement_r < 0){
       if(target_displacement_l > displacement_l && target_displacement_r > displacement_r){
+        motor_stop();
         break;
       }
     }

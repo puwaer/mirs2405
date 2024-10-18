@@ -12,7 +12,6 @@ static float y_coordinate = 0; //[m]
 
 void setup() {
   confirmation_device();
-  io_open();
   encoder_open();
   motor_open();
   arm_open();
