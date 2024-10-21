@@ -1,5 +1,5 @@
 
-void arm(float _ang1, float _ang3, float _ang4){
+void arm(float _ang1, float _ang2, float _ang3, float _ang4){
   scs_2.write(_ang4);  //動くかわからない
   scs_1.write(_ang3);  //動くかわからない
   
