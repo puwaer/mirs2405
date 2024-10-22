@@ -52,7 +52,7 @@ void PID_joint2(float a, float b, int *c){
 void joint2(float _angle) {
   joint2_initialize(_angle, &target_ang_joint2);
   while(1){
-    angle_joint2 = analogRead(A0);
+    angle_joint2 = analogRead(PIN_JOINT_2_POT);
     angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN, POT_MAX);
     PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
     joint2_limitter(joint2_pwm, &joint2_pwm);

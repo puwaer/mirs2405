@@ -40,18 +40,25 @@ void arm_open(){
   scs_1.attach(PIN_JOINT_3_PWM);
   scs_2.attach(PIN_JOINT_4_PWM);
 
-  pinMode(PIN_JOINT_1_POT, INPUT);
+  
 
   pinMode(PIN_JOINT_1_R_PWM, OUTPUT);
-  pinMode(PIN_JOINT_1_R_DIR, OUTPUT);
-
   pinMode(PIN_JOINT_1_L_PWM, OUTPUT);
+  pinMode(PIN_JOINT_1_R_DIR, OUTPUT);
   pinMode(PIN_JOINT_1_L_DIR, OUTPUT);
+  pinMode(PIN_JOINT_1_POT, INPUT);
+
+  digitalWrite(PIN_JOINT_1_R_DIR, HIGH);
+  digitalWrite(PIN_JOINT_1_L_DIR, HIGH);
+
+  pinMode(PIN_JOINT_2_PWM, OUTPUT);
+  pinMode(PIN_JOINT_2_DIR, OUTPUT);
+  pinMode(PIN_JOINT_2_POT, INPUT);
+
+  digitalWrite(PIN_JOINT_2_DIR, HIGH);
 
   pinMode(PIN_INFRARED_LED, OUTPUT);
   pinMode(PIN_PHOTOREFLECTOR, INPUT);
-
-  attachInterrupt(digitalPinToInterrupt(PIN_JOINT_1_POT), pot_change, CHANGE);
   
 }
 

@@ -19,13 +19,8 @@ void arm_init(){
   digitalWrite(PIN_TURNTABLEENC_B, HIGH);
   attachInterrupt(digitalPinToInterrupt(PIN_TURNTABLEENC_A), enc_change, CHANGE);
 
-  pinMode(PIN_JOINT_2_PWM, OUTPUT);
-  pinMode(PIN_JOINT_2_DIR, OUTPUT);
-  digitalWrite(PIN_JOINT_2_DIR, HIGH);
-
   pinMode(PIN_PUMP_PWM, OUTPUT);
   pinMode(PIN_PUMP_DIR, OUTPUT);
-  pinMode(PIN_JOINT_POT, INPUT);
   digitalWrite(PIN_PUMP_DIR, HIGH);
 
 }

@@ -24,3 +24,8 @@ void loop() {
   motor_stop();
   exit(0);
 }
+
+/*  run(x, y)  (x,y)へ移動
+    arm(ang1, ang2, ang3, ang4) アームを指定角度へ　すべて絶対角度
+
+  
