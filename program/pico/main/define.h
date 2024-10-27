@@ -17,9 +17,9 @@
 #define PIN_JOINT_2_DIR   20
 #define PIN_JOINT_2_POT   27
 
-#define PIN_JOINT_3_PWM    8   //第三関節
+#define PIN_JOINT_3_PWM    16   //第三関節
 
-#define PIN_JOINT_4_PWM    9   //第四関節
+#define PIN_JOINT_4_PWM    8   //第四関節
 
 #define PIN_INFRARED_LED    21  //赤外線近接センサー
 #define PIN_PHOTOREFLECTOR  22    
@@ -79,3 +79,5 @@ int   joint2_pwm_limitter_H  = 80;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -80;    //pwmの最小値
 int   joint2_dead_zone       = 50;     //pwmの最小値(絶対値)
 
+const byte joint3ID = 1; //第三関節のシリアルサーボID
+const byte joint4ID = 2 ;//第四関節のシリアルサーボID

@@ -1,3 +1,5 @@
+static long cnt = 0;
+
 float target_ang_turntable;
 float angle_turntable;
 
@@ -6,6 +8,29 @@ float integral_ang_turntable;
 float differential_ang_turntable;
 float pre_err_ang_turntable;
 int turntable_pwm;
+
+void encoder_get(float *a){
+  *a = cnt * PPR;
+}
+
+void encoder_reset(){
+  cnt = 0;
+}
+
+void enc_change() {
+  int a_curr;
+  int b_curr;
+  static int a_prev = LOW;
+  static int b_prev = LOW;
+  a_curr = digitalRead(PIN_TURNTABLEENC_A);
+  b_curr = digitalRead(PIN_TURNTABLEENC_B);
+  if (a_prev ==  LOW && b_prev == HIGH && a_curr == HIGH && b_curr ==  LOW) cnt--;
+  if (a_prev == HIGH && b_prev ==  LOW && a_curr ==  LOW && b_curr == HIGH) cnt--;
+  if (a_prev ==  LOW && b_prev ==  LOW && a_curr == HIGH && b_curr == HIGH) cnt++;
+  if (a_prev == HIGH && b_prev == HIGH && a_curr ==  LOW && b_curr ==  LOW) cnt++;
+  a_prev = a_curr;
+  b_prev = b_curr;
+}
 
 void turntable_initialize(float a, float *b){
   encoder_reset();
