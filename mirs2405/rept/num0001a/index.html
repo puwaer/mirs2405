@@ -37,7 +37,7 @@
 </tr>
 <tr>
 <td>A01</td>
-<td>2024.10.9</td>
+<td>2024.10.18</td>
 <td>宇佐見祥</td>
 <td>    </td>
 <td>初版</td>
@@ -48,310 +48,56 @@
 
 <h3>目次</h3>
     <ul>
-        <li><a href = "#elec1">1. はじめに</a><br> </li>
-        <li><a href = "#elec2">2. 全体接続図</a><br></li>
-        <li><a href = "#elec3">3. システム構成</a><br></li>
-        <li><a href = "#elec3-1"> 3-1.回路全体</a><br></li>
-        <li><a href = "#elec3-2"> 3-2.電源回路</a><br></li>
-        <li><a href = "#elec3-2-1"> 3-2-1.PICマイコン電源回路</a><br></li>
-        <li><a href = "#elec3-2-2"> 3-2-2.バッテリー電圧測定回路</a><br></li>
-        <li><a href = "#elec3-2-3"> 3-2-3.電源回路12V系</a><br></li>
-        <li><a href = "#elec3-2-4"> 3-2-4.サーボモーター用電源回路</a><br></li>
-        <li><a href = "#elec3-2-5"> 3-2-5.ゲートドライブ回路</a><br></li>
-        <li><a href = "#elec3-2-6"> 3-2-6.電源回路制御用マイコン</a><br></li>
-        <li><a href = "#elec4">4.使用物品</a><br></li>
-        <li><a href = "#elec5">5.参考文献</a><br></li>
+        <li><a href = "#rept1">1. はじめに</a><br> </li>
+        <li><a href = "#rept2">2. 分圧抵抗の選定(電圧測定回路)</a><br></li>
+        <li><a href = "#rept3">3. 各アクチュエータの必要トルク計算</a><br></li>
+        <li><a href = "#rept4">4.参考文献</a><br></li>
     </ul>
 
 <br>
-<h2><a name = elec1>1.はじめに</a></h2>
+<h2><a name = rept1>1.はじめに</a></h2>
 本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの技術調査書である。<br>
 技術調査書ではメカやエレキの部品選定の基準や方法、根拠を示す。<br>
 <br>
 
-<h2><a name = elec2>2.メカトロニクス</a></h2>
-<br>
-
-<h2><a name = elec3>3.エレクトロニクス</a></h2>
-各項目でそれぞれの回路の動作を解説する。<br>
-<br>
-
-
-<h3><a name = elec3-1>3-1.回路全体</a></h3>
-全体の回路図をfig.2に示す。<br>
-
+<h2><a name = rept2>2.分圧抵抗の選定(電圧測定回路)</a></h2>
+電圧測定回路(バッテリー,降圧コンバータ出力)に使用する分圧抵抗の算出手順を示す。<br>
+測定電圧の最大値は26.8V(LiFePOバッテリー満充電時電圧)である。<br>
+一方で電圧測定をするマイコンのADCの入力最大電圧は5Vである。<br>
+よって、測定電圧の最大値がかかってもADCの入力電圧を超えないようにするため、分圧比は5:1とした。<br>
+抵抗値は5kΩと1kΩで分圧する。5kΩの抵抗はクリエイティブラボにないため、2kΩ+2kΩ+1kΩで5kΩとする。<br>
+実際にこの抵抗値で測定可能かを確かめるため、実験を行った。<br>
+実験に使用した器具<br>
+・直流安定化電源 PA18-5B<br>
+・抵抗器 2kΩ×2, 1kΩ×2<br>
+・マイコン PIC16F1938I/SP<br>
+作成した回路の回路図をfig.1に示す。<br>
 <center>
-
-    <img src="../picture/全体ツナギ_600W_DCDC.png" width="1000"><br>
-    fig.2 全体回路図
+    <img src="../picture/分圧回路.png" width="200"><br>
+    fig.1 分圧回路図
 </center>
-<br>
-電源回路の出力は、2系統となる。<br>
-7.4V系 : サーボモーター<br>
-12V系  : パワーウィンドウモータ・その他直流モーター <br>
-
-<h3><a name = elec3-2>3-2.電源回路</a></h3>
-電源の回路図をfig.3に示す。<br>
-
+結果をtable.1に示す。<br>
 <center>
-    <img src="../picture/全体ツナギ_600W_DCDC.png" width="1000"><br>
-    fig.3 電源回路図
+    table.1 分圧回路の測定結果<br>
+    <img src="../picture/分圧回路測定結果.png" width="200"><br>
 </center>
-<br>
-電源回路はマイコン部、7.4V電源部、12V電源部に分けられる。
-
-<h4><a name = elec3-2-1>3-2-1.PICマイコン電源回路</a></h4>
-回路図をfig.4に示す。<br>
-<center>
-    <img src="../picture/マイコン電源部回路図_詳細設計用.png" width="400"><br>
-    fig.4 マイコン電源部回路図
-</center>
-NJM7805を使用し5Vを供給する。<br>
-また、この5Vを絶縁型DCDCコンバータの入力にも使用する。<br>
+使用するAVRの最大出力電圧が18Vであるため、それ以上の電圧での測定はできなかった。<br>
+table.1より電源電圧が9Vより低い領域では測定値と電源電圧の誤差が大きいが、それよりも電圧の高い領域で誤差は1%以内に収まっている。<br>
+バッテリー電圧はコンバータの出力可否を判断するために使用するため、この回路の精度でも問題ないと考えられる。<br>
+また、降圧コンバータでは24Vを12Vに降圧するため、12V付近での精度が確保できていればよい。<br>
+本実験の結果では10V以上で誤差1%以下であることが確認できているため、この分圧比は適していると考えられる。<br>
 <br>
 
-<h4><a name = elec3-2-2>3-2-2.バッテリー電圧測定回路</a></h4>
-回路図をfig.5に示す。<br>
-<center>
-    <img src="../picture/電圧測定部回路図_詳細設計用.png" width="400"><br>
-    fig.5 電圧測定部回路図
-</center>
-LiFePOバッテリーの両端子に分圧抵抗を接続する。<br>
-BATTVD端子をPICマイコンのアナログピンに接続し、バッテリー電圧を監視する。<br>
-バッテリー電圧が低すぎる場合は降圧コンバータの出力を切る。<br>
-<br>
-
-<h4><a name = elec3-2-3>3-2-3.電源回路12V系</a></h4>
-回路図をfig.6に示す。<br>
-<center>
-    <img src="../picture/モーター降圧回路_詳細設計用.png" width="800"><br>
-    fig.6 降圧コンバータ部回路図
-</center>
-
-電源の入力はLiFePOバッテリーである。<br>
-出力にはモータードライバを接続し、12Vを供給する。<br>
-出力側には分圧抵抗を接続し、OVD端子電圧をPICマイコンのADコンバータから過電圧検出を行う。<br>
-検出電圧を用いて出力が12V一定になるように制御し、任意設定の閾値を超えた場合は出力を切る。<br>
-ゲート制御はPICマイコンで行う<br>
-SBDは4パラで使用する。<br>
-平滑コイルも定格電流の関係から6パラで使用する。<br>
-<br>
-
-<h4><a name = elec3-2-4>3-2-4.サーボモーター用電源回路</a></h4>
-回路図をfig.7に示す。<br>
-<center>
-    <img src="../picture/サーボ電源回路図_詳細設計用.png" width="800"><br>
-    fig.7 サーボ電源回路図
-</center>
-
-NJM2360ADを使用した降圧DCDCコンバータ回路である。<br>
-出力電圧7.4V、最大出力電流は5Aとしている。<br>
-<br>
-
-<h4><a name = elec3-2-5>3-2-5.ゲートドライブ回路</a></h4>
-回路図をfig.8に示す。<br>
-<center>
-    <img src="../picture/ゲートドライブ回路図_詳細設計用.png" width="800"><br>
-    fig.8 ゲートドライブ回路図
-</center>
-
-Nch-MOSFETをハイサイドで駆動するため、フローティング電源を用いる。<br>
-ゲート制御信号はフォトカプラで絶縁され、ターンオン時は12V、ターンオフ時は0Vをゲートに印加する。<br>
-ゲート抵抗は絶縁型DCDCコンバータの出力電流の制約からターンオン時は100Ω、ターンオフ時は50Ωとなるようにしている。
-<br>
-
-<h4><a name = elec3-2-6>3-2-6.電源回路制御用マイコン</a></h4>
-電源回路の制御にはPIC16F1938を使用する。<br>
-使用するI/Oと機能をtable.1に示す。
-<center>
-
-    table.1 PICマイコンI/O
-    <table class="table010">
-        <tr>
-            <th>ピン番号</th>
-            <th>入出力</th>
-            <th>機能</th>
-        </tr>
-    
-        <tr>
-            <td>RA0</td>
-            <td>IN</td>
-            <td>OVD入力</td>
-        </tr>
-
-        <tr>
-            <td>RA1</td>
-            <td>IN</td>
-            <td>BATTVD入力</td>
-        </tr>
-
-        <tr>
-            <td>RB0</td>
-            <td>OUT</td>
-            <td>降圧コンバータゲート信号出力</td>
-        </tr>
-    
-        
-    </table>
-    </center>
-    
+<h2><a name = rept3>3.各アクチュエータの必要トルク計算</a></h2>
+/*製作中*/<br>
 <br>
 
 <br>
 
-
-<h2><a name = elec4>4.使用物品</a></h2>
-使用物品をtable.2に示す。<br>
-<br>
-<center>
-
-    table.2 使用物品
-    <table class="table010">
-        <tr>
-            <th>物品名</th>
-            <th>単価</th>
-            <th>個数</th>
-            <th>小計</th>
-            <th>サイトURL</th>
-        </tr>
-        <tr>
-            <td>積層セラミックコンデンサ 0.1μF</td>
-            <td>25円</td>
-            <td>3</td>
-            <td>75円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g110147/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>積層セラミックコンデンサ 10μF</td>
-            <td>50円</td>
-            <td>1</td>
-            <td>50円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g108155/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>ショットキーダイオード 1S4</td>
-            <td>20円</td>
-            <td>1</td>
-            <td>20円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g116384/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>汎用小信号高速スイッチングダイオード 1N4148</td>
-            <td>150円</td>
-            <td>1</td>
-            <td>150円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g100941/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>2素子入りショットキーバリアダイオード MBR3060FCT</td>
-            <td>120円</td>
-            <td>2</td>
-            <td>240円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g106054/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>ファストリカバリーダイオード ER504</td>
-            <td>30円</td>
-            <td>1</td>
-            <td>30円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g112794/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>トロイダルコイル 470μH 9A</td>
-            <td>150円</td>
-            <td>6</td>
-            <td>900円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g106732/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>トロイダルコイル 90μH</td>
-            <td>50円</td>
-            <td>1</td>
-            <td>50円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g106915/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>TTC3710B</td>
-            <td>120円</td>
-            <td>1</td>
-            <td>120円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g115116/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>TTA1452B</td>
-            <td>120円</td>
-            <td>2</td>
-            <td>240円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g115119/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>TK3R2E06PL</td>
-            <td>120円</td>
-            <td>1</td>
-            <td>120円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g113792/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>3W級絶縁型DC-DCコンバータ MCW03-05S12</td>
-            <td>850円</td>
-            <td>1</td>
-            <td>850円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g104262/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>TLP250H</td>
-            <td>150円</td>
-            <td>1</td>
-            <td>150円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g108042/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>NJM2360AD</td>
-            <td>70円</td>
-            <td>1</td>
-            <td>70円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g112365/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>ガラス管ヒューズ20A</td>
-            <td>40円</td>
-            <td>3</td>
-            <td>120円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g108632/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>ガラス管ヒューズ10A</td>
-            <td>40円</td>
-            <td>2</td>
-            <td>80円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g107138/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>ヒューズホルダー　基板取付用　標準タイプ</td>
-            <td>20円</td>
-            <td>10</td>
-            <td>200円</td>
-            <td><a href ="https://akizukidenshi.com/catalog/g/g110522/">リンク</a></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>合計</td>
-            <td>3465円</td>
-            <td></td>
-        </tr>
-       
-    </table>
-</center>
-
-<h2><a name = elec5>5.参考文献</a></h2>
+<h2><a name = rept4>4.参考文献</a></h2>
 <address>
-    <a href="https://www.kyohritsu.com/eclib/OTHER/DATASHEET/JRC/njm2360app.pdf" target="_self">njm2360アプリケーションノート</a>
+    <a href="https://ww1.microchip.com/downloads/jp/DeviceDoc/41574A_JP.pdf" target="_self">PIC16(L)F1938/9 データシート</a>
 </address>
-<address>
-    <a href="https://toshiba.semicon-storage.com/info/application_note_ja_20180726_AKX00023.pdf?did=59459" target="_self">MOSFETゲート駆動回路</a>
-</address>
-
 
 <br><br><br>
 <hr>

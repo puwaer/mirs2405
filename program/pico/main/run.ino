@@ -184,6 +184,7 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
 
     motor_run_l(pwm_l);
     motor_run_r(pwm_r);
+    delay(10);
   } 
 }
 
@@ -278,7 +279,7 @@ void run_tur(float angle, float ang_vel) {
     
     motor_run_l(pwm_l);
     motor_run_r(pwm_r);
-    
+    delay(10);
   }
 }
 
