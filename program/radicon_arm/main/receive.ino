@@ -5,7 +5,7 @@ void recieve(){
 }
 
  
-//割り込みで処理する内容
+//割り込み処理
 void chAChangeInterupt()
 {
   unsigned long nowPulse = micros();  //現在のマイコン内の時間をnowPulseに代入
