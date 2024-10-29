@@ -18,7 +18,7 @@ void setup() {
 }
 
 void loop() {
-  check_raspy();
+  check_raspi();
   motor_stop();
   exit(0);
 }

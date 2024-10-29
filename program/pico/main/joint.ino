@@ -213,12 +213,12 @@ void joint3_4(byte _id, int _position) {
   byte message[13];
   message[0] = 0xFF;  // ヘッダ
   message[1] = 0xFF;  // ヘッダ
-  message[2] = _id;    // サーボID
+  message[2] = _id;   // サーボID
   message[3] = 9;     // パケットデータ長
   message[4] = 3;     // コマンド（3は書き込み命令）
   message[5] = 42;    // レジスタ先頭番号
   message[6] = (_position >> 8) & 0xFF; // 位置情報バイト上位
-  message[7] = _position & 0xFF; // 位置情報バイト下位
+  message[7] = _position & 0xFF;  // 位置情報バイト下位
   message[8] = 0x00;  // 時間情報バイト下位
   message[9] = 0x00;  // 時間情報バイト上位
   message[10] = 0x00; // 速度情報バイト下位

@@ -1,4 +1,4 @@
-void check_raspy(){
+void check_raspi(){
   int inc_bytes[64] = {-1,};
 
     /*ここから受信処理*/
