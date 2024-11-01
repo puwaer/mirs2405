@@ -26,7 +26,7 @@
 
 
 #define POT_MIN 0
-#define POT_MAX 300 //[°]
+#define POT_MAX 287 //[°]
 
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
@@ -70,14 +70,29 @@ float Kd_joint1 = 0;
 int   joint1_pwm_limitter_H  = 80;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -80;    //pwmの最小値
 int   joint1_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint1_ang_limitter_H  = 360;   //角度の最大値[度]
+int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
+
 
 float Kp_joint2 = 0.119;
 float Ki_joint2 = 0;
 float Kd_joint2 = 0;
 
+
 int   joint2_pwm_limitter_H  = 80;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -80;    //pwmの最小値
 int   joint2_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint2_ang_limitter_H  = 360;   //角度の最大値[度]
+int   joint2_ang_limitter_L  = 0;     //角度の最小値[度]
 
-const byte joint3ID = 1; //第三関節のシリアルサーボID
-const byte joint4ID = 2 ;//第四関節のシリアルサーボID
+const byte joint3ID = 30; //第三関節のシリアルサーボID
+const byte joint4ID = 30;//第四関節のシリアルサーボID
+
+const int SCS_MAX_VEL = 60; // 第三,四関節_vel=200の時の速度 [度/s]
+int joint3_vel = 1; // (0-60) 度/s 
+int joint4_vel = 1; // (0-60) 度/s 
+
+int   joint3_ang_limitter_H  = 90;   //角度の最大値[度]
+int   joint3_ang_limitter_L  = 0;     //角度の最小値[度]
+int   joint4_ang_limitter_H  = 90;   //角度の最大値[度]
+int   joint4_ang_limitter_L  = 0;     //角度の最小値[度]

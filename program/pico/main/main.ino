@@ -3,21 +3,22 @@
 #include <math.h>
 #include <arduino.h>
 
-static float x_coordinate = 0; //[m]
-static float y_coordinate = 0; //[m]
-
 void setup() {
   confirmation_device();
   encoder_open();
   motor_open();
   arm_open();
-  raspi_open();
   Serial.begin(115200);
+  delay(100);
 
-  delay(1000);
+  raspi_open();
 }
 
 void loop() {
+  //run_debug();
+  //arm_debug();
+  radicon(100,100,100);
+
   check_raspi();
   motor_stop();
   exit(0);
