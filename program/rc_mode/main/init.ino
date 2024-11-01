@@ -1,4 +1,4 @@
-void init(){
+void rc_init(){
   pinMode(LED_PIN, OUTPUT);
   pinMode(MR8_A_PIN,INPUT);
   pinMode(MR8_B_PIN,INPUT);

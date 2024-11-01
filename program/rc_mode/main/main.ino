@@ -1,7 +1,7 @@
 #include "define.h"
 
 void setup() {
-  init();
+  rc_init();
 }
 
 void loop() {
