@@ -90,27 +90,26 @@ void radicon_joint2(bool _up, bool _down){
 void radicon_joint3(bool _up, bool _down){
   if(_up){
     joint3_angle += 1;
-    
-    joint3(joint3ID, joint3_angle, joint3_vel);
   }
   else if(_down){
     joint3_angle -= 1;
-    joint3(joint3ID, joint3_angle, joint3_vel);
   }
-  delay(1000);
+  joint3_ang_limitter(joint3_angle, &joint3_angle);
+  joint3(joint3ID, joint3_angle, joint3_vel);
+  delay(100);
 }
   
   
 void radicon_joint4(bool _up, bool _down){
   if(_up){
     joint4_angle += 1;
-    joint4(joint4ID, joint4_angle, joint4_vel);
   }
   else if(_down){
     joint4_angle -= 1;
-    joint4(joint4ID, joint4_angle, joint4_vel);
   }
-  delay(1000);
+  joint4_ang_limitter(joint4_angle, &joint4_angle);
+  joint4(joint4ID, joint4_angle, joint4_vel);
+  delay(100);
 }
 
 void radicon(int A, int C, int F){
