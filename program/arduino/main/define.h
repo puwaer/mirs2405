@@ -13,7 +13,8 @@
 
 #define GRIP_MIN 544  //サーボの角度が0度のときのパルス幅[us]。デフォルトは544。
 #define GRIP_MAX 2400 // サーボの角度が180度のときのパルス幅[us]。デフォルトは2400。
-#define GRIP_ANG 15  //グリッパーの動作角度[度](0-180)
+#define GRIP_OPEN_ANG 15  //グリッパーの動作角度[度](0-180)
+#define GRIP_CLOSE_ANG 0
 
 #define AIRCHUCK_MIN  544
 #define AIRCHUCK_MAX  2400

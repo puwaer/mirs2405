@@ -1,4 +1,4 @@
-/*void check_serial(){
+void check_serial(){
     int inc_bytes[64] = {-1,};
 
     if(Serial.available() > 0){
@@ -71,7 +71,7 @@
     }
 
 
-}*/
+}
 
 
 

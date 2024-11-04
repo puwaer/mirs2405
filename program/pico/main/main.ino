@@ -1,5 +1,6 @@
 #include "define.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <arduino.h>
 
@@ -17,9 +18,9 @@ void setup() {
 void loop() {
   //run_debug();
   //arm_debug();
-  radicon(100,100,100);
+  radicon_debug();
 
-  check_raspi();
+  //check_raspi();
   motor_stop();
   exit(0);
 }

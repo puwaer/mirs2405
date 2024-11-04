@@ -14,19 +14,111 @@ static bool back_r = false;
 
 static int var = 0;
 static int old_var = 0;
-static int state = 0;
-
-// limitをまだ作ってない
+static int state = 0;   //0:走行 1:グリッパー、ターンテーブル 2:一、二関節 3:三、四関節
+static int maxState = 3; 
 
 //chA 1100 - 1900 1200以下:バック 1700以上:前進
 //押し込み　1500以下:通常 1900以上:押し込み
 
-void radicon(int _A, int _C, int _F){
-  if(_A < 1200){
+void radicon_run_r(bool _f, bool _b){
+  if(_f){
+    motor_run_r(run_speed);
+  }
+  else if(_b){
+    motor_run_r(-run_speed);
+  }
+  else{
+    motor_run_r(0); 
+  }
+}
+
+void radicon_run_l(bool _f, bool _b){
+  if(_f){
+    motor_run_l(run_speed);
+  }
+  else if(_b){
+    motor_run_l(-run_speed);
+  }
+  else{
+    motor_run_l(0); 
+  }
+}
+
+void radicon_joint1(bool _up, bool _down){
+  int _angle = analogRead(PIN_JOINT_1_POT);
+  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
+  if((_angle <= joint1_ang_limitter_L) || (joint1_ang_limitter_H <= _angle)){
+    joint1_L_run(0);
+    joint1_R_run(0);
+  }
+  else{
+    if(_up){
+      joint1_L_run(-joint1_speed);
+      joint1_R_run(joint1_speed);
+    }
+    else if(_down){
+      joint1_L_run(joint1_speed);
+      joint1_R_run(-joint1_speed);
+    }
+    else{
+      joint1_L_run(0);
+      joint1_R_run(0);
+    }
+  }
+}
+
+void radicon_joint2(bool _up, bool _down){
+  int _angle = analogRead(PIN_JOINT_2_POT);
+  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
+  if((_angle <= joint2_ang_limitter_L) || (joint2_ang_limitter_H <= _angle)){
+    joint2_run(0);
+  }
+  else{
+    if(_up){
+      joint2_run(joint2_speed);
+    }
+    else if(_down){
+      joint2_run(-joint2_speed);
+    }
+    else{
+      joint2_run(0);
+    }
+  }
+  
+}
+
+void radicon_joint3(bool _up, bool _down){
+  if(_up){
+    joint3_angle += 1;
+    
+    joint3(joint3ID, joint3_angle, joint3_vel);
+  }
+  else if(_down){
+    joint3_angle -= 1;
+    joint3(joint3ID, joint3_angle, joint3_vel);
+  }
+  delay(1000);
+}
+  
+  
+void radicon_joint4(bool _up, bool _down){
+  if(_up){
+    joint4_angle += 1;
+    joint4(joint4ID, joint4_angle, joint4_vel);
+  }
+  else if(_down){
+    joint4_angle -= 1;
+    joint4(joint4ID, joint4_angle, joint4_vel);
+  }
+  delay(1000);
+}
+
+void radicon(int A, int C, int F){
+  if(A < 1200){
     front_l = false;
     back_l = true;
   }
-  else if(1700 <_A){
+  else if(1700 < A){
     front_l = true;
     back_l = false;
   } 
@@ -35,11 +127,11 @@ void radicon(int _A, int _C, int _F){
     back_l = false;
   }
 
-  if(_C < 1200){
+  if(C < 1200){
     front_l = false;
     back_l = true;
   }
-  else if(1700 <_C){
+  else if(1700 < C){
     front_l = true;
     back_l = false;
   } 
@@ -48,16 +140,16 @@ void radicon(int _A, int _C, int _F){
     back_l = false;
   }
 
-  if(1800 <_F)  _F = 1;
-  else          _F = 0;
+  if(1800 < F)   F = 1;
+  else           F = 0;
 
-  var = _F;
+  var =  F;
   var = !(var);
 
     //スイッチが離された瞬間を読み取る
   if(var == LOW && old_var == HIGH){
     state++;
-    if (state > 4){
+    if (state > maxState){
       state = 0;
     }
   }
@@ -104,95 +196,4 @@ void radicon(int _A, int _C, int _F){
     radicon_joint3(false, false);
     radicon_joint4(false, false); 
   }
-
-void radicon_run_r(bool _f, bool _b){
-  else if(_f){
-    motor_run_r(run_speed);
-  }
-  else if(_b){
-    motor_run_r(-run_speed);
-  }
-  else{
-    motor_run_r(0); 
-  }
-}
-
-void radicon_run_l(bool _f, bool _b){
-  else if(_f){
-    motor_run_l(run_speed);
-  }
-  else if(_b){
-    motor_run_l(-run_speed);
-  }
-  else{
-    motor_run_l(0); 
-  }
-}
-
-void radicon_joint1(bool _up, bool _down){
-  int _angle = analogRead(PIN_JOINT_1_POT);
-  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
-  if((_angle <= joint1_ang_limitter_L) || (joint1_ang_limitter_H <= _angle)){
-    joint1_L_run(0);
-    joint1_R_run(0);
-    continue;
-  }
-
-  if(_up){
-    joint1_L_run(-joint1_speed);
-    joint1_R_run(joint1_speed);
-  }
-  else if(_down){
-    joint1_L_run(joint1_speed);
-    joint1_R_run(-joint1_speed);
-  }
-  else{
-    joint1_L_run(0);
-    joint1_R_run(0);
-  }
-}
-
-void radicon_joint2(bool _up, bool _down){
-  int _angle = analogRead(PIN_JOINT_2_POT);
-  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
-  if((_angle <= joint2_ang_limitter_L) || (joint2_ang_limitter_H <= _angle)){
-    joint2_run(0);
-    continue;
-  }
-
-  if(_up){
-    joint2_run(joint2_speed);
-  }
-  else if(_down){
-    joint2_run(-joint2_speed);
-  }
-  else{
-    joint2_run(0);
-  }
-}
-
-void radicon_joint3(bool _up, bool _down){
-  if(_up){
-    joint3_angle += 1;
-    
-    joint3(joint3ID, joint3_angle, joint3_vel);
-  }
-  else if(_down){
-    joint3_angle -= 1;
-    joint3(joint3ID, joint3_angle, joint3_vel);
-  }
-  delay(1000);
-}
-  
-  
-void radicon_joint4(bool _up, bool _down){
-  if(_up){
-    joint4_angle += 1;
-    joint4(joint4ID, joint4_angle, joint4_vel);
-  }
-  else if(_down){
-    joint4_angle -= 1;
-    joint4(joint4ID, joint4_angle, joint4_vel);
-  }
-  delay(1000);
 }

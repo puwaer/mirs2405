@@ -1,9 +1,9 @@
 void gripper(bool _check){
-  if(_check == false){
-    grip.write(GRIP_ANG);
+  if(_check == true){
+    grip.write(GRIP_OPEN_ANG);
   }
-  else if(_check == true){
-    grip.write(0);
+  else if(_check == false){
+    grip.write(GRIP_CLOSE_ANG);
   }
 }
 
