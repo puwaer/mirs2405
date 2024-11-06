@@ -12,6 +12,41 @@ static int state = 0;   //0:走行 1:グリッパー、ターンテーブル 2:�
 static int maxState = 3; 
 
 
+void radicon_gripper(bool _open, bool _close){
+  int ang;
+  if(_open){
+    ang += 1;
+    if(GRIP_OPEN_ANG <= ang){
+      ang = GRIP_OPEN_ANG;
+    }
+  }
+  else if(_close){
+    ang -= 1;
+    if(ang <= GRIP_CLOSE_ANG){
+      ang = GRIP_CLOSE_ANG;
+    }
+  }
+  else{
+  }
+  
+  grip.write(ang);
+  
+  delay(1000);
+}
+
+void radicon_turntable(bool _left, bool _right){
+  turntable_run(turntable_speed);
+  if(_left){
+    turntable_run(turntable_speed);
+  }
+  else if(_right){
+    turntable_run(-turntable_speed);
+  }
+  else{
+    turntable_run(0);
+  }
+}
+
 void radicon(int A, int C, int F){
   if(A < 1200){
     front_l = false;
@@ -75,40 +110,5 @@ void radicon(int A, int C, int F){
   else{
     radicon_gripper(false, false);
     radicon_turntable(false, false);
-  }
-}
-
-void radicon_gripper(bool _open, bool _close){
-  int ang;
-  if(_open){
-    ang += 1;
-    if(GRIP_OPEN_ANG <= ang){
-      ang = GRIP_OPEN_ANG;
-    }
-  }
-  else if(_close){
-    ang -= 1;
-    if(ang <= GRIP_CLOSE_ANG){
-      ang = GRIP_CLOSE_ANG;
-    }
-  }
-  else{
-  }
-  
-  grip.write(ang);
-  
-  delay(1000);
-}
-
-void radicon_turntable(bool _left, bool _right){
-  turntable_run(turntable_speed);
-  if(_left){
-    turntable_run(turntable_speed);
-  }
-  else if(_right){
-    turntable_run(-turntable_speed);
-  }
-  else{
-    turntable_run(0);
   }
 }

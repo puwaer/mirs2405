@@ -6,7 +6,7 @@ void arm_init(){
   airchuck1.attach(PIN_AIRCHUCK_1_PWM, AIRCHUCK_MIN, AIRCHUCK_MAX);
   airchuck2.attach(PIN_AIRCHUCK_2_PWM, AIRCHUCK_MIN, AIRCHUCK_MAX);
 
-  grip.write(0);
+  grip.write(GRIP_OPEN_ANG);
   airchuck1.write(0);
   airchuck2.write(0);
 

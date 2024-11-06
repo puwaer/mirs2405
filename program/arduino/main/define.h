@@ -1,14 +1,14 @@
-#define PIN_GRIPPER_PWM      3   //グリッパー開閉
-#define PIN_AIRCHUCK_1_PWM      5   //エアーチャックの昇降
-#define PIN_AIRCHUCK_2_PWM      6   //エアーチャックの昇降
+#define PIN_GRIPPER_PWM     3   //グリッパー開閉
+#define PIN_AIRCHUCK_1_PWM  5   //エアーチャックの昇降
+#define PIN_AIRCHUCK_2_PWM  6   //エアーチャックの昇降
 
 #define PIN_TURNTABLEENC_A  2     //ターンテーブル
 #define PIN_TURNTABLEENC_B  4
 #define PIN_TURNTABLE_PWM   10  
 #define PIN_TURNTABLE_DIR   7
 
-#define PIN_PUMP_PWM       9   //真空ポンプ
-#define PIN_PUMP_DIR       12
+#define PIN_PUMP_PWM        9   //真空ポンプ
+#define PIN_PUMP_DIR        12
 
 
 #define GRIP_MIN 544  //サーボの角度が0度のときのパルス幅[us]。デフォルトは544。
