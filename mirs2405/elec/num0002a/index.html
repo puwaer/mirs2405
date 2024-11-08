@@ -48,11 +48,11 @@
 
 <h3>目次</h3>
     <ul>
-        <li><a href = "#elec1">1. はじめに</a><br> </li>
-        <li><a href = "#elec2">2. サーボモータ電源基板</a><br></li>
-        <li><a href = "#elec3">3. PWM・ゲートドライブ基板</a><br></li>
-        <li><a href = "#elec4">4.電圧測定基板</a><br></li>
-        <li><a href = "#elec5">5.参考文献</a><br></li>
+        <li><a href = "#elec2">1. はじめに</a><br> </li>
+        <li><a href = "#elec1">2.基板の製作手順</a><br></li>
+        <li><a href = "#elec3">3. サーボモータ電源基板</a><br></li>
+        <li><a href = "#elec4">4. PWM・ゲートドライブ基板</a><br></li>
+        <li><a href = "#elec5">5.電圧測定基板</a><br></li>
     </ul>
 
 <br>
@@ -63,9 +63,92 @@
     <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/elec/num0003a" target="_self">エレキ単体試験書へ</a>
 </address>
 <br>
-
 <br>
-<h2><a name = elec2>2.サーボモータ電源基板</a></h2>
+
+<h2><a name = elec2>2.基板の製作手順</a></h2>
+基板の製作にはKicadを用いた。<br>
+先ずは回路図からPCBのパターンを作成する。<br>
+PCBパターンが完成したらガーバーファイル(裏面の銅箔部分データと外形データ)及びドリルファイルを出力する。<br>
+出力されたファイルを基板加工機に移し、加工を始める。<br>
+基板加工機は3台あるうちの真ん中にあるミッツ製のものを使用した。<br>
+ただし原点合わせや加工穴深さの設定、工具データの設定等が非常に煩雑だった。<br>
+使用したファイルはtable.1より参照。
+<center>
+    table.1 加工データファイル<br>
+    <table class="table010">
+        <tr>
+            <th>ファイル</th>
+            <th>種類</th>
+            <th>詳細</th>
+        </tr>
+        <tr>
+            <td><a href="../files/SRV_PCB/gbr/MIRS2405_ServoDCDC-B_Cu.gbr">MIRS2405_ServoDCDC-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>サーボ電源基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/SRV_PCB/gbr/MIRS2405_ServoDCDC-Edge_Cuts.gbr">MIRS2405_ServoDCDC-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>サーボ電源基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/SRV_PCB/drl/MIRS2405_ServoDCDC-PTH.drl">MIRS2405_ServoDCDC-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>サーボ電源基板のドリルデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/SRV_PCB/drl/MIRS2405_ServoDCDC-NPTH.drl">MIRS2405_ServoDCDC-NPTH.drl</a></td>
+            <td>ドリル</td>
+            <td>サーボ電源基板のドリルデータ</td>
+        </tr>
+
+        <tr>
+            <td><a href="../files/GDC_PCB/gbr/MIRS2405_PWM_GD-B_Cu.gbr">MIRS2405_PWM_GD-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>PWM・ゲートドライブ基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/GDC_PCB/gbr/MIRS2405_PWM_GD-Edge_Cuts.gbr">MIRS2405_PWM_GD-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>PWM・ゲートドライブ基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/GDC_PCB/drl/MIRS2405_PWM_GD-PTH.drl">MIRS2405_PWM_GD-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>PWM・ゲートドライブ基板のドリルデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/GDC_PCB/drl/MIRS2405_PWM_GD-NPTH.drl">MIRS2405_PWM_GD-NPTH.drl</a></td>
+            <td>ドリル</td>
+            <td>PWM・ゲートドライブ基板のドリルデータ</td>
+        </tr>
+
+        <tr>
+            <td><a href="../files/OVD_PCB/gbr/MIRS2405_OVD_pcb-B_Cu.gbr">MIRS2405_OVD_pcb-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>電圧測定基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/OVD_PCB/gbr/MIRS2405_OVD_pcb-Edge_Cuts.gbr">MIRS2405_OVD_pcb-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>電圧測定基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/OVD_PCB/drl/MIRS2405_OVD_pcb-PTH.drl">MIRS2405_OVD_pcb-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>電圧測定基板のドリルデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/OVD_PCB/drl/MIRS2405_OVD_pcb-NPTH.drl">MIRS2405_OVD_pcb-NPTH</a></td>
+            <td>ドリル</td>
+            <td>電圧測定基板のドリルデータ</td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h2><a name = elec3>3.サーボモータ電源基板</a></h2>
 製作した基板をfig.1, fig.2に示す。<br>
 <br>
 <center>
@@ -76,9 +159,10 @@
 </center>
 <br>
 バッテリー入力および電源出力はXT60コネクタを使用した。<br>
+両面生基板を加工したが、表面は導通させないためヤスリで削った。<br>
 
 <br>
-<h2><a name = elec3>3.PWM・ゲートドライブ基板</a></h2>
+<h2><a name = elec4>4.PWM・ゲートドライブ基板</a></h2>
 製作した基板をfig.3, fig.4に示す。<br>
 <br>
 <center>
@@ -88,10 +172,11 @@
     fig.4 PWM・ゲートドライブ基板　裏面<br><br>
 </center>
 基板上面右側の5穴,3穴は、ほかのデバイスとSPIまたはI2Cにて通信するための準備として加工した部分である。<br>
-現在は電源基板と他のマイコン間での通信はしない設計のため、XHコネクタは未実装としている。<br>
+現在はPWM基板と他のマイコン間での通信はしない設計のため、XHコネクタは未実装としている。<br>
+サーボ電源基板と同じくヤスリで削った。<br>
+四隅に銅箔部が残っているが回路に影響はしないためこのままとしている。<br>
 
-
-<h2><a name = elec4>4.電圧測定基板</a></h2>
+<h2><a name = elec5>5.電圧測定基板</a></h2>
 製作した基板をfig.5, fig.6に示す。<br>
 <br>
 <center>
@@ -101,10 +186,6 @@
     fig.4 電圧測定基板　裏面<br><br>
 </center>
 
-<h2><a name = elec5>5.参考文献</a></h2>
-<address>
-    <a href="https://www.kyohritsu.com/eclib/OTHER/DATASHEET/JRC/njm2360app.pdf" target="_self">njm2360アプリケーションノート</a>
-</address>
 
 
 <br><br><br>
