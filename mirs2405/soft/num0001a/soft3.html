@@ -13,7 +13,7 @@
 
 <body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
 
-    <img src="../../gullc_rogo.jpg" width="100">
+    <img src="../document/gullc_rogo.jpg" width="100">
 
 <table class="table010">
 <tr>
@@ -108,7 +108,7 @@
       <h3>3.1.Raspberry Pi 4 modleB</h3>
           <p>Raspberry Piのモジュール構成をfigure1, Table2に示す。</p>
           <center>
-          <img src="./rasp2.png" width="800" height="400"><br>
+          <img src="../document/module_pi.png" width="1200" height="400"><br>
             figure1. :Raspberry Piのモジュール構成</br></center>
            <table class="table010">
              <caption><center><b>Table.2:Raspberry Piのモジュール詳細</b></center></caption>
@@ -118,33 +118,33 @@
              </tr>
 
              <tr>
-             <td>pilot.c</td>
-             <td>親機の動作の制御をする</td>
+             <td>main.py</td>
+             <td>全体のメインプログラムを実行</td>
              </tr>
 
              <tr>
-              <td>request.c</td>
-              <td>すべてのモータを制御する</td>
+              <td>serial_ino.py</td>
+              <td>Arduino Unoとのシリアル通信</td>
               </tr>
 
             <tr>
-              <td>com_ESP32.c</td>
-              <td>ESP32とI2C通信する</td>
+              <td>serial_pico.py</td>
+              <td>rp2040とのシリアル通信</td>
               </tr>
 
             <tr>
-              <td>base_ext.c</td>
-              <td>子機とbluetooth通信する</td>
+              <td>serial_jetson.py</td>
+              <td>Jetson nanoとのシリアル通信</td>
               </tr>
 
             <tr>
-              <td>uss.c</td>
-              <td>超音波センサの値を読み取る</td>
+              <td>arm.py</td>
+              <td>ロボットアーム角度計算プログラム</td>
               </tr>
 
             <tr>
-              <td>io.c</td>
-              <td>タッチセンサを読み取る</td>
+              <td>config.py</td>
+              <td>各モジュールで使用する定数を定義</td>
               </tr>
               </table> 
         </a>
