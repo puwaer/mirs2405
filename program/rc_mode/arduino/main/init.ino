@@ -9,4 +9,5 @@ void rc_init(){
   pinMode(MR8_G_PIN,INPUT);
   pinMode(MR8_H_PIN,INPUT);
   Serial.begin(115200);
+  //delay(1000);
 }

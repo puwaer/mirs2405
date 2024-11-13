@@ -1,12 +1,12 @@
 void receive(){
-  int a = pulseIn(MR8_A_PIN, HIGH);
-  //int b = pulseIn(MR8_B_PIN, HIGH);
-  int c = pulseIn(MR8_C_PIN, HIGH);
-  //int d = pulseIn(MR8_D_PIN, HIGH);
-  int e = pulseIn(MR8_E_PIN, HIGH);
-  int f = pulseIn(MR8_F_PIN, HIGH);
-  int g = pulseIn(MR8_G_PIN, HIGH);
-  int h = pulseIn(MR8_H_PIN, HIGH);
+  a = pulseIn(MR8_A_PIN, HIGH);
+  //b = pulseIn(MR8_B_PIN, HIGH);
+  c = pulseIn(MR8_C_PIN, HIGH);
+  //d = pulseIn(MR8_D_PIN, HIGH);
+  e = pulseIn(MR8_E_PIN, HIGH);
+  f = pulseIn(MR8_F_PIN, HIGH);
+  g = pulseIn(MR8_G_PIN, HIGH);
+  h = pulseIn(MR8_H_PIN, HIGH);
 
   Serial.print("A=");
   Serial.print(a);
