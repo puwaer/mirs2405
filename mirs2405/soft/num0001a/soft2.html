@@ -216,11 +216,15 @@
 
         <a name="3.4">
             <h3>3.3.jetson nano</h3>
-            <p>ESP32のモジュール構成をfigure3, Table4に示す。</p>
+            <p>ESP32のモジュール構成をfigure3,ros2のnodeをfigure4,モジュール、nodeの詳細をTable4に示す。</p>
             <center>
-            <img src="./esp2.jpg" width="400" height="300"><br>
-              figure2. :親機・ESP32のモジュール構成</br></center>
-            
+            <img src="../document/module_jetson.png" height="300"><br>
+              figure.3 :jetsonのモジュール構成</br></center>
+            <br>
+            <center>
+            <img src="../document/module_ros_lidar_nodo.png" width="500"><br>
+              figure.4 :ros2のnode</br></center>
+              
              <table class="table010">
               <caption><center><b>Table.3:プログラムの説明</b></center></caption>
                <tr>
@@ -229,64 +233,38 @@
                </tr>
   
                <tr>
-                <td>raspi</td>
-                <td>Raspberry PiとI2C通信をする</td>
-               </tr>
+                <td>deepface_text.py</td>
+                <td>年齢推定、性別判定を判定する</td>
+              </tr>
               <tr>
-                <td>motor_set</td>
-                <td>ワイヤー制御を行う</td>
-                </tr>
+                <td>ex.py</td>
+                <td>lidarの情報から身長を推定する</td>
+              </tr>
               <tr>
-                <td>encoder</td>
-                <td>モータの回転数をカウントする</td>
-                </tr>
+                <td>get_lidar_value.py</td>
+                <td>ros2の/human_detectorのtopicから値を取得する</td>
+              </tr>
               <tr>
-                <td>wirData</td>
-                <td>データを受け取る</td>
-                </tr>
+                <td>serial_jetson.py</td>
+                <td>jetsonとraspberry pi 4 modleBとシリアル通信を行う</td>
+              </tr>
               <tr>
-                <td>esp32</td>
-                <td>子機のESP32とBluetooth通信を行う</td>
-                </tr>
+                <td>main.py</td>
+                <td>まとめてプログラムを実行する</td>
+              </tr>
+              <tr>
+                <td>view_s1lidar_s1_launch.py</td>
+                <td>lidarがら値を取得して/scanのtopicを出力する</td>
+              </tr>
+              <tr>
+                <td>lidar_human_detector.py</td>
+                <td>/scanから値を取得して、移動している物体を認識して距離と角度の情報を取得する。<br>
+                  その後、/human_detectorの名前でtopic出力する</td>
+              </tr>
               </table> 
           </a>
 
-          <a name="3.5">
-            <h3>3.4.esp32</h3>
-            <p>ESP32のモジュール構成をfigure3, Table4に示す。</p>
-            <center>
-            <img src="./esp2.jpg" width="400" height="300"><br>
-              figure2. :親機・ESP32のモジュール構成</br></center>
-            
-             <table class="table010">
-              <caption><center><b>Table.3:プログラムの説明</b></center></caption>
-               <tr>
-              <th>モジュール名</th>
-               <th>概要</th>
-               </tr>
-  
-               <tr>
-                <td>raspi</td>
-                <td>Raspberry PiとI2C通信をする</td>
-                </tr>
-              <tr>
-                <td>motor_set</td>
-                <td>ワイヤー制御を行う</td>
-                </tr>
-              <tr>
-                <td>encoder</td>
-                <td>モータの回転数をカウントする</td>
-                </tr>
-              <tr>
-                <td>wirData</td>
-                <td>データを受け取る</td>
-                </tr>
-              <tr>
-                <td>esp32</td>
-                <td>子機のESP32とBluetooth通信を行う</td>
-                </tr>
-              </table> 
-          </a>
+    
 
   <a name="4">
     <h3>4.フローチャート</h3>
