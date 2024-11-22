@@ -9,6 +9,7 @@ void setup() {
   encoder_open();
   motor_open();
   arm_open();
+  analogWriteRange(PWM_MAX);
   Serial.begin(115200);
   delay(100);
 
