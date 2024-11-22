@@ -27,7 +27,7 @@
 
 #define POT_MIN 0
 #define POT_MAX 287 //[°]
-
+#define PWM_MAX 1023
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
 float PPR             = 4096.0;
@@ -57,19 +57,19 @@ float ratio_dis_RperL = 2 / 2;  //直線時の右クローラと左クローラ�
 float one_round_meter = 1.35;   //一回転時の片クローラの移動距離[m]
 
 int   control_period  = 10;     //制御周期
-int   pwm_limitter_H  = 80;     //pwmの最大値
-int   pwm_limitter_L  = -80;    //pwmの最小値
+int   pwm_limitter_H  = 320;     //pwmの最大値
+int   pwm_limitter_L  = -320;    //pwmの最小値
 int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
-int   dead_zone       = 50;     //pwmの最小値(絶対値)
+int   dead_zone       = 200;     //pwmの最小値(絶対値)
 
 float Kp_joint1 = 0.119;
 float Ki_joint1 = 0;
 float Kd_joint1 = 0;
 
-int   joint1_pwm_limitter_H  = 80;     //pwmの最大値
-int   joint1_pwm_limitter_L  = -80;    //pwmの最小値
-int   joint1_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint1_pwm_limitter_H  = 320;     //pwmの最大値
+int   joint1_pwm_limitter_L  = -320;    //pwmの最小値
+int   joint1_dead_zone       = 200;     //pwmの最小値(絶対値)
 int   joint1_ang_limitter_H  = 360;   //角度の最大値[度]
 int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
 
@@ -79,9 +79,9 @@ float Ki_joint2 = 0;
 float Kd_joint2 = 0;
 
 
-int   joint2_pwm_limitter_H  = 80;     //pwmの最大値
-int   joint2_pwm_limitter_L  = -80;    //pwmの最小値
-int   joint2_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
+int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
+int   joint2_dead_zone       = 200;     //pwmの最小値(絶対値)
 int   joint2_ang_limitter_H  = 360;   //角度の最大値[度]
 int   joint2_ang_limitter_L  = 0;     //角度の最小値[度]
 
