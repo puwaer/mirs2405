@@ -2,7 +2,7 @@ import socket
 import numpy
 import cv2
 
-HOST = "192.168.XXX.XXX"  # ここはRaspberryPiのIPアドレスを入力
+HOST = "172.25.19.218"  # ここはRaspberryPiのIPアドレスを入力
 PORT = 5569
 
 
@@ -25,6 +25,6 @@ def getimage():
 
 while True:
     img = getimage()
-    cv2.waitKey(5)  # 少し待ってやらないと映像が生成される前に次の処理が来て映像が映りませんでした。
+    cv2.waitKey(1)  # 少し待ってやらないと映像が生成される前に次の処理が来て映像が映りませんでした。
     # img_90deg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) # 映像が時計方向90度に曲がっていた場合
     cv2.imshow('Capture', img)
