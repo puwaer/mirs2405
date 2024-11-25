@@ -76,7 +76,7 @@ def face_data(image):
 
 
 # reading reference_image from directory
-ref_image = cv2.imread("Ref_image.jpg")
+ref_image = cv2.imread("./Ref_image.jpg")
 
 # find the face width(pixels) in the reference_image
 ref_image_face_width = face_data(ref_image)
