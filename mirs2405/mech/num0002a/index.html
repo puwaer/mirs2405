@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>MIRS2405-MECH-0001 MIRS2405 メカニクス詳細設計書</title>
+<title>MIRS2405-MECH-0002 MIRS2405 メカニクス詳細設計書(電源ユニット筐体)</title>
 <link rel=stylesheet href="../../style.css" type="text/css">
 <link rel="shortcut icon" href="../../gullc_rogo.jpg" />
 <script>
@@ -18,11 +18,11 @@
 <table class="table010">
 <tr>
 <th>名称</th>
-<td class="title">MIRS2405 メカニクス詳細設計書</td>
+<td class="title">MIRS2405 メカニクス詳細設計書(電源ユニット筐体)</td>
 </tr>
 <tr>
 <th>番号</th>
-<td class="title">MIRS2405-MECH-0001</td>
+<td class="title">MIRS2405-MECH-0002</td>
 </tr>
 </table>
 <br>
@@ -37,17 +37,10 @@
 </tr>
 <tr>
 <td>A01</td>
-<td>2024.10.16</td>
-<td>横山翔琉</td>
-<td>    </td>
-<td>初版</td>
-</tr>
-<tr>
-<td>A02</td>
-<td>2024.11.1</td>
+<td>2024.11.22</td>
 <td>宇佐見祥</td>
 <td>    </td>
-<td>Arm Assyの追加</td>
+<td>初版</td>
 </tr>
 </table>
 
@@ -57,71 +50,63 @@
 <h3>目次</h3>
     <ul>
         <li><a href = "#mech1">1. はじめに</a><br> </li>
-        <li><a href = "#mech2">2. 全体図</a><br></li>
-        <li><a href = "#mech3">3. システム構成</a><br></li>
-        <li><a href = "#mech3-1-1">3-1-1. Assy一覧</a><br></li>
-        <li><a href = "#mech3-1-2">3-1-2. 組み立て手順</a><br></li>
-        <li><a href = "#mech3-2-1"> 3-2-1. Arm Basis Asdy</a><br></li>
-        <li><a href = "#mech3-2-2"> 3-2-2. Basis Assy</a><br></li>
-        <li><a href = "#mech3-2-3"> 3-2-3. Arm Assy</a><br></li>
-        <li><a href = "#mech3-2-4"> 3-2-4. Control Box Assy</a><br></li>
-        <li><a href = "#mech3-2-5"> 3-2-5. CuGo V3 Assy</a><br></li>
-        <li><a href = "#mech3-2-6"> 3-2-6. Air Chuck Assy</a><br></li>
-        <li><a href = "#mech3-2-7"> 3-2-7. Gripper Assy</a><br></li>
-        <li><a href = "#mech4">4. 購入物品</a><br></li>
+        <li><a href = "#mech2">2. 外観</a><br></li>
+        <li><a href = "#mech3">3. 図面,加工データ</a><br></li>
+        <li><a href = "#mech3-1">3-1. サーボモータ電源ユニット</a><br></li>
+        <li><a href = "#mech3-2">3-2. 主回路チョッパユニット</a><br></li>
+        <li><a href = "#mech3-3">3-3. ヒューズユニット</a><br></li>
+        <li><a href = "#mech4">4. 使用物品</a><br></li>
         <li><a href = "#mech5">5. 参考文献</a><br></li>
     </ul>
 
 <br>
 <h2><a name = mech1>1. はじめに</a></h2>
-本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭのメカニクス詳細設計書である。<br>
+本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの電源ユニット筐体詳細設計書である。<br>
 <br>
 
 
 <br>
-<h2><a name = mech2>2. 全体図</a></h2>
-全体図をfig.1に示す。<br>
-<br>
-<center>
-    <img src="../picture/MIRS2405.png" width="100"><br><br>
-    fig.1 全体図
-</center>
-<br>
-。<br>
-。<br>
-<br>
-
-
-<h2><a name = mech3>3. システム構成</a></h2>
-本機は7つのAssyによって構成されている。<br>
-・ターンテーブルの回転とロボットアームの駆動を行うArm Basis Assy<br>
-・各Assyを固定し接続するための基礎となるBasis Assy<br>
-・ロボットアームの腕となるArm Assy<br>
-・制御を担うコンピュータの保護と冷却を行うControl Box Assy<br>
-・走行体であるCuGo V3 Assy<br>
-・重なねて保管された紙を一枚ずつ給紙するAir Chuck Assy<br>
-・物をつかむためロボットアームの手となるGripper Assy<br>
-Gripper Assyはつかみたい物に応じて交換することができる。標準では紙をつかむための仕様である。<br>
-<br>
-
-
-<h3><a name = mech3-1-1>3-1-1. Assy一覧</a></h3>
-Assy一覧をfig.2に示す。<br>
+<h2><a name = mech2>2. 外観</a></h2>
+サーボ電源ユニット, ゲートドライブモジュール, 主回路モジュール, ヒューズユニットそれぞれをfig.1～fig.6に示す。<br>
 <br>
 <center>
-    <img src="../picture/Assy List.png" width="100"><br>
-    fig.2 Assy一覧
+    <img src="./picture/MIRS DCDC Module Assy.png" width="500"><br>
+    fig.1 サーボ電源ユニット<br>
+    <img src="./picture/MIRS PWM_GD Module Assy.png" width="500"><br>
+    fig.2 ゲートドライブモジュール<br>
+    <img src="./picture/MIRS Main Circuit Module Assy front.png" width="500"><br>
+    fig.3 主回路(表)<br>
+    <img src="./picture/MIRS Main Circuit Module Assy back.png" width="500"><br>
+    fig.4 主回路(裏)<br>
+    <img src="./picture/MIRS Fuse 3Line Assy.png" width="500"><br>
+    fig.5 ヒューズユニット(3本)<br>
+    <img src="./picture/MIRS Fuse 2Line Assy.png" width="500"><br>
+    fig.6 ヒューズユニット(2本)<br>
 </center>
 <br>
-
-
-<h3><a name = mach3-1-2>3-1-2. 組み立て手順</a></h3>
-本項目では各Assy同士の組み立て手順を解説する。<br>
-各Assyの組み立てについては3-2-1 ~ 3-2-6で詳細な解説を行う。<br>
 <br>
 
 
-<h4><a name = mech3-2-1>3-2-1. Arm Basis Assy</a></h4>
+<h2><a name = mech3>3. 図面,加工データ</a></h2>
+加工に使用するデータと図面はtable.1にまとめる。
+<br>
+
+
+<h3><a name = mech3-1>3-1. サーボモータ電源ユニット</a></h3>
+サーボモータ電源ユニットは、基板の上面と下面をアクリル板で覆う。<br>
+さらにL形パーツ4点をアクリル板に取り付け、MIRS走行帯の下面(キャタピラ間のスペース)に艤装する。<br>
+<br>
+<br>
+
+
+<h3><a name = mech3-2>3-2. 主回路チョッパユニット</a></h3>
+主回路チョッパユニットはゲートドライブモジュールと主回路モジュールにより構成される。<br>
+ゲートドライブモジュール,主回路モジュールのどちらも、サーボモータ電源ユニットと同じようにアクリル板で覆う。<br>
+艤装方法もサーボモータ電源ユニットと同一である。<br>
+<br>
+
+
+<h3><a name = mech3-3>3-3. ヒューズユニット</a></h3>
 Arm Basis Assyをfig.3に示す。<br>
 <br>
 <center>
