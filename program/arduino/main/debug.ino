@@ -15,3 +15,8 @@ void radicon_debug(){
   }
   
 }
+
+void turntable_debug(){
+  int _ang = 30;
+  turntable(_ang)
+}

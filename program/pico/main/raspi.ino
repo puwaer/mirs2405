@@ -39,5 +39,4 @@ void check_raspi(){
             break;
     }
 
-
 }

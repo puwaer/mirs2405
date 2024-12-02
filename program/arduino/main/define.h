@@ -20,7 +20,7 @@
 #define AIRCHUCK_MAX  2400
 #define AIRCHUCK_ANG  15
 
-#define PPR  4096.0
+#define turntable_PPR  4096.0
 
 float Kp_turntable = 0.119;
 float Ki_turntable = 0;
