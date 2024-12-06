@@ -17,10 +17,10 @@ float pre_err_ang_joint2;
 int joint2_pwm;
 
 void joint1_initialize(float a, float *b){
+  a += joint1_ang_center;
   joint1_ang_limitter(a, &a);
   PID_reset_joint1();
   joint1_stop();
-
   *b = a;
 }
 
@@ -71,7 +71,7 @@ void PID_joint1(float a, float b, int *c){
 void joint1(float _angle) {
   joint1_initialize(_angle, &target_ang_joint1);
   while(1){
-    angle_joint1 = analogRead(PIN_JOINT_1_POT);
+    angle_joint1 = analogRead(PIN_JOINT_1_R_POT);
     angle_joint1 = map(angle_joint1, 0, 1023, POT_MIN, POT_MAX);
     PID_joint1(target_ang_joint1, angle_joint1, &joint1_pwm);
     joint1_pwm_limitter(joint1_pwm, &joint1_pwm);
@@ -132,10 +132,10 @@ void joint1_L_run(int _pwm){
 }
 
 void joint2_initialize(float a, float *b){
+  a += joint1_ang_center;
   joint2_ang_limitter(a, &a);
   PID_reset_joint2();
   joint2_stop();
-
   *b = a;
 }
 
@@ -227,6 +227,7 @@ void joint2_run(int _pwm){
 }
 
 void joint3(byte _id, int _ang, int _vel) {
+  _ang += joint3_ang_center;
   joint3_ang_limitter(_ang, &_ang);
   _ang = map(_ang, 0, 300, 0, 1023);
   _vel = map(_vel, 0, SCS_MAX_VEL, 0, 200);
@@ -269,6 +270,7 @@ void joint3_ang_limitter(int _ang, int *_return){
 }
 
 void joint4(byte _id, int _ang, int _vel) {
+  _ang += joint4_ang_center;
   joint4_ang_limitter(_ang, &_ang);
   _ang = map(_ang, 0, 300, 0, 1023);
   _vel = map(_vel, 0, SCS_MAX_VEL, 0, 200);

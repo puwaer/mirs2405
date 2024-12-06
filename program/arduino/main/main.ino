@@ -11,7 +11,8 @@ void setup(){
 }
 
 void loop(){
-  turntable_debug();
+  //turntable_debug();
+  grip_debug();
   exit(0);
 }
 
