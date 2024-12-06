@@ -5,6 +5,8 @@ import time
 
 HOST = "172.25.16.100"  # サーバーのIPアドレス
 PORT = 5569
+TARGET_FPS = 10  # 目標FPS
+FRAME_INTERVAL = 1 / TARGET_FPS  # フレーム間隔 (秒)
 
 
 def getimage(sock):
@@ -25,6 +27,8 @@ start_time = time.time()
 fps = 0.0  # 初期値
 
 while True:
+    loop_start_time = time.time()  # ループ開始時間
+
     img = getimage(sock)
     if img is None:
         continue
@@ -36,7 +40,6 @@ while True:
     # 1秒経過ごとにFPSを計算
     if elapsed_time > 1.0:
         fps = frame_count / elapsed_time
-        
         frame_count = 0
         start_time = time.time()
 
@@ -56,6 +59,12 @@ while True:
     # 終了条件
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+    # ループの終了時間を計算して待機
+    loop_end_time = time.time()
+    loop_duration = loop_end_time - loop_start_time
+    if loop_duration < FRAME_INTERVAL:
+        time.sleep(FRAME_INTERVAL - loop_duration)
 
 sock.close()
 cv2.destroyAllWindows()

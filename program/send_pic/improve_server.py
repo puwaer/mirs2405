@@ -2,7 +2,7 @@ import socketserver
 import cv2
 import sys
 
-HOST = "172.25.19.218"  # ここはRaspberryPiのIPアドレスを入力
+HOST = "172.25.16.100"  # ここはRaspberryPiのIPアドレスを入力
 PORT = 5569
 
 
@@ -18,7 +18,7 @@ class TCPHandler(socketserver.BaseRequestHandler):
             size = len(data).to_bytes(4, byteorder='big')
             self.request.sendall(size + data)
 
-videoCap = cv2.VideoCapture(0)
+videoCap = cv2.VideoCapture(1)
 socketserver.TCPServer.allow_reuse_address = True
 server = socketserver.TCPServer((HOST, PORT), TCPHandler)
 
