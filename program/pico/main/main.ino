@@ -18,8 +18,8 @@ void setup() {
 
 void loop() {
   //run_debug();
-  //arm_debug();
-  radicon_debug();
+  arm_debug();
+  //radicon_debug();
 
   //check_raspi();
   motor_stop();
@@ -28,6 +28,7 @@ void loop() {
 
 /*  run(x, y)  (x,y)へ移動
     arm(ang1, ang2, ang3, ang4) アームを指定角度へ　すべて絶対角度
-      ang3,4: 0~300[°]
+      ang1,2: -150~150[°]
+      ang3,4: -150~150[°]
 
 */

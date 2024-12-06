@@ -45,7 +45,8 @@ void arm_open(){
   pinMode(PIN_JOINT_1_L_PWM, OUTPUT);
   pinMode(PIN_JOINT_1_R_DIR, OUTPUT);
   pinMode(PIN_JOINT_1_L_DIR, OUTPUT);
-  pinMode(PIN_JOINT_1_POT, INPUT);
+  pinMode(PIN_JOINT_1_R_POT, INPUT);
+  pinMode(PIN_JOINT_1_L_POT, INPUT);
 
   digitalWrite(PIN_JOINT_1_R_DIR, HIGH);
   digitalWrite(PIN_JOINT_1_L_DIR, HIGH);

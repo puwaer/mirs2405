@@ -11,11 +11,12 @@
 #define PIN_JOINT_1_L_PWM   15
 #define PIN_JOINT_1_R_DIR   18
 #define PIN_JOINT_1_L_DIR   19
-#define PIN_JOINT_1_POT     26
+#define PIN_JOINT_1_R_POT   26
+#define PIN_JOINT_1_L_POT   27
 
 #define PIN_JOINT_2_PWM   10  //第二関節
 #define PIN_JOINT_2_DIR   20
-#define PIN_JOINT_2_POT   27
+#define PIN_JOINT_2_POT   28
 
 #define PIN_JOINT_3_PWM    16   //第三関節
 
@@ -70,7 +71,8 @@ float Kd_joint1 = 0;
 int   joint1_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -320;    //pwmの最小値
 int   joint1_dead_zone       = 200;     //pwmの最小値(絶対値)
-int   joint1_ang_limitter_H  = 360;   //角度の最大値[度]
+int   joint1_ang_limitter_H  = 300;   //角度の最大値[度]
+int   joint1_ang_center      = 150;
 int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
 
 
@@ -82,17 +84,20 @@ float Kd_joint2 = 0;
 int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
 int   joint2_dead_zone       = 200;     //pwmの最小値(絶対値)
-int   joint2_ang_limitter_H  = 360;   //角度の最大値[度]
+int   joint2_ang_limitter_H  = 300;   //角度の最大値[度]
+int   joint2_ang_center      = 150;
 int   joint2_ang_limitter_L  = 0;     //角度の最小値[度]
 
-const byte joint3ID = 30; //第三関節のシリアルサーボID
-const byte joint4ID = 30;//第四関節のシリアルサーボID
+const byte joint3ID = 1; //第三関節のシリアルサーボID
+const byte joint4ID = 1;//第四関節のシリアルサーボID
 
 const int SCS_MAX_VEL = 60; // 第三,四関節_vel=200の時の速度 [度/s]
 int joint3_vel = 1; // (0-60) 度/s 
 int joint4_vel = 1; // (0-60) 度/s 
 
-int   joint3_ang_limitter_H  = 90;   //角度の最大値[度]
+int   joint3_ang_limitter_H  = 300;   //角度の最大値[度]
+int   joint3_ang_center      = 150;
 int   joint3_ang_limitter_L  = 0;     //角度の最小値[度]
-int   joint4_ang_limitter_H  = 90;   //角度の最大値[度]
+int   joint4_ang_limitter_H  = 300;   //角度の最大値[度]
+int   joint4_ang_center      = 150;
 int   joint4_ang_limitter_L  = 0;     //角度の最小値[度]
