@@ -3,7 +3,7 @@ import numpy
 import cv2
 import time
 
-HOST = "172.25.16.100"  # サーバーのIPアドレス
+HOST = "172.25.16.100"  # サーバーのIPアドレスaaa
 PORT = 5569
 TARGET_FPS = 10  # 目標FPS
 FRAME_INTERVAL = 1 / TARGET_FPS  # フレーム間隔 (秒)
