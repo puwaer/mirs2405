@@ -1,8 +1,9 @@
 import cv2
 from deepface import DeepFace
+import os
 
-# 顔認証のためのユーザー情報（顔画像へのパス）
-#user_image_path = "path_to_user_image.jpg"
+# GPU使用を明示的に設定（利用可能な場合）
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # 最初のGPUを使用（-1にするとCPUのみ使用）
 
 # 表情推定を行う関数
 def emotion_analysis(image):
@@ -19,33 +20,27 @@ def gender_analysis(image):
     result = DeepFace.analyze(image, actions=['gender'], enforce_detection=False)
     return result[0]['gender']
 
-
 # メイン処理
 def main():
     # カメラからの映像を取得
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     while True:
         ret, frame = cap.read()
         if not ret:
             break
         
-        # DeepFaceで顔認証
-        """
-        try:
-            result = DeepFace.verify(frame, user_image_path, enforce_detection=False)
-            print(f"認証結果: {result['verified']}")
-        except Exception as e:
-            print("顔認証エラー:", str(e))
-        
+        # OpenCVのGPUを使用してフレームをアップロード
+        frame_gpu = cv2.cuda_GpuMat()
+        frame_gpu.upload(frame)
+
         # 表情推定
         try:
             dominant_emotion = emotion_analysis(frame)
             cv2.putText(frame, f"Emotion: {dominant_emotion}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
         except Exception as e:
             print("表情推定エラー:", str(e))
-        """
-            
+
         # 年齢推定
         try:
             estimated_age = age_analysis(frame)
