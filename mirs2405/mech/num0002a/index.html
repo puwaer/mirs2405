@@ -51,7 +51,7 @@
     <ul>
         <li><a href = "#mech1">1. はじめに</a><br> </li>
         <li><a href = "#mech2">2. 外観</a><br></li>
-        <li><a href = "#mech3">3. 図面,加工データ</a><br></li>
+        <li><a href = "#mech3">3. 加工データ</a><br></li>
         <li><a href = "#mech3-1">3-1. サーボモータ電源ユニット</a><br></li>
         <li><a href = "#mech3-2">3-2. 主回路チョッパユニット</a><br></li>
         <li><a href = "#mech3-3">3-3. ヒューズユニット</a><br></li>
@@ -87,15 +87,71 @@
 <br>
 
 
-<h2><a name = mech3>3. 図面,加工データ</a></h2>
+<h2><a name = mech3>3. 加工データ</a></h2>
 加工に使用するデータと図面はtable.1にまとめる。
+<center>
+    table.1 加工データファイル<br>
+    <table class="table010">
+        <tr>
+            <th>ファイル</th>
+            <th>種類</th>
+            <th>詳細</th>
+        </tr>
+        <tr>
+            <td><a href="../files/SRV_PCB/gbr/MIRS2405_ServoDCDC-B_Cu.gbr">MIRS2405_ServoDCDC-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>サーボ電源基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/SRV_PCB/gbr/MIRS2405_ServoDCDC-Edge_Cuts.gbr">MIRS2405_ServoDCDC-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>サーボ電源基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/SRV_PCB/drl/MIRS2405_ServoDCDC-PTH.drl">MIRS2405_ServoDCDC-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>サーボ電源基板のドリルデータ</td>
+        </tr>
+
+        <tr>
+            <td><a href="../files/GDC_PCB/gbr/MIRS2405_PWM_GD-B_Cu.gbr">MIRS2405_PWM_GD-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>PWM・ゲートドライブ基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/GDC_PCB/gbr/MIRS2405_PWM_GD-Edge_Cuts.gbr">MIRS2405_PWM_GD-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>PWM・ゲートドライブ基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/GDC_PCB/drl/MIRS2405_PWM_GD-PTH.drl">MIRS2405_PWM_GD-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>PWM・ゲートドライブ基板のドリルデータ</td>
+        </tr>
+
+        <tr>
+            <td><a href="../files/OVD_PCB/gbr/MIRS2405_OVD_pcb-B_Cu.gbr">MIRS2405_OVD_pcb-B_Cu.gbr</a></td>
+            <td>ガーバー</td>
+            <td>電圧測定基板の裏面銅箔部ガーバーデータ</td>
+        </tr> 
+        <tr>
+            <td><a href="../files/OVD_PCB/gbr/MIRS2405_OVD_pcb-Edge_Cuts.gbr">MIRS2405_OVD_pcb-Edge_Cuts.gbr</a></td>
+            <td>ガーバー</td>
+            <td>電圧測定基板の外形線ガーバーデータ</td>
+        </tr>
+        <tr>
+            <td><a href="../files/OVD_PCB/drl/MIRS2405_OVD_pcb-PTH.drl">MIRS2405_OVD_pcb-PTH.drl</a></td>
+            <td>ドリル</td>
+            <td>電圧測定基板のドリルデータ</td>
+        </tr>
+    </table>
+</center>
 <br>
 
 
 <h3><a name = mech3-1>3-1. サーボモータ電源ユニット</a></h3>
 サーボモータ電源ユニットは、基板の上面と下面をアクリル板で覆う。<br>
 さらにL形パーツ4点をアクリル板に取り付け、MIRS走行帯の下面(キャタピラ間のスペース)に艤装する。<br>
-<br>
 <br>
 
 
@@ -109,192 +165,7 @@
 <h3><a name = mech3-3>3-3. ヒューズユニット</a></h3>
 Arm Basis Assyをfig.3に示す。<br>
 <br>
-<center>
-    <img src="../picture/Arm Basis Assy1.png" width="388"><img src="../picture/Arm Basis Assy2.png" width="300"><img src="../picture/Arm Basis Assy3.png" width="419"><br>
-    fig.3 Arm Basis Assy
-</center>
 <br>
-Arm Basis Assy部品リストをtable.1に示す。<br>
-<br>
-<center>
-    table.1 Arm Basis Assy部品リスト
-    <table class="table010">
-        <tr>
-            <th>部品番号</th>
-            <th>部品名</th>
-            <th>個数</th>
-            <th>詳細</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Turn Table Top</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Turn Table Top.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>KS5N-IG36P Mount 1</td>
-            <td>1</td>
-            <td><a href ="../dimensions/KS5N-IG36P Mount 1.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>THS70160</td>
-            <td>1</td>
-            <td><a href ="https://www.monotaro.com/p/3946/2062/">リンク</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>KS5N-IG36P Mount 2</td>
-            <td>1</td>
-            <td><a href ="../dimensions/KS5N-IG36P Mount 2.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>IG36P-721</td>
-            <td>1</td>
-            <td><a href ="https://www.shayangye.com/en/ig-36p">リンク</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>KS5N</td>
-            <td>1</td>
-            <td><a href ="https://nichibo-motor.jp/product/content/32">リンク</a></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Arm Mount Plate Right</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Arm Mount Plate Right.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Arm Mount Plate Left</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Arm Mount Plate Left.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>[J,L]C-578VA Mount</td>
-            <td>3</td>
-            <td><a href ="../dimensions/[J,L]C-578VA Mount.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Mabuchi LC-578VA</td>
-            <td>1</td>
-            <td><a href ="https://www.mabuchi-motor.co.jp/product/pdf/LC-578VB.pdf">リンク</a></td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>Mabuchi JC-578VA</td>
-            <td>2</td>
-            <td><a href ="https://www.mabuchi-motor.co.jp/product/pdf/JC-578VB.pdf">リンク</a></td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>[J,L]C-578VA Joint</td>
-            <td>3</td>
-            <td><a href ="../dimensions/[J,L]C-578VA Joint.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>[J,L]C-578VA Joint Spacer</td>
-            <td>3</td>
-            <td><a href ="../dimensions/[J,L]C-578VA Joint Spacer.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>Shaft Arm Joint 0-1 Gear</td>
-            <td>2</td>
-            <td><a href ="../dimensions/Shaft Arm Joint 0-1 Gear.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>628-H_214</td>
-            <td>3</td>
-            <td><a href ="https://jp.misumi-ec.com/vona2/detail/221005190774/?HissuCode=628-H&msockid=02dc7910a6c3680417de6d76a7b9694d">リンク</a></td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>φ8 x 19.7mm Aluminum Bar</td>
-            <td>2</td>
-            <td><a href ="../dimensions/φ8 x 19.7mm Aluminum Bar.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>Shaft Arm Joint 0-1</td>
-            <td>2</td>
-            <td><a href ="../dimensions/Shaft Arm Joint 0-1.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>18</td>
-            <td>φ8 x 26.0mm Aluminum Bar</td>
-            <td>1</td>
-            <td><a href ="../dimensions/φ8 x 26.0mm Aluminum Bar.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>19</td>
-            <td>Timing Pulley Motor</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Timing Pulley Motor.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>Timing Pulley Motor Gear</td>
-            <td>2</td>
-            <td><a href ="../dimensions/Timing Pulley Motor Gear.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>21</td>
-            <td>Timing Pulley Motor Wall</td>
-            <td>2</td>
-            <td><a href ="../dimensions/Timing Pulley Motor Wall.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>22</td>
-            <td>LM0.8-20 IG36P Joint</td>
-            <td>1</td>
-            <td><a href ="../dimensions/LM0.8-20 IG36P Joint.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>23</td>
-            <td>LM0.8-20 Additional Work</td>
-            <td>1</td>
-            <td><a href ="https://www.monotaro.com/p/8980/3132/?msockid=02dc7910a6c3680417de6d76a7b9694d">リンク</a></td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>Timing Pulley Motor Wall Spacer</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Timing Pulley Motor Wall Spacer.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>25</td>
-            <td>Potentionmeter Bot</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Potentionmeter Bot.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>26</td>
-            <td>Aluminum Square Pipe 10mm x 10mm x 56mm</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Aluminum Square Pipe 10mm x 10mm x 56mm.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>27</td>
-            <td>Potentionmeter Mount</td>
-            <td>1</td>
-            <td><a href ="../dimensions/Potentionmeter Mount.pdf">図面</a></td>
-        </tr>
-        <tr>
-            <td>28</td>
-            <td>Potentionmeter</td>
-            <td>2</td>
-            <td></td>
-        </tr>
-    </table>
-</center>
 <br>
 
 <br>
@@ -310,29 +181,6 @@ Basis Assyをfig.4に示す。<br>
 <br>
 Basis Assy部品リストをtable.2に示す。<br>
 <br>
-<center>
-    table.2 Basis Assy部品リスト
-    <table class="table010">
-        <tr>
-            <th>部品番号</th>
-            <th>部品名</th>
-            <th>個数</th>
-            <th>ショップURL</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>aaa</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>bbb</td>
-            <td>1</td>
-            <td><a href ="">リンク</a></td>
-        </tr>
-    </table>
-</center>
 <br>
 。<br>
 。<br>
