@@ -1,6 +1,6 @@
-static int run_speed     = 50; //(pwm)50-255
-static int joint1_speed  = 50;  
-static int joint2_speed  = 50;
+static int run_speed     = 200; //(pwm)200-1023
+static int joint1_speed  = 200;  
+static int joint2_speed  = 200;
 static int joint3_angle  = 0;
 static int joint3_speed  = 1; //度/sec
 static int joint4_angle  = 0;
@@ -11,13 +11,12 @@ static bool back_l = false;
 static bool front_r = false;
 static bool back_r = false;
 
-
 static int var = 0;
 static int old_var = 0;
 static int state = 0;   //0:走行 1:グリッパー、ターンテーブル 2:一、二関節 3:三、四関節
 static int maxState = 3; 
 
-//chA 1100 - 1900 1200以下:バック 1700以上:前進
+//chA 1100 - 1900 1200以下:前進 1700以上:後退
 //押し込み　1500以下:通常 1900以上:押し込み
 
 void radicon_run_r(bool _f, bool _b){
@@ -53,11 +52,11 @@ void radicon_joint1(bool _up, bool _down){
   }
   else{
     if(_up){
-      joint1_L_run(-joint1_speed);
+      joint1_L_run(joint1_speed);
       joint1_R_run(joint1_speed);
     }
     else if(_down){
-      joint1_L_run(joint1_speed);
+      joint1_L_run(-joint1_speed);
       joint1_R_run(-joint1_speed);
     }
     else{
@@ -112,14 +111,14 @@ void radicon_joint4(bool _up, bool _down){
   delay(100);
 }
 
-void radicon(int A, int C, int F){
+void radicon_run(int A, int C, int F){
   if(A < 1200){
-    front_l = false;
-    back_l = true;
-  }
-  else if(1700 < A){
     front_l = true;
     back_l = false;
+  }
+  else if(1700 < A){
+    front_l = false;
+    back_l = true;
   } 
   else{
     front_l = false;
@@ -127,16 +126,16 @@ void radicon(int A, int C, int F){
   }
 
   if(C < 1200){
-    front_l = false;
-    back_l = true;
+    front_r = true;
+    back_r = false;
   }
   else if(1700 < C){
-    front_l = true;
-    back_l = false;
+    front_r = false;
+    back_r = true;
   } 
   else{
-    front_l = false;
-    back_l = false;
+    front_r = false;
+    back_r = false;
   }
 
   if(1800 < F)   F = 1;
@@ -154,6 +153,10 @@ void radicon(int A, int C, int F){
   }
   
   old_var = var; //varのをold_varに保存
+  Serial.print("state = ");
+  Serial.println(state);
+
+  raspi_send(3, state, A, C);
 
   if(state == 0){
     radicon_run_l(front_l, back_l);
@@ -195,4 +198,30 @@ void radicon(int A, int C, int F){
     radicon_joint3(false, false);
     radicon_joint4(false, false); 
   }
+
+}
+
+void radicon(bool _check){
+  while(1){
+    if(!_check){
+      break;
+    }
+    int MR8_A = pulseIn(PIN_MR8_A,HIGH);
+    int MR8_C = pulseIn(PIN_MR8_C,HIGH);
+    int MR8_F = pulseIn(PIN_MR8_F,HIGH);
+    
+    Serial.print("MR8_A = ");
+    Serial.print(MR8_A);
+    Serial.print("  MR8_C = ");
+    Serial.print(MR8_C);
+    Serial.print("  MR8_F = ");
+    Serial.print(MR8_F);
+    Serial.println();
+    
+    radicon_run(MR8_A, MR8_C, MR8_F);
+
+
+    delay(10);
+  }
+  
 }

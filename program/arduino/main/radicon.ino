@@ -1,4 +1,3 @@
-
 static int turntable_speed = 50;
 
 static bool front_l = false;
@@ -11,25 +10,24 @@ static int old_var = 0;
 static int state = 0;   //0:走行 1:グリッパー、ターンテーブル 2:一、二関節 3:三、四関節
 static int maxState = 3; 
 
-
 void radicon_gripper(bool _open, bool _close){
-  int ang;
+  int _ang;
   if(_open){
-    ang += 1;
-    if(GRIP_OPEN_ANG <= ang){
-      ang = GRIP_OPEN_ANG;
+    _ang += 1;
+    if(GRIP_OPEN_ANG <= _ang){
+      _ang = GRIP_OPEN_ANG;
     }
   }
   else if(_close){
-    ang -= 1;
-    if(ang <= GRIP_CLOSE_ANG){
-      ang = GRIP_CLOSE_ANG;
+    _ang -= 1;
+    if(_ang <= GRIP_CLOSE_ANG){
+      _ang = GRIP_CLOSE_ANG;
     }
   }
   else{
   }
   
-  grip.write(ang);
+  grip.write(_ang);
   
   delay(1000);
 }
@@ -47,14 +45,14 @@ void radicon_turntable(bool _left, bool _right){
   }
 }
 
-void radicon(int A, int C, int F){
+void radicon_run(int A, int C, int state){
   if(A < 1200){
-    front_l = false;
-    back_l = true;
-  }
-  else if(1700 < A){
     front_l = true;
     back_l = false;
+  }
+  else if(1700 < A){
+    front_l = false;
+    back_l = true;
   } 
   else{
     front_l = false;
@@ -62,33 +60,17 @@ void radicon(int A, int C, int F){
   }
 
   if(C < 1200){
-    front_l = false;
-    back_l = true;
-  }
-  else if(1700 < C){
     front_l = true;
     back_l = false;
+  }
+  else if(1700 < C){
+    front_l = false;
+    back_l = true;
   } 
   else{
     front_l = false;
     back_l = false;
   }
-
-  if(1800 < F)   F = 1;
-  else           F = 0;
-
-  var =  F;
-  var = !(var);
-
-    //スイッチが離された瞬間を読み取る
-  if(var == LOW && old_var == HIGH){
-    state++;
-    if (state > maxState){
-      state = 0;
-    }
-  }
-  
-  old_var = var; //varのをold_varに保存
 
   if(state == 0){
     radicon_gripper(false, false);
@@ -111,4 +93,16 @@ void radicon(int A, int C, int F){
     radicon_gripper(false, false);
     radicon_turntable(false, false);
   }
+}
+
+void radicon(bool _check, int MR8_A, int MR8_C, int state){
+  while(1){
+    if(!_check){
+      break;
+    }
+    
+    radicon_run(MR8_A, MR8_C, state);
+    delay(10);
+  }
+  
 }
