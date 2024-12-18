@@ -9,7 +9,9 @@
 
 #define PIN_MR8_A   10
 #define PIN_MR8_C   11 
+#define PIN_MR8_E   13
 #define PIN_MR8_F   12
+
 
 #define PIN_JOINT_1_R_PWM   14  //第一関節
 #define PIN_JOINT_1_L_PWM   15

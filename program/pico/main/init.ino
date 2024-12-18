@@ -63,6 +63,6 @@ void arm_open(){
 void rc_init(){
   pinMode(PIN_MR8_A,INPUT);
   pinMode(PIN_MR8_C,INPUT);
+  pinMode(PIN_MR8_E,INPUT);
   pinMode(PIN_MR8_F,INPUT);
-  Serial.begin(115200);
 }

@@ -144,7 +144,7 @@ void radicon_run(int A, int C, int F){
   var =  F;
   var = !(var);
 
-    //スイッチが離された瞬間を読み取る
+  //スイッチが離された瞬間を読み取る
   if(var == LOW && old_var == HIGH){
     state++;
     if (state > maxState){
@@ -155,8 +155,6 @@ void radicon_run(int A, int C, int F){
   old_var = var; //varのをold_varに保存
   Serial.print("state = ");
   Serial.println(state);
-
-  raspi_send(3, state, A, C);
 
   if(state == 0){
     radicon_run_l(front_l, back_l);
@@ -201,25 +199,31 @@ void radicon_run(int A, int C, int F){
 
 }
 
-void radicon(bool _check){
-  while(1){
-    if(!_check){
-      break;
-    }
+void radicon(){
+  while(1){  
     int MR8_A = pulseIn(PIN_MR8_A,HIGH);
     int MR8_C = pulseIn(PIN_MR8_C,HIGH);
+    int MR8_E = pulseIn(PIN_MR8_E,HIGH);
     int MR8_F = pulseIn(PIN_MR8_F,HIGH);
+
+    if(1800 <  MR8_E) MR8_E = 1;
+    else              MR8_E = 0;
+
+    if(MR8_E == 1) break;
+
+    raspi_send(4, state, MR8_A, MR8_C, MR8_E);
     
     Serial.print("MR8_A = ");
     Serial.print(MR8_A);
     Serial.print("  MR8_C = ");
     Serial.print(MR8_C);
+    Serial.print("  MR8_E = ");
+    Serial.print(MR8_E);
     Serial.print("  MR8_F = ");
     Serial.print(MR8_F);
     Serial.println();
     
     radicon_run(MR8_A, MR8_C, MR8_F);
-
 
     delay(10);
   }

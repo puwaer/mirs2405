@@ -95,13 +95,12 @@ void radicon_run(int A, int C, int state){
   }
 }
 
-void radicon(bool _check, int MR8_A, int MR8_C, int state){
+void radicon(int state, int MR8_A, int MR8_C, int MR8_E){
   while(1){
-    if(!_check){
-      break;
-    }
-    
+    if(MR8_E == 1) break;
+
     radicon_run(MR8_A, MR8_C, state);
+    
     delay(10);
   }
   

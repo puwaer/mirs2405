@@ -1,9 +1,10 @@
 const int RECEIVE_ARRAY_SIZE = 5;  // 受信する配列の要素数
 uint8_t highByte, lowByte;
 int receivedIndex = 0;
-uint16_t receivedArray[RECEIVE_ARRAY_SIZE];  // 受信した配列を格納
+uint16_t receivedArray[RECEIVE_ARRAY_SIZE] = {0, 0, 0, 0, 0};  // 受信した配列を格納
+int old_receivedArray[RECEIVE_ARRAY_SIZE];
 
-const int SEND_ARRAY_SIZE = 4;
+const int SEND_ARRAY_SIZE = 5;
 int sendArray[SEND_ARRAY_SIZE]; //送信する配列を格納
 
 void raspi_receive(){
@@ -28,54 +29,73 @@ void raspi_receive(){
       }
     }
   }
-  switch(receivedArray[0]){
+
+  bool arraysmatch = true;
+
+  for (int i = 0; i < RECEIVE_ARRAY_SIZE; i++) {
+    if (old_receivedArray[i] != receivedArray[i]) {
+      arraysmatch = false; // 一致しない要素が見つかった場合
+      break; // 比較を終了
+    }
+  }
+
+  if(!arraysmatch){ //receivedArrayが変化した場合
+    switch(receivedArray[0]){
     case -1:
       turntable_stop();
       break;
     case 0:
-      raspi_send(0, 1, 0, 0);
       break;
 
     case 1:
-
-      break; 
+      raspi_send(0, 1, 0, 0, 0);
+      break;
 
     case 2:
 
       break; 
 
     case 3:
-      radicon(receivedArray[1], receivedArray[2], receivedArray[3], receivedArray[4]);
+
       break; 
 
     case 4:
-
+      radicon(receivedArray[1], receivedArray[2], receivedArray[3], receivedArray[4]);
       break; 
 
     case 5:
+
+      break; 
+
+    case 6:
       gripper(receivedArray[1]);
       break;
       
-    case 6:
+    case 7:
       airchuck(receivedArray[1]);
       break;
 
-    case 7:
+    case 8:
       PUMP(receivedArray[1]);
       break;
 
+    case 9:
+      turntable(receivedArray[1]);
+
     default:
       break;
+    }
   }
 }
 
-void raspi_send(int sendArray_0, int sendArray_1, int sendArray_2, int sendArray_3){
+void raspi_send(int sendArray_0, int sendArray_1, int sendArray_2, int sendArray_3, int sendArray_4){
   sendArray[0] = sendArray_0;
   sendArray[1] = sendArray_1;
   sendArray[2] = sendArray_2;
   sendArray[3] = sendArray_3;
+  sendArray[4] = sendArray_4;
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < SEND_ARRAY_SIZE; i++){
     Serial.write(receivedArray[i] & 0xFF);         // 下位バイト
     Serial.write((receivedArray[i] >> 8) & 0xFF);  // 上位バイト
   }
