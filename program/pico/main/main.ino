@@ -13,20 +13,26 @@ void setup() {
   Serial.begin(115200);
   delay(100);
 
-  //raspi_open();
+  raspi_open();
 }
 
 void loop() {
- while(1){
+ /*while(1){
     raspi_receive();
     delay(10);
-  }
-  
+  }*/
+
+
+  /*while(1){
+    joint3(joint3ID, -20, 1);
+    Serial.println("-20");
+    delay(10);
+  }*/
   //run_debug();
   //arm_debug();
-  //radicon();
+  radicon();
   /*while(1){
-    Serial.println(analogRead(PIN_JOINT_2_POT));
+    Serial.println(analogRead(PIN_JOINT_1_R_POT));
     delay(10);
   }*/
 

@@ -19,7 +19,7 @@ void motor_open(){
   motor_stop();
 }
 
-/*void raspi_open(){
+void raspi_open(){
   Serial.begin(115200);
   
   while(!Serial.available()){
@@ -29,7 +29,7 @@ void motor_open(){
     Serial.println("Press any key to skip");
     delay(1000);
   }
-}*/
+}
 
 void arm_open(){
   Serial1.setTX(PIN_JOINT_3_PWM);
