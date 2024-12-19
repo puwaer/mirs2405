@@ -18,7 +18,7 @@ class TCPHandler(socketserver.BaseRequestHandler):
             size = len(data).to_bytes(4, byteorder='big')
             self.request.sendall(size + data)
 
-videoCap = cv2.VideoCapture(1)
+videoCap = cv2.VideoCapture(0)
 socketserver.TCPServer.allow_reuse_address = True
 server = socketserver.TCPServer((HOST, PORT), TCPHandler)
 

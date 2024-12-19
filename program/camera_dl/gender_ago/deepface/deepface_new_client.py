@@ -7,7 +7,7 @@ import threading
 import queue
 
 # サーバー接続設定
-HOST = "172.25.18.20"  # Raspberry PiのIPアドレス
+HOST = "172.25.16.100"  
 PORT = 5569
 
 # 最新の画像を管理するキュー
