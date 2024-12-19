@@ -7,7 +7,7 @@ import threading
 import queue
 
 # サーバー接続設定
-HOST = "172.25.16.100"  
+HOST = "172.25.18.20"  
 PORT = 5569
 
 # 最新の画像を管理するキュー
