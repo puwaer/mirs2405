@@ -31,15 +31,21 @@ def main():
             send_rc()
             arm()
             send_angle()
-            if input_value[1] == 1:
+            ft_state = receive_ft()
+            if ft_state[1] == 1:
                 mode=refile
 
         else mode=refill
             remove_position()
-            possession_state = receive_possession()
-            if possession_state == 0:
+            ft_state = receive_ft()
+            if ft_state == 0:
                 get_handout()
             mode = wait
 
     if __name__ == "__main__":
     main()
+
+
+init()
+main()
+
