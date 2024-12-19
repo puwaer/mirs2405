@@ -27,17 +27,17 @@ def main():
 
         else mode=give:
             position = [camera_data[3], camera_data[4]]
-            send_rc()
+            serial_rc()
             arm()
             send_angle()
-            ft_state = receive_ft()
-            if ft_state[1] == 1:
+            pr_state = receive_pr()
+            if pr_state[1] == 1:
                 mode=refile
 
         else mode=refill
             remove_position()
-            ft_state = receive_ft()
-            if ft_state == 0:
+            pr_state = receive_pr()
+            if pr_state == 0:
                 get_handout()
             mode = wait
 

@@ -7,10 +7,10 @@ import serial
 #import config
 #from send import send_angle
 
-from receive import receive_once # 受信関数をインポート
+from receive import receive_ft # 受信関数をインポート
 
 def main():
-    received_values = receive_once()  # データを受信
+    received_values = receive_ft()  # データを受信
 
     # 受信したデータを表示
     if received_values:
