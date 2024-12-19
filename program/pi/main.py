@@ -17,7 +17,6 @@ def init():
     else
         sys.exit()
     
-    init()
 
 def main():
     while True:
@@ -41,10 +40,6 @@ def main():
             if ft_state == 0:
                 get_handout()
             mode = wait
-
-    if __name__ == "__main__":
-    main()
-
 
 init()
 main()
