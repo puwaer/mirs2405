@@ -19,6 +19,11 @@ void setup() {
 void loop(){
  /*while(1){
     raspi_receive();
+    delay(100);
+  }*/
+
+  /*while(1){
+    raspi_send(4,2,1800,1800,0);
     delay(10);
   }*/
 
@@ -27,8 +32,8 @@ void loop(){
     delay(10);
   }*/
   //run_debug();
-  //arm_debug();
-  radicon();
+  arm_debug();
+  //radicon();
   /*while(1){
     Serial.println(analogRead(PIN_JOINT_1_R_POT));
     delay(10);

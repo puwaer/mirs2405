@@ -95,6 +95,8 @@ void raspi_send(int sendArray_0, int sendArray_1, int sendArray_2, int sendArray
   sendArray[3] = sendArray_3;
   sendArray[4] = sendArray_4;
 
+  Serial.write(0xFF); // スタートバイトを送信
+
   for (int i = 0; i < SEND_ARRAY_SIZE; i++){
     Serial.write(receivedArray[i] & 0xFF);         // 下位バイト
     Serial.write((receivedArray[i] >> 8) & 0xFF);  // 上位バイト
