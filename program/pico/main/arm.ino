@@ -10,7 +10,7 @@ void arm(float _ang1, float _ang2, float _ang3, float _ang4){
 
 void photoreflector(){
   int photo_check = digitalRead(PIN_PHOTOREFLECTOR);
-  raspi_send(4, photo_check, 0, 0, 0);
+  raspi_send(5, photo_check, 0, 0, 0);
 }
 
 void all_stop(){

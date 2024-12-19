@@ -76,10 +76,10 @@ float Kp_pot  = 0.2;
 
 int   joint1_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint1_dead_zone       = 200;     //pwmの最小値(絶対値)
-int   joint1_ang_limitter_H  = 240;   //角度の最大値[度]
+int   joint1_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint1_ang_limitter_H  = 300;   //角度の最大値[度]
 int   joint1_ang_center      = 150;
-int   joint1_ang_limitter_L  = 60;     //角度の最小値[度]
+int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
 
 
 float Kp_joint2 = 0.319;
@@ -89,7 +89,7 @@ float Kd_joint2 = 0;
 
 int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint2_dead_zone       = 200;     //pwmの最小値(絶対値)
+int   joint2_dead_zone       = 50;     //pwmの最小値(絶対値)
 int   joint2_ang_limitter_H  = 300;   //角度の最大値[度]
 int   joint2_ang_center      = 150;
 int   joint2_ang_limitter_L  = 0;     //角度の最小値[度]
