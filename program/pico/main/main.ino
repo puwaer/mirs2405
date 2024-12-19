@@ -16,16 +16,14 @@ void setup() {
   raspi_open();
 }
 
-void loop() {
+void loop(){
  /*while(1){
     raspi_receive();
     delay(10);
   }*/
 
-
   /*while(1){
-    joint3(joint3ID, -20, 1);
-    Serial.println("-20");
+    joint4(joint3ID, 0, 1);
     delay(10);
   }*/
   //run_debug();
@@ -36,7 +34,7 @@ void loop() {
     delay(10);
   }*/
 
-  delay(1000);
+  //delay(1000);
   
   joint1_stop();
   joint2_stop();
@@ -47,7 +45,8 @@ void loop() {
 /*  run(x, y)  (x,y)へ移動
 
     arm(ang1, ang2, ang3, ang4) アームを指定角度へ　すべて絶対角度
-      ang1,2: -150~150[°]
+      ang1: -150~150[°]
+      ang2: -90~90[°]
       ang3,4: -150~150[°]
 
     radicon(bool _check) 

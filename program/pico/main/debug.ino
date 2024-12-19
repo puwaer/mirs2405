@@ -8,13 +8,24 @@ void run_debug(){
 }
 
 void arm_debug(){
-  int joint1_ang = 30;
-  int joint2_ang = 30;
-  int joint3_ang = 0;
-  int joint4_ang = 0;
+  int joint1_ang = 0;
+  int joint2_ang = 0;
+  int joint3_ang = 30;
+  int joint4_ang = 30;
 
-  arm(joint1_ang, joint2_ang, joint3_ang, joint4_ang);
-  delay(100000);
+  /*arm(joint1_ang, joint2_ang, joint3_ang, joint4_ang);
+  delay(100000);*/
+
+  while(1){
+    arm(0, -45, 0, 0);
+    delay(20000);
+    arm(0, 0, joint3_ang, joint4_ang);
+    delay(20000);
+    arm(0, 45, 0, 0);
+    delay(20000);
+    arm(0, 0, joint3_ang, joint4_ang);
+    delay(20000);
+  }
 
 }
 

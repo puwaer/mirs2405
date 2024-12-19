@@ -12,17 +12,16 @@
 #define PIN_MR8_E   13
 #define PIN_MR8_F   12
 
-
 #define PIN_JOINT_1_R_PWM   14  //第一関節
 #define PIN_JOINT_1_L_PWM   15
 #define PIN_JOINT_1_R_DIR   18
 #define PIN_JOINT_1_L_DIR   19
-#define PIN_JOINT_1_R_POT   26 
+#define PIN_JOINT_1_R_POT   28 //26
 #define PIN_JOINT_1_L_POT   27
 
 #define PIN_JOINT_2_PWM   9  //第二関節9
 #define PIN_JOINT_2_DIR   20  //20
-#define PIN_JOINT_2_POT   28  //28
+#define PIN_JOINT_2_POT   26  //28
 
 #define PIN_JOINT_3_PWM    16   //第三関節
 
@@ -32,7 +31,7 @@
 #define PIN_PHOTOREFLECTOR  22    
 
 #define POT_MIN 0
-#define POT_MAX 287 //[°]
+#define POT_MAX 255 //[°]
 #define PWM_MAX 1023
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
@@ -69,30 +68,30 @@ int   motor_l_offset  = 0;
 int   motor_r_offset  = 0;
 int   dead_zone       = 200;     //pwmの最小値(絶対値)
 
-float Kp_joint1 = 0.119;
+float Kp_joint1 = 7.2;
 float Ki_joint1 = 0;
 float Kd_joint1 = 0;
 float Kp_pot  = 0.2;
 
 int   joint1_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint1_dead_zone       = 50;     //pwmの最小値(絶対値)
+int   joint1_dead_zone       = 200;     //pwmの最小値(絶対値)
 int   joint1_ang_limitter_H  = 300;   //角度の最大値[度]
 int   joint1_ang_center      = 150;
 int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
 
 
-float Kp_joint2 = 0.319;
+float Kp_joint2 = 7.2;
 float Ki_joint2 = 0;
-float Kd_joint2 = 0;
+float Kd_joint2 = 0.2;
 
 
 int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint2_dead_zone       = 50;     //pwmの最小値(絶対値)
-int   joint2_ang_limitter_H  = 300;   //角度の最大値[度]
-int   joint2_ang_center      = 150;
-int   joint2_ang_limitter_L  = 0;     //角度の最小値[度]
+int   joint2_dead_zone       = 150;     //pwmの最小値(絶対値)
+int   joint2_ang_limitter_H  = 210;   //角度の最大値[度]
+int   joint2_ang_center      = 110;
+int   joint2_ang_limitter_L  = 10;     //角度の最小値[度]
 
 const byte joint3ID = 1; //第三関節のシリアルサーボID
 const byte joint4ID = 1;//第四関節のシリアルサーボID
@@ -106,6 +105,6 @@ int   joint3_ang_center      = 150;
 int   joint3_ang_limitter_H  = joint3_ang_center + 75;   //角度の最大値[度]
 int   joint3_ang_limitter_L  = joint3_ang_center - 75;     //角度の最小値[度]
 
-int   joint4_ang_center      = 150;
+int   joint4_ang_center      = 180;
 int   joint4_ang_limitter_H  = joint4_ang_center + 75;   //角度の最大値[度]
 int   joint4_ang_limitter_L  = joint4_ang_center - 75;;     //角度の最小値[度]

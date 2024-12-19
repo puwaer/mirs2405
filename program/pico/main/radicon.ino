@@ -1,11 +1,11 @@
 static int run_speed     = 200; //(pwm)200-1023
 static int joint1_speed  = 200;  
 static int joint2_speed  = 200;
-static int joint3_angle  = 0;
-static int joint3_angle10  = 750;
+static int joint3_angle  = joint3_ang_center;
+static int joint3_angle2  = joint3_angle*2;
 static int joint3_speed  = 1; //度/sec
-static int joint4_angle  = 0;
-static int joint4_angle10  = 750;
+static int joint4_angle  = joint4_ang_center;
+static int joint4_angle2  = joint4_angle*2;
 static int joint4_speed  = 1; //度/sec
 
 static bool front_l = false;
@@ -90,18 +90,24 @@ void radicon_joint2(bool _up, bool _down){
 
 void radicon_joint3(bool _up, bool _down){
   if(_up){
-    joint3_angle10 += 1;
+    joint3_angle2 += 1;
   }
   else if(_down){
-    joint3_angle10 -= 1;
+    joint3_angle2 -= 1;
   }
 
-  joint3_angle = joint3_angle10 / 10;
+  if(joint3_ang_limitter_H*2 <= joint3_angle2){
+    joint3_angle2 = joint3_ang_limitter_H*2;
+  } 
+  else if(joint3_angle2 <= joint3_ang_limitter_L*2){
+    joint3_angle2 = joint3_ang_limitter_L*2;
+  }
 
-  joint3_ang_limitter(joint3_angle, &joint3_angle);
+  joint3_angle = joint3_angle2 / 2;
+  joint3_angle -= joint3_ang_center;
+
+  //joint3_ang_limitter(joint3_angle, &joint3_angle);
   //joint3_angle -= joint3_ang_center;
-  Serial.println(joint3_angle);
-  Serial.println(joint3_angle10);
 
   joint3(joint3ID, joint3_angle, joint3_speed);
   
@@ -109,17 +115,27 @@ void radicon_joint3(bool _up, bool _down){
   
 void radicon_joint4(bool _up, bool _down){
   if(_up){
-    joint4_angle10 += 1;
+    joint4_angle2 += 1;
   }
   else if(_down){
-    joint4_angle10 -= 1;
+    joint4_angle2 -= 1;
   }
 
-  joint4_angle = joint4_angle10 / 10;
+  if(joint4_ang_limitter_H*2 <= joint4_angle2){
+    joint4_angle2 = joint4_ang_limitter_H*2;
+  } 
+  else if(joint4_angle2 <= joint4_ang_limitter_L*2){
+    joint4_angle2 = joint4_ang_limitter_L*2;
+  }
 
-  joint4_ang_limitter(joint4_angle, &joint4_angle);
+  joint4_angle = joint4_angle2 / 2;
   joint4_angle -= joint4_ang_center;
+  
+  //joint4_ang_limitter(joint4_angle, &joint4_angle);
   joint4(joint4ID, joint4_angle, joint4_speed);
+  Serial.println(joint4_angle);
+  Serial.println(joint4_angle2);
+
 }
 
 void radicon_run(int A, int C, int F){
@@ -233,7 +249,7 @@ void radicon(){
     Serial.print(MR8_F);
     Serial.println();
 
-    Serial.println(analogRead(PIN_JOINT_1_R_POT));
+    //Serial.println(analogRead(PIN_JOINT_1_R_POT));
     
     radicon_run(MR8_A, MR8_C, MR8_F);
 

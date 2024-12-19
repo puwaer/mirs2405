@@ -196,7 +196,7 @@ void joint1_L_run(int _pwm){
 }
 
 void joint2_initialize(float a, float *b){
-  a += joint1_ang_center;
+  a += joint2_ang_center;
   joint2_ang_limitter(a, &a);
   PID_reset_joint2();
   joint2_stop();
@@ -264,8 +264,8 @@ void joint2(float _angle) {
       }
 
       /*Serial.println(angle_joint2);
-      Serial.println(target_ang_joint2);
-      Serial.println(joint2_pwm);*/
+      Serial.println(target_ang_joint2);*/
+      Serial.println(joint2_pwm);
 
       joint2_run(joint2_pwm);
       delay(10);
@@ -278,14 +278,15 @@ void joint2(float _angle) {
     
       PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
       joint2_pwm_limitter(joint2_pwm, &joint2_pwm);
+      
       if(abs(target_ang_joint2) >= abs(angle_joint2)){
         joint2_stop();
         break;
       }
       
       /*Serial.println(angle_joint2);
-      Serial.println(target_ang_joint2);
-      Serial.println(joint2_pwm);*/
+      Serial.println(target_ang_joint2);*/
+      Serial.println(joint2_pwm);
 
       joint2_run(joint2_pwm);
       delay(10);
