@@ -2,7 +2,7 @@ import socket
 import json
 
 HOST = "172.25.16.100"  
-PORT = 5569
+PORT = 5700
 
 def get_dict_data(sock):
     # サイズを受信

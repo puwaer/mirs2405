@@ -3,7 +3,7 @@ import sys
 import json
 
 HOST = "172.25.16.100"  
-PORT = 5569
+PORT = 5700
 
 class TCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
