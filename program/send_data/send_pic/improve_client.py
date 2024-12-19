@@ -2,7 +2,7 @@ import socket
 import numpy
 import cv2
 
-HOST = "172.25.19.218"  # ここはRaspberryPiのIPアドレスを入力
+HOST = "172.25.19.218"  
 PORT = 5569
 
 

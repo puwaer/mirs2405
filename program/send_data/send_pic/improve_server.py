@@ -2,7 +2,7 @@ import socketserver
 import cv2
 import sys
 
-HOST = "172.25.16.100"  # ここはRaspberryPiのIPアドレスを入力
+HOST = "172.25.16.100"  
 PORT = 5569
 
 
