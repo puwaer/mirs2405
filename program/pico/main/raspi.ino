@@ -1,4 +1,4 @@
-const int RECEIVE_ARRAY_SIZE = 5;  // 受信する配列の要素数
+const int RECEIVE_ARRAY_SIZE = 7;  // 受信する配列の要素数
 uint16_t receivedArray[RECEIVE_ARRAY_SIZE]; // 受信した配列を格納
 int old_receivedArray[RECEIVE_ARRAY_SIZE];
 
@@ -47,11 +47,8 @@ void raspi_receive(){
   }*/
   arraysmatch = false;
 
-  if(receivedArray[0] == 4){
-    radicon();
-  }
 
-  /*if(!arraysmatch){ //receivedArrayが変化した場合
+  if(!arraysmatch){ //receivedArrayが変化した場合
     switch(receivedArray[0]){
     case -1:
       all_stop();
@@ -73,7 +70,7 @@ void raspi_receive(){
       break;
       
     case 4:
-      radicon();
+      radicon(receivedArray[1], receivedArray[2], receivedArray[3], receivedArray[4], receivedArray[5], receivedArray[6]);
       break;
 
     case 5:
@@ -83,7 +80,7 @@ void raspi_receive(){
     default:
       break;
     }
-  }*/
+  }
 }
 
 void raspi_send(int sendArray_0, int sendArray_1, int sendArray_2, int sendArray_3, int sendArray_4){

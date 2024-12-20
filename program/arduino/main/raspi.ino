@@ -1,7 +1,7 @@
-const int RECEIVE_ARRAY_SIZE = 5;  // 受信する配列の要素数
+const int RECEIVE_ARRAY_SIZE = 7;  // 受信する配列の要素数
 uint8_t highByte, lowByte;
 int receivedIndex = 0;
-uint16_t receivedArray[RECEIVE_ARRAY_SIZE] = {0, 0, 0, 0, 0};  // 受信した配列を格納
+uint16_t receivedArray[RECEIVE_ARRAY_SIZE] = {0, 0, 0, 0, 0, 0, 0};  // 受信した配列を格納
 int old_receivedArray[RECEIVE_ARRAY_SIZE];
 
 const int SEND_ARRAY_SIZE = 5;
@@ -60,7 +60,7 @@ void raspi_receive(){
       break; 
 
     case 4:
-      radicon(receivedArray[1], receivedArray[2], receivedArray[3], receivedArray[4]);
+      radicon(receivedArray[1], receivedArray[2], receivedArray[3], receivedArray[4], receivedArray[5], receivedArray[6]);
       break; 
 
     case 5:

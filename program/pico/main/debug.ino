@@ -8,8 +8,8 @@ void run_debug(){
 }
 
 void arm_debug(){
-  int joint1_ang = 0;
-  int joint2_ang = 0;
+  int joint1_ang = 30;
+  int joint2_ang = 30;
   int joint3_ang = 30;
   int joint4_ang = 30;
 
@@ -17,36 +17,50 @@ void arm_debug(){
   delay(100000);*/
 
   while(1){
-    arm(0, -45, 0, 0);
+    arm(0, 0, 0, 0);
     delay(20000);
-    arm(0, 0, joint3_ang, joint4_ang);
+    arm(30, 0, joint3_ang, joint4_ang);
     delay(20000);
-    arm(0, 45, 0, 0);
+    arm(30, 30, 0, 0);
     delay(20000);
-    arm(0, 0, joint3_ang, joint4_ang);
+    arm(0, 30, joint3_ang, joint4_ang);
     delay(20000);
   }
 
 }
 
-void stringToIntValues(String str, int value[], char delim) {
-  int k = 0;
-  int j = 0;
-  char text[8];
+/*void radicon_debug(){
+  while(1){  
+    unsigned int MR8_A = pulseIn(PIN_MR8_A,HIGH);
+    unsigned int MR8_C = pulseIn(PIN_MR8_C,HIGH);
+    unsigned int MR8_E = pulseIn(PIN_MR8_E,HIGH);
+    unsigned int MR8_F = pulseIn(PIN_MR8_F,HIGH);
 
-  for (int i = 0; i <= str.length(); i++) {
-    char c = str.charAt(i);
-    if ( c == delim || i == str.length() ) {
-      text[k] = '\0';
-      value[j] = atoi(text);
-      j++;
-      k = 0;
-    } else {
-      text[k] = c;
-      k++;
-    }
+    /*if(1800 <  MR8_E) MR8_E = 1;
+    else              MR8_E = 0;
+    
+    //raspi_send(4, state, MR8_A, MR8_C, MR8_E);
+
+    if(MR8_E == 1) break;
+    
+    Serial.print("MR8_A = ");
+    Serial.print(MR8_A);
+    Serial.print("  MR8_C = ");
+    Serial.print(MR8_C);
+    Serial.print("  MR8_E = ");
+    Serial.print(MR8_E);
+    Serial.print("  MR8_F = ");
+    Serial.print(MR8_F);
+    Serial.println();
+
+    //Serial.println(analogRead(PIN_JOINT_1_R_POT));
+    
+    //radicon_run(MR8_A, MR8_C, MR8_F);
+
+    delay(10);
   }
-}
+  
+}*/
 
 void show_XXX(){
   

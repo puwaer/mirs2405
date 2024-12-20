@@ -16,12 +16,12 @@
 #define PIN_JOINT_1_R_PWM   15
 #define PIN_JOINT_1_L_DIR   18
 #define PIN_JOINT_1_R_DIR   19
-#define PIN_JOINT_1_L_POT   28 //26
+#define PIN_JOINT_1_L_POT   26 //26
 #define PIN_JOINT_1_R_POT   27
 
 #define PIN_JOINT_2_PWM   9  //第二関節9
 #define PIN_JOINT_2_DIR   20  //20
-#define PIN_JOINT_2_POT   26  //28
+#define PIN_JOINT_2_POT   28  //28
 
 #define PIN_JOINT_3_PWM    16   //第三関節
 
