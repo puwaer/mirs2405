@@ -7,6 +7,7 @@ class HeightEstimator:
     def __init__(self, initial_height=170):
         self.calibration_height = initial_height  # 初期値設定
         self.calibration_factor = None
+        self.calibrated_shoulder_width = None  # キャリブレーション時の肩幅
         self.mp_pose = mp.solutions.pose
         self.pose = self.mp_pose.Pose(
             min_detection_confidence=0.5,
@@ -19,22 +20,33 @@ class HeightEstimator:
     def estimate_height(self, landmarks):
         if not landmarks:
             return None, None
-        
+
         # 必要なランドマークの取得
-        shoulder_mid = landmarks[11]  # 右肩
-        hip_mid = landmarks[23]      # 右腰
-        ankle = landmarks[27]        # 右足首
-        
+        right_shoulder = landmarks[11]
+        left_shoulder = landmarks[12]
+        hip_mid = landmarks[23]  # 右腰
+        ankle = landmarks[27]   # 右足首
+
+        # 肩幅の計算
+        current_shoulder_width = self.calculate_distance(right_shoulder, left_shoulder)
+
+        # キャリブレーション時の肩幅を記録
+        if self.calibrated_shoulder_width is None:
+            self.calibrated_shoulder_width = current_shoulder_width
+
+        # 距離スケール補正
+        scale_factor = self.calibrated_shoulder_width / current_shoulder_width
+
         # 肩から足首までの距離を計算
-        total_height_pixels = self.calculate_distance(shoulder_mid, ankle)
-        
+        total_height_pixels = self.calculate_distance(hip_mid, ankle)
+
         # キャリブレーションファクターの計算または使用
         if self.calibration_factor is None:
-            self.calibration_factor = self.calibration_height / total_height_pixels
-        
+            self.calibration_factor = self.calibration_height / (total_height_pixels * scale_factor)
+
         # 推定身長の計算 (cm)
-        estimated_height = total_height_pixels * self.calibration_factor
-        
+        estimated_height = total_height_pixels * scale_factor * self.calibration_factor
+
         return estimated_height
 
     def adjust_height(self, adjustment):
@@ -43,6 +55,7 @@ class HeightEstimator:
         # キャリブレーションファクターをリセットして再計算を強制
         self.calibration_factor = None
         return self.calibration_height
+
 
 
 def main():
