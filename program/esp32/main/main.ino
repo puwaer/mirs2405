@@ -7,8 +7,13 @@ void setup() {
 }
 
 void loop() {
-  while(1){
+  /*while(1){
     raspi_receive();
+  }*/
+
+  while(1){
+    send_rc();
   }
 
+  exit(0);
 }

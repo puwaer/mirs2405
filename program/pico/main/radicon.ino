@@ -49,7 +49,7 @@ void radicon_run_l(bool _f, bool _b){
 
 void radicon_joint1(bool _up, bool _down){
   int _angle = analogRead(PIN_JOINT_1_R_POT);
-  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
+  _angle     = map(_angle, 0, 1023, POT_MIN_1, POT_MAX_1);
   if((_angle <= joint1_ang_limitter_L) || (joint1_ang_limitter_H <= _angle)){
     joint1_L_run(0);
     joint1_R_run(0);
@@ -72,7 +72,7 @@ void radicon_joint1(bool _up, bool _down){
 
 void radicon_joint2(bool _up, bool _down){
   int _angle = analogRead(PIN_JOINT_2_POT);
-  _angle     = map(_angle, 0, 1023, POT_MIN, POT_MAX);
+  _angle     = map(_angle, 0, 1023, POT_MIN_2, POT_MAX_2);
   if((_angle <= joint2_ang_limitter_L) || (joint2_ang_limitter_H <= _angle)){
     joint2_run(0);
   }

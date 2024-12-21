@@ -17,7 +17,7 @@ void send_rc(){
     sendArray[5] = pulseIn(PIN_MR8_E, HIGH);
     unsigned int F = pulseIn(PIN_MR8_F, HIGH);
   
-    if(1800 < sendArray[6]) F = 1;
+    if(1800 < F) F = 1;
     else                    F = 0;
 
     var =  F;
@@ -35,11 +35,25 @@ void send_rc(){
 
     sendArray[6] = state;
   
+    Serial.print("MR8_A = ");
+    Serial.print(sendArray[1]);
+    Serial.print("  MR8_B = ");
+    Serial.print(sendArray[2]);
+    Serial.print("  MR8_C = ");
+    Serial.print(sendArray[3]);
+    Serial.print("  MR8_D = ");
+    Serial.print(sendArray[4]);
+    Serial.print("  MR8_E = ");
+    Serial.print(sendArray[5]);
+    Serial.print("  state = ");
+    Serial.print(sendArray[6]);
+    Serial.println();
+
     // 各int型データを2バイトに分けて送信
-    for (int i = 0; i < SEND_ARRAY_SIZE ; i++) {
+    /*for (int i = 0; i < SEND_ARRAY_SIZE ; i++) {
       Serial.write(sendArray[i] & 0xFF);         // 下位バイト
       Serial.write((sendArray[i] >> 8) & 0xFF);  // 上位バイト
-    }
+    }*/
     if (sendArray[5] > 1800){
       break;
     }

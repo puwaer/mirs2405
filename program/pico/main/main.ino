@@ -11,6 +11,7 @@ void setup() {
   analogWriteRange(PWM_MAX);
   rc_init();
   Serial.begin(115200);
+  Serial.setTimeout(10);
   delay(100);
 
   raspi_open();
@@ -34,12 +35,20 @@ void loop(){
   //run_debug();
   arm_debug();
   //radicon();
+
   /*while(1){
-    Serial.println(analogRead(PIN_JOINT_1_R_POT));
-    delay(10);
+    digitalWrite(PIN_JOINT_1_R_DIR, HIGH);
+    digitalWrite(PIN_JOINT_2_DIR, HIGH);
   }*/
 
-  //delay(1000);
+  //joint2(0);
+  //delay(10000);
+  /*joint1_R_run(-200);
+  delay(5000);
+  joint1_R_run(0);
+  delay(1000);
+  joint1_R_run(200);
+  delay(5000);*/
   
   joint1_stop();
   joint2_stop();

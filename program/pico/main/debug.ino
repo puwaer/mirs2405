@@ -1,5 +1,6 @@
 float x_coordinate = 0; //[m]
 float y_coordinate = 0; //[m]
+int arm_debug_count = 0;
 
 void run_debug(){
   x_coordinate = -0.25;
@@ -8,25 +9,32 @@ void run_debug(){
 }
 
 void arm_debug(){
-  int joint1_ang = 30;
-  int joint2_ang = 30;
-  int joint3_ang = 30;
-  int joint4_ang = 30;
-
-  /*arm(joint1_ang, joint2_ang, joint3_ang, joint4_ang);
-  delay(100000);*/
-
   while(1){
-    arm(0, 0, 0, 0);
-    delay(20000);
-    arm(30, 0, joint3_ang, joint4_ang);
-    delay(20000);
-    arm(30, 30, 0, 0);
-    delay(20000);
-    arm(0, 30, joint3_ang, joint4_ang);
-    delay(20000);
+    arm_debug_count++;
+    if(arm_debug_count >= 100){
+      Serial.print("POT_R = ");
+      Serial.print(analogRead(PIN_JOINT_1_R_POT));
+      Serial.print("  POT_L = ");
+      Serial.print(analogRead(PIN_JOINT_1_L_POT));
+      Serial.print("  POT_2 = ");
+      Serial.print(analogRead(PIN_JOINT_2_POT));
+      Serial.println();
+      arm_debug_count = 0;
+    }
+    
+    int val[4] = {0};
+    if (Serial.available() > 0) {
+      delay(10);
+      for (int i = 0; i < 4; i++) {
+        val[i] = Serial.parseInt();    //文字列データを数値に変換
+      }
+      arm(val[0], val[1], val[2], val[3]);
+      while (Serial.available() > 0) {//受信バッファクリア
+        char t = Serial.read();
+      }
+    }
+    delay(10);
   }
-
 }
 
 /*void radicon_debug(){

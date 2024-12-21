@@ -30,8 +30,12 @@
 #define PIN_INFRARED_LED    21  //赤外線近接センサー
 #define PIN_PHOTOREFLECTOR  22    
 
-#define POT_MIN 0
-#define POT_MAX 255 //[°]
+#define POT_MIN_1 0
+#define POT_MAX_1 320 //[°]
+
+#define POT_MIN_2 0
+#define POT_MAX_2 255 //[°]
+
 #define PWM_MAX 1023
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
@@ -59,7 +63,7 @@ float Ki_displacement_r = 0;
 float Kd_displacement_r = 0;
 
 float ratio_dis_RperL = 2 / 2;  //直線時の右クローラと左クローラの移動距離比
-float one_round_meter = 1.35;   //一回転時の片クローラの移動距離[m]
+float one_round_meter = 1.4;   //一回転時の片クローラの移動距離[m]
 
 int   control_period  = 10;     //制御周期
 int   pwm_limitter_H  = 320;     //pwmの最大値
@@ -70,28 +74,29 @@ int   dead_zone       = 200;     //pwmの最小値(絶対値)
 
 float Kp_joint1 = 7.2;
 float Ki_joint1 = 0;
-float Kd_joint1 = 0;
-float Kp_pot  = 0.2;
+float Kd_joint1 = 0.2;
+float Kp_pot    = 0.2;
+float Kp_joint1_dead_zone = 1.45;
 
-int   joint1_pwm_limitter_H  = 320;     //pwmの最大値
-int   joint1_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint1_dead_zone       = 200;     //pwmの最小値(絶対値)
-int   joint1_ang_limitter_H  = 300;   //角度の最大値[度]
+int   joint1_pwm_limitter_H  = 350;     //pwmの最大値
+int   joint1_pwm_limitter_L  = -350;    //pwmの最小値
+int   joint1_dead_zone       = 170;     //pwmの最小値(絶対値)  
 int   joint1_ang_center      = 150;
-int   joint1_ang_limitter_L  = 0;     //角度の最小値[度]
+int   joint1_ang_limitter_H  = joint1_ang_center + 60;   //角度の最大値[度]
+int   joint1_ang_limitter_L  = joint1_ang_center - 60;     //角度の最小値[度]
 
 
-float Kp_joint2 = 7.2;
+float Kp_joint2 = 7;
 float Ki_joint2 = 0;
-float Kd_joint2 = 0.2;
-
+float Kd_joint2 = 0.1;
+float Kp_joint2_dead_zone = 1.2;
 
 int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint2_dead_zone       = 150;     //pwmの最小値(絶対値)
-int   joint2_ang_limitter_H  = 210;   //角度の最大値[度]
-int   joint2_ang_center      = 110;
-int   joint2_ang_limitter_L  = 10;     //角度の最小値[度]
+int   joint2_dead_zone       = 130;     //pwmの最小値(絶対値)
+int   joint2_ang_center      = 170;
+int   joint2_ang_limitter_H  = joint2_ang_center + 90;   //角度の最大値[度]
+int   joint2_ang_limitter_L  = joint2_ang_center - 90;     //角度の最小値[度]
 
 const byte joint3ID = 1; //第三関節のシリアルサーボID
 const byte joint4ID = 1;//第四関節のシリアルサーボID

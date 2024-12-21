@@ -23,7 +23,13 @@ void raspi_open(){
   Serial.begin(115200);
   
   while(!Serial.available()){
-    Serial.println(analogRead(PIN_JOINT_1_R_POT));
+    Serial.print("POT_R = ");
+    Serial.print(analogRead(PIN_JOINT_1_R_POT));
+    Serial.print("  POT_L = ");
+    Serial.print(analogRead(PIN_JOINT_1_L_POT));
+    Serial.print("  POT_2 = ");
+    Serial.print(analogRead(PIN_JOINT_2_POT));
+    Serial.println();
     Serial.read();
     Serial.println("Raspberry Pi No signal");
     Serial.println("Press any key to skip");
