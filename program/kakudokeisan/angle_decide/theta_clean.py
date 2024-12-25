@@ -7,7 +7,6 @@ from color import Color
 # θの範囲を -πからπ にする。 (θはスカラー)
 def normalization1(θ_1, θ_2, θ_3):
     ψ = [θ_1, θ_2, θ_3]
-    #pdb.set_trace()
 
     for i in range(len(ψ)):
         θ_i = ψ[i]
