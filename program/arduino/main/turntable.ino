@@ -10,7 +10,7 @@ float pre_err_ang_turntable;
 int turntable_pwm;
 
 void encoder_get(float *a){
-  *a = cnt * PPR;
+  *a = cnt;
 }
 
 void encoder_reset(){
@@ -24,10 +24,22 @@ void enc_change() {
   static int b_prev = LOW;
   a_curr = digitalRead(PIN_TURNTABLEENC_A);
   b_curr = digitalRead(PIN_TURNTABLEENC_B);
-  if (a_prev ==  LOW && b_prev == HIGH && a_curr == HIGH && b_curr ==  LOW) cnt--;
-  if (a_prev == HIGH && b_prev ==  LOW && a_curr ==  LOW && b_curr == HIGH) cnt--;
-  if (a_prev ==  LOW && b_prev ==  LOW && a_curr == HIGH && b_curr == HIGH) cnt++;
-  if (a_prev == HIGH && b_prev == HIGH && a_curr ==  LOW && b_curr ==  LOW) cnt++;
+  if (a_prev ==  LOW && b_prev == HIGH && a_curr == HIGH && b_curr ==  LOW){
+    cnt--;
+    if(cnt <= -turntable_PPR/2) cnt = turntable_PPR/2;
+  } 
+  if (a_prev == HIGH && b_prev ==  LOW && a_curr ==  LOW && b_curr == HIGH){
+    cnt--;
+    if(cnt <= -turntable_PPR/2) cnt = turntable_PPR/2;
+  }
+  if (a_prev ==  LOW && b_prev ==  LOW && a_curr == HIGH && b_curr == HIGH){
+    cnt++;
+    if(cnt >= turntable_PPR/2) cnt = -turntable_PPR/2;
+  }  
+  if (a_prev == HIGH && b_prev == HIGH && a_curr ==  LOW && b_curr ==  LOW){
+    cnt++;
+    if(cnt >= turntable_PPR/2) cnt = -turntable_PPR/2;
+  } 
   a_prev = a_curr;
   b_prev = b_curr;
 }
@@ -37,7 +49,7 @@ void turntable_initialize(float a, float *b){
   PID_reset_turntable();
   turntable_stop();
 
-  *b = a;
+  *b = map(a, -180, 180, -turntable_PPR/2, turntable_PPR/2);
 }
 
 void turntable_limitter(int a, int *b){

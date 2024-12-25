@@ -1,11 +1,17 @@
 float target_ang_joint1;
-float angle_joint1;
+float angle_joint1_r;
+float angle_joint1_l;
+float angle_joint1_err;
 
 float err_ang_joint1;
 float integral_ang_joint1;
 float differential_ang_joint1;
 float pre_err_ang_joint1;
 int joint1_pwm;
+int joint1_pwm_r;
+int joint1_pwm_l;
+int joint1_dead_zone_up;
+int joint1_dead_zone_down;
 
 float target_ang_joint2;
 float angle_joint2;
@@ -15,27 +21,47 @@ float integral_ang_joint2;
 float differential_ang_joint2;
 float pre_err_ang_joint2;
 int joint2_pwm;
+int joint2_dead_zone_up;
+int joint2_dead_zone_down;
 
 void joint1_initialize(float a, float *b){
+  a += joint1_ang_center;
   joint1_ang_limitter(a, &a);
   PID_reset_joint1();
   joint1_stop();
-
   *b = a;
 }
 
-void joint1_pwm_limitter(int a, int *b){
+void joint1_pwm_limitter_up(int a, int *b){
   if(a > joint1_pwm_limitter_H){
     *b = joint1_pwm_limitter_H;
   }
   else if(a < joint1_pwm_limitter_L){
     *b = joint1_pwm_limitter_L;
   }
-  else if(0 < a && a < joint1_dead_zone){
-    *b = joint1_dead_zone;
+  else if(0 < a && a < joint1_dead_zone_up){
+    *b = joint1_dead_zone_up;
   }
-  else if(-joint1_dead_zone < a && a < 0){
-    *b = -joint1_dead_zone;
+  else if(-joint1_dead_zone_up < a && a < 0){
+    *b = -joint1_dead_zone_up;
+  }
+  else{
+    *b = a;
+  }
+}
+
+void joint1_pwm_limitter_down(int a, int *b){
+  if(a > joint1_pwm_limitter_H){
+    *b = joint1_pwm_limitter_H;
+  }
+  else if(a < joint1_pwm_limitter_L){
+    *b = joint1_pwm_limitter_L;
+  }
+  else if(0 < a && a < joint1_dead_zone_down){
+    *b = joint1_dead_zone_down;
+  }
+  else if(-joint1_dead_zone_down < a && a < 0){
+    *b = -joint1_dead_zone_down;
   }
   else{
     *b = a;
@@ -70,31 +96,106 @@ void PID_joint1(float a, float b, int *c){
 
 void joint1(float _angle) {
   joint1_initialize(_angle, &target_ang_joint1);
-  while(1){
-    angle_joint1 = analogRead(PIN_JOINT_1_POT);
-    angle_joint1 = map(angle_joint1, 0, 1023, POT_MIN, POT_MAX);
-    PID_joint1(target_ang_joint1, angle_joint1, &joint1_pwm);
-    joint1_pwm_limitter(joint1_pwm, &joint1_pwm);
+  angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
+  angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
 
-    if(abs(target_ang_joint1) < abs(angle_joint1)){
-      joint1_stop();
-      break;
+  if(target_ang_joint1 > angle_joint1_r){
+    while(1){
+      angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
+      angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
+      angle_joint1_l = analogRead(PIN_JOINT_1_L_POT);
+      angle_joint1_l = map(angle_joint1_l, 0, 1023, POT_MAX_1, POT_MIN_1);
+      PID_joint1(target_ang_joint1, angle_joint1_r, &joint1_pwm);
+
+      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      if(angle_joint1_r <= joint1_ang_center){
+        joint1_pwm_limitter_up(joint1_pwm, &joint1_pwm);
+      }
+      else if(angle_joint1_r > joint1_ang_center){
+        joint1_pwm_limitter_down(joint1_pwm, &joint1_pwm);
+      }
+    
+      if(abs(target_ang_joint1) <= abs(angle_joint1_r)){
+        joint1_stop();
+        break;
+      }
+
+      joint1_pwm_r = joint1_pwm;
+      joint1_pwm_l = joint1_pwm;
+
+      angle_joint1_err = angle_joint1_r - angle_joint1_l;
+
+      if (angle_joint1_err > 0){
+        joint1_pwm_r -= Kp_pot * angle_joint1_err;
+      }
+      if (angle_joint1_err < 0){
+        joint1_pwm_l += Kp_pot * angle_joint1_err;
+      }
+
+      Serial.println(angle_joint1_r);
+      Serial.println(target_ang_joint1);
+      Serial.println(joint1_pwm_r);
+      Serial.println(joint1_pwm_l);
+      Serial.println();
+
+      joint1_R_run(joint1_pwm_r);
+      joint1_L_run(joint1_pwm_l);
+
+      delay(10);
     }
-    if(target_ang_joint1 == 0){
-      joint1_stop();
-      break;
+  }
+  
+  else if(target_ang_joint1 < angle_joint1_r){
+    while(1){
+      angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
+      angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
+      angle_joint1_l = analogRead(PIN_JOINT_1_L_POT);
+      angle_joint1_l = map(angle_joint1_l, 0, 1023, POT_MAX_1, POT_MIN_1);
+      PID_joint1(target_ang_joint1, angle_joint1_r, &joint1_pwm);
+
+      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      if(angle_joint1_r <= joint1_ang_center){
+        joint1_pwm_limitter_down(joint1_pwm, &joint1_pwm);
+      }
+      else if(angle_joint1_r > joint1_ang_center){
+        joint1_pwm_limitter_up(joint1_pwm, &joint1_pwm);
+      }
+    
+      if(abs(target_ang_joint1) >= abs(angle_joint1_r)){
+        joint1_stop();
+        break;
+      }
+
+      joint1_pwm_r = joint1_pwm;
+      joint1_pwm_l = joint1_pwm;
+      angle_joint1_err = angle_joint1_r - angle_joint1_l;
+
+      if (angle_joint1_err > 0){
+        joint1_pwm_r -= Kp_pot * angle_joint1_err;
+      }
+      if (angle_joint1_err < 0){
+        joint1_pwm_l += Kp_pot * angle_joint1_err;
+      }
+
+      Serial.println(angle_joint1_r);
+      Serial.println(target_ang_joint1);
+      Serial.println(joint1_pwm_r);
+      Serial.println(joint1_pwm_l);
+      Serial.println();
+
+      joint1_R_run(joint1_pwm_r);
+      joint1_L_run(joint1_pwm_l);
+
+      delay(10);
     }
-
-    joint1_R_run(joint1_pwm);
-    joint1_L_run(-joint1_pwm);
-
-    delay(10);
-  } 
+  }
 }
 
 void joint1_stop(){
   analogWrite(PIN_JOINT_1_R_PWM, 0);
-  analogWrite(PIN_JOINT_1_R_PWM, 0);
+  analogWrite(PIN_JOINT_1_L_PWM, 0);
 }
 
 void joint1_R_run(int _pwm){
@@ -132,25 +233,43 @@ void joint1_L_run(int _pwm){
 }
 
 void joint2_initialize(float a, float *b){
+  a += joint2_ang_center;
   joint2_ang_limitter(a, &a);
   PID_reset_joint2();
   joint2_stop();
-
   *b = a;
 }
 
-void joint2_pwm_limitter(int a, int *b){
+void joint2_pwm_limitter_up(int a, int *b){
   if(a > joint2_pwm_limitter_H){
     *b = joint2_pwm_limitter_H;
   }
   else if(a < joint2_pwm_limitter_L){
     *b = joint2_pwm_limitter_L;
   }
-  else if(0 < a && a < joint2_dead_zone){
-    *b = joint2_dead_zone;
+  else if(0 < a && a < joint2_dead_zone_up){
+    *b = joint2_dead_zone_up;
   }
-  else if(-joint2_dead_zone < a && a < 0){
-    *b = -joint2_dead_zone;
+  else if(-joint2_dead_zone_up < a && a < 0){
+    *b = -joint2_dead_zone_up;
+  }
+  else{
+    *b = a;
+  }
+}
+
+void joint2_pwm_limitter_down(int a, int *b){
+  if(a > joint2_pwm_limitter_H){
+    *b = joint2_pwm_limitter_H;
+  }
+  else if(a < joint2_pwm_limitter_L){
+    *b = joint2_pwm_limitter_L;
+  }
+  else if(0 < a && a < joint2_dead_zone_down){
+    *b = joint2_dead_zone_down;
+  }
+  else if(-joint2_dead_zone_down < a && a < 0){
+    *b = -joint2_dead_zone_down;
   }
   else{
     *b = a;
@@ -159,10 +278,10 @@ void joint2_pwm_limitter(int a, int *b){
 
 void joint2_ang_limitter(float _ang, float *_return){
   if(joint2_ang_limitter_H <= _ang){
-    *_return = joint1_ang_limitter_H;
+    *_return = joint2_ang_limitter_H;
   } 
   else if(_ang <= joint2_ang_limitter_L){
-    *_return = joint1_ang_limitter_L;
+    *_return = joint2_ang_limitter_L;
   }
 }
 
@@ -185,24 +304,67 @@ void PID_joint2(float a, float b, int *c){
 
 void joint2(float _angle) {
   joint2_initialize(_angle, &target_ang_joint2);
-  while(1){
-    angle_joint2 = analogRead(PIN_JOINT_2_POT);
-    angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN, POT_MAX);
-    PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
-    joint2_pwm_limitter(joint2_pwm, &joint2_pwm);
+  angle_joint2 = analogRead(PIN_JOINT_2_POT);
+  angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
 
-    if(abs(target_ang_joint2) < abs(angle_joint2)){
-      joint2_stop();
-      break;
-    }
-    if(target_ang_joint2 == 0){
-      joint2_stop();
-      break;
-    }
+  if(target_ang_joint2 > angle_joint2){
+    while(1){
+      angle_joint2 = analogRead(PIN_JOINT_2_POT);
+      angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
+      PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
 
-    joint2_run(joint2_pwm);
-    delay(10);
-  } 
+      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+      if(angle_joint2 <= joint2_ang_center){
+        joint2_pwm_limitter_up(joint2_pwm, &joint2_pwm);
+      }
+      else if(angle_joint2 > joint2_ang_center){
+        joint2_pwm_limitter_down(joint2_pwm, &joint2_pwm);
+      }
+
+      if(abs(target_ang_joint2) <= abs(angle_joint2)){
+        joint2_stop();
+        break;
+      }
+
+      /*Serial.println(angle_joint2);
+      Serial.println(target_ang_joint2);*/
+      Serial.println(joint2_pwm);
+
+      joint2_run(joint2_pwm);
+      delay(10);
+    } 
+  }
+  else if(target_ang_joint2 < angle_joint2){
+    while(1){
+      angle_joint2 = analogRead(PIN_JOINT_2_POT);
+      angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
+    
+      PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
+      
+      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+
+      if(angle_joint2 <= joint2_ang_center){
+        joint2_pwm_limitter_down(joint2_pwm, &joint2_pwm);
+      }
+      else if(angle_joint2 > joint2_ang_center){
+        joint2_pwm_limitter_up(joint2_pwm, &joint2_pwm);
+      }
+      
+      if(abs(target_ang_joint2) >= abs(angle_joint2)){
+        joint2_stop();
+        break;
+      }
+      
+      /*Serial.println(angle_joint2);
+      Serial.println(target_ang_joint2);*/
+      Serial.println(joint2_pwm);
+
+      joint2_run(joint2_pwm);
+      delay(10);
+    } 
+  }
 }
 
 void joint2_stop(){
@@ -227,6 +389,7 @@ void joint2_run(int _pwm){
 }
 
 void joint3(byte _id, int _ang, int _vel) {
+  _ang += joint3_ang_center;
   joint3_ang_limitter(_ang, &_ang);
   _ang = map(_ang, 0, 300, 0, 1023);
   _vel = map(_vel, 0, SCS_MAX_VEL, 0, 200);
@@ -269,6 +432,7 @@ void joint3_ang_limitter(int _ang, int *_return){
 }
 
 void joint4(byte _id, int _ang, int _vel) {
+  _ang += joint4_ang_center;
   joint4_ang_limitter(_ang, &_ang);
   _ang = map(_ang, 0, 300, 0, 1023);
   _vel = map(_vel, 0, SCS_MAX_VEL, 0, 200);

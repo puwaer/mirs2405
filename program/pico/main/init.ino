@@ -1,7 +1,3 @@
-void confirmation_device(){
-  
-}
-
 void encoder_open(){
   pinMode(PIN_ENC_A_L, INPUT);
   pinMode(PIN_ENC_B_L, INPUT);
@@ -27,6 +23,13 @@ void raspi_open(){
   Serial.begin(115200);
   
   while(!Serial.available()){
+    Serial.print("POT_R = ");
+    Serial.print(analogRead(PIN_JOINT_1_R_POT));
+    Serial.print("  POT_L = ");
+    Serial.print(analogRead(PIN_JOINT_1_L_POT));
+    Serial.print("  POT_2 = ");
+    Serial.print(analogRead(PIN_JOINT_2_POT));
+    Serial.println();
     Serial.read();
     Serial.println("Raspberry Pi No signal");
     Serial.println("Press any key to skip");
@@ -45,7 +48,8 @@ void arm_open(){
   pinMode(PIN_JOINT_1_L_PWM, OUTPUT);
   pinMode(PIN_JOINT_1_R_DIR, OUTPUT);
   pinMode(PIN_JOINT_1_L_DIR, OUTPUT);
-  pinMode(PIN_JOINT_1_POT, INPUT);
+  pinMode(PIN_JOINT_1_R_POT, INPUT);
+  pinMode(PIN_JOINT_1_L_POT, INPUT);
 
   digitalWrite(PIN_JOINT_1_R_DIR, HIGH);
   digitalWrite(PIN_JOINT_1_L_DIR, HIGH);
@@ -57,6 +61,14 @@ void arm_open(){
   digitalWrite(PIN_JOINT_2_DIR, HIGH);
 
   pinMode(PIN_INFRARED_LED, OUTPUT);
+  digitalWrite(PIN_INFRARED_LED, HIGH);
   pinMode(PIN_PHOTOREFLECTOR, INPUT);
   
+}
+
+void rc_init(){
+  pinMode(PIN_MR8_A,INPUT);
+  pinMode(PIN_MR8_C,INPUT);
+  pinMode(PIN_MR8_E,INPUT);
+  pinMode(PIN_MR8_F,INPUT);
 }

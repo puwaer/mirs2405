@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>MIRS2405-ELEC-0002 MIRS2405 エレクトロニクス基板製造完了報告書</title>
+<title>MIRS2405-ELEC-0002 MIRS2405 エレクトロニクス製造完了報告書</title>
 <link rel=stylesheet href="../../style.css" type="text/css">
 <link rel="shortcut icon" href="../../gullc_rogo.jpg" />
 <script>
@@ -18,7 +18,7 @@
 <table class="table010">
 <tr>
 <th>名称</th>
-<td class="title">MIRS2405 エレクトロニクス基板製造完了報告書</td>
+<td class="title">MIRS2405 エレクトロニクス製造完了報告書</td>
 </tr>
 <tr>
 <th>番号</th>
@@ -36,12 +36,19 @@
 <th>改訂記事</th>
 </tr>
 <tr>
-<td>A01</td>
-<td>2024.11.8</td>
-<td>宇佐見祥</td>
-<td></td>
-<td>初版</td>
+    <td>A01</td>
+    <td>2024.11.18</td>
+    <td>宇佐見祥</td>
+    <td></td>
+    <td>初版</td>
 </tr>
+<tr>
+    <td>A02</td>
+    <td>2024.12.10</td>
+    <td>宇佐見祥</td>
+    <td></td>
+    <td>主回路モジュール項の追加とゲート基板画像の差し替え</td>
+    </tr>
 </table>
 
 <br>
@@ -53,11 +60,12 @@
         <li><a href = "#elec3">3. サーボモータ電源基板</a><br></li>
         <li><a href = "#elec4">4. PWM・ゲートドライブ基板</a><br></li>
         <li><a href = "#elec5">5.電圧測定基板</a><br></li>
+        <li><a href = "#elec6">6.主回路モジュール</a><br></li>
     </ul>
 
 <br>
 <h2><a name = elec1>1.はじめに</a></h2>
-本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの基板製造完了報告書である。<br>
+本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの製造完了報告書である。<br>
 製造した基板の動作検証については、動作試験書に記載する。<br>
 <address>
     <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/elec/num0003a" target="_self">エレキ単体試験書へ</a>
@@ -137,9 +145,9 @@ PCBパターンが完成したらガーバーファイル(裏面の銅箔部分�
 製作した基板をfig.1, fig.2に示す。<br>
 <br>
 <center>
-    <img src="../picture/サーボモータ電源回路_表面.jpg" width="786"><br>
+    <img src="../picture/サーボモータ電源回路_表面.jpg" width="500"><br>
     fig.1 サーボモータ電源回路　表面<br><br>
-    <img src="../picture/サーボモータ電源回路_裏面.jpg" width="786"><br>
+    <img src="../picture/サーボモータ電源回路_裏面.jpg" width="500"><br>
     fig.2 サーボモータ電源回路　裏面<br><br>
 </center>
 <br>
@@ -151,26 +159,44 @@ PCBパターンが完成したらガーバーファイル(裏面の銅箔部分�
 製作した基板をfig.3, fig.4に示す。<br>
 <br>
 <center>
-    <img src="../picture/PWM基板_表面.jpg" width="786"><br>
+    <img src="../picture/PWM基板_表面.jpg" width="500"><br>
     fig.3 PWM・ゲートドライブ基板　表面<br><br>
-    <img src="../picture/PWM基板_裏面.jpg" width="786"><br>
+    <img src="../picture/PWM基板_裏面.jpg" width="500"><br>
     fig.4 PWM・ゲートドライブ基板　裏面<br><br>
 </center>
 基板上面右側の5穴,3穴は、ほかのデバイスとSPIまたはI2Cにて通信するための準備として加工した部分である。<br>
 現在はPWM基板と他のマイコン間での通信はしない設計のため、XHコネクタは未実装としている。<br>
 サーボ電源基板と同じくヤスリで削った。<br>
 四隅に銅箔部が残っているが回路に影響はしないためこのままとしている。<br>
+基板単体での動作に問題はなかったが、モーターなどを接続して動作させると突入電流による電圧降下によって<br>
+電源制御マイコンにリセットがかかることが分かった。そのため入力側のXT60コネクタにコンデンサ(470μF,50V)を接続することで問題を解消している。<br>
+
 
 <h2><a name = elec5>5.電圧測定基板</a></h2>
 製作した基板をfig.5, fig.6に示す。<br>
 <br>
 <center>
     <img src="../picture/電圧測定基板_表面.jpg" width="300"><br>
-    fig.3 電圧測定基板　表面<br><br>
+    fig.5 電圧測定基板　表面<br><br>
     <img src="../picture/電圧測定基板_裏面.jpg" width="300"><br>
-    fig.4 電圧測定基板　裏面<br><br>
+    fig.6 電圧測定基板　裏面<br><br>
 </center>
 
+
+<h2><a name = elec6>6.主回路モジュール</a></h2>
+製作した基板をfig.7,fig8に示す。<br>
+<br>
+<center>
+    <img src="../picture/主回路モジュール前面.jpg" width="500"><br>
+    fig.7 主回路モジュール前面<br><br>
+    <img src="../picture/主回路モジュール後面.jpg" width="500"><br>
+    fig.8 主回路モジュール後面<br><br>
+</center>
+前面にあるアルミ板にMOSFETとSBDを固定している。<br>
+電圧測定基板は後面パネルに固定し、ケーブルを介してゲート基板と接続する。<br>
+
+
+<br><br><br>
 
 
 <br><br><br>

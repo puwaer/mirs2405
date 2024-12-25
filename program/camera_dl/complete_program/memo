@@ -1,0 +1,9 @@
+ssh jetson@172.25.18.20
+cd Documents/mirs2405/program/camera_dl/complete_program
+python improve_server.py
+
+
+ssh pi@172.25.17.238
+cd Documents/mirs2405/program/camera_dl/complete_program
+python3 client_value.py
+

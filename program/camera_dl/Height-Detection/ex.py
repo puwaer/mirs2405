@@ -3,10 +3,10 @@ import cv2
 import subprocess
 import os
 import pyttsx3
-cmd = ' Body_Detection.py'
+cmd = 'Body_Detection.py'
 # distance from camera to object(face) measured
 # centimeter
-Known_distance = 200.96
+Known_distance = 60.96
 
 # width of face in the real world or Object Plane
 # centimeter
@@ -91,11 +91,11 @@ Focal_length_found = Focal_Length_Finder(
 print(Focal_length_found)
 
 # show the reference image
-#cv2.imshow("ref_image", ref_image)
+cv2.imshow("ref_image", ref_image)
 
 # initialize the camera object so that we
 # can get frame from it
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 # looping through frame, incoming from
 # camera/video

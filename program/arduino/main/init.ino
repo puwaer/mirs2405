@@ -26,7 +26,6 @@ void arm_init(){
 }
 
 void raspi_open(){
-  Serial.begin(115200);
   
   while(!Serial.available()){
     Serial.read();
