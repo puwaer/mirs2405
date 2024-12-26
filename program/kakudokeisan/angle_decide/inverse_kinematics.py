@@ -24,12 +24,12 @@ def inverse_kinematics(L, x_target, y_target, z_target, w):
     data = theta_calcu.calucuetion(L, x_target, z_target, w)        # θを計算する (アーム)
 
     φ_0 = theta_calcu.horaizon(x_target, y_target)                  # θを計算する (ターンテーブル)
-    φ_1, φ_2 = theta_clean.theta_convers(data)                      # πから見た角度にする
+    φ_1, φ_2, φ_3 = theta_clean.theta_convers(data)                 # π/2から見た角度にする (前側が正)
 
-    φ = [φ_0, φ_1, φ_2]
+    φ = [φ_0, φ_1, φ_2, φ_3]
 
     #print(data)
-    #print(f"φ_0 = {np.rad2deg(φ_0)}, φ_1 = {np.rad2deg(φ_1)}, φ_2 = {np.rad2deg(φ_2)} ")
+    #print(f"φ_0 = {(np.rad2deg(φ_0)):.2f}, φ_1 = {(np.rad2deg(φ_1)):.2f}, φ_2 = {(np.rad2deg(φ_2)):.2f}, φ_3 = {(np.rad2deg(φ_3)):.2f}")
 
     return(φ)
 
