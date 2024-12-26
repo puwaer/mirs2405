@@ -1,11 +1,16 @@
-
+float past_ang1;
+float past_ang2;
 
 void arm(float _ang1, float _ang2, float _ang3, float _ang4){
-  joint1(_ang1);
-  joint2(_ang2);
-  joint3(joint3ID, _ang3, joint3_vel); 
-  joint4(joint4ID, _ang4, joint4_vel);
-  
+  if (!((_ang1 <= 0) && (180+_ang1-_ang2 <= 10))){
+    if (past_ang2 >= 160) joint2(160);
+    joint1(_ang1);
+    joint2(_ang2);
+    joint3(joint3ID, _ang3, joint3_vel); 
+    joint4(joint4ID, _ang4, joint4_vel);
+    past_ang1 = _ang1;
+    past_ang2 = _ang2;
+  }
 }
 
 void photoreflector(){
@@ -17,4 +22,8 @@ void all_stop(){
   motor_stop();
   joint1_stop();
   joint2_stop();
+}
+
+float mapf(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

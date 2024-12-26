@@ -1,3 +1,5 @@
+#define PI 3.141592653589793
+
 #define PIN_ENC_A_L   0
 #define PIN_ENC_A_R   1
 #define PIN_ENC_B_L   2  
@@ -7,11 +9,6 @@
 #define PIN_PWM_R     6 
 #define PIN_PWM_L     7
 
-#define PIN_MR8_A   10
-#define PIN_MR8_C   11
-#define PIN_MR8_E   13
-#define PIN_MR8_F   12
-
 #define PIN_JOINT_1_L_PWM   14  //第一関節
 #define PIN_JOINT_1_R_PWM   15
 #define PIN_JOINT_1_L_DIR   18
@@ -19,7 +16,7 @@
 #define PIN_JOINT_1_L_POT   26 //26
 #define PIN_JOINT_1_R_POT   27
 
-#define PIN_JOINT_2_PWM   9  //第二関節9
+#define PIN_JOINT_2_PWM   10  //第二関節9
 #define PIN_JOINT_2_DIR   20  //20
 #define PIN_JOINT_2_POT   28  //28
 
@@ -30,17 +27,31 @@
 #define PIN_INFRARED_LED    21  //赤外線近接センサー
 #define PIN_PHOTOREFLECTOR  22    
 
-#define POT_MIN_1 0
-#define POT_MAX_1 320 //[°]
+/*#define POT_MIN_1 0
+#define POT_MAX_1 310 //[°]*/
+#define POT_READ_MIN_1_R  255
+#define POT_READ_MAX_1_R  785
+#define POT_ANGLE_MIN_1_R 0 //-65
+#define POT_ANGLE_MAX_1_R 130 //65
 
-#define POT_MIN_2 0
-#define POT_MAX_2 255 //[°]
+#define POT_READ_MIN_1_L  200
+#define POT_READ_MAX_1_L  778
+#define POT_ANGLE_MIN_1_L 0 //-65
+#define POT_ANGLE_MAX_1_L 130 //65
+
+/*#define POT_MIN_2 0
+#define POT_MAX_2 255 //[°]*/
+
+#define POT_READ_MIN_2  130
+#define POT_READ_MAX_2  860
+#define POT_ANGLE_MIN_2 0   //-10
+#define POT_ANGLE_MAX_2 190
 
 #define PWM_MAX 1023
 
 float crawler_length  = 250.0; //クローラーの長さ[mm]
 float PPR             = 4096.0;
-float run_PP          = crawler_length / PPR; //1パルス当たりの走行距離[mm]
+float run_PP          = crawler_length / PPR; //1パルス当たりの走行距離[mm]75
 
 float Kp_velocity_l   = 0.027; //50[cm/s]と旋回
 //float Kp_velocity_l   = 0.025; //25[cm/s]
@@ -74,29 +85,28 @@ int   dead_zone       = 200;     //pwmの最小値(絶対値)
 
 float Kp_joint1 = 7.2;
 float Ki_joint1 = 0;
-float Kd_joint1 = 0.2;
+float Kd_joint1 = 0.3;
 float Kp_pot    = 0.2;
-float Kp_joint1_dead_zone = 1.45;
+float Kp_joint1_dead_zone = 100.0;
 
 int   joint1_pwm_limitter_H  = 350;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -350;    //pwmの最小値
-int   joint1_dead_zone       = 170;     //pwmの最小値(絶対値)  
-int   joint1_ang_center      = 150;
-int   joint1_ang_limitter_H  = joint1_ang_center + 60;   //角度の最大値[度]
-int   joint1_ang_limitter_L  = joint1_ang_center - 60;     //角度の最小値[度]
+int   joint1_dead_zone       = 180;     //pwmの最小値(絶対値)  
+int   joint1_ang_center      = POT_ANGLE_MAX_1_R / 2;
+int   joint1_ang_limitter_H  = joint1_ang_center + 65;   //角度の最大値[度]
+int   joint1_ang_limitter_L  = joint1_ang_center - 65;     //角度の最小値[度]
 
-
-float Kp_joint2 = 7;
+float Kp_joint2 = 5.5;
 float Ki_joint2 = 0;
-float Kd_joint2 = 0.1;
-float Kp_joint2_dead_zone = 1.2;
+float Kd_joint2 = 0.10;
+float Kp_joint2_dead_zone = 50.0;
 
 int   joint2_pwm_limitter_H  = 320;     //pwmの最大値
 int   joint2_pwm_limitter_L  = -320;    //pwmの最小値
-int   joint2_dead_zone       = 130;     //pwmの最小値(絶対値)
-int   joint2_ang_center      = 170;
-int   joint2_ang_limitter_H  = joint2_ang_center + 90;   //角度の最大値[度]
-int   joint2_ang_limitter_L  = joint2_ang_center - 90;     //角度の最小値[度]
+int   joint2_dead_zone       = 150;     //pwmの最小値(絶対値)
+int   joint2_ang_center      = 10;
+int   joint2_ang_limitter_H  = joint2_ang_center + 180;   //角度の最大値[度]
+int   joint2_ang_limitter_L  = joint2_ang_center -10;     //角度の最小値[度]
 
 const byte joint3ID = 1; //第三関節のシリアルサーボID
 const byte joint4ID = 1;//第四関節のシリアルサーボID

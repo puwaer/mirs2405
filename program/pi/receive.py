@@ -1,22 +1,29 @@
 import serial
 import time
-import send
-
-#jetson
-#def receive_position():
-
+import config
 import socket
 import numpy as np
 import struct
 
+#jetson
+#lidarデータの取得
+def receive_lidar(){
+    ser_jetson = serial.Serial(config.JETSON_PORT, config.BAUDRATE)
+    lidar_data = 
+    return lidar_data
+}
+
+
+'''
+#カメラデータの受取
 def receive_camera(server_ip: str, server_port: int):
-    """
+    
     クライアントから配列を1度だけ受信するサーバー関数。
 
     :param server_ip: サーバーのIPアドレス
     :param server_port: サーバーのポート番号
     :return: 受信したNumPy配列
-    """
+    
     try:
         # ソケットを作成し、サーバーに接続
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -69,79 +76,117 @@ if camera_data is not None:
 else:
     print("No array received.")
 
-
-#pico
-
-def serial_rc(receive_port='/dev/ttyACM0', forward_port='/dev/ttyACM0', baudrate=115200):
-    """
-    シリアルポートでデータを受信し、他のポートにそのまま転送する関数。
-    """
-    # シリアル通信の初期化
-    ser_receive = serial.Serial(receive_port, baudrate)
-    ser_forward = serial.Serial(forward_port, baudrate)
+'''
+#esp
+#ラジコン通信
+def serial_rc():   
+     # シリアル通信の初期化
+    ser_esp = serial.Serial(config.ESP_PORT, config.BAUDRATE)
+    ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
+    #ser_arduino = serial.Serial(config.ARDUINO_PORT, config.BAUDRATE)
     time.sleep(2)  # シリアル通信の初期化待ち
+    data = [4, 0, 0, 0, 0, 0, 0]    #識別番号（ラジコンモードは4）
+    size=14
 
-    try:
-        while True:
-            # データが一定以上たまっている場合に受信
-            if ser_receive.in_waiting >= 10:  # 10バイト以上のデータが待機中か確認
-                data = ser_receive.read(10)  # 10バイトを一度に受信
-                input_values = []
+    byte_array = bytearray()
+    for value in data:
+        # 符号付き16ビット整数の範囲をチェック
+        if -0x8000 <= value <= 0x7FFF:
+            # 16ビット内に収める (2の補数形式)
+            value = value & 0xFFFF
+            
+            # 上位バイトと下位バイトに分割
+            high_byte = (value >> 8) & 0xFF
+            low_byte = value & 0xFF
+            
+            # バイト列に追加
+            byte_array.append(low_byte)
+            byte_array.append(high_byte)
 
-                # 2バイトごとに組み合わせてintに変換
-                for i in range(0, len(data), 2):  # len(data)を使って、データ長に依存する
-                    pulse_value = data[i] | (data[i + 1] << 8)
-                    input_values.append(pulse_value)
-                
-                # 転送データをそのまま送信
-                ser_forward.write(data)
-
-                print("Received input values:", input_values)
-                
-                # 特定の条件が満たされたらループを終了
-                if len(input_values) > 4 and input_values[4] == 1:  # input_valuesの長さをチェック
-                    print("Terminating based on received signal.")
-                    break
-
-    except serial.SerialException as e:
-        # シリアル通信エラーの処理
-        print(f"Serial communication error: {e}")
-    except Exception as e:
-        # その他のエラーの処理
-        print(f"An unexpected error occurred: {e}")
-    finally:
-        # シリアルポートを閉じる
-        ser_receive.close()
-        ser_forward.close()
-
-def receive_pr():
-    size = 5  # 配列のサイズ
-    bytes_per_value = 2  # 各値は2バイト
-    total_bytes = size * bytes_per_value
-
-    ser = serial.Serial('/dev/ttyACM0', 115200)
-    time.sleep(2)  # シリアル通信の初期化待ち
-
-    ft_state = []  # 受信したデータを格納するリスト
+        ser_esp.write(byte_array)   #識別番号を送信
+        time.sleep(0.1)  # 少し待機
 
     while True:
-        # データが十分に待機しているか確認
-        if ser.in_waiting >= total_bytes:
-            data = ser.read(total_bytes)  # 配列データを取得
+        # ESP32からデータ受信
+        if ser_esp.in_waiting >= size:  # 14バイト以上のデータが待機中か確認
+            data = ser_esp.read(size)  # 14バイトを一度に受信
+            input_values = []
 
-            # データを2バイトずつ整数に変換
-            for i in range(0, total_bytes, 2):
+
+            # 2バイトごとに組み合わせてintに変換
+            for i in range(0, len(data), 2):
                 pulse_value = data[i] | (data[i + 1] << 8)
                 input_values.append(pulse_value)
 
-            print("Received input values:", ft_state)
-            break  # 受信後はループを抜ける
+            # データをPicoに転送
+            ser_pico.write(data)
+
+            # データをArduinoに転送
+            #ser_arduino.write(data)
+            
+            print("Received input values:", input_values)
+
+            # chEが押されたらラジコンモード終了
+            if input_values[0] == 0:
+                print("Terminating based on received signal.")
+                break
+
+            time.sleep(0.2)
+
+   
+
+    # シリアルポートを閉じる
+    ser_esp.close()
+    ser_pico.close()
+    #ser_arduino.close()
+
+
+#pico
+#フォトリフレクタ値を受信
+def receive_pr():
+     # シリアル通信の初期化
+    ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
+    time.sleep(2)  # シリアル通信の初期化待ち
+    data = [5, 0, 0, 0, 0, 0, 0]    #識別番号
+    size=14
+
+    byte_array = bytearray()
+    for value in data:
+        # 符号付き16ビット整数の範囲をチェック
+        if -0x8000 <= value <= 0x7FFF:
+            # 16ビット内に収める (2の補数形式)
+            value = value & 0xFFFF
+            
+            # 上位バイトと下位バイトに分割
+            high_byte = (value >> 8) & 0xFF
+            low_byte = value & 0xFF
+            
+            # バイト列に追加
+            byte_array.append(low_byte)
+            byte_array.append(high_byte)
+
+        ser_pico.write(byte_array)
+        time.sleep(0.1)  # 少し待機    
+
+    while True:
+        if ser_pico.in_waiting >= size:  # データが受信されているか確認
+            data = ser_pico.read(size)  # 配列データを取得
+            pr_state = []
+            # データを2バイトずつ整数に変換
+            for i in range(0, size, 2):
+                pulse_value = data[i] | (data[i + 1] << 8)
+                pr_state.append(pulse_value)
+
+            print("Received input values:", pr_state)
+            break  # データを受信したらループを抜ける
 
         # データがまだ受信されていない場合は、ループを続ける
         print("Waiting for data...")
 
-    ser.close()  # シリアルポートを閉じる
+    ser_pico.close()  # シリアルポートを閉じる
     return pr_state  # 受信したデータを返す
+
+
 
 
 #arduino

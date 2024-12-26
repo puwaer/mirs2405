@@ -9,7 +9,6 @@ void setup() {
   motor_open();
   arm_open();
   analogWriteRange(PWM_MAX);
-  rc_init();
   Serial.begin(115200);
   Serial.setTimeout(10);
   delay(100);
@@ -59,8 +58,8 @@ void loop(){
 /*  run(x, y)  (x,y)へ移動
 
     arm(ang1, ang2, ang3, ang4) アームを指定角度へ　すべて絶対角度
-      ang1: -150~150[°]
-      ang2: -90~90[°]
+      ang1: -75~75[°]
+      ang2: -10~190[°]
       ang3,4: -150~150[°]
 
     radicon(bool _check) 

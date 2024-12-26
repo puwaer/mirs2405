@@ -26,7 +26,6 @@ void arm_init(){
 }
 
 void raspi_open(){
-  
   while(!Serial.available()){
     Serial.read();
     Serial.println("Raspberry Pi No signal");

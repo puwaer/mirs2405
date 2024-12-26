@@ -1,6 +1,8 @@
-#シリアル通信
+# シリアルポート設定
+ESP_PORT = '/dev/ttyACM0'
+PICO_PORT = '/dev/ttyACM0'
+ARDUINO_PORT = '/dev/ttyACM0'
+#JETSON_PORT = '/dev/'
 
-port_arduino = '/dev/ttyusb1'
-port_pico = '/dev/ttyusb2'
-BOUDRATE = 9600
-
+# ボーレート
+BAUDRATE = 115200

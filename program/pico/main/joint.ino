@@ -97,18 +97,19 @@ void PID_joint1(float a, float b, int *c){
 void joint1(float _angle) {
   joint1_initialize(_angle, &target_ang_joint1);
   angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
-  angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
+  angle_joint1_r = mapf(angle_joint1_r, POT_READ_MIN_1_R, POT_READ_MAX_1_R, POT_ANGLE_MIN_1_R, POT_ANGLE_MAX_1_R);
 
   if(target_ang_joint1 > angle_joint1_r){
     while(1){
       angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
-      angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
+      angle_joint1_r = mapf(angle_joint1_r, POT_READ_MIN_1_R, POT_READ_MAX_1_R, POT_ANGLE_MIN_1_R, POT_ANGLE_MAX_1_R);
       angle_joint1_l = analogRead(PIN_JOINT_1_L_POT);
-      angle_joint1_l = map(angle_joint1_l, 0, 1023, POT_MAX_1, POT_MIN_1);
+      angle_joint1_l = mapf(angle_joint1_l, POT_READ_MIN_1_L, POT_READ_MAX_1_L, POT_ANGLE_MIN_1_L, POT_ANGLE_MAX_1_L);
       PID_joint1(target_ang_joint1, angle_joint1_r, &joint1_pwm);
 
-      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
-      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * sin(abs(angle_joint1_r - joint1_ang_center)*PI/180);
+      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * sin(abs(angle_joint1_r - joint1_ang_center)*PI/180);
+
       if(angle_joint1_r <= joint1_ang_center){
         joint1_pwm_limitter_up(joint1_pwm, &joint1_pwm);
       }
@@ -132,7 +133,6 @@ void joint1(float _angle) {
       if (angle_joint1_err < 0){
         joint1_pwm_l += Kp_pot * angle_joint1_err;
       }
-
       Serial.println(angle_joint1_r);
       Serial.println(target_ang_joint1);
       Serial.println(joint1_pwm_r);
@@ -149,13 +149,13 @@ void joint1(float _angle) {
   else if(target_ang_joint1 < angle_joint1_r){
     while(1){
       angle_joint1_r = analogRead(PIN_JOINT_1_R_POT);
-      angle_joint1_r = map(angle_joint1_r, 0, 1023, POT_MIN_1, POT_MAX_1);
+      angle_joint1_r = mapf(angle_joint1_r, POT_READ_MIN_1_R, POT_READ_MAX_1_R, POT_ANGLE_MIN_1_R, POT_ANGLE_MAX_1_R);
       angle_joint1_l = analogRead(PIN_JOINT_1_L_POT);
-      angle_joint1_l = map(angle_joint1_l, 0, 1023, POT_MAX_1, POT_MIN_1);
+      angle_joint1_l = mapf(angle_joint1_l, POT_READ_MIN_1_L, POT_READ_MAX_1_L, POT_ANGLE_MIN_1_L, POT_ANGLE_MAX_1_L);
       PID_joint1(target_ang_joint1, angle_joint1_r, &joint1_pwm);
 
-      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
-      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * abs(angle_joint1_r - joint1_ang_center);
+      joint1_dead_zone_up = joint1_dead_zone + Kp_joint1_dead_zone * sin(abs(angle_joint1_r - joint1_ang_center)*PI/180);
+      joint1_dead_zone_down = joint1_dead_zone - Kp_joint1_dead_zone * sin(abs(angle_joint1_r - joint1_ang_center)*PI/180);
       if(angle_joint1_r <= joint1_ang_center){
         joint1_pwm_limitter_down(joint1_pwm, &joint1_pwm);
       }
@@ -305,16 +305,16 @@ void PID_joint2(float a, float b, int *c){
 void joint2(float _angle) {
   joint2_initialize(_angle, &target_ang_joint2);
   angle_joint2 = analogRead(PIN_JOINT_2_POT);
-  angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
+  angle_joint2 = mapf(angle_joint2, POT_READ_MIN_2, POT_READ_MAX_2, POT_ANGLE_MIN_2, POT_ANGLE_MAX_2);
 
   if(target_ang_joint2 > angle_joint2){
     while(1){
       angle_joint2 = analogRead(PIN_JOINT_2_POT);
-      angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
+      angle_joint2 = mapf(angle_joint2, POT_READ_MIN_2, POT_READ_MAX_2, POT_ANGLE_MIN_2, POT_ANGLE_MAX_2);
       PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
 
-      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
-      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * sin(abs(angle_joint2 - joint2_ang_center)*PI/180);
+      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * sin(abs(angle_joint2 - joint2_ang_center)*PI/180);
       if(angle_joint2 <= joint2_ang_center){
         joint2_pwm_limitter_up(joint2_pwm, &joint2_pwm);
       }
@@ -338,12 +338,12 @@ void joint2(float _angle) {
   else if(target_ang_joint2 < angle_joint2){
     while(1){
       angle_joint2 = analogRead(PIN_JOINT_2_POT);
-      angle_joint2 = map(angle_joint2, 0, 1023, POT_MIN_2, POT_MAX_2);
+      angle_joint2 = mapf(angle_joint2, POT_READ_MIN_2, POT_READ_MAX_2, POT_ANGLE_MIN_2, POT_ANGLE_MAX_2);
     
       PID_joint2(target_ang_joint2, angle_joint2, &joint2_pwm);
       
-      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
-      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * abs(angle_joint2 - joint2_ang_center);
+      joint2_dead_zone_up = joint2_dead_zone + Kp_joint2_dead_zone * sin(abs(angle_joint2 - joint2_ang_center)*PI/180);
+      joint2_dead_zone_down = joint2_dead_zone - Kp_joint2_dead_zone * sin(abs(angle_joint2 - joint2_ang_center)*PI/180);
 
       if(angle_joint2 <= joint2_ang_center){
         joint2_pwm_limitter_down(joint2_pwm, &joint2_pwm);
@@ -359,7 +359,13 @@ void joint2(float _angle) {
       
       /*Serial.println(angle_joint2);
       Serial.println(target_ang_joint2);*/
-      Serial.println(joint2_pwm);
+      Serial.print("joint2_pwm = ");
+      Serial.print(joint2_pwm);
+      Serial.print("  joint2_dead_zone_up = ");
+      Serial.print(joint2_dead_zone_up);
+      Serial.print("  angle_joint2-joint2_ang_center = ");
+      Serial.print(angle_joint2 - joint2_ang_center);
+      Serial.println();
 
       joint2_run(joint2_pwm);
       delay(10);
