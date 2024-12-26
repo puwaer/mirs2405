@@ -1,4 +1,5 @@
 import numpy as np
+import theta_priority
 
 #import pdb
 #from color import Color
@@ -6,7 +7,7 @@ import numpy as np
 
 def choicetheta(L, θ_1_kouho, θ_2_kouho, x_target, z_target, w):
     r = []
-    indicies = []
+    indices = []
     c = 0
 
     for i in range (len(θ_1_kouho)):
@@ -34,14 +35,11 @@ def choicetheta(L, θ_1_kouho, θ_2_kouho, x_target, z_target, w):
             r_kouho = np.sqrt (x_r**2 + z_r**2)
 
             r.append(r_kouho)
-            indicies.append([i, j])
+            indices.append([i, j])
 
     if c == len(θ_1_kouho) * len(θ_2_kouho):
         return(None, None)
 
-    k = np.argmin(r)
-    i, j = indicies[k]
-    θ_1_choiced = θ_1_kouho[i]
-    θ_2_choiced = θ_2_kouho[j]
+    θ_1_choiced, θ_2_choiced = theta_priority.priority(θ_1_kouho, θ_2_kouho, r, indices, w)
 
     return(θ_1_choiced, θ_2_choiced)

@@ -56,13 +56,10 @@ def calucuetion(L, x_target, z_target, w):
     φ_2 = np.arctan2(x_2, z_2 )
     cosθ_1u = (u + L[0]**2 - L[1]**2) / (2 * L[0] * l)
 
-    print(cosθ_1u)
-
     # 丸め誤差対策
     if -1.000000000000005 <= cosθ_1u < 1.000000000000005:
         cosθ_1u = np.clip(cosθ_1u, -1, 1)
 
-    print(cosθ_1u)
 
     if not -1 <= cosθ_1u <= 1:
         print(f"目標 ({x_target:.3f}, {z_target:.3f}) は到達不可能です。B-2")
@@ -128,7 +125,7 @@ def calucuetion(L, x_target, z_target, w):
 
 
     data = ([True, θ_1, θ_2, θ_3, error])
-    print(Color.GREEN, f"目標 ({x_target:.3f}, {z_target:.3f}): θ_1 = {np.rad2deg(θ_1):.2f}, θ_2 = {np.rad2deg(θ_2):.2f}, θ_3 = {np.rad2deg(θ_3):.2f}, error = {error:.2f}", Color.RESET, sep = '')
+    #print(Color.GREEN, f"目標 ({x_target:.3f}, {z_target:.3f}): θ_1 = {np.rad2deg(θ_1):.2f}, θ_2 = {np.rad2deg(θ_2):.2f}, θ_3 = {np.rad2deg(θ_3):.2f}, error = {error:.2f}", Color.RESET, sep = '')
 
     return(data)
 
