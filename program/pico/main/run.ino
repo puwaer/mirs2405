@@ -122,7 +122,7 @@ void run_To(float x, float y){
   r = powf(powf(x,2)+powf(y,2), 0.5);
   if(y == 0){
     if(x >= 0) theta = 0;
-    else if(x < 0) theta = M_PI;
+    else if(x < 0) theta = PI;
   }
   else theta = atan2(y, x);
 
@@ -191,17 +191,17 @@ void run_st(float L_velocity, float L_displacement, float R_velocity, float R_di
 void run_tur(float angle, float ang_vel) {
   float L_velocity, R_velocity, L_displacement, R_displacement;
 
-  if((-M_PI <= angle) && (angle <= 0)){
+  if((-PI <= angle) && (angle <= 0)){
     L_velocity      = 0.5 * ang_vel;
     R_velocity      = -0.5 * ang_vel;
-    L_displacement  = -(one_round_meter * angle / 2 / M_PI);
-    R_displacement  = -(-one_round_meter * angle / 2 / M_PI);
+    L_displacement  = -(one_round_meter * angle / 2 / PI);
+    R_displacement  = -(-one_round_meter * angle / 2 / PI);
   }
-  else if((0 < angle) && (angle <= (M_PI))){
+  else if((0 < angle) && (angle <= (PI))){
     L_velocity      = -0.5 * ang_vel;
     R_velocity      = 0.5 * ang_vel;
-    L_displacement  = -one_round_meter * angle / 2 / M_PI;
-    R_displacement  = one_round_meter * angle / 2 / M_PI;
+    L_displacement  = -one_round_meter * angle / 2 / PI;
+    R_displacement  = one_round_meter * angle / 2 / PI;
   }
 
   

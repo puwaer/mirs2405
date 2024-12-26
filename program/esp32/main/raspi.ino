@@ -1,4 +1,4 @@
-const int RECEIVE_ARRAY_SIZE = 5;  // 受信する配列の要素数
+const int RECEIVE_ARRAY_SIZE = 7;  // 受信する配列の要素数
 uint16_t receivedArray[RECEIVE_ARRAY_SIZE]; // 受信した配列を格納
 
 void raspi_receive(){

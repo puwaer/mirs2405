@@ -102,6 +102,14 @@ void turntable(float _angle) {
       turntable_stop();
       break;
     }
+    Serial.print("angle_turntable = ");
+    Serial.print(angle_turntable);
+    Serial.print(",  target_ang_turntable = ");
+    Serial.print(target_ang_turntable);
+    Serial.print(",  turntable_pwm = ");
+    Serial.print(turntable_pwm);
+    Serial.println();
+    
 
     turntable_run(turntable_pwm);
     delay(10);

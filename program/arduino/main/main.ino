@@ -8,16 +8,18 @@ Servo airchuck2;
 void setup(){
   arm_init();
   Serial.begin(115200);
-  //raspi_open();
+  raspi_open();
   delay(100);
 }
 
 void loop(){
-  while(1){
+  /*while(1){
     raspi_receive();
-  }
+  }*/
   
-  //turntable_debug();
+  
+
+  turntable_debug();
   //grip_debug();
   exit(0);
 }
