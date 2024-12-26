@@ -1,14 +1,16 @@
+float past_ang1;
 float past_ang2;
 
 void arm(float _ang1, float _ang2, float _ang3, float _ang4){
-  if (past_ang2 >= 160) joint2(160);
-  joint1(_ang1);
-  joint2(_ang2);
-  joint3(joint3ID, _ang3, joint3_vel); 
-  joint4(joint4ID, _ang4, joint4_vel);
-
-  past_ang2 = _ang2;
-  
+  if (!((_ang1 <= 0) && (180+_ang1-_ang2 <= 10))){
+    if (past_ang2 >= 160) joint2(160);
+    joint1(_ang1);
+    joint2(_ang2);
+    joint3(joint3ID, _ang3, joint3_vel); 
+    joint4(joint4ID, _ang4, joint4_vel);
+    past_ang1 = _ang1;
+    past_ang2 = _ang2;
+  }
 }
 
 void photoreflector(){
