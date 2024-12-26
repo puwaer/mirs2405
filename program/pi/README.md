@@ -1,27 +1,24 @@
-# mirs2405 radicon_arm
+# mirs2405 raspberry pi
 
-raspberry pi シリアル通信
-送信
-jetson
-・動作状態
+・main.py：全体プログラム
 
-pico
-・アーム角度
-・動作状態
+・config.py：ポート、ボーレートを定義。ポートはたまに変わる。
 
-arduino
-・ラジコン入力
-・アーム角度
-・識別
+・ポート確認
+    arduino,pico：ls /dev/ttyACM*
+    esp32       ：ls /dev/ttyUSB*
+・ポートアクセス権限
+    sudo chmod 666 /dev/ttyACM0
 
-受信
-jetson
-・座標
+・inverse_kinematics.py：アーム角度計算
 
-pico
-・ラジコン入力
-・受取可否（グリッパー）
+・receive.py：受信用プログラム
+    serial_rc()：ラジコン通信用関数
+    recive_pr()：フォトリフレクタ値の受信用関数
 
-arduino
-・タイムアウト
-・識別
+・send.py：送信用プログラム
+    send_angle(data)：アーム角度送信用関数
+
+・test.py：テスト用プログラム
+
+
