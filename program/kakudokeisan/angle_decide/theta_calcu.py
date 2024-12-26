@@ -1,14 +1,16 @@
 import numpy as np
-#import pdb
 
 import theta_choice, theta_clean
 from color import Color
+
+#import pdb
+#from color import Color
 
 
 # 入力の目標座標から角度θを計算する   
 def calucuetion(L, x_target, z_target, w):
     if not abs(w) == 1:
-        #print("ERROR!")
+        print("ERROR!")
         return()
 
     # 第2関節の座標を計算
@@ -20,7 +22,7 @@ def calucuetion(L, x_target, z_target, w):
 
     # 到達可能か？
     if L[0] + L[1] < l:
-        #print(f"目標 ({x_target:.1f}, {z_target:.1f}) は到達不可能です。")
+        print(f"目標 ({x_target:.3f}, {z_target:.3f}) は到達不可能です。A")
         data = ([False, "None", "None", "None", "None"])
         return(data)
 
@@ -28,8 +30,13 @@ def calucuetion(L, x_target, z_target, w):
     # θ_2の候補の計算
     cosθ_2 = (u - L[0]**2 - L[1]**2 ) / (2 * L[0] * L[1] )
 
+    # 丸め誤差対策
+    if -1.000000000000005 <= cosθ_2 < 1.000000000000005:
+        cosθ_2 = np.clip(cosθ_2, -1, 1)
+
     if not -1 <= cosθ_2 <= 1:
-        # print(f"目標 ({x_target:.1f}, {z_target:.1f}) は到達不可能です。")
+        print(f"目標 ({x_target:.3f}, {z_target:.3f}) は到達不可能です。B-1")
+        print(f"cosθ_2 is range over: {cosθ_2}")
         data = ([False, "None", "None", "None", "None"])
         return(data)
 
@@ -49,8 +56,17 @@ def calucuetion(L, x_target, z_target, w):
     φ_2 = np.arctan2(x_2, z_2 )
     cosθ_1u = (u + L[0]**2 - L[1]**2) / (2 * L[0] * l)
 
+    print(cosθ_1u)
+
+    # 丸め誤差対策
+    if -1.000000000000005 <= cosθ_1u < 1.000000000000005:
+        cosθ_1u = np.clip(cosθ_1u, -1, 1)
+
+    print(cosθ_1u)
+
     if not -1 <= cosθ_1u <= 1:
-        #print(f"目標 ({x_target:.1f}, {z_target:.1f}) は到達不可能です。")
+        print(f"目標 ({x_target:.3f}, {z_target:.3f}) は到達不可能です。B-2")
+        print(f"cosθ_2 is range over: {cosθ_2}")
         data = ([False, "None", "None", "None", "None"])
         return(data)
 
@@ -87,7 +103,7 @@ def calucuetion(L, x_target, z_target, w):
     θ_1, θ_2 = theta_choice.choicetheta(L, θ_1_kouho, θ_2_kouho, x_target, z_target, w)
 
     if θ_1 == None or θ_2 == None:
-        # print(f"目標 ({x_target:.2f}, {z_target:.2f}) は到達不可能です。")
+        print(f"目標 ({x_target:.3f}, {z_target:.3f}) は到達不可能です。C")
         data = ([False, "None", "None", "None", "None"])
         return(data)
 
@@ -112,7 +128,7 @@ def calucuetion(L, x_target, z_target, w):
 
 
     data = ([True, θ_1, θ_2, θ_3, error])
-    #print(Color.GREEN, f"目標 ({x_target:.1f}, {z_target:.1f}): θ_1 = {np.rad2deg(θ_1):.2f}, θ_2 = {np.rad2deg(θ_2):.2f}, θ_3 = {np.rad2deg(θ_3):.2f}, error = {error:.2f}", Color.RESET, sep = '')
+    print(Color.GREEN, f"目標 ({x_target:.3f}, {z_target:.3f}): θ_1 = {np.rad2deg(θ_1):.2f}, θ_2 = {np.rad2deg(θ_2):.2f}, θ_3 = {np.rad2deg(θ_3):.2f}, error = {error:.2f}", Color.RESET, sep = '')
 
     return(data)
 

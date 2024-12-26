@@ -1,4 +1,8 @@
-import numpy as np
+#import numpy as np
+
+#import pdb
+#from color import Color
+
 
 def decide(P):
     p_1 = P[0]
