@@ -47,3 +47,30 @@ void PUMP_run(int _pwm){
     analogWrite(PIN_PUMP_PWM, 0);
   }
 }
+
+void ultrasonic(){
+  int reading;
+  Wire.beginTransmission(112);
+  Wire.write(byte(0x00));
+  Wire.write(byte(0x51));
+  Wire.endTransmission();
+
+  delay(70);
+
+  Wire.beginTransmission(112);
+  Wire.write(byte(0x02));
+  Wire.endTransmission();
+
+  Wire.requestFrom(112, 2);
+
+  if (2 <= Wire.available()){
+    reading = Wire.read();
+    reading = reading << 8;
+    reading |= Wire.read();
+    Serial.print(reading);
+    Serial.println("cm");
+  }
+  delay(30);
+
+  raspi_send(10, reading, 0, 0, 0);
+}

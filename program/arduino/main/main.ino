@@ -1,5 +1,6 @@
 #include "define.h"
 #include <Servo.h>
+#include <Wire.h>
 
 Servo grip;
 Servo airchuck1;
@@ -7,6 +8,8 @@ Servo airchuck2;
 
 void setup(){
   arm_init();
+  turntable_init();
+  Wire.begin();   
   Serial.begin(115200);
   raspi_open();
   delay(100);
@@ -17,9 +20,11 @@ void loop(){
     raspi_receive();
   }*/
   
-  
+  /*while(1){
+    ultrasonic();
+  }*/
 
-  turntable_debug();
+  //turntable_debug();
   //grip_debug();
   exit(0);
 }

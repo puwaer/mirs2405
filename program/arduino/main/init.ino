@@ -10,6 +10,13 @@ void arm_init(){
   airchuck1.write(0);
   airchuck2.write(0);
 
+  pinMode(PIN_PUMP_PWM, OUTPUT);
+  pinMode(PIN_PUMP_DIR, OUTPUT);
+  digitalWrite(PIN_PUMP_DIR, HIGH);
+
+}
+
+void turntable_init(){
   pinMode(PIN_TURNTABLE_PWM, OUTPUT);
   pinMode(PIN_TURNTABLE_DIR, OUTPUT);
   pinMode(PIN_TURNTABLEENC_A, INPUT);
@@ -18,11 +25,6 @@ void arm_init(){
   digitalWrite(PIN_TURNTABLEENC_A, HIGH);
   digitalWrite(PIN_TURNTABLEENC_B, HIGH);
   attachInterrupt(digitalPinToInterrupt(PIN_TURNTABLEENC_A), enc_change, CHANGE);
-
-  pinMode(PIN_PUMP_PWM, OUTPUT);
-  pinMode(PIN_PUMP_DIR, OUTPUT);
-  digitalWrite(PIN_PUMP_DIR, HIGH);
-
 }
 
 void raspi_open(){

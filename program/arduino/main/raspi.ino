@@ -82,6 +82,9 @@ void raspi_receive(){
     case 9:
       turntable(receivedArray[1]);
 
+    case 10:
+      ultrasonic();
+      
     default:
       break;
     }

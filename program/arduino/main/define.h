@@ -10,6 +10,8 @@
 #define PIN_PUMP_PWM        9   //真空ポンプ
 #define PIN_PUMP_DIR        12
 
+#define PIN_ULTRASONIC_SDA  A0
+#define PIN_ULTRASONIC_SCL  A1
 
 #define GRIP_MIN 544  //サーボの角度が0度のときのパルス幅[us]。デフォルトは544。
 #define GRIP_MAX 2400 // サーボの角度が180度のときのパルス幅[us]。デフォルトは2400。
