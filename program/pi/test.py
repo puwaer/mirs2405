@@ -1,12 +1,20 @@
-#from receive import receive_pr
 import config  # 設定ファイルをインポート
-from receive import serial_rc  # シリアル通信関数をインポート
-from send import send_angle
 import sys
 sys.path.append("./angle_decide")
+from receive import receive_pr
+from receive import serial_rc  # シリアル通信関数をインポート
+from receive import judge_angle
+from send import send_angle
 from inverse_kinematics import inverse_kinematics
 
-
+'''
+#身長から角度決定
+#hight = receive_camera
+hight = [139, 0, 0, 0, 0]
+angle = judge_angle(hight[0])
+print(angle)
+'''
+'''
 #角度計算
 def test_arm():
     L = [0.425, 0.426225, 0.1]
@@ -18,6 +26,7 @@ def test_arm():
     #print(a)
     print(a[2])
 test_arm()
+'''
 
 '''
 #rc操作
@@ -34,7 +43,6 @@ def test_angle():
 test_angle()
 '''
 
-'''
 #フォトリフレクタ値の受信
 def test_pr():
     print("Starting receive_pr...")
@@ -47,4 +55,3 @@ def test_pr():
         print("No data received.")
 
 test_pr()
-'''

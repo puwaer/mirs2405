@@ -29,7 +29,7 @@ def send_angle(data):
 
     ser_pico.close()
 
-
+'''
 #走行命令の送信
 def send_run(){
         time.sleep(2)  # シリアル通信の初期化待ち
@@ -55,6 +55,6 @@ def send_run(){
 
     ser_pico.close()
 }
-
+'''
 
 #arduino

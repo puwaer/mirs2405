@@ -6,13 +6,15 @@ import numpy as np
 import struct
 
 #jetson
+
+'''
 #lidarデータの取得
 def receive_lidar(){
     ser_jetson = serial.Serial(config.JETSON_PORT, config.BAUDRATE)
     lidar_data = 
     return lidar_data
 }
-
+'''
 
 '''
 #カメラデータの受取
@@ -147,7 +149,7 @@ def receive_pr():
      # シリアル通信の初期化
     ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
     time.sleep(2)  # シリアル通信の初期化待ち
-    data = [5, 0, 0, 0, 0, 0, 0]    #識別番号
+    data = [1, 0, 0, 0, 0, 0, 0]    #識別番号
     size=14
 
     byte_array = bytearray()
@@ -186,12 +188,70 @@ def receive_pr():
     ser_pico.close()  # シリアルポートを閉じる
     return pr_state  # 受信したデータを返す
 
+def judge_angle(hight):
+    if 100 <= hight <=110:
+        angle=[10, 10, 10, 10, 0, 0, 0]
+    elif 120 <= hight <=120:
+        angle=[20, 20, 10, 10, 0, 0 ,0]
+    elif 120 <= hight <=130:
+        angle=[30, 10, 10, 10, 0, 0, 0]
+    elif 130 <= hight <=140:
+        angle=[40, 10, 10, 10, 0, 0, 0]
+    elif 140 <= hight <=150:
+        angle=[50, 10, 10, 10, 0, 0, 0]
+    elif 150 <= hight <=160:
+        angle=[20, 20, 10, 10, 0, 0 ,0]
+    elif 160 <= hight <=170:
+        angle=[30, 10, 10, 10, 0, 0, 0]
+    elif 170 <= hight <=180:
+        angle=[40, 10, 10, 10, 0, 0, 0]
+    elif 180 <= hight <=190:
+        angle=[50, 10, 10, 10, 0, 0, 0]
 
-
+    return angle
 
 #arduino
 
+def receive_distance():
+     # シリアル通信の初期化
+    ser_arduino = serial.Serial(config.ARDUINO_PORT, config.BAUDRATE)
+    time.sleep(2)  # シリアル通信の初期化待ち
+    data = [5, 0, 0, 0, 0, 0, 0]    #識別番号
+    size=14
 
+    byte_array = bytearray()
+    for value in data:
+        # 符号付き16ビット整数の範囲をチェック
+        if -0x8000 <= value <= 0x7FFF:
+            # 16ビット内に収める (2の補数形式)
+            value = value & 0xFFFF
+            
+            # 上位バイトと下位バイトに分割
+            high_byte = (value >> 8) & 0xFF
+            low_byte = value & 0xFF
+            
+            # バイト列に追加
+            byte_array.append(low_byte)
+            byte_array.append(high_byte)
 
+        ser_arduino.write(byte_array)
+        time.sleep(0.1)  # 少し待機    
 
+    while True:
+        if ser_arduino.in_waiting >= size:  # データが受信されているか確認
+            data = ser_arduino.read(size)  # 配列データを取得
+            distance = []
+            # データを2バイトずつ整数に変換
+            for i in range(0, size, 2):
+                distance_value = data[i] | (data[i + 1] << 8)
+                distance.append(distance_value)
+
+            print("Received input values:", distance)
+            break  # データを受信したらループを抜ける
+
+        # データがまだ受信されていない場合は、ループを続ける
+        print("Waiting for data...")
+
+    ser_arduino.close()  # シリアルポートを閉じる
+    return distance  # 受信したデータを返す
 
