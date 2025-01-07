@@ -1,3 +1,4 @@
+import math
 import serial
 import time
 import config
@@ -189,24 +190,31 @@ def receive_pr():
     return pr_state  # 受信したデータを返す
 
 def judge_angle(hight):
+    L1 = 460
+    L2 = 420
+    L3 = 100
+    joint1_angle = -25
+    
     if 100 <= hight <=110:
-        angle=[10, 10, 10, 10, 0, 0, 0]
-    elif 120 <= hight <=120:
-        angle=[20, 20, 10, 10, 0, 0 ,0]
+        angle=[joint1_angle, 89, -89, 10, 0, 0, 0]
+    elif 110 <= hight <=120:
+        angle=[joint1_angle, 87, -87, 10, 0, 0 ,0]
     elif 120 <= hight <=130:
-        angle=[30, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 86, -86, 10, 0, 0, 0]
     elif 130 <= hight <=140:
-        angle=[40, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 85, -85, 10, 0, 0, 0]
     elif 140 <= hight <=150:
-        angle=[50, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 83, -83, 10, 0, 0, 0]
     elif 150 <= hight <=160:
-        angle=[20, 20, 10, 10, 0, 0 ,0]
+        angle=[joint1_angle, 82, -82, 10, 0, 0 ,0]
     elif 160 <= hight <=170:
-        angle=[30, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 81, -81, 10, 0, 0, 0]
     elif 170 <= hight <=180:
-        angle=[40, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 79, -79, 10, 0, 0, 0]
     elif 180 <= hight <=190:
-        angle=[50, 10, 10, 10, 0, 0, 0]
+        angle=[joint1_angle, 78, -78, 10, 0, 0, 0]
+    elif 190 <= hight:
+        angle=[joint1_angle, 76, -76, 10, 0, 0, 0]
 
     return angle
 

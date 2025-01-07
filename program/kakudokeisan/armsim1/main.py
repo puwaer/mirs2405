@@ -9,7 +9,7 @@ from color import Color
 # 入力データ
 L = [0.5, 0.5, 0.1]                                     # 各リンクの長さ
 #L = [0.425, 0.426225, 0.1]
-x_target, z_target = 0.2, 0.6                           # 目標座標
+x_target, z_target = 0, 0.6                             # 目標座標
 W = 1                                                   # -1 -> 掴む時 (下向き), 1 -> 渡す時 (上向き)
 
 start_row, start_col = 2, 2                             # Excelファイルへ書き込み始めるセル

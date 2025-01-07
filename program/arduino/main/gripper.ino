@@ -72,5 +72,6 @@ void ultrasonic(){
   }
   delay(30);
 
-  raspi_send(10, reading, 0, 0, 0);
+  //raspi_send(10, reading, 0, 0, 0);
+
 }

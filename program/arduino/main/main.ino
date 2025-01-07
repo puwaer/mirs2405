@@ -20,9 +20,9 @@ void loop(){
     raspi_receive();
   }*/
   
-  /*while(1){
+  while(1){
     ultrasonic();
-  }*/
+  }
 
   //turntable_debug();
   //grip_debug();
