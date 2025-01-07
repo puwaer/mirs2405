@@ -31,15 +31,20 @@ def main():
                 distance = receive_distance()
                 if 20 < distance <= 35:
                     joint1_angle -= 1
-                    data = [3,joint1_angle, arm_angle[1], arm_angle[2], arm_angle[3], 0, 0]
+                    
                 elif 35 < distance < 45:
                     break
                 elif 45 < distance < 150:
                     joint1_angle += 1
-                    data = [3,joint1_angle, arm_angle[1], arm_angle[2], arm_angle[3], 0, 0]
                 else:
                     break
-                send_angle(data)
+                if joint1_angle < -65:
+                    joint1_angle = -65
+                elif joint1_angle > 65:
+                    joint1_angle = 65
+                    
+                data = [3,joint1_angle, arm_angle[1], arm_angle[2], arm_angle[3], 0, 0]
+                send_angle(data)   
                 time.sleep(0.1)
                 
             #position = [camera_data[3], camera_data[4]]
