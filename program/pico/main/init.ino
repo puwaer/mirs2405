@@ -23,8 +23,8 @@ void raspi_open(){
   Serial.begin(115200);
   
   while(!Serial.available()){
-    Serial.print("POT_R = ");
-    Serial.print(analogRead(PIN_JOINT_1_R_POT));
+    //Serial.print("POT_R = ");
+    //Serial.print(analogRead(PIN_JOINT_1_R_POT));
     Serial.print("  POT_L = ");
     Serial.print(analogRead(PIN_JOINT_1_L_POT));
     Serial.print("  POT_2 = ");

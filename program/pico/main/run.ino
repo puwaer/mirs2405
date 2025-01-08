@@ -204,8 +204,6 @@ void run_tur(float angle, float ang_vel) {
     R_displacement  = one_round_meter * angle / 2 / PI;
   }
 
-  
-  
   control_initialize(L_velocity, R_velocity, L_displacement, R_displacement, &target_velocity_l, &target_velocity_r, &target_displacement_l, &target_displacement_r);
   while(1){
     encoder_get(&displacement_l, &displacement_r);

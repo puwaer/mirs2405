@@ -13,7 +13,7 @@ void arm_debug(){
     arm_debug_count++;
     if(arm_debug_count >= 100){
       Serial.print("POT_R = ");
-      Serial.print(analogRead(PIN_JOINT_1_R_POT));
+      //Serial.print(analogRead(PIN_JOINT_1_R_POT));
       Serial.print("  POT_L = ");
       Serial.print(analogRead(PIN_JOINT_1_L_POT));
       Serial.print("  POT_2 = ");
