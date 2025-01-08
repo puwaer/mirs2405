@@ -32,7 +32,7 @@ def main_height_server():
             if height is not None:
                 print(f"height: {height:.2f} cm")
 
-                if isinstance(height, (int, float)):
+                if isinstance(height, (int, float)) and not height == "NaN":
                     server.current_data = {"height": float(height)}
                     server.handle_request()
                 else:
