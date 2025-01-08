@@ -8,27 +8,8 @@ from typing import Tuple, Optional
 from zed_hight_class import HeightMeasurement
 from server_value_updata import CustomTCPServer, TCPHandler
 
-"""
-class TCPHandler(socketserver.BaseRequestHandler):
-    def handle(self):
-        try:
-            json_str = json.dumps(self.server.current_data)
-            data = json_str.encode('utf-8')
-            size = len(data).to_bytes(4, byteorder='big')
-            self.request.sendall(size + data)
-        except ConnectionError:
-            print("Connection lost")
-        except Exception as e:
-            print(f"Error occurred: {e}")
 
-class CustomTCPServer(socketserver.TCPServer):
-    def __init__(self, server_address, RequestHandlerClass):
-        self.current_data = None
-        super().__init__(server_address, RequestHandlerClass)
-"""
-
-        
-def main():
+def main_hight_server():
     HOST = "172.25.15.27"
     PORT = 5700
     
@@ -64,4 +45,4 @@ def main():
         print("終了しました")
 
 if __name__ == "__main__":
-    main()
+    main_hight_server()
