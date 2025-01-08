@@ -22,7 +22,6 @@ def send_array(port: str, baudrate: int, array: list):
         print(f"Sent: {array}")
 '''
 
-
 #pico
 #角度送信
 def send_angle(data):
@@ -49,6 +48,35 @@ def send_angle(data):
         time.sleep(0.1)  # 少し待機
 
     ser_pico.close()
+
+def wave_hand():
+    data = {3, 0, 0, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, 5, 5, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, 10, 10, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, 5, 5, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, 0, 0, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, -5, -5, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, -10, -10, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, -5, -5, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
+    data = {3, 0, 0, 0, 0, 0 ,0}
+    send_angle(data)
+    #time.sleep(1)
 
 '''
 #走行命令の送信

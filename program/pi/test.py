@@ -8,6 +8,7 @@ from receive import judge_angle
 from receive import receive_distance
 from receive import receive_array_once
 from send import send_angle
+from send import wave_hand
 from inverse_kinematics import inverse_kinematics
 
 
@@ -18,7 +19,7 @@ print(received_array[0])
 #hight = [139, 0, 0, 0, 0]
 angle = judge_angle(received_array[0])
 print(angle)
-send_angle(angle)
+#send_angle(angle)
 
 '''
 #角度計算
