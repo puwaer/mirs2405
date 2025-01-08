@@ -1,6 +1,27 @@
 import serial
 import time
 import config
+import struct
+
+'''
+#jetsonデータ送信
+def send_array(port: str, baudrate: int, array: list):
+    """
+    要素2の配列をシリアル通信で送信する関数
+
+    Args:
+        port (str): シリアルポート名 (例: "/dev/ttyUSB0")
+        baudrate (int): ボーレート
+        array (list): 送信する2要素の配列 (例: [1234, 5678])
+    """
+    # シリアルポートを開く
+    with serial.Serial(port, baudrate, timeout=1) as ser:
+        # 配列の要素を送信（int型2要素をバイナリ形式に変換）
+        data = struct.pack('2i', array[0], array[1])
+        ser.write(data)
+        print(f"Sent: {array}")
+'''
+
 
 #pico
 #角度送信

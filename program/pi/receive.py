@@ -1,4 +1,3 @@
-import math
 import serial
 import time
 import config
@@ -7,26 +6,14 @@ import numpy as np
 import struct
 
 #jetson
-
-'''
-#lidarデータの取得
-def receive_lidar(){
-    ser_jetson = serial.Serial(config.JETSON_PORT, config.BAUDRATE)
-    lidar_data = 
-    return lidar_data
-}
-'''
-
-'''
-#カメラデータの受取
-def receive_camera(server_ip: str, server_port: int):
-    
+def receive_array_once(server_ip: str, server_port: int):
+    """
     クライアントから配列を1度だけ受信するサーバー関数。
 
     :param server_ip: サーバーのIPアドレス
     :param server_port: サーバーのポート番号
     :return: 受信したNumPy配列
-    
+    """
     try:
         # ソケットを作成し、サーバーに接続
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,7 +31,7 @@ def receive_camera(server_ip: str, server_port: int):
         if not array_size_data:
             raise ValueError("Failed to receive array size.")
         array_size = struct.unpack('i', array_size_data)[0]
-        print(f"Receiving array of size: {array_size} bytes")
+        #print(f"Receiving array of size: {array_size} bytes")
 
         # 配列データを受信
         array_data = b""
@@ -55,8 +42,8 @@ def receive_camera(server_ip: str, server_port: int):
             array_data += packet
 
         # バイトデータをNumPy配列に変換
-        array = np.frombuffer(array_data, dtype=np.float64)
-        print(f"Received array: {array}")
+        array = np.frombuffer(array_data, dtype=np.int32)
+        #print(f"Received array: {array}")
 
         # 応答メッセージをクライアントに送信
         client_socket.send("Array received!".encode())
@@ -73,13 +60,33 @@ def receive_camera(server_ip: str, server_port: int):
         server_socket.close()
 
 
-camera_data = receive_camera('0.0.0.0', 12340)
-if camera_data is not None:
-    print(f"Processed array: {camera_data}")
-else:
-    print("No array received.")
-
 '''
+#jetsonからのデータ取得
+def receive_array(port: str, baudrate: int) -> list:
+    """
+    シリアル通信で受信したデータを2要素の配列として返す関数
+
+    Args:
+        port (str): シリアルポート名 (例: "/dev/ttyS0")
+        baudrate (int): ボーレート
+
+    Returns:
+        list: 受信した2要素の配列 (例: [1234, 5678])
+    """
+    # シリアルポートを開く
+    with serial.Serial(port, baudrate, timeout=1) as ser:
+        # 必要なバイト数が受信できるまで待つ
+        while ser.in_waiting < 8:  # int型2要素 = 4バイト × 2 = 8バイト
+            pass
+        
+        # 受信したデータを読み取る
+        data = ser.read(8)
+        # バイナリデータを解釈して配列に変換
+        array = list(struct.unpack('2i', data))
+        print(f"Received: {array}")
+        return array
+'''
+
 #esp
 #ラジコン通信
 def serial_rc():   
@@ -150,7 +157,7 @@ def receive_pr():
      # シリアル通信の初期化
     ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
     time.sleep(2)  # シリアル通信の初期化待ち
-    data = [1, 0, 0, 0, 0, 0, 0]    #識別番号
+    data = [2, 0, 0, 0, 0, 0, 0]    #識別番号
     size=14
 
     byte_array = bytearray()
@@ -190,31 +197,24 @@ def receive_pr():
     return pr_state  # 受信したデータを返す
 
 def judge_angle(hight):
-    L1 = 460
-    L2 = 420
-    L3 = 100
-    joint1_angle = -25
-    
     if 100 <= hight <=110:
-        angle=[joint1_angle, 89, -89, 10, 0, 0, 0]
-    elif 110 <= hight <=120:
-        angle=[joint1_angle, 87, -87, 10, 0, 0 ,0]
+        angle=[3, 10, 10, 10, 0, 0, 0]
+    elif 120 <= hight <=120:
+        angle=[3, 20, 20, 20, 0, 0 ,0]
     elif 120 <= hight <=130:
-        angle=[joint1_angle, 86, -86, 10, 0, 0, 0]
+        angle=[3, 30, 30, 30, 0, 0, 0]
     elif 130 <= hight <=140:
-        angle=[joint1_angle, 85, -85, 10, 0, 0, 0]
+        angle=[3, 40, 40, 40, 0, 0, 0]
     elif 140 <= hight <=150:
-        angle=[joint1_angle, 83, -83, 10, 0, 0, 0]
+        angle=[3, 50, 50, 50, 0, 0, 0]
     elif 150 <= hight <=160:
-        angle=[joint1_angle, 82, -82, 10, 0, 0 ,0]
+        angle=[3, 60, 60, 60, 0, 0 ,0]
     elif 160 <= hight <=170:
-        angle=[joint1_angle, 81, -81, 10, 0, 0, 0]
+        angle=[3, 70, 70, 70, 0, 0, 0]
     elif 170 <= hight <=180:
-        angle=[joint1_angle, 79, -79, 10, 0, 0, 0]
+        angle=[3, 80, 80, 80, 0, 0, 0]
     elif 180 <= hight <=190:
-        angle=[joint1_angle, 78, -78, 10, 0, 0, 0]
-    elif 190 <= hight:
-        angle=[joint1_angle, 76, -76, 10, 0, 0, 0]
+        angle=[3, 90, 90, 90, 0, 0, 0]
 
     return angle
 
@@ -223,8 +223,8 @@ def judge_angle(hight):
 def receive_distance():
      # シリアル通信の初期化
     ser_arduino = serial.Serial(config.ARDUINO_PORT, config.BAUDRATE)
-    time.sleep(2)  # シリアル通信の初期化待ち
-    data = [5, 0, 0, 0, 0, 0, 0]    #識別番号
+    time.sleep(0.1)  # シリアル通信の初期化待ち
+    data = [10, 0, 0, 0, 0, 0, 0]    #識別番号
     size=14
 
     byte_array = bytearray()
@@ -258,7 +258,7 @@ def receive_distance():
             break  # データを受信したらループを抜ける
 
         # データがまだ受信されていない場合は、ループを続ける
-        print("Waiting for data...")
+        #print("Waiting for data...")
 
     ser_arduino.close()  # シリアルポートを閉じる
     return distance  # 受信したデータを返す
