@@ -1,57 +1,37 @@
-import socketserver
-import sys
+import socket
 import json
 
-HOST = "172.25.15.27"
-PORT = 5700
-
-class TCPHandler(socketserver.BaseRequestHandler):
-    def handle(self):
-        try:
-            # 文字列をディクショナリ形式に変換
-            data_dict = {"message": self.server.current_data}
-            
-            # 辞書をJSON文字列に変換
-            json_str = json.dumps(data_dict)
-            
-            # 文字列をバイト列に変換
-            data = json_str.encode('utf-8')
-            
-            # データサイズを取得
-            size = len(data).to_bytes(4, byteorder='big')
-            
-            # サイズとデータを送信（1回だけ）
-            self.request.sendall(size + data)
-            
-        except ConnectionError:
-            print("Connection lost")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-
-class CustomTCPServer(socketserver.TCPServer):
-    def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
-        self.current_data = None
-        super().__init__(server_address, RequestHandlerClass, bind_and_activate)
+def get_dict_data(sock):
+    data = sock.recv(1024).decode('utf-8')  # 受信データをデコード
+    print("Raw received data:", data)  # 受信データを表示
+    try:
+        data_dict = json.loads(data)  # JSON文字列を辞書に変換
+        return data_dict.get('message', '')  # messageキーの値を取得
+    except json.JSONDecodeError:
+        #print("Received data is not valid JSON")
+        return None
 
 if __name__ == "__main__":
-    socketserver.TCPServer.allow_reuse_address = True
-    server = CustomTCPServer((HOST, PORT), TCPHandler)
+    HOST = '172.25.15.27'
+    PORT = 5700
+    while True:
+        try:
+            # ソケット接続
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((HOST, PORT))
 
-    try:
-        print("Server started")
-        while True:
-            # 入力を受け付ける
-            input_text = input("Please enter the data you want to send: ")
+            # データを受信して表示
+            received_data = get_dict_data(sock)
+            if received_data is not None:
+                print("Received:", received_data)
             
-            # 入力されたデータを保存
-            server.current_data = input_text
+            # 接続を閉じる
+            sock.close()
             
-            # クライアントからの接続を1回待ち受ける
-            server.handle_request()
-            
-            print("Data sent. Waiting for next input...")
-            
-    except KeyboardInterrupt:
-        print("\nShutting down server...")
-        server.server_close()
-        sys.exit()
+        except KeyboardInterrupt:
+            print("\nClosing connection...")
+            break
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            sock.close()
+            continue
