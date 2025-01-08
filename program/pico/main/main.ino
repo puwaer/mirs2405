@@ -13,7 +13,7 @@ void setup() {
   Serial.setTimeout(10);
   delay(100);
 
-  //raspi_open();
+  raspi_open();
 }
 
 void loop(){
