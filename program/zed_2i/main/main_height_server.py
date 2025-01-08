@@ -4,6 +4,7 @@ import cv2
 import mediapipe as mp
 import socketserver
 import json
+import math
 from typing import Tuple, Optional
 from zed_hight_class import HeightMeasurement
 from server_value_updata import CustomTCPServer, TCPHandler
@@ -32,7 +33,7 @@ def main_height_server():
             if height is not None:
                 print(f"height: {height:.2f} cm")
 
-                if isinstance(height, (int, float)) and not height == "NaN":
+                if isinstance(height, (int, float)) and not (isinstance(height, float) and math.isnan(height)):
                     server.current_data = {"height": float(height)}
                     server.handle_request()
                 else:
