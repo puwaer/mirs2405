@@ -24,7 +24,7 @@ class HeightMeasurement:
         self.point_cloud = sl.Mat()
         
         # Measurement parameters
-        self.diff_rate = 1.19  # 倍率
+        self.diff_rate = 1.2  # 倍率
         
     def open_camera(self) -> bool:
         """カメラを開く"""
