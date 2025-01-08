@@ -122,7 +122,7 @@ class HeightMeasurement:
         self.camera.close()
         cv2.destroyAllWindows()
 
-def main():
+def main_hight():
     height_measurement = HeightMeasurement()
     
     if not height_measurement.open_camera():
@@ -146,4 +146,4 @@ def main():
     print("終了しました")
 
 if __name__ == "__main__":
-    main()
+    main_hight()
