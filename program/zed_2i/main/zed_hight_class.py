@@ -81,11 +81,11 @@ class HeightMeasurement:
                 status_text = f"height: {height:.2f} cm"
                 color = (0, 255, 0)  # 緑色
             else:
-                status_text = "有効な深度データが取得できません"
+                status_text = "not data"
                 color = (0, 0, 255)  # 赤色
                 height = None
         else:
-            status_text = "骨格検出失敗"
+            status_text = "not human"
             color = (0, 0, 255)  # 赤色
             height = None
 
