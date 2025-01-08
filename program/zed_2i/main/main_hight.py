@@ -1,60 +1,67 @@
+import pyzed.sl as sl
+import numpy as np
 import cv2
-import sys
+import mediapipe as mp
+import socketserver
+import json
+from typing import Tuple, Optional
 from zed_hight_class import HeightMeasurement
-from server_value_updata import socketserver
-from server_value_updata import CustomTCPServer
-from server_value_updata import TCPHandler
+from server_value_updata import CustomTCPServer, TCPHandler
 
+"""
+class TCPHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        try:
+            json_str = json.dumps(self.server.current_data)
+            data = json_str.encode('utf-8')
+            size = len(data).to_bytes(4, byteorder='big')
+            self.request.sendall(size + data)
+        except ConnectionError:
+            print("Connection lost")
+        except Exception as e:
+            print(f"Error occurred: {e}")
 
-HOST = "172.25.15.27"
-PORT = 5700
+class CustomTCPServer(socketserver.TCPServer):
+    def __init__(self, server_address, RequestHandlerClass):
+        self.current_data = None
+        super().__init__(server_address, RequestHandlerClass)
+"""
 
-def main_server():
-    socketserver.TCPServer.allow_reuse_address = True
-    server = CustomTCPServer((HOST, PORT), TCPHandler)
-
-    try:
-        print("Server started")
-        while True:
-            # 入力を受け付ける
-            input_text = input("Please enter the data you want to send: ")
-            
-            # 入力されたデータを保存
-            server.current_data = input_text
-            
-            # クライアントからの接続を1回待ち受ける
-            server.handle_request()
-            
-            print("Data sent. Waiting for next input...")
-            
-    except KeyboardInterrupt:
-        print("\nShutting down server...")
-        server.server_close()
-        sys.exit()
-
-
-def main_hight():
-    height_measurement = HeightMeasurement()
+        
+def main():
+    HOST = "172.25.15.27"
+    PORT = 5700
     
+    height_measurement = HeightMeasurement()
     if not height_measurement.open_camera():
         return
+        
+    server = CustomTCPServer((HOST, PORT), TCPHandler)
+    server.allow_reuse_address = True
     
     print("測定を開始します。'q'で終了します")
     
-    while True:
-        height, image = height_measurement.process_frame()
-        
-        if image.size > 0:
-            cv2.imshow("ZED Height Measurement", image)
-        
-        if height is not None:
-            print(f"測定身長: {height:.2f} cm")
+    try:
+        while True:
+            height, image = height_measurement.process_frame()
             
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    
-    height_measurement.close()
-    print("終了しました")
+            if image.size > 0:
+                cv2.imshow("ZED Height Measurement", image)
+            
+            if height is not None:
+                print(f"測定身長: {height:.2f} cm")
+                server.current_data = {"height": float(height)}
+                server.handle_request()
+                
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+                
+    except KeyboardInterrupt:
+        print("\nShutting down...")
+    finally:
+        height_measurement.close()
+        server.server_close()
+        print("終了しました")
 
 if __name__ == "__main__":
-    main_hight()
+    main()
