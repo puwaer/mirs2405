@@ -1,8 +1,12 @@
 from rplidar import RPLidar
 
 # シリアルポートとボーレートの設定
-PORT_NAME = 'COM7'  # Windowsの場合の例。Linuxでは '/dev/ttyUSB0' など
+PORT_NAME = 'COM3'              # Windowsの場合の例
+PORT_NAME = '/dev/ttyUSB0'      # Linuxの場合
+
 BAUDRATE = 115200   # または 256000
+#pip install rplidar
+
 
 def main():
     # RPLidarオブジェクトを初期化
