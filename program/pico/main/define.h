@@ -29,10 +29,10 @@
 
 /*#define POT_MIN_1 0
 #define POT_MAX_1 310 //[°]*/
-#define POT_READ_MIN_1_R  255
+/*#define POT_READ_MIN_1_R  255
 #define POT_READ_MAX_1_R  785
 #define POT_ANGLE_MIN_1_R 0 //-65
-#define POT_ANGLE_MAX_1_R 130 //65
+#define POT_ANGLE_MAX_1_R 130 //65*/
 
 #define POT_READ_MIN_1_L  200
 #define POT_READ_MAX_1_L  778
@@ -92,7 +92,7 @@ float Kp_joint1_dead_zone = 100.0;
 int   joint1_pwm_limitter_H  = 350;     //pwmの最大値
 int   joint1_pwm_limitter_L  = -350;    //pwmの最小値
 int   joint1_dead_zone       = 180;     //pwmの最小値(絶対値)  
-int   joint1_ang_center      = POT_ANGLE_MAX_1_R / 2;
+int   joint1_ang_center      = POT_ANGLE_MAX_1_L / 2;
 int   joint1_ang_limitter_H  = joint1_ang_center + 65;   //角度の最大値[度]
 int   joint1_ang_limitter_L  = joint1_ang_center - 65;     //角度の最小値[度]
 
