@@ -9,6 +9,7 @@ PORT = 5700
 class TCPHandler(socketserver.BaseRequestHandler):
     def __init__(self, request, client_address, server):
         self.data_dict = server.data_dict
+        self.counter = 0
         super().__init__(request, client_address, server)
         
     def handle(self):
