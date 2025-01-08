@@ -137,7 +137,7 @@ def main_hight():
             cv2.imshow("ZED Height Measurement", image)
         
         if height is not None:
-            print(f"測定身長: {height:.2f} cm")
+            print(f"height: {height:.2f} cm")
             
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
