@@ -88,7 +88,7 @@ def main():
                 if err_h == sl.ERROR_CODE.SUCCESS and err_f == sl.ERROR_CODE.SUCCESS:
                     base_height_in_meters = abs(head_depth[1] - foot_depth[1])
                     diff_plus = 25
-                    diff_rate = 1.18
+                    diff_rate = 1.19
                     #height_in_meters = (base_height_in_meters * 0.1) + diff_plus                       
                     height_in_meters = (base_height_in_meters * 0.1) * diff_rate                # Y座標の差分(diff), 倍率(diff_rate)
                     status_text = f"height: {height_in_meters:.2f} cm"
