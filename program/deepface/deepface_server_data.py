@@ -1,10 +1,36 @@
 import cv2
 from deepface import DeepFace
 import numpy as np
-import socket
+import socketserver
 import json
-import threading
-import struct
+import sys
+
+class TCPHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        try:
+            # 辞書をJSON文字列に変換
+            json_str = json.dumps(self.server.current_data)
+            
+            # 文字列をバイト列に変換
+            data = json_str.encode('utf-8')
+            
+            # データサイズを取得
+            size = len(data).to_bytes(4, byteorder='big')
+            
+            # サイズとデータを送信（1回だけ）
+            self.request.sendall(size + data)
+            
+        except ConnectionError:
+            print("Connection lost")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+
+class CustomTCPServer(socketserver.TCPServer):
+    def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
+        self.current_data = None
+        super().__init__(server_address, RequestHandlerClass, bind_and_activate)
+
+
 
 def emotion_analysis(image):
     result = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
@@ -19,6 +45,7 @@ def gender_analysis(image):
     return result[0]['gender']
 
 def get_face_bbox(image):
+    # DeepFaceのdetect_face関数で顔検出を行う
     try:
         face_objs = DeepFace.extract_faces(image, enforce_detection=False)
         if face_objs:
@@ -33,60 +60,30 @@ def get_face_bbox(image):
     except Exception as e:
         print("顔検出エラー:", str(e))
         return None
+    
+def start_server(HOST, PORT, input_text) :
+    socketserver.TCPServer.allow_reuse_address = True
+    server = CustomTCPServer((HOST, PORT), TCPHandler)
 
-def handle_client(client_socket):
     try:
+        print("Server started")
         while True:
-            if estimated_age is not None and estimated_gender is not None:
-                # データをJSON形式に変換
-                data_dict = {
-                    'age': estimated_age,
-                    'gender': estimated_gender
-                }
-                json_data = json.dumps(data_dict)
-                
-                # データの長さを取得し、4バイトのバイト列に変換
-                length = len(json_data)
-                length_bytes = struct.pack('!I', length)
-                
-                # 長さとデータを送信
-                client_socket.sendall(length_bytes)
-                client_socket.sendall(json_data.encode('utf-8'))
-                
-            # 少し待機して負荷を下げる
-            import time
-            time.sleep(0.1)
             
-    except Exception as e:
-        print(f"クライアント処理エラー: {e}")
-    finally:
-        client_socket.close()
+            # 入力されたデータを保存
+            server.current_data = input_text
+            
+            # クライアントからの接続を1回待ち受ける
+            server.handle_request()
+            
+            print("Data sent. Waiting for next input...")
+            
+    except KeyboardInterrupt:
+        print("\nShutting down server...")
+        server.server_close()
+        sys.exit()
 
-def start_server(host, port):
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_socket.bind((host, port))
-    server_socket.listen(5)
-    print(f"サーバー起動: {host}:{port}")
 
-    while True:
-        client_socket, addr = server_socket.accept()
-        print(f"クライアント接続: {addr}")
-        client_thread = threading.Thread(target=handle_client, args=(client_socket,))
-        client_thread.daemon = True
-        client_thread.start()
-
-def main():
-    global estimated_age, estimated_gender
-    estimated_age = None
-    estimated_gender = None
-
-    # サーバーを別スレッドで起動
-    HOST = "172.25.15.27"  # あなたのIPアドレスに変更してください
-    PORT = 5700
-    server_thread = threading.Thread(target=start_server, args=(HOST, PORT), daemon=True)
-    server_thread.start()
-
+def main(HOST, PORT):
     cap = cv2.VideoCapture(0)
 
     while True:
@@ -94,27 +91,34 @@ def main():
         if not ret:
             break
         
+        # 顔検出とバウンディングボックスの取得
         bbox = get_face_bbox(frame)
         if bbox:
             x, y, w, h = bbox
+            # バウンディングボックスを描画（緑色）
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             
-            try:
-                estimated_age = age_analysis(frame)
-                cv2.putText(frame, f"Age: {estimated_age}", (10, 70), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                
-                estimated_gender = gender_analysis(frame)
-                cv2.putText(frame, f"Gender: {estimated_gender}", (10, 110), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-                
-                print(f"Age: {estimated_age}, Gender: {estimated_gender}")
+        # 年齢推定
+        try:
+            estimated_age = age_analysis(frame)
+            cv2.putText(frame, f"Age: {estimated_age}", (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            print(estimated_age)
+            start_server(HOST, PORT, estimated_age)
+        except Exception as e:
+            print("年齢推定エラー:", str(e))
 
-            except Exception as e:
-                print("推定エラー:", str(e))
+        # 性別推定
+        try:
+            estimated_gender = gender_analysis(frame)
+            cv2.putText(frame, f"Gender: {estimated_gender}", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            print(estimated_gender)
+        except Exception as e:
+            print("性別推定エラー:", str(e))
 
+        # 映像を表示
         cv2.imshow("Face Recognition & Analysis", frame)
-        
+
+        # 'q'キーで終了
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -122,4 +126,6 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+    HOST = '172.25.15.27'
+    PORT = 5700
+    main(HOST, PORT)
