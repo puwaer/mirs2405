@@ -9,7 +9,7 @@ from zed_hight_class import HeightMeasurement
 from server_value_updata import CustomTCPServer, TCPHandler
 
 
-def main_hight_server():
+def main_height_server():
     HOST = "172.25.15.27"
     PORT = 5700
     
@@ -30,10 +30,15 @@ def main_hight_server():
                 cv2.imshow("ZED Height Measurement", image)
             
             if height is not None:
-                print(f"測定身長: {height:.2f} cm")
-                server.current_data = {"height": float(height)}
-                server.handle_request()
-                
+                print(f"height: {height:.2f} cm")
+
+                if isinstance(height, (int, float)):
+                    server.current_data = {"height": float(height)}
+                    server.handle_request()
+                else:
+                    print("Error: height is not a number")
+
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
                 
@@ -44,5 +49,7 @@ def main_hight_server():
         server.server_close()
         print("終了しました")
 
+
+
 if __name__ == "__main__":
-    main_hight_server()
+    main_height_server()
