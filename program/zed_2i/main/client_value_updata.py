@@ -3,7 +3,7 @@ import json
 
 def get_dict_data(sock):
     data = sock.recv(1024).decode('utf-8')  # 受信データをデコード
-    print("Raw received data:", data)  # 受信データを表示
+    print(data)  # 受信データを表示
     try:
         data_dict = json.loads(data)  # JSON文字列を辞書に変換
         return data_dict.get('message', '')  # messageキーの値を取得
