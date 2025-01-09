@@ -17,4 +17,5 @@ def read_json_name(file_number):
 
 if __name__ == "__main__":
     json_data = read_json_name(2)       #[0, 1, 2],[男女, 年齢, 身長]
+                                        # 0: 男性, 1: 女性
     print(json_data)
