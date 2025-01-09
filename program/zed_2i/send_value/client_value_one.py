@@ -16,8 +16,8 @@ def get_dict_data(sock):
     return data
 
 if __name__ == "__main__":
-    #HOST = '172.25.15.27'
-    HOST = '172.25.15.130'
+    HOST = '172.25.15.27'
+    #HOST = '172.25.15.130'
     PORT = 5700
     while True:
         received_data_int = 0
