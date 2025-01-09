@@ -61,6 +61,7 @@ class FaceAnalyzer:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
         estimated_age = self.age_analysis(frame)
+        estimated_age = estimated_age -10
         if estimated_age:
             cv2.putText(frame, f"Age: {estimated_age}", (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
@@ -88,6 +89,7 @@ class FaceAnalyzer:
             estimated_age, estimated_gender = self.analyze_frame(frame)
             #data_age_gender = f"{estimated_age},{estimated_gender}"
             binary_gender = self.determine_gender(estimated_gender)
+
 
             gender_age = f"{binary_gender},{estimated_age}"
 

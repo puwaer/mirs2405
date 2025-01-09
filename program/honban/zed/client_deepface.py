@@ -42,6 +42,6 @@ def get_data(HOST, PORT, output_file_1, output_file_2):
 if __name__ == "__main__":
     HOST = '172.25.15.27'
     PORT = 5000
-    output_file_1 = './program/output/output_age.json'
-    output_file_2 = './program/output/output_gender.json'
+    output_file_1 = './program/honban/zed/output_age.json'
+    output_file_2 = './program/honban/zed/output_gender.json'
     get_data(HOST, PORT, output_file_1, output_file_2)
