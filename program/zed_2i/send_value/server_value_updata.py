@@ -2,7 +2,7 @@ import socketserver
 import sys
 import json
 
-HOST = "172.25.14.19"
+HOST = "172.25.15.27"
 PORT = 5700
 
 class TCPHandler(socketserver.BaseRequestHandler):

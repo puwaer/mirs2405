@@ -24,7 +24,8 @@ class HeightMeasurement:
         self.point_cloud = sl.Mat()
         
         # Measurement parameters
-        self.diff_rate = 1.2  # 倍率
+        self.diff_rate = 1.15  # 倍率
+        self.diff_const = 12  # 定数
         
     def open_camera(self) -> bool:
         """カメラを開く"""
@@ -109,7 +110,7 @@ class HeightMeasurement:
             
             if err_h == sl.ERROR_CODE.SUCCESS and err_f == sl.ERROR_CODE.SUCCESS:
                 base_height_in_meters = abs(head_depth[1] - foot_depth[1])
-                height_in_meters = (base_height_in_meters * 0.1) * self.diff_rate
+                height_in_meters = (base_height_in_meters * 0.1) * self.diff_rate + self.diff_const
                 return height_in_meters
             
         except Exception as e:
