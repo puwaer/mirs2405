@@ -13,28 +13,6 @@ static bool h = false;
 
 static int mode = 0;
 
-void radicon_gripper(bool _open, bool _close){
-  int _ang;
-  if(_open){
-    _ang += 1;
-    if(GRIP_OPEN_ANG <= _ang){
-      _ang = GRIP_OPEN_ANG;
-    }
-  }
-  else if(_close){
-    _ang -= 1;
-    if(_ang <= GRIP_CLOSE_ANG){
-      _ang = GRIP_CLOSE_ANG;
-    }
-  }
-  else{
-  }
-  
-  grip.write(_ang);
-  
-  delay(1000);
-}
-
 void radicon_turntable(bool _left, bool _right){
   turntable_run(turntable_speed);
   if(_left){
@@ -101,34 +79,42 @@ void radicon_run(int A, int B, int C, int D, int G, int H){
     right_r = false;
   }
 
-  if (997 <= G && G <= 1003) mode = 0;
-  else if (1047 <= G && G <=1053) mode = 1;
-  else if (1097 <= G && G <=1103) mode = 2;
+  if (990 <= G && G <= 1000) mode = 0;
+  else if (1040 <= G && G <=1050) mode = 1;
+  else if (1090 <= G && G <=1100) mode = 2;
   else mode = 0;
 
-  if (997 <= H && H <= 1003) h = false;
-  else if (1047 <= H && H <=1053) h = true;
+  if (990 <= H && H <= 1000) h = false;
+  else if (1040 <= H && H <=1050) h = true;
   else h = false;
 
   if(mode == 1){
-    radicon_gripper(false, false);
     radicon_turntable(left_l, right_l);
   }
   else if(mode == 2){
-    radicon_gripper(false, false);
     radicon_turntable(false, false);
   }
   else{
-    radicon_gripper(false, false);
     radicon_turntable(false, false);
   }
 }
 
 void radicon(int MR8_A, int MR8_B, int MR8_C, int MR8_D, int MR8_G, int MR8_H){
-
-
-  //Serial.println(analogRead(PIN_JOINT_1_R_POT));
-
+  
+  Serial.print("MR8_A = ");
+  Serial.print(MR8_A);
+  Serial.print("  MR8_B = ");
+  Serial.print(MR8_B);
+  Serial.print("  MR8_C = ");
+  Serial.print(MR8_C);
+  Serial.print("  MR8_D = ");
+  Serial.print(MR8_D);
+  Serial.print("  MR8_G = ");
+  Serial.print(MR8_G);
+  Serial.print("  MR8_H= ");
+  Serial.print(MR8_H);
+  Serial.println();
+  
   radicon_run(MR8_A, MR8_B, MR8_C, MR8_D, MR8_G, MR8_H);
     
   delay(10);

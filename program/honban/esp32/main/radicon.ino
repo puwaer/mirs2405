@@ -41,22 +41,12 @@ void send_rc(){
 
     sendArray[6] = state;
 */
-    if (sendArray[5] > 18000){
-      //sendArray[0]=0;
-      for (int i = 0; i < SEND_ARRAY_SIZE ; i++) {
-        Serial.write(sendArray[i] & 0xFF);         // 下位バイト
-        Serial.write((sendArray[i] >> 8) & 0xFF);  // 上位バイト
-      }
-      delay(1000);
-      break;
-    }
-    else{
-      // 各int型データを2バイトに分けて送信
-      for (int i = 0; i < SEND_ARRAY_SIZE ; i++) {
-        Serial.write(sendArray[i] & 0xFF);         // 下位バイト
-        Serial.write((sendArray[i] >> 8) & 0xFF);  // 上位バイト
-      }
-    }
+    // 各int型データを2バイトに分けて送信
+   for (int i = 0; i < SEND_ARRAY_SIZE ; i++) {
+    Serial.write(sendArray[i] & 0xFF);         // 下位バイト
+    Serial.write((sendArray[i] >> 8) & 0xFF);  // 上位バイト
+   }
+    
 
     delay(300); // 送信間隔
   }

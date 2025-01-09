@@ -109,25 +109,25 @@ def judge_angle(hight):
     joint1_angle = 25
     
     if hight <=110:
-        angle=[3, joint1_angle, 89, 81, -180, 0, 0]
+        angle=[3, joint1_angle, 89, 89, -170, 0, 0]
     elif 110 <= hight <=120:
-        angle=[3, joint1_angle, 87, 93, -180, 0, 0]
+        angle=[3, joint1_angle, 87, 87, -170, 0, 0]
     elif 120 <= hight <=130:
-        angle=[3, joint1_angle, 86, 94, -180, 0, 0]
+        angle=[3, joint1_angle, 86, 86, -170, 0, 0]
     elif 130 <= hight <=140:
-        angle=[3, joint1_angle, 85, 95, -180, 0, 0]
+        angle=[3, joint1_angle, 85, 85, -170, 0, 0]
     elif 140 <= hight <=150:
-        angle=[3, joint1_angle, 83, 97, -180, 0, 0]
+        angle=[3, joint1_angle, 83, 83, -170, 0, 0]
     elif 150 <= hight <=160:
-        angle=[3, joint1_angle, 82, -82, -180, 0, 0]
+        angle=[3, joint1_angle, 82, 82, -170, 0, 0]
     elif 160 <= hight <=170:
-        angle=[3, joint1_angle, 81, -81, -180, 0, 0]
+        angle=[3, joint1_angle, 81, 81, -170, 0, 0]
     elif 170 <= hight <=180:
-        angle=[3, joint1_angle, 79, -79, -180, 0, 0]
+        angle=[3, joint1_angle, 79, 79, -170, 0, 0]
     elif 180 <= hight <=190:
-        angle=[3, joint1_angle, 78, -78, -180, 0, 0]
+        angle=[3, joint1_angle, 78, 78, -170, 0, 0]
     elif 190 <= hight:
-        angle=[3, joint1_angle, 76, -76, -180, 0, 0]
+        angle=[3, joint1_angle, 76, 76, -170, 0, 0]
 
     return angle
 

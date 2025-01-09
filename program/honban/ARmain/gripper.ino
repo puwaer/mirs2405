@@ -1,21 +1,6 @@
-void gripper(bool _check){
-  if(_check == true){
-    grip.write(GRIP_OPEN_ANG);
-  }
-  else if(_check == false){
-    grip.write(GRIP_CLOSE_ANG);
-  }
-}
 
 void airchuck(bool _check){
-  if(_check == false){
-    airchuck1.write(AIRCHUCK_ANG);
-    airchuck2.write(AIRCHUCK_ANG);
-  }
-  else if(_check == true){
-    airchuck1.write(0);
-    airchuck2.write(0);
-  }
+  
 }
 
 void PUMP(bool _check){
@@ -72,5 +57,5 @@ void ultrasonic(){
   }
   delay(30);
 
-  raspi_send(10, reading, 0, 0, 0);
+  raspi_send(10, reading, 0, 0, 0, 0, 0);
 }

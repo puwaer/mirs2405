@@ -1,24 +1,19 @@
 #include "define.h"
-#include <Servo.h>
 #include <Wire.h>
-
-Servo grip;
-Servo airchuck1;
-Servo airchuck2;
 
 void setup(){
   arm_init();
   turntable_init();
   Wire.begin();   
   Serial.begin(115200);
-  raspi_open();
+  //raspi_open();
   delay(100);
 }
 
 void loop(){
-  /*while(1){
+  while(1){
     raspi_receive();
-  }*/
+  }
   
   /*while(1){
     ultrasonic();
@@ -30,9 +25,6 @@ void loop(){
 }
 
 /*
-void gripper(bool check)
-    check:true  → 開く
-          false → 閉じる
 
 airchuck(bool check)
     check:true  → 開く

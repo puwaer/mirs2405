@@ -13,13 +13,13 @@ void setup() {
   Serial.setTimeout(10);
   delay(100);
 
-  raspi_open();
+  //raspi_open();
 }
 
 void loop(){
- /*while(1){
+  while(1){
     raspi_receive();
-    delay(100);
+    delay(200);
   }
 
   /*while(1){
@@ -30,9 +30,25 @@ void loop(){
   /*while(1){
     joint4(joint3ID, 0, 1);
     delay(10);
-  }*/
+  }:/
+  /*arm(0, 0, 0, 0);
+  delay(2000);
+  arm(-15, 180, 0, 0);
+  delay(1000);
+  arm(-21, 180, 0, 0);
+  delay(1000);
+  //pomp
+  delay(5000);
+  arm(-15, 90, 90, -180);
+
+  while(1)
+  */
+  
+  
+  
+  
   //run_debug();
-  arm_debug();
+  //arm_debug();
   //radicon();
 
   /*while(1){

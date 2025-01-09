@@ -1,15 +1,4 @@
 void arm_init(){
-  pinMode(PIN_GRIPPER_PWM, OUTPUT);
-  pinMode(PIN_AIRCHUCK_1_PWM, OUTPUT);
-  pinMode(PIN_AIRCHUCK_2_PWM, OUTPUT);
-  grip.attach(PIN_GRIPPER_PWM, GRIP_MAX, GRIP_MIN);
-  airchuck1.attach(PIN_AIRCHUCK_1_PWM, AIRCHUCK_MIN, AIRCHUCK_MAX);
-  airchuck2.attach(PIN_AIRCHUCK_2_PWM, AIRCHUCK_MIN, AIRCHUCK_MAX);
-
-  grip.write(GRIP_OPEN_ANG);
-  airchuck1.write(0);
-  airchuck2.write(0);
-
   pinMode(PIN_PUMP_PWM, OUTPUT);
   pinMode(PIN_PUMP_DIR, OUTPUT);
   digitalWrite(PIN_PUMP_DIR, HIGH);

@@ -47,4 +47,3 @@ void raspi_receive() {
     }
   }
 }
-
