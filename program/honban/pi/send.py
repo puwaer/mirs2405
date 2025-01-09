@@ -1,13 +1,11 @@
 import serial
 import time
 import config
+import struct
 
 #pico
 #角度送信
-def send_angle(data):
-    ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
-    time.sleep(2)  # シリアル通信の初期化待ち
-    #data = [3, -20, -20, 0, 0, 0, 0]
+def send_angle(data, ser_pico):
 
     byte_array = bytearray()
     for value in data:
@@ -27,7 +25,19 @@ def send_angle(data):
         ser_pico.write(byte_array)
         time.sleep(0.1)  # 少し待機
 
-    ser_pico.close()
+
+def get(ser_pico):
+    data = [3, 0, 0, 0, 0, 0 ,0]    #配布物を取得
+    send_angle(data, ser_pico)
+    data = [3, -15, 180, 0, 0, 0 ,0]
+    send_angle(data, ser_pico)
+    data = [3, -20, 180, 0, 0, 0 ,0]
+    send_angle(data, ser_pico)
+    #↑紙を吸う
+    data = [3, -15, 90, 90, -180, 0 ,0]
+    send_angle(data, ser_pico)
+    time.sleep(3)
+
 
 '''
 #走行命令の送信

@@ -9,7 +9,7 @@ def read_json_name(file_number):
     file_path = [
         './program/output/output_age.json',
         './program/output/output_gender.json',
-        './program/output/output_zed.json'
+        '../zed/output_zed.json'
         ]
     
     return int(read_json(file_path[file_number]))
