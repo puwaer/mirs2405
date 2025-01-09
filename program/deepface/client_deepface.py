@@ -7,12 +7,10 @@ def get_dict_data(sock):
     #print(data)  # 受信データを表示
     
     # 制御文字や不要な部分を除去
-    #clean_data = re.sub(r'[^\d]', '', data)  # 数字以外を削除
-    return data
+    clean_data = re.sub(r'[^\d]', '', data)  # 数字以外を削除
+    return clean_data
 
-if __name__ == "__main__":
-    HOST = '172.25.14.19'
-    PORT = 5700
+def get_data(HOST, PORT, output_file):
     while True:
         try:
             # ソケット接続
@@ -23,7 +21,11 @@ if __name__ == "__main__":
             received_data = get_dict_data(sock)
             int_data = int(received_data)
             print(int_data)
-            
+
+            # Save int_data to a JSON file
+            with open(f'{output_file}', 'w') as json_file:
+                json.dump(int_data, json_file)
+
             # 接続を閉じる
             sock.close()
             
@@ -34,3 +36,10 @@ if __name__ == "__main__":
             print(f"Error occurred: {e}")
             sock.close()
             continue
+
+if __name__ == "__main__":
+    HOST = '172.25.14.19'
+    PORT = 5000
+    output_file = './program/output/output_age.json'
+    output_file = './program/output/output_gender.json'
+    get_data(HOST, PORT, output_file)
