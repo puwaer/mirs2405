@@ -7,8 +7,12 @@ import struct
 
 #esp
 #ラジコン通信
-def serial_rc(ser_esp, ser_pico):   
-
+def serial_rc():   
+     # シリアル通信の初期化
+    ser_esp = serial.Serial(config.ESP_PORT, config.BAUDRATE)
+    ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
+    #ser_arduino = serial.Serial(config.ARDUINO_PORT, config.BAUDRATE)
+    time.sleep(0.1)  # シリアル通信の初期化待ち
     data = [4, 0, 0, 0, 0, 0, 0]    #識別番号（ラジコンモードは4）
     size=14
 
@@ -47,11 +51,11 @@ def serial_rc(ser_esp, ser_pico):
 
             # データをArduinoに転送
             #ser_arduino.write(data)
-            
+
             print("Received input values:", input_values)
 
-            # chEが押されたらラジコンモード終了
-            if input_values[0] == 0:
+            # chGが押されたらラジコンモード終了
+            if not(1040 <= input_values[5] <= 1100):
                 print("Terminating based on received signal.")
                 break
 
@@ -102,24 +106,28 @@ def receive_pr(ser_pico):
 
 
 def judge_angle(hight):
-    if 100 <= hight <=110:
-        angle=[3, 10, 10, 10, 0, 0, 0]
-    elif 120 <= hight <=120:
-        angle=[3, 20, 20, 20, 0, 0 ,0]
+    joint1_angle = 25
+    
+    if hight <=110:
+        angle=[3, joint1_angle, 89, 81, -180, 0, 0]
+    elif 110 <= hight <=120:
+        angle=[3, joint1_angle, 87, 93, -180, 0, 0]
     elif 120 <= hight <=130:
-        angle=[3, 30, 30, 30, 0, 0, 0]
+        angle=[3, joint1_angle, 86, 94, -180, 0, 0]
     elif 130 <= hight <=140:
-        angle=[3, 40, 40, 40, 0, 0, 0]
+        angle=[3, joint1_angle, 85, 95, -180, 0, 0]
     elif 140 <= hight <=150:
-        angle=[3, 50, 50, 50, 0, 0, 0]
+        angle=[3, joint1_angle, 83, 97, -180, 0, 0]
     elif 150 <= hight <=160:
-        angle=[3, 60, 60, 60, 0, 0 ,0]
+        angle=[3, joint1_angle, 82, -82, -180, 0, 0]
     elif 160 <= hight <=170:
-        angle=[3, 10, 10, 10, 10, 0, 0]
+        angle=[3, joint1_angle, 81, -81, -180, 0, 0]
     elif 170 <= hight <=180:
-        angle=[3, 80, 80, 80, 0, 0, 0]
+        angle=[3, joint1_angle, 79, -79, -180, 0, 0]
     elif 180 <= hight <=190:
-        angle=[3, 90, 90, 90, 0, 0, 0]
+        angle=[3, joint1_angle, 78, -78, -180, 0, 0]
+    elif 190 <= hight:
+        angle=[3, joint1_angle, 76, -76, -180, 0, 0]
 
     return angle
 

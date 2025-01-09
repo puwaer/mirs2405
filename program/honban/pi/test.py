@@ -15,17 +15,37 @@ from receive import receive_distance
 from receive import judge_angle
 from send import send_angle
 
-
+#ser_esp = serial.Serial(config.PICO_PORT, config.BAUDRATE)
 ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
-
+#ser_arduino = serial.Serial(config.PICO_PORT, config.BAUDRATE)
+#serial_rc()
 #身長から角度決定
+'''
 hight = read_json_name(2)
 print(hight)
 arm_angle = judge_angle(hight)
 print(arm_angle)
+'''
+'''
+arm_angle = [3, 0, 0, 0, 0, 0, 0]
 send_angle(arm_angle, ser_pico)
+time.sleep(1)
 
 
+'''
+arm_angle = [3, 0, 0, 0, 0, 0, 0]
+send_angle(arm_angle, ser_pico)
+time.sleep(1)
+arm_angle = [3, 0, 10, 0, 0, 0, 0]
+send_angle(arm_angle, ser_pico)
+time.sleep(1)
+arm_angle = [3, 0, -10, 0, 0, 0, 0]
+send_angle(arm_angle, ser_pico)
+time.sleep(1)
+arm_angle = [3, 0, 0, 0, 0, 0, 0]
+send_angle(arm_angle, ser_pico)
+time.sleep(1)
+'''
 
 '''
 #rc操作
