@@ -31,7 +31,7 @@ def get(ser_pico):
     send_angle(data, ser_pico)
     data = [3, -15, 180, 0, 0, 0 ,0]
     send_angle(data, ser_pico)
-    data = [3, -20, 180, 0, 0, 0 ,0]
+    data = [3, -21, 180, 0, 0, 0 ,0]
     send_angle(data, ser_pico)
     #↑紙を吸う
     data = [3, -15, 90, 90, -180, 0 ,0]

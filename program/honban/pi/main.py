@@ -14,11 +14,11 @@ from receive import serial_rc
 from receive import receive_distance
 from receive import judge_angle
 from send import send_angle
-
+'''
 a = read_json_name(2)
 print(a)
-
 '''
+
 def main():
     ser_esp = serial.Serial(config.ESP_PORT, config.BAUDRATE)
     ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
@@ -79,4 +79,4 @@ def main():
 #実行
 mode = 'refill'
 main()
-'''
+

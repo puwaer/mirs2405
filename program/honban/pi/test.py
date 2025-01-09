@@ -16,11 +16,14 @@ from receive import judge_angle
 from send import send_angle
 
 
+ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
+
 #身長から角度決定
 hight = read_json_name(2)
 print(hight)
-angle = judge_angle(hight)
-print(angle)
+arm_angle = judge_angle(hight)
+print(arm_angle)
+send_angle(arm_angle, ser_pico)
 
 
 

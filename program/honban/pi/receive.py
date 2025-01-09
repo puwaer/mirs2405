@@ -115,7 +115,7 @@ def judge_angle(hight):
     elif 150 <= hight <=160:
         angle=[3, 60, 60, 60, 0, 0 ,0]
     elif 160 <= hight <=170:
-        angle=[3, 70, 70, 70, 0, 0, 0]
+        angle=[3, 10, 10, 10, 10, 0, 0]
     elif 170 <= hight <=180:
         angle=[3, 80, 80, 80, 0, 0, 0]
     elif 180 <= hight <=190:
