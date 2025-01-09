@@ -1,15 +1,14 @@
 import socket
 import json
+import re
 
 def get_dict_data(sock):
     data = sock.recv(1024).decode('utf-8')  # 受信データをデコード
-    print(data)  # 受信データを表示
-    try:
-        data_dict = json.loads(data)  # JSON文字列を辞書に変換
-        return data_dict.get('message', '')  # messageキーの値を取得
-    except json.JSONDecodeError:
-        #print("Received data is not valid JSON")
-        return None
+    #print(data)  # 受信データを表示
+    
+    # 制御文字や不要な部分を除去
+    clean_data = re.sub(r'[^\d]', '', data)  # 数字以外を削除
+    return clean_data
 
 if __name__ == "__main__":
     HOST = '172.25.15.27'
@@ -22,8 +21,9 @@ if __name__ == "__main__":
 
             # データを受信して表示
             received_data = get_dict_data(sock)
-            if received_data is not None:
-                print("Received:", received_data)
+            int_data = int(received_data)
+            print(int_data)
+            
             
             # 接続を閉じる
             sock.close()

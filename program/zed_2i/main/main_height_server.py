@@ -34,7 +34,8 @@ def main_height_server():
                 print(f"height: {height:.2f} cm")
 
                 if isinstance(height, (int, float)) and not (isinstance(height, float) and math.isnan(height)):
-                    server.current_data = {"height": int(height)}
+                    #server.current_data = {"height": int(height)}
+                    server.current_data = int(height)
                     server.handle_request()
                 else:
                     print("Error: height is not a number")
