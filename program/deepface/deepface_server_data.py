@@ -4,6 +4,7 @@ import numpy as np
 import socket
 import json
 import threading
+import struct
 
 def emotion_analysis(image):
     result = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
@@ -36,12 +37,26 @@ def get_face_bbox(image):
 def handle_client(client_socket):
     try:
         while True:
-            # 最新の推定結果をJSON形式で送信
-            data = json.dumps({
-                'age': estimated_age,
-                'gender': estimated_gender
-            })
-            client_socket.send(data.encode('utf-8'))
+            if estimated_age is not None and estimated_gender is not None:
+                # データをJSON形式に変換
+                data_dict = {
+                    'age': estimated_age,
+                    'gender': estimated_gender
+                }
+                json_data = json.dumps(data_dict)
+                
+                # データの長さを取得し、4バイトのバイト列に変換
+                length = len(json_data)
+                length_bytes = struct.pack('!I', length)
+                
+                # 長さとデータを送信
+                client_socket.sendall(length_bytes)
+                client_socket.sendall(json_data.encode('utf-8'))
+                
+            # 少し待機して負荷を下げる
+            import time
+            time.sleep(0.1)
+            
     except Exception as e:
         print(f"クライアント処理エラー: {e}")
     finally:
@@ -67,7 +82,7 @@ def main():
     estimated_gender = None
 
     # サーバーを別スレッドで起動
-    HOST = "172.25.15.27"
+    HOST = "172.25.15.27"  # あなたのIPアドレスに変更してください
     PORT = 5700
     server_thread = threading.Thread(target=start_server, args=(HOST, PORT), daemon=True)
     server_thread.start()
