@@ -5,8 +5,16 @@ def read_json(file_path):
         data = json.load(file)
     return data
 
+def read_json_name(file_number):
+    file_path = [
+        './program/output/output_age.json',
+        './program/output/output_gender.json',
+        './program/output/output_zed.json'
+        ]
+    
+    return int(read_json(file_path[file_number]))
+    
+
 if __name__ == "__main__":
-    file_path = 'output_zed.json'
-    json_data = read_json(file_path)
-    #json_data = int(read_json(file_path))
+    json_data = read_json_name(0)       #[0, 1, 2],[男女, 年齢, 身長]
     print(json_data)
