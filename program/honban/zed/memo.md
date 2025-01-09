@@ -8,6 +8,11 @@ zed_hight_class.py
 client_json.py
 
 年齢、性別予測
+サーバー
+server_deepface.py
+
+クライアント
+client_deepface.py
 
 jsonファイルread
 read_json.py
