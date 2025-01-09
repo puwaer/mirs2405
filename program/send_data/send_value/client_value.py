@@ -1,7 +1,7 @@
 import socket
 import json
 
-HOST = "172.25.16.100"  
+HOST = "172.25.15.27"  
 PORT = 5700
 
 def get_dict_data(sock):
