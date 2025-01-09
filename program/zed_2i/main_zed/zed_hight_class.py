@@ -25,7 +25,7 @@ class HeightMeasurement:
         
         # Measurement parameters
         self.diff_rate = 1.15  # 倍率
-        self.diff_const = 12  # 定数
+        self.diff_const = 5  # 定数
         
     def open_camera(self) -> bool:
         """カメラを開く"""
