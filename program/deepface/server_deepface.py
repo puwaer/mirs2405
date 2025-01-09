@@ -1,36 +1,12 @@
 import cv2
 from deepface import DeepFace
 import numpy as np
-import socketserver
-import json
-import sys
+import requests
 
-class TCPHandler(socketserver.BaseRequestHandler):
-    def handle(self):
-        try:
-            # 辞書をJSON文字列に変換
-            json_str = json.dumps(self.server.current_data)
-            
-            # 文字列をバイト列に変換
-            data = json_str.encode('utf-8')
-            
-            # データサイズを取得
-            size = len(data).to_bytes(4, byteorder='big')
-            
-            # サイズとデータを送信（1回だけ）
-            self.request.sendall(size + data)
-            
-        except ConnectionError:
-            print("Connection lost")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-
-class CustomTCPServer(socketserver.TCPServer):
-    def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
-        self.current_data = None
-        super().__init__(server_address, RequestHandlerClass, bind_and_activate)
-
-
+# サーバーのIPアドレスとポート番号
+HOST = '172.25.15.27'
+PORT = '5000'
+SERVER_URL = f"http://{HOST}:{PORT}/api"
 
 def emotion_analysis(image):
     result = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
@@ -45,7 +21,6 @@ def gender_analysis(image):
     return result[0]['gender']
 
 def get_face_bbox(image):
-    # DeepFaceのdetect_face関数で顔検出を行う
     try:
         face_objs = DeepFace.extract_faces(image, enforce_detection=False)
         if face_objs:
@@ -60,30 +35,19 @@ def get_face_bbox(image):
     except Exception as e:
         print("顔検出エラー:", str(e))
         return None
-    
-def start_server(HOST, PORT, input_text) :
-    socketserver.TCPServer.allow_reuse_address = True
-    server = CustomTCPServer((HOST, PORT), TCPHandler)
 
+def send_data_to_server(age, gender):
     try:
-        print("Server started")
-        while True:
-            
-            # 入力されたデータを保存
-            server.current_data = input_text
-            
-            # クライアントからの接続を1回待ち受ける
-            server.handle_request()
-            
-            print("Data sent. Waiting for next input...")
-            
-    except KeyboardInterrupt:
-        print("\nShutting down server...")
-        server.server_close()
-        sys.exit()
+        payload = {"age": str(age), "gender": gender}
+        response = requests.post(SERVER_URL, json=payload)
+        if response.status_code == 200:
+            print("データ送信成功:", response.json())
+        else:
+            print("データ送信失敗:", response.status_code, response.text)
+    except Exception as e:
+        print("データ送信エラー:", str(e))
 
-
-def main(HOST, PORT):
+def main():
     cap = cv2.VideoCapture(0)
 
     while True:
@@ -103,9 +67,9 @@ def main(HOST, PORT):
             estimated_age = age_analysis(frame)
             cv2.putText(frame, f"Age: {estimated_age}", (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             print(estimated_age)
-            start_server(HOST, PORT, estimated_age)
         except Exception as e:
             print("年齢推定エラー:", str(e))
+            estimated_age = None
 
         # 性別推定
         try:
@@ -114,6 +78,11 @@ def main(HOST, PORT):
             print(estimated_gender)
         except Exception as e:
             print("性別推定エラー:", str(e))
+            estimated_gender = None
+
+        # サーバーにデータを送信
+        if estimated_age is not None and estimated_gender is not None:
+            send_data_to_server(estimated_age, estimated_gender)
 
         # 映像を表示
         cv2.imshow("Face Recognition & Analysis", frame)
@@ -126,6 +95,4 @@ def main(HOST, PORT):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    HOST = '172.25.15.27'
-    PORT = 5700
-    main(HOST, PORT)
+    main()
