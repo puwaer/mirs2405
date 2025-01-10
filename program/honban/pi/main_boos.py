@@ -19,7 +19,7 @@ a = read_json_name(2)
 print(a)
 '''
 
-def main():
+def main_boos():
     ser_esp = serial.Serial(config.ESP_PORT, config.BAUDRATE)
     ser_pico = serial.Serial(config.PICO_PORT, config.BAUDRATE)
     ser_arduino = serial.Serial(config.ARDUINO_PORT, config.BAUDRATE)

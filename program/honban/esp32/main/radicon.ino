@@ -4,6 +4,8 @@ unsigned int sendArray[SEND_ARRAY_SIZE]; //送信する配列を格納
 
 static int var = 0;
 static int old_var = 0; 
+int state = 0;
+int maxState = 2;
 
 
 void send_rc(){
@@ -16,12 +18,9 @@ void send_rc(){
     sendArray[4] = pulseIn(PIN_MR8_D, HIGH);
     sendArray[5] = pulseIn(PIN_MR8_G, HIGH);
     sendArray[6] = pulseIn(PIN_MR8_H, HIGH);
+    unsigned int F = pulseIn(PIN_MR8_F, HIGH);
     //sendArray[7] = pulseIn(PIN_MR8_G, HIGH);
     //sendArray[8] = pulseIn(PIN_MR8_H, HIGH);
-
-    for (int i = 1; i <= 6; i++){
-      sendArray[i] /= 100;
-    }
 
 /*  
     if(1800 < F) F = 1;
