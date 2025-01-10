@@ -194,9 +194,9 @@ void radicon_run(int A, int B, int C, int D, int G, int H){
     right_r = false;
   }
 
-  if (997 <= G && G <= 1003) mode = 0;
-  else if (1047 <= G && G <=1053) mode = 1;
-  else if (1097 <= G && G <=1103) mode = 2;
+  if (990 <= G && G <= 1000) mode = 0;
+  else if (1040 <= G && G <=1050) mode = 1;
+  else if (1090 <= G && G <=1100) mode = 2;
   else mode = 0;
 
   if(mode == 1){
@@ -226,8 +226,20 @@ void radicon_run(int A, int B, int C, int D, int G, int H){
 }
 
 void radicon(int MR8_A, int MR8_B, int MR8_C, int MR8_D, int MR8_G, int MR8_H){
-
-  //Serial.println(analogRead(PIN_JOINT_1_R_POT));
+  
+  Serial.print("MR8_A = ");
+  Serial.print(MR8_A);
+  Serial.print("  MR8_B = ");
+  Serial.print(MR8_B);
+  Serial.print("  MR8_C = ");
+  Serial.print(MR8_C);
+  Serial.print("  MR8_D = ");
+  Serial.print(MR8_D);
+  Serial.print("  MR8_G = ");
+  Serial.print(MR8_G);
+  Serial.print("  MR8_H= ");
+  Serial.print(MR8_H);
+  Serial.println();
 
   radicon_run(MR8_A, MR8_B, MR8_C, MR8_D, MR8_G, MR8_H);
     

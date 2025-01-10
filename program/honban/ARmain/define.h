@@ -1,4 +1,3 @@
-#define PIN_GRIPPER_PWM     3   //グリッパー開閉
 #define PIN_AIRCHUCK_1_PWM  5   //エアーチャックの昇降
 #define PIN_AIRCHUCK_2_PWM  6   //エアーチャックの昇降
 
@@ -12,15 +11,6 @@
 
 #define PIN_ULTRASONIC_SDA  A0
 #define PIN_ULTRASONIC_SCL  A1
-
-#define GRIP_MIN 544  //サーボの角度が0度のときのパルス幅[us]。デフォルトは544。
-#define GRIP_MAX 2400 // サーボの角度が180度のときのパルス幅[us]。デフォルトは2400。
-#define GRIP_OPEN_ANG 15  //グリッパーの動作角度[度](0-180)
-#define GRIP_CLOSE_ANG 0
-
-#define AIRCHUCK_MIN  544
-#define AIRCHUCK_MAX  2400
-#define AIRCHUCK_ANG  15
 
 #define turntable_PPR  4096.0
 
