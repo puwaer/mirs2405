@@ -100,8 +100,8 @@ class HeightMeasurement:
             
             if err_h == sl.ERROR_CODE.SUCCESS and err_f == sl.ERROR_CODE.SUCCESS:
                 base_height_in_meters = abs(head_depth[1] - foot_depth[1])
-                height_in_meters = (base_height_in_meters * 100) * self.diff_rate + self.diff_const
-                return height_in_meters
+                height_in_meters = (base_height_in_meters * 0.1) * self.diff_rate + self.diff_const
+                return int(height_in_meters)
             
         except Exception as e:
             print(f"Depth data error: {e}")
