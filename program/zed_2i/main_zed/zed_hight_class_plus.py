@@ -24,8 +24,9 @@ class HeightMeasurement:
         self.point_cloud = sl.Mat()
         
         # Measurement parameters
-        self.diff_rate = 1.18  # 倍率
+        self.diff_rate = 1.15  # 倍率
         self.diff_const = 5  # 定数
+        self.diff_depth = 2.92  # 深度の倍率
         
     def open_camera(self) -> bool:
         """カメラを開く"""
@@ -46,6 +47,8 @@ class HeightMeasurement:
                          int(landmarks[self.mp_pose.PoseLandmark.NOSE].y * image.shape[0]))
             foot_point = (int(landmarks[self.mp_pose.PoseLandmark.LEFT_FOOT_INDEX].x * image.shape[1]),
                          int(landmarks[self.mp_pose.PoseLandmark.LEFT_FOOT_INDEX].y * image.shape[0]))
+            #print(f"head_point: {head_point}, foot_point: {foot_point}")
+
             return head_point, foot_point
         return None, None
 
@@ -76,24 +79,46 @@ class HeightMeasurement:
             # 骨格ポイントの描画
             self._draw_points(image_ocv, head_point, foot_point)
             
-            # 深度データから身長を計算
-            height = self._calculate_height(head_point, foot_point)
-            if height:
-                status_text = f"height: {height:.2f} cm"
-                color = (0, 255, 0)  # 緑色
-            else:
-                status_text = "not data"
+            try:
+                # 深度データから身長を計算
+                result = self._calculate_height(head_point, foot_point)
+                if result is not None:
+                    height, head_depth, foot_depth = result
+                    if height:
+                        status_text = f"height: {height:.2f} cm"
+                        color = (0, 255, 0)  # 緑色
+                        print(f"head_depth: {head_depth}, foot_depth: {foot_depth}")
+                    else:
+                        status_text = "not data"
+                        color = (0, 0, 255)  # 赤色
+                        height = None
+                        head_depth = None
+                        foot_depth = None
+                else:
+                    status_text = "calculation failed"
+                    color = (0, 0, 255)  # 赤色
+                    height = None
+                    head_depth = None
+                    foot_depth = None
+
+            except Exception as e:
+                status_text = "calculation error"
                 color = (0, 0, 255)  # 赤色
                 height = None
+                head_depth = None
+                foot_depth = None
+                print(f"Error in height calculation: {e}")
         else:
             status_text = "not human"
             color = (0, 0, 255)  # 赤色
             height = None
+            head_depth = None
+            foot_depth = None   
 
         # ステータステキストの描画
         cv2.putText(image_ocv, status_text, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
         
-        return height, image_ocv
+        return height, image_ocv, head_depth, foot_depth
 
     def _draw_points(self, image: np.ndarray, head_point: tuple, foot_point: tuple):
         """検出ポイントを描画"""
@@ -110,8 +135,10 @@ class HeightMeasurement:
             
             if err_h == sl.ERROR_CODE.SUCCESS and err_f == sl.ERROR_CODE.SUCCESS:
                 base_height_in_meters = abs(head_depth[1] - foot_depth[1])
+                base_head = (abs(head_depth[1]) * 0.1) * self.diff_depth
+                base_foot = (abs(foot_depth[1]) * 0.1) * self.diff_depth
                 height_in_meters = (base_height_in_meters * 0.1) * self.diff_rate + self.diff_const
-                return height_in_meters
+                return height_in_meters, base_head, base_foot
             
         except Exception as e:
             print(f"深度データ取得エラー: {e}")
@@ -132,13 +159,14 @@ def main_hight():
     print("測定を開始します。'q'で終了します")
     
     while True:
-        height, image = height_measurement.process_frame()
+        height, image, head_depth, foot_depth = height_measurement.process_frame()
         
         if image.size > 0:
             cv2.imshow("ZED Height Measurement", image)
         
         if height is not None:
             print(f"height: {height:.2f} cm")
+            print(f"head_depth: {head_depth}, foot_depth: {foot_depth}")    
             
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
