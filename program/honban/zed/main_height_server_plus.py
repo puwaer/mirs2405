@@ -6,7 +6,7 @@ import socketserver
 import json
 import math
 from typing import Tuple, Optional
-from zed_hight_class import HeightMeasurement
+from zed_hight_class_plus import HeightMeasurement
 from server_value_updata import CustomTCPServer, TCPHandler
 
 
@@ -25,7 +25,7 @@ def main_height_server():
     
     try:
         while True:
-            height, image = height_measurement.process_frame()
+            height, image, head_depth, foot_depth = height_measurement.process_frame()
             
             if image.size > 0:
                 cv2.imshow("ZED Height Measurement", image)
@@ -36,6 +36,10 @@ def main_height_server():
                 if isinstance(height, (int, float)) and not (isinstance(height, float) and math.isnan(height)):
                     #server.current_data = {"height": int(height)}
                     server.current_data = int(height)
+                    server.handle_request()
+                    server.current_data = int(head_depth)
+                    server.handle_request()
+                    server.current_data = int(foot_depth)
                     server.handle_request()
                 else:
                     print("Error: height is not a number")
