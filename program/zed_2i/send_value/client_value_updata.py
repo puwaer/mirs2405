@@ -21,8 +21,8 @@ if __name__ == "__main__":
 
             # データを受信して表示
             received_data = get_dict_data(sock)
-            int_data = int(received_data)
-            print(int_data)
+            #int_data = int(received_data)
+            print(received_data)
             
             # 接続を閉じる
             sock.close()
