@@ -112,34 +112,46 @@
                <td>main.py</td>
                <td>全体のメインプログラムを実行</td>
                </tr>
-  
+               
                <tr>
-                <td>serial_ino.py</td>
-                <td>Arduino Unoとのシリアル通信</td>
-                </tr>
+                 <td>config.py</td>
+                 <td>各モジュールで使用する定数を定義</td>
+               </tr>
+
+               <tr>
+                <td>send.py</td>
+                <td></td>
+              </tr>
   
               <tr>
-                <td>serial_pico.py</td>
-                <td>rp2040とのシリアル通信</td>
-                </tr>
+                <td>receive.py</td>
+                <td></td>
+              </tr>
   
               <tr>
-                <td>serial_jetson.py</td>
-                <td>Jetson nanoとのシリアル通信</td>
-                </tr>
+                <td>clinet_value_updata.py</td>
+                <td></td>
+              </tr>
   
               <tr>
-                <td>arm.py</td>
-                <td>ロボットアーム角度計算プログラム</td>
-                </tr>
-  
+                <td>read_json.py</td>
+                <td></td>
+              </tr>
+
               <tr>
-                <td>config.py</td>
-                <td>各モジュールで使用する定数を定義</td>
-                </tr>
+                <td>client_json.py</td>
+                <td></td>
+              </tr>     
+
+              <tr>
+                <td>client_deepface.py</td>
+                <td></td>
+              </tr>
+
                 </table> 
           </a><br>
 
+          
         <a name="3.2">
           <h3>3.2.Arduino UNO</h3>
           <p>Arduinoのモジュール構成をfigure2, Table3に示す。</p>
@@ -262,34 +274,22 @@
                </tr>
   
                <tr>
-                <td>deepface_text.py</td>
-                <td>年齢推定、性別判定を判定する</td>
+                <td>main_height_server_plus.py</td>
+                <td>setup関数および、loop関数の定義</td>
               </tr>
               <tr>
-                <td>ex.py</td>
-                <td>lidarの情報から身長を推定する</td>
+                <td>server_value_update.py</td>
+                <td></td>
               </tr>
               <tr>
-                <td>get_lidar_value.py</td>
-                <td>ros2の/human_detectorのtopicから値を取得する</td>
+                <td>zed_hight_class_plus.py</td>
+                <td></td>
               </tr>
               <tr>
-                <td>serial_jetson.py</td>
-                <td>jetsonとraspberry pi 4 modleBとシリアル通信を行う</td>
+                <td>server_deepface.py</td>
+                <td></td>
               </tr>
-              <tr>
-                <td>main.py</td>
-                <td>まとめてプログラムを実行する</td>
-              </tr>
-              <tr>
-                <td>view_s1lidar_s1_launch.py</td>
-                <td>lidarがら値を取得して/scanのtopicを出力する</td>
-              </tr>
-              <tr>
-                <td>lidar_human_detector.py</td>
-                <td>/scanから値を取得して、移動している物体を認識して距離と角度の情報を取得する。<br>
-                  その後、/human_detectorの名前でtopic出力する</td>
-              </tr>
+
               </table> 
           </a><br>
 
@@ -309,33 +309,24 @@
                </tr>
   
                <tr>
-                <td>deepface_text.py</td>
-                <td>年齢推定、性別判定を判定する</td>
+                <td>main.ino</td>
+                <td></td>
               </tr>
               <tr>
-                <td>ex.py</td>
-                <td>lidarの情報から身長を推定する</td>
+                <td>defind.h</td>
+                <td></td>
               </tr>
               <tr>
-                <td>get_lidar_value.py</td>
-                <td>ros2の/human_detectorのtopicから値を取得する</td>
+                <td>init.ino</td>
+                <td></td>
               </tr>
               <tr>
-                <td>serial_jetson.py</td>
-                <td>jetsonとraspberry pi 4 modleBとシリアル通信を行う</td>
+                <td>raspi.ino</td>
+                <td></td>
               </tr>
               <tr>
-                <td>main.py</td>
-                <td>まとめてプログラムを実行する</td>
-              </tr>
-              <tr>
-                <td>view_s1lidar_s1_launch.py</td>
-                <td>lidarがら値を取得して/scanのtopicを出力する</td>
-              </tr>
-              <tr>
-                <td>lidar_human_detector.py</td>
-                <td>/scanから値を取得して、移動している物体を認識して距離と角度の情報を取得する。<br>
-                  その後、/human_detectorの名前でtopic出力する</td>
+                <td>radicon.ino</td>
+                <td></td>
               </tr>
               </table> 
           </a><br>
