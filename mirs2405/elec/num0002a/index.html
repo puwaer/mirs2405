@@ -64,7 +64,7 @@
         <li><a href = "#elec7">7.電源系回路の機体への固定</a><br></li>
         <li><a href = "#elec8">8.Raspberry Pi pico用基板</a><br></li>
         <li><a href = "#elec9">9.Arduino用基板</a><br></li>
-        <li><a href = "#elec10">10.総括</a><br></li>
+        <li><a href = "#elec11">11.総括</a><br></li>
     </ul>
 
 <br>
@@ -205,7 +205,7 @@ PCBパターンが完成したらガーバーファイル(裏面の銅箔部分�
 <center>
     <img src="../picture/MD段.jpg" width="500"><br>
     fig.9 固定の様子(上)<br><br>
-    <img src="../picture/左側回路.jpg" width="500"><br>
+    <img src="../picture/左側回路.jpg" height="500"><br>
     fig.10 固定の様子(下)<br><br>
 </center>
 
@@ -223,7 +223,20 @@ PCBパターンが完成したらガーバーファイル(裏面の銅箔部分�
     fig.12 固定の様子(上)<br><br>
 </center>
 
-<h2><a name = elec10>10.総括</a></h2>
+<h2><a name = elec10>10.電源回路制御プログラム</a></h2>
+電源回路の制御にはPICマイコン(PIC16F1938)を使用している。<br>
+マイコンのピン配置をfig.13に示す。<br>
+<center>
+    <img src="../picture/PICピン.png" width="250"><br>
+    fig.13 ピン配置<br><br>
+</center>
+PWM周波数は15.625kHzとしている。プログラムは以下のURLに示す。<br>
+<address>
+    <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/elec/files/MIRS step down converter.X.zip" target="_self">電源制御プログラム</a>
+</address>
+
+
+<h2><a name = elec11>11.総括</a></h2>
 モータを回転させたときの電圧降下を考慮しておらず、部品の追加が必要になってしまった。<br>
 メカとの連携不足で配線スペースに余裕がなく、配線長も無駄に長くなってしまった。<br>
 各パート間での連携がとても大切だと感じた。<br>
