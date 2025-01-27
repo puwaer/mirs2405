@@ -1,0 +1,201 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-SOHT-0001 MIRS2405 ソフト詳細設計書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 ソフト開発報告書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-soft-0003</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>B01</td>
+<td>2025.1.24</td>
+<td>清拓実、平沢快斗、幸航輝</td>
+<td></td>
+<td>初版</td>
+</tr>
+</table>
+
+<br>
+
+
+  <!-- ここから本文-->
+  <h3>目次</h3>
+  <ol>
+      <li><a href="#1">ドキュメント概要  </a><br></li>
+      <li>
+        <a href="#2">作成した主なプログラムと評価</a>
+        <ul>
+          <li><a href="#2-1">ロボットアーム</a></li>
+          <li><a href="#2-2">ラジコン操作</a></li>
+          <li><a href="#2-3">年齢、性別、身長の測定(対象者選別)</a></li>
+        </ul>
+      </li>
+      <li><a href="#3">総括</a></li>
+      <li><a href="#4">プログラムのソースコード</a></li>
+  </ol>
+  <hr>
+
+
+  
+  <h2><a name="1">1.ドキュメント概要</a></h2>
+  <dd>
+      <p>
+          本ドキュメントはmirs2405𝔊𝔘𝔏𝔏ℭのソフトウェア開発報告書である。
+      </p>
+
+  </dd>
+  
+  <h2><a name="2">2.作成したプログラムと評価</a></h2>
+  <div>
+      <ul>
+          <li>
+              <h3><a name="2-1">走行機能(ライントレース)</a></h3>
+              <!-- <iframe src="https://www.youtube.com/embed/yn59zjOSwMk?&autoplay=1&mute=1&controls=0&loop=1&playlist=yn59zjOSwMk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+              <p>
+                  ＜概要＞<br>
+                  ロボット中央のフォトリフレクタ2つから白線と黒線の値を読み取った。その値からPID制御によりライントレースを行った。値が白線の閾値を超えた場合にUターンをさせた。<br>
+                  <br>
+                  ＜評価＞<br>
+                  黒線の両サイドの値を取得する設計のため、直進および方向転換の際の追従精度は高かった。ただ、PIDのゲイン調整が上手くできず左右の振動が発生していた。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  振動については、Dゲイン大きくすることで振動の抑制が可能と考えられる。<br>
+                  ライントレース以外の方法として、LiDARを用いたSLAMとNavigationによる自立走行が考えられる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  Arduino: run_ctrl.ino (vel_ctrl.ino, motor.ino)<br>
+              </p>
+          </li>
+          <li>
+              <h3><a name="2-2">画角調整&撮影機能</a></h3>
+              <iframe src="https://www.youtube.com/embed/5Q51hlnyWxo?&autoplay=1&mute=1&controls=0&loop=1&playlist=5Q51hlnyWxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <p>
+                  ＜概要＞<br>
+                  昇降機構によるカメラの上下動とサーボモータによる上下回転により画角調整を行った。画角調整後、カメラで撮影した。<br>
+                  <br>
+                  ＜評価＞<br>
+                  昇降機構とサーボモータは共に動作した。しかし昇降用モータのエンコーダが取得できず高さ計算ができなかった。画角調整のロジックに関しては、事前に設定した画角のみだった。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  自動画角調整の方法として、顔検出機能から顔の位置が中央に来る画角に合わせるものがある。<br>
+                  また以下の論文を用い、写真の美的評価と撮影すべき構図を検出し画角調整を行う方法もある。<br>
+                  <a href="https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=195835&item_no=1&page_id=13&block_id=8" target="_blank">深層学習による美的評価エンジンの開発と構図推薦カメラへの実装-情報処理学会</a><br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  Arduino: camera_ctrl.ino, servo_ctrl.ino (vel_ctrl.ino, motor.ino)<br>
+                  Jetson: get_img.py<br>
+              </p>
+          </li>
+          <li>
+              <h3><a name="2-3">顔認証機能</a></h3>
+              <iframe src="https://www.youtube.com/embed/cL-RALAbu_g?&autoplay=1&mute=1&controls=0&loop=1&playlist=cL-RALAbu_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br>
+              ※この動画は顔検出の機能です。
+              <p>
+                  ＜概要＞<br>
+                  OpenCV4.5.4から実装された顔検出および顔認証のAPIを用いた。<br>
+                  <br>
+                  ＜評価＞<br>
+                  顔検出についてはfps1.5程度で15人同時に検出ができた。<br>
+                  教室の一番後ろに立っている人やカメラ目線でない人でも検出ができた。<br>
+                  顔認証については国会議員など写真を用いた場合おおむね認証できていたが、学生を用いた場合は正確な認証は行えなかった。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  公開されているAPIは学習時に国会議員の画像を用いていた可能性があり精度が高かったと考えられる。既存の学習モデルに対して、学生の写真を用いファインチューニングを行うことで精度改善が期待できる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  Jetson: faceCV_recognition.py
+              </p>
+          </li>
+          <li>
+              <h3><a name="2-4">アップロード機能</a></h3>
+              <p>
+                  ＜概要＞<br>
+                  GoogleのAPIを用い、撮影した写真をGoogleドライブにアップロードし、撮影場所や時間や授業などのデータをスプレッドシートに記録した。<br>
+                  <br>
+                  ＜評価＞<br>
+                  写真のアップロードとデータの記録は基本的に行うことができた。ただwifiがつながりにくい所ではアップロードできないことがあった。ロボットの動作上、写真のアップロードは授業終了後まとめて行うため、その際にwifiの接続環境の良い所に移動するため問題にはならない。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  写真のより詳細なデータを取得し記録すればWebページでの公開に用いることができる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  Jetson: upload.py, google_drive.py<br>
+              </p>
+          </li>
+          <li>
+              <h3><a name="2-5">Webサイトでの公開</a></h3>
+              <iframe src="https://www.youtube.com/embed/_GfjWb55LFs?&autoplay=1&mute=1&controls=0&loop=1&playlist=_GfjWb55LFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <p>
+                  ＜概要＞<br>
+                  撮影された画像を表示機能と学年及びクラスによるソート機能を実装した。<br>
+                  ※現在は画像の公開を行っていません。<br>
+                  <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303/punit_photo/">WebサイトURL</a><br>
+                  <br>
+                  ＜評価＞<br>
+                  画像の表示およびソート機能は正常に動作していた。ただ画像の表示をURLの指定では表示できない不具合が発生し、一度エンコードして表示しているため表示までに時間がかかってしまった。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  GASやGoogleドライブの画像表示の仕様が複雑であったため、学校サーバーに画像を保存などができれば解決可能と考えられる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  GAS: index.html, tenso.gs
+              </p>
+          </li>
+        </ul>
+  </div>
+
+  <h2><a name="3">3.総括</a></h2>
+  <dd>
+      ソフト開発のメインであった顔認証機能とLiDARを用いた走行が実装できなかったことは大変残念であった。<br>
+      また、それらの開発に大半の時間を割いたため、ライントレースや撮影機能を中心に最低限しか実装できなかった。<br>
+      要件定義や設計、開発の優先順位の決定が非常に重要であると感じた。<br>
+      写真とデータのアップロードやWebページのソート機能については実装ができてよかった。<br>
+      また、発表会前日のraspiの故障や社会実証実験直前での画像が表示できなくなる問題があったが、jetsonでの代替や別方法での画像表示など的確に対応できたことは大変良かったと思う。<br>
+  </dd>
+
+  <h2><a name="4">4.プログラムのソースコード</a></h2>
+  <dd>
+      <p>
+          プログラムのソースコードを以下に示す。<br>
+          <a href="./mirs2303_PuNIT_program.zip">MIRS2303 PuNIT ソースコード (ダウンロードリンク)</a>
+      </p>
+  </dd>
+
+ </body>
+ <br>
+ <hr>
+ <br>
+ <address>
+  <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405">MIRS2031ドキュメント管理台帳</a>
+
+</address>
+ </html>
