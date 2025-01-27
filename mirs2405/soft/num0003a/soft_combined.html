@@ -37,7 +37,7 @@
 </tr>
 <tr>
 <td>B01</td>
-<td>2025.1.24</td>
+<td>2025.1.27</td>
 <td>清拓実、平沢快斗、幸航輝</td>
 <td></td>
 <td>初版</td>
@@ -56,7 +56,8 @@
         <ul>
           <li><a href="#2-1">ロボットアーム</a></li>
           <li><a href="#2-2">ラジコン操作</a></li>
-          <li><a href="#2-3">年齢、性別、身長の測定(対象者選別)</a></li>
+          <li><a href="#2-3">年齢、性別の測定(対象者選別)</a></li>
+          <li><a href="#2-4">身長の測定(対象者選別)</a></li>
         </ul>
       </li>
       <li><a href="#3">総括</a></li>
@@ -65,7 +66,7 @@
   <hr>
 
 
-  
+
   <h2><a name="1">1.ドキュメント概要</a></h2>
   <dd>
       <p>
@@ -78,7 +79,7 @@
   <div>
       <ul>
           <li>
-              <h3><a name="2-1">走行機能(ライントレース)</a></h3>
+              <h3><a name="2-1">ロボットアーム</a></h3>
               <!-- <iframe src="https://www.youtube.com/embed/yn59zjOSwMk?&autoplay=1&mute=1&controls=0&loop=1&playlist=yn59zjOSwMk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
               <p>
                   ＜概要＞<br>
@@ -96,7 +97,7 @@
               </p>
           </li>
           <li>
-              <h3><a name="2-2">画角調整&撮影機能</a></h3>
+              <h3><a name="2-2">ラジコン操作</a></h3>
               <iframe src="https://www.youtube.com/embed/5Q51hlnyWxo?&autoplay=1&mute=1&controls=0&loop=1&playlist=5Q51hlnyWxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               <p>
                   ＜概要＞<br>
@@ -116,7 +117,7 @@
               </p>
           </li>
           <li>
-              <h3><a name="2-3">顔認証機能</a></h3>
+              <h3><a name="2-3">年齢、性別の測定(対象者選別)</a></h3>
               <iframe src="https://www.youtube.com/embed/cL-RALAbu_g?&autoplay=1&mute=1&controls=0&loop=1&playlist=cL-RALAbu_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br>
               ※この動画は顔検出の機能です。
               <p>
@@ -135,41 +136,27 @@
                   Jetson: faceCV_recognition.py
               </p>
           </li>
+   
           <li>
-              <h3><a name="2-4">アップロード機能</a></h3>
-              <p>
-                  ＜概要＞<br>
-                  GoogleのAPIを用い、撮影した写真をGoogleドライブにアップロードし、撮影場所や時間や授業などのデータをスプレッドシートに記録した。<br>
-                  <br>
-                  ＜評価＞<br>
-                  写真のアップロードとデータの記録は基本的に行うことができた。ただwifiがつながりにくい所ではアップロードできないことがあった。ロボットの動作上、写真のアップロードは授業終了後まとめて行うため、その際にwifiの接続環境の良い所に移動するため問題にはならない。<br>
-                  <br>
-                  ＜改良・改善案＞<br>
-                  写真のより詳細なデータを取得し記録すればWebページでの公開に用いることができる。<br>
-                  <br>
-                  ＜対象プログラム＞<br>
-                  Jetson: upload.py, google_drive.py<br>
-              </p>
-          </li>
-          <li>
-              <h3><a name="2-5">Webサイトでの公開</a></h3>
-              <iframe src="https://www.youtube.com/embed/_GfjWb55LFs?&autoplay=1&mute=1&controls=0&loop=1&playlist=_GfjWb55LFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              <p>
-                  ＜概要＞<br>
-                  撮影された画像を表示機能と学年及びクラスによるソート機能を実装した。<br>
-                  ※現在は画像の公開を行っていません。<br>
-                  <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2303/punit_photo/">WebサイトURL</a><br>
-                  <br>
-                  ＜評価＞<br>
-                  画像の表示およびソート機能は正常に動作していた。ただ画像の表示をURLの指定では表示できない不具合が発生し、一度エンコードして表示しているため表示までに時間がかかってしまった。<br>
-                  <br>
-                  ＜改良・改善案＞<br>
-                  GASやGoogleドライブの画像表示の仕様が複雑であったため、学校サーバーに画像を保存などができれば解決可能と考えられる。<br>
-                  <br>
-                  ＜対象プログラム＞<br>
-                  GAS: index.html, tenso.gs
-              </p>
-          </li>
+            <h3><a name="2-4">身長の測定(対象者選別)</a></h3>
+            <iframe src="https://www.youtube.com/embed/cL-RALAbu_g?&autoplay=1&mute=1&controls=0&loop=1&playlist=cL-RALAbu_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br>
+            ※この動画は顔検出の機能です。
+            <p>
+                ＜概要＞<br>
+                OpenCV4.5.4から実装された顔検出および顔認証のAPIを用いた。<br>
+                <br>
+                ＜評価＞<br>
+                顔検出についてはfps1.5程度で15人同時に検出ができた。<br>
+                教室の一番後ろに立っている人やカメラ目線でない人でも検出ができた。<br>
+                顔認証については国会議員など写真を用いた場合おおむね認証できていたが、学生を用いた場合は正確な認証は行えなかった。<br>
+                <br>
+                ＜改良・改善案＞<br>
+                公開されているAPIは学習時に国会議員の画像を用いていた可能性があり精度が高かったと考えられる。既存の学習モデルに対して、学生の写真を用いファインチューニングを行うことで精度改善が期待できる。<br>
+                <br>
+                ＜対象プログラム＞<br>
+                Jetson: faceCV_recognition.py
+            </p>
+        </li>
         </ul>
   </div>
 
@@ -186,7 +173,8 @@
   <dd>
       <p>
           プログラムのソースコードを以下に示す。<br>
-          <a href="./mirs2303_PuNIT_program.zip">MIRS2303 PuNIT ソースコード (ダウンロードリンク)</a>
+          <a href="https://github.com/puwaer/mirs2405">MIRS2405 𝔊𝔘𝔏𝔏ℭで使用したリポジトリ</a><br>
+          <a href="https://github.com/puwaer/mirs2405/tree/main/program/honban">MIRS2405 𝔊𝔘𝔏𝔏ℭで最終的に使用したプログラム</a>
       </p>
   </dd>
 
