@@ -116,45 +116,52 @@
                   Jetson: get_img.py<br>
               </p>
           </li>
+          <br>
           <li>
               <h3><a name="2-3">年齢、性別の測定(対象者選別)</a></h3>
-              <iframe src="https://www.youtube.com/embed/cL-RALAbu_g?&autoplay=1&mute=1&controls=0&loop=1&playlist=cL-RALAbu_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br>
-              ※この動画は顔検出の機能です。
               <p>
                   ＜概要＞<br>
-                  OpenCV4.5.4から実装された顔検出および顔認証のAPIを用いた。<br>
+                  deepfaceのライブラリを用いて年齢検出,性別判定を行いデータの通信を行うプログラム<br>
                   <br>
                   ＜評価＞<br>
-                  顔検出についてはfps1.5程度で15人同時に検出ができた。<br>
-                  教室の一番後ろに立っている人やカメラ目線でない人でも検出ができた。<br>
-                  顔認証については国会議員など写真を用いた場合おおむね認証できていたが、学生を用いた場合は正確な認証は行えなかった。<br>
+                  基本的に1人について検出しており、10fps程でた<br>
+                  同じ画面に2人以上入っている場合、先に画面に入っている人をトラッキングし測定する<br>
+                  cuda,tensorflowを用いることでgpuで処理がてき処理速度が早くなり、30fps程でた<br>
+                  性別判定の精度は高いが、年齢検出の精度はそこまで高くなかった<br>
+                  また、IPv4を用いることでデータ通信ができる<br>
                   <br>
                   ＜改良・改善案＞<br>
-                  公開されているAPIは学習時に国会議員の画像を用いていた可能性があり精度が高かったと考えられる。既存の学習モデルに対して、学生の写真を用いファインチューニングを行うことで精度改善が期待できる。<br>
+                  公開されているモデル(deepfaceのモデル)は、西洋人のデータセットを主に学習されており、男女判定は問題なかったが年齢検出はそこまで精度が出なかったと考えられる。<br>
+                  アジア人の写真を用いて追加学習を行うことで年齢推定の精度改善が期待できる。<br>
                   <br>
                   ＜対象プログラム＞<br>
-                  Jetson: faceCV_recognition.py
+                  server_deepface.py(サーバー側), client_deepface.py(クライアント側)<br>
               </p>
           </li>
-   
+          <br>
           <li>
             <h3><a name="2-4">身長の測定(対象者選別)</a></h3>
-            <iframe src="https://www.youtube.com/embed/cL-RALAbu_g?&autoplay=1&mute=1&controls=0&loop=1&playlist=cL-RALAbu_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br>
-            ※この動画は顔検出の機能です。
+            <center>
+              <img src="../document_3/skeleton_estimation.png" height="300"><br>
+              ※この画像は骨格推定の機能です</br></center>
             <p>
                 ＜概要＞<br>
-                OpenCV4.5.4から実装された顔検出および顔認証のAPIを用いた。<br>
+                googleのmediapipe(骨格推定モデル)と深度カメラを用いた身長測定<br>
                 <br>
                 ＜評価＞<br>
-                顔検出についてはfps1.5程度で15人同時に検出ができた。<br>
-                教室の一番後ろに立っている人やカメラ目線でない人でも検出ができた。<br>
-                顔認証については国会議員など写真を用いた場合おおむね認証できていたが、学生を用いた場合は正確な認証は行えなかった。<br>
+                骨格推定で検出された顔の中心の座標と足先の座標を用いて、深度カメラの値より身長を算出するプログラムを作成した。<br>
+                顔の中心の座標を用いているため、正確な身長は測定されないため、定数倍と定数を足すことで実際に近い身長を予測した。<br>
+                顔の中心と足先がカメラに映りさえすれば、人物が前後に移動しても、身長測定の精度は非常に高くなる。<br>
+                cuda,pytorchを用いることでgpuで処理がてき処理速度が早くなった。<br>
+                また、IPv4を用いることでデータ通信ができる。<br>
                 <br>
                 ＜改良・改善案＞<br>
-                公開されているAPIは学習時に国会議員の画像を用いていた可能性があり精度が高かったと考えられる。既存の学習モデルに対して、学生の写真を用いファインチューニングを行うことで精度改善が期待できる。<br>
+                身長測定を行うプロフラムのアルゴリズム上、顔の中心と足先がカメラに映らないと計測できない。<br>
+                骨格推定で検出された顔の中心の座標と足先の座標を用いていたが、他の部位の座標も用いることでより正確な身長測定が可能となり、全身が入らなくても測定できるになると考えられる。<br>
                 <br>
                 ＜対象プログラム＞<br>
-                Jetson: faceCV_recognition.py
+                main_height_server_plus.py,zed_hight_class_plus.py,server_value_update.py(サーバー側) <br>
+                client_json.py(クライアント側)
             </p>
         </li>
         </ul>
@@ -162,11 +169,10 @@
 
   <h2><a name="3">3.総括</a></h2>
   <dd>
-      ソフト開発のメインであった顔認証機能とLiDARを用いた走行が実装できなかったことは大変残念であった。<br>
-      また、それらの開発に大半の時間を割いたため、ライントレースや撮影機能を中心に最低限しか実装できなかった。<br>
-      要件定義や設計、開発の優先順位の決定が非常に重要であると感じた。<br>
-      写真とデータのアップロードやWebページのソート機能については実装ができてよかった。<br>
-      また、発表会前日のraspiの故障や社会実証実験直前での画像が表示できなくなる問題があったが、jetsonでの代替や別方法での画像表示など的確に対応できたことは大変良かったと思う。<br>
+      <br>
+      <br>
+      <br>
+      <br>
   </dd>
 
   <h2><a name="4">4.プログラムのソースコード</a></h2>
