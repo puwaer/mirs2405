@@ -33,8 +33,8 @@ def get(ser_pico):
     send_angle(data, ser_pico)
     data = [3, -21, 180, 0, 0, 0 ,0]
     send_angle(data, ser_pico)
-    #↑紙を吸う
-    data = [3, -15, 90, 90, -180, 0 ,0]
+    #紙を吸う
+    data = [3, -15, 90, 90, -170, 0 ,0]
     send_angle(data, ser_pico)
     time.sleep(3)
 
