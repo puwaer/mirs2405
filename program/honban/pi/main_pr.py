@@ -30,7 +30,7 @@ def main_pr():
     camera_data[1] = 1
     
     while True: 
-    	serial_rc(ser_esp, ser_pico)
+        serial_rc(ser_esp, ser_pico)
         if mode=='wait':
             if camera_data[1] == 1:
                 mode='give'
