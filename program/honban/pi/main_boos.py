@@ -14,6 +14,7 @@ from receive import serial_rc
 from receive import receive_distance
 from receive import judge_angle
 from send import send_angle
+from send import get
 '''
 a = read_json_name(2)
 print(a)
@@ -78,5 +79,5 @@ def main_boos():
 
 #実行
 mode = 'refill'
-main()
+main_boos()
 
