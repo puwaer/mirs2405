@@ -92,30 +92,31 @@
                   PID制御の割合が高いため、全体的にパラメータを下げ、アームの位置による制御の割合をあげることが対応策として考えられる。<br>
                   <br>
                   ＜対象プログラム＞<br>
-                  Arduino UNO: turntable.ino, gripper.ino
+                  Arduino UNO: turntable.ino, gripper.ino<br>
                   Raspberry Pi Pico: arm.ino, joint.ino, difine.h<br>
               </p>
           </li>
+          <br
           <li>
-              <h3><a name="2-2">ラジコン操作</a></h3>
-              <iframe src="https://www.youtube.com/embed/5Q51hlnyWxo?&autoplay=1&mute=1&controls=0&loop=1&playlist=5Q51hlnyWxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              <p>
-                  ＜概要＞<br>
-                  昇降機構によるカメラの上下動とサーボモータによる上下回転により画角調整を行った。画角調整後、カメラで撮影した。<br>
-                  <br>
-                  ＜評価＞<br>
-                  昇降機構とサーボモータは共に動作した。しかし昇降用モータのエンコーダが取得できず高さ計算ができなかった。画角調整のロジックに関しては、事前に設定した画角のみだった。<br>
-                  <br>
-                  ＜改良・改善案＞<br>
-                  自動画角調整の方法として、顔検出機能から顔の位置が中央に来る画角に合わせるものがある。<br>
-                  また以下の論文を用い、写真の美的評価と撮影すべき構図を検出し画角調整を行う方法もある。<br>
-                  <a href="https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=195835&item_no=1&page_id=13&block_id=8" target="_blank">深層学習による美的評価エンジンの開発と構図推薦カメラへの実装-情報処理学会</a><br>
-                  <br>
-                  ＜対象プログラム＞<br>
-                  Arduino: camera_ctrl.ino, servo_ctrl.ino (vel_ctrl.ino, motor.ino)<br>
-                  Jetson: get_img.py<br>
-              </p>
-          </li>
+            <h3><a name="2-2">デバイス間の通信</a></h3>
+            <p>
+                ＜概要＞<br>
+                USBシリアル通信を用いてraspiから各マイコンに指令を送ることでシステムの統合を行った。配列に識別番号、指令値を入れることでマイコン側がどの処理を行うかを決定した。esp32で取得したラジコン入力をraspiが受信することで動作開始のタイミングを決定できるようにした。<br>
+                <br>
+                ＜評価＞<br>
+                デバイス間の通信ではraspiで設定した識別番号通りの処理をマイコンが行い、指令値通りに制御することができた。ラジコン入力を加えたときに動作が開始することも確認した。<br>
+                <br>
+                ＜改良・改善案＞<br>
+                ラジコン入力で動作中のシステムを遠隔終了させることで、安全面が向上すると考えられる。<br>
+                <br>
+                ＜対象プログラム＞<br>
+                Arduino: raspi.ino<br>
+                pico: raspi.ino<br>
+                esp32: raspi.ino, radicon.ino<br>
+                raspi: send.py, receive.py<br>
+                Jetson: get_img.py<br>
+            </p>
+        </li>
           <br>
           <li>
               <h3><a name="2-3">年齢、性別の測定(対象者選別)</a></h3>
