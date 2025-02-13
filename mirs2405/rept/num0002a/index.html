@@ -13,86 +13,132 @@
 
 <body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
 
-    <img src="../../gullc_rogo.jpg" width="100">
+        <img src="../../gullc_rogo.jpg" width="100">
 
-<table class="table010">
-<tr>
-<th>名称</th>
-<td class="title">MIRS2405 開発完了報告書</td>
-</tr>
-<tr>
-<th>番号</th>
-<td class="title">MIRS2405-REPT-0002</td>
-</tr>
-</table>
-<br>
+    <table class="table010">
+    <tr>
+    <th>名称</th>
+    <td class="title">MIRS2405 開発完了報告書</td>
+    </tr>
+    <tr>
+    <th>番号</th>
+    <td class="title">MIRS2405-REPT-0002</td>
+    </tr>
+    </table>
+    <br>
 
-<table class="table010">
-<tr>
-<th>版数</th>
-<th>最終更新日</th>
-<th>作成</th>
-<th>承認</th>
-<th>改訂記事</th>
-</tr>
-<tr>
-<td>A01</td>
-<td>2024.01.24</td>
-<td>宇佐見祥</td>
-<td>    </td>
-<td>初版</td>
-</tr>
-</table>
+    <table class="table010">
+    <tr>
+    <th>版数</th>
+    <th>最終更新日</th>
+    <th>作成</th>
+    <th>承認</th>
+    <th>改訂記事</th>
+    </tr>
+    <tr>
+    <td>A01</td>
+    <td>2024.02.13</td>
+    <td>宇佐見祥,幸航輝</td>
+    <td>    </td>
+    <td>初版</td>
+    </tr>
+    </table>
 
-<br>
+    <br>
 
-<h3>目次</h3>
-    <ul>
-        <li><a href = "#rept1">1. はじめに</a><br> </li>
-        <li><a href = "#rept2">2. 機体・機体評価</a><br></li>
-        <li><a href = "#rept3">3. 発表会の振り返り</a><br></li>
-        <li><a href = "#rept4">4. 社会実装</a><br></li>
-        <li><a href = "#rept5">5. 作業時間の分析</a><br></li>
-        <li><a href = "#rept6">6. 全体総括</a><br></li>
-        <li><a href = "#rept7">7. 班員の感想</a><br></li>
-    </ul>
-<br>
+    <h3>目次</h3>
+        <ul>
+            <li><a href = "#rept1">1. はじめに</a><br> </li>
+            <li><a href = "#rept2">2. 機体・機体評価</a><br></li>
+            <li><a href = "#rept3">3. 発表会の振り返り</a><br></li>
+            <li><a href = "#rept4">4. 社会実装</a><br></li>
+            <li><a href = "#rept5">5. 作業時間の分析</a><br></li>
+            <li><a href = "#rept6">6. 全体総括</a><br></li>
+            <li><a href = "#rept7">7. 班員の感想</a><br></li>
+        </ul>
+    <br>
 
-<h2><a name = rept1>1. はじめに</a></h2>
-本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの開発完了報告書である。<br>
-<br>
+    <h2><a name = rept1>1. はじめに</a></h2>
+    本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭの開発完了報告書である。<br>
+    <br>
 
-<h2><a name = rept2>2. 機体・機体評価</a></h2>
-<br>
-<br>
+    <h2><a name = rept2>2. 機体・機体評価</a></h2>
+    <p>まず、制作した機体をfigure1に示す。</p>
+    <center>
+    <img src="./oya.jpg" width="500" height="800"><br>
+    figure1:𝔊𝔘𝔏𝔏ℭ</br></center>
+    <br>
+    <p>次に、制作した機体の評価をTable1に示す。</p>
+    <table class="table010">
+      <caption><center><b>Table.1:親機</b></center></caption>
+      <tr>
+      <th>機能</th>
+      <th>概要</th>
+      <th>評価</th>
+      </tr>
 
-<h2><a name = rept3>3. 発表会の振り返り</a></h2>
-<br>
-<br>
+      <tr>
+      <td>ロボットアーム</td>
+      <td>根本の関節と第二関節をポテンショメータの値を読み取って角度制御し、第3関節とエアーチャックはシリアルサーボモータで制御、ターンテーブルはエンコーダで制御した。<br>根本の関節と第二関節は地面に対して鉛直の時を0度とした。角度偏差のPID制御のほかに、三角関数を用いて、アームの位置による負荷の変化に対応した。</td>
+      <td>紙の取得や、目的の高さへ持っていくことができたため、角度制御の精度は高い。一方、移動角度が大きい場合のアームの動作が速く、安全性にかけている。</td>
+      </tr>
 
-<h2><a name = rept4>4. 社会実装</a></h2>
-<br>
-<br>
+      
+    <tr>
+          <td>エアチャック</td>
+          <td></td>
+          <td></td>
+    </tr>
 
-<h2><a name = rept5>5. 作業時間の分析</a></h2>
-<br>
-<br>
+    <tr>
+        <td>ターンテーブル</td>
+        <td></td>
+        <td></td>
+    </tr>
 
-<h2><a name = rept6>6. 全体総括</a></h2>
-<br>
-<br>
+    <tr>
+        <td>年齢、性別、身長の測定</td>
+        <td>googleのmediapipe(骨格推定モデル)と深度カメラと機械学習を用いて年齢、性別、身長の予測、測定する</td>
+        <td>顔の中心と足先がカメラに映りさえすれば、人物が前後に移動しても、身長測定の精度は非常に高くなる。<br>年齢、性別は顔が入っていれば測定できる</td>
+    </tr>
+    </table>
+    
 
-<h2><a name = rept7>7. 班員の感想</a></h2>
-<br>
-<br>
+    <h2><a name = rept3>3. 発表会の振り返り</a></h2>
+    <p>発表会における結果は以下のとおりである。</p>
+    <p>　　発表会（得票）　第2位</p>
+    <p>発表会では、仲谷が発表を担当した。<br>
+        なにか内容を書いて<br>
+        </p>
+    
+    <br>
+
+    <h2><a name = rept4>4. 社会実装</a></h2>
+    <p>社会実装報告書を以下のURLに示す</p>
+    <td><a href="./">社会実装報告書</a></a>
+    <br>
+    <br>
 
 
-<br><br><br>
-<hr>
+    <h2><a name = rept5>5. 作業時間の分析</a></h2>
+    <br>
+    <br>
 
-<address>
-    <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/" target="_self">MIRS2405ドキュメント管理台帳へ</a>
-</address>
+    <h2><a name = rept6>6. 全体総括</a></h2>
+    <br>
+    <br>
+
+    <h2><a name = rept7>7. 班員の感想</a></h2>
+    <br>
+    <br>
+
+
+    <br><br><br>
+    <hr>
+
+    <address>
+        <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/" target="_self">MIRS2405ドキュメント管理台帳へ</a>
+    </address>
 
 
 </BODY></html>
