@@ -63,7 +63,7 @@ def main():
     estimator = HeightEstimator()
     
     # カメラのセットアップ
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     
     # キャリブレーション値の表示制御用の変数
     last_key_press_time = 0
