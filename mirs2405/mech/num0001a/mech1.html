@@ -1,0 +1,1112 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-MECH-0001 MIRS2405 メカニクス詳細設計書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+    <img src="../../gullc_rogo.jpg" width="100">
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 メカニクス詳細設計書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-MECH-0001</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>A01</td>
+<td>2024.10.16</td>
+<td>横山翔琉</td>
+<td>    </td>
+<td>初版</td>
+</tr>
+<tr>
+<td>A02</td>
+<td>2024.11.1</td>
+<td>宇佐見祥</td>
+<td>    </td>
+<td>Arm Assyの追加</td>
+</tr>
+<tr>
+<td>A03</td>
+<td>2025.02.16</td>
+<td>横山翔琉</td>
+<td>    </td>
+<td>最終版</td>
+</tr>
+</table>
+
+
+<h3>目次</h3>
+    <ul>
+        <li><a href = "#mech1">1. はじめに</a><br> </li>
+        <li><a href = "#mech2">2. 全体図</a><br></li>
+        <li><a href = "#mech3">3. システム構成</a><br></li>
+        <li><a href = "#mech3-1-1">3-1-1. Assy一覧</a><br></li>
+        <li><a href = "#mech3-1-2">3-1-2. 組み立て手順</a><br></li>
+        <li><a href = "#mech3-2-1"> 3-2-1. ARM BASE ASSY</a><br></li>
+        <li><a href = "#mech3-2-2"> 3-2-2. BASE ASSY</a><br></li>
+        <li><a href = "#mech3-2-3"> 3-2-3. ARM ASSY</a><br></li>
+        <li><a href = "#mech3-2-4"> 3-2-4. AIR CHUCK ASSY</a><br></li>
+        <li><a href = "#mech4">4. 購入物品</a><br></li>
+        <li><a href = "#mech5">5. 参考文献</a><br></li>
+    </ul>
+<br>
+
+
+<h2><a name = mech1>1. はじめに</a></h2>
+本ドキュメントはMIRS2405 𝔊𝔘𝔏𝔏ℭのメカニクス詳細設計書である。<br>
+持ち上げられる最大重量は300g以下である。(R,Lモーター同期時)<br>
+組み立て手順に従わないと部品を破損する設計なので従う事。<br>
+分解も同様組み立て手順の逆手順で分解する事をおすすめする。<br>
+<br>
+
+
+<h2><a name = mech2>2. 全体図</a></h2>
+全体図をfig.1に示す。<br>
+以下のダウンロードリンクよりstlファイルを入手可能。<br>
+<p><a href="../stl/GULLC.stl"download="GULLC.stl">GULLC.stl</a></p><br>
+<center>
+    <img src="../picture/GULLC.png" width="1000"><br>
+    fig.1 全体図
+</center>
+<br>
+
+
+<h2><a name = mech3>3. システム構成</a></h2>
+本機は以下4つのASSYによって構成されている。<br>
+・ターンテーブルの回転とロボットアームの駆動を行うARM BASE ASSY<br>
+・クローラー、アーム、制御回路を統合するBASE ASSY<br>
+・ロボットアームのアームとなるARM ASSY<br>
+・紙を一枚ずつ保持するAIR CHUCK ASSY<br>
+<br>
+
+
+<h3><a name = mech3-1-1>3-1-1. Assy一覧</a></h3>
+ASSY一覧をfig.2からfig.5に示す。<br>
+<center>
+    <img src="../picture/ARM BASE ASSY.png" width="1000"><br>
+    fig.2 ARM BASE ASSY<br>
+    <img src="../picture/BASE ASSY.png" width="1000"><br>
+    fig.3 BASE ASSY<br>
+    <img src="../picture/ARM ASSY.png" width="1000"><br>
+    fig.4 ARM ASSY<br>
+    <img src="../picture/AIR CHUCK ASSY.png" width="1000"><br>
+    fig.5 AIR CHUCK ASSY
+</center>
+<br>
+
+
+<h3><a name = mach3-1-2>3-1-2. 組み立て手順</a></h3>
+本項目では各ASSY同士の組み立て手順を解説する。<br>
+各ASSYの組み立てについては3-2-1から3-2-4で詳細な解説を行う。<br>
+以下のダウンロードリンクよりf3zファイルを入手可能。<br>
+<p><a href="../f3z/GULLC.f3z"download="GULLC.f3z">GULLC.f3z</a></p><br>
+1. ARM BASE ASSYとBASE ASSYをHBLFSN5 8個で接続する。インサートナットとM5ネジで締結する。<br>
+2. ARM BASE ASSYにARM ASSYを挿す。M3ネジとM3ナットで締結する。<br>
+3. ARM ASSYにAIR CHUCK ASSYを取り付ける。SCS215のメタルホーンとM3ネジで締結する。<br>
+以上<br>
+<br>
+
+
+<h4><a name = mech3-2-1>3-2-1. ARM BASE ASSY</a></h4>
+ARM BASE ASSYをfig.6からfig.9に示す。<br>
+<br>
+<center>
+    <img src="../picture/ARM BASE ASSY1.png" width="1000"><br>
+    fig.6 ARM BASE ASSY 左前<br>
+    <img src="../picture/ARM BASE ASSY2.png" width="1000"><br>
+    fig.7 ARM BASE ASSY 右前<br>
+    <img src="../picture/ARM BASE ASSY3.png" width="1000"><br>
+    fig.8 ARM BASE ASSY 右後ろ<br>
+    <img src="../picture/ARM BASE ASSY4.png" width="1000"><br>
+    fig.9 ARM BASE ASSY 左後ろ
+</center>
+<br>
+ARM BASE ASSY部品リストをtable.1に示す。<br>
+<br>
+<center>
+    table.1 ARM BASE ASSY部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>STL又はDXF</th>
+            <th>URL</th>
+            <th>f3z</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Turn Table Top</td>
+            <td>1</td>
+            <td><a href ="../dxf/Turn Table Top.DXF">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Potentionmeter Bot</td>
+            <td>1</td>
+            <td><a href ="../stl/Potentionmeter Bot.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Arm Mount Plate Left</td>
+            <td>1</td>
+            <td><a href ="../dxf/Arm Mount Plate Left.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Arm Mount Plate Right</td>
+            <td>1</td>
+            <td><a href ="../dxf/Arm Mount Plate Right.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>KS5N-IG36P Mount1</td>
+            <td>1</td>
+            <td><a href ="../stl/KS5N-IG36P Mount1.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>KS5N-IG36P Mount2</td>
+            <td>1</td>
+            <td><a href ="../stl/KS5N-IG36P Mount2.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>IG36P-721</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="../link/IG36P.pdf">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>KS5N</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="../link/KS5N.pdf">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>[J,L]C-587VA Mount</td>
+            <td>1</td>
+            <td><a href ="../dxf/[J,L]C-587VA Mount.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>MRG25-8-12</td>
+            <td>1</td>
+            <td><a href ="../pdf/MRG25-8-12.pdf">追加加工PDF</a></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>LM0.8-20</td>
+            <td>2</td>
+            <td><a href ="../pdf/LM0.8-20.pdf">追加加工PDF</a></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>[J,L]C-587VA Joint</td>
+            <td>3</td>
+            <td><a href ="../dxf/[J,L]C-587VA Joint.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>628-H</td>
+            <td>3</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>[J,L]C-587VA Joint Spacer</td>
+            <td>3</td>
+            <td><a href ="../dxf/[J,L]C-587VA Joint Spacer.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Shaft Arm Joint 0-1 Gear</td>
+            <td>2</td>
+            <td><a href ="../dxf/Shaft Arm Joint 0-1 Gear.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>Timing Pulley Motor Wall</td>
+            <td>2</td>
+            <td><a href ="../dxf/Timing Pulley Motor Wall.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Timing Pulley Spacer ABS</td>
+            <td>2</td>
+            <td><a href ="../dxf/Timing Pulley Spacer ABS.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Spacer φ8.0 x 3.0mm</td>
+            <td>3</td>
+            <td><a href ="../dxf/Spacer φ8.0 x 3.0mm.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Timing Pulley Motor Gear</td>
+            <td>2</td>
+            <td><a href ="../dxf/Timing Pulley Motor Gear.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Timing Pulley Motor</td>
+            <td>1</td>
+            <td><a href ="../dxf/Timing Pulley Motor.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>Shaft Arm Joint 0-1</td>
+            <td>2</td>
+            <td><a href ="../dxf/Shaft Arm Joint 0-1.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>Aluminum Bar φ8.0 x 19.0mm</td>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>Aluminum Bar φ8.0 x 25.0mm</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>Washer</td>
+            <td>3</td>
+            <td><a href ="../dxf/Washer.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>25</td>
+            <td>Gear Potentionmeter Joint</td>
+            <td>3</td>
+            <td><a href ="../dxf/Gear Potentionmeter Joint.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Potention Pole</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>27</td>
+            <td>Potention Mid Adapter</td>
+            <td>1</td>
+            <td><a href ="../dxf/Potention Mid Adapter.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>28</td>
+            <td>Potentionmeter Mount</td>
+            <td>1</td>
+            <td><a href ="../dxf/Potentionmeter Mount.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>Lock Nat</td>
+            <td>1</td>
+            <td><a href ="../dxf/Lock Nat.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>mabuchi JC-578VA</td>
+            <td>2</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>31</td>
+            <td>mabuchi LC-578VA</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>32</td>
+            <td>Washer Half</td>
+            <td>2</td>
+            <td><a href ="../dxf/Washer Half.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>33</td>
+            <td>Aluminum Bar φ12 x 69.0mm</td>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h4><a name = mech3-2-2>3-2-2. BASE ASSY</a></h4>
+BASE ASSYをfig.10からfig.13に示す。<br>
+<br>
+<center>
+    <img src="../picture/BASE ASSY1.png" width="1000"><br>
+    fig.10 BASE ASSY 左前<br>
+    <img src="../picture/BASE ASSY2.png" width="1000"><br>
+    fig.11 BASE ASSY 右前<br>
+    <img src="../picture/BASE ASSY3.png" width="1000"><br>
+    fig.12 BASE ASSY 右後ろ<br>
+    <img src="../picture/BASE ASSY4.png" width="1000"><br>
+    fig.13 BASE ASSY 左後ろ
+</center>
+<br>
+BASE ASSY部品リストをtable.2に示す。<br>
+<br>
+<center>
+    table.2 BASE ASSY部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>STL又はDXF</th>
+            <th>URL</th>
+            <th>f3z</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Turn Table Bot</td>
+            <td>1</td>
+            <td><a href ="../dxf/Turn Table Bot.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>NFS5-2020-500</td>
+            <td>8</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>paper limit</td>
+            <td>1</td>
+            <td><a href ="../dxf/Paper Limit.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>NFS5-2020-292</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>HBLFSN5</td>
+            <td>24</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>LM0.8-20 Table Joint</td>
+            <td>1</td>
+            <td><a href ="../stl/LM0.8-20 Table Joint.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>LM0.8-20 Table Joint Top</td>
+            <td>1</td>
+            <td><a href ="../stl/LM0.8-20 Table Joint Top.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>8</th>
+            <td>NFS5-2020-70</td>
+            <td>8</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>CuGoV3 Left</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>CuGoV3 Right</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Emergency Stop Button Mount</td>
+            <td>1</td>
+            <td><a href ="../stl/Emergency Stop Button Mount.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Emergency Stop Button</td>
+            <td>1</td>
+            <td><a href ="../stl/Emergency Stop Button.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Paper Table</td>
+            <td>1</td>
+            <td><a href ="../dxf/Paper Table.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Spacer φ3.2 x 30.0mm</td>
+            <td>32</td>
+            <td><a href ="../stl/Spacer φ3.2 x 30.0mm.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Wirering Table</td>
+            <td>1</td>
+            <td><a href ="../dxf/Wirering Table.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>LiDAR Mount</td>
+            <td>1</td>
+            <td><a href ="../dxf/LiDAR Mount.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Aluminum Square Pipe 292mm mb</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Aluminum Square Pipe 292mm mid</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Aluminum Square Pipe 292mm LiPO</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Aluminum Square Pipe 34mm</td>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>Aluminum Square Pipe 85mm</td>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>Aluminum Square Pipe 34mm</td>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>Aluminum Square Pipe 86.4mm</td>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>Pump Mount</td>
+            <td>1</td>
+            <td><a href ="../stl/Pump Mount.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>25</td>
+            <td>Syringe Tube</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Syringe Mount</td>
+            <td>1</td>
+            <td><a href ="../stl/Syringe Mount.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>27</td>
+            <td>Screw Rods</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>28</td>
+            <td>CPJC20-BL-6-6</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>IG36P-014</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>mabuchi RS-540 SH</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>31</td>
+            <td>KS5N-IG36P Mount1</td>
+            <td>1</td>
+            <td><a href ="../stl/KS5N-IG36P Mount1.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>32</td>
+            <td>KS5N-IG36P Mount2</td>
+            <td>1</td>
+            <td><a href ="../stl/KS5N-IG36P Mount2.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>33</td>
+            <td>P-Joint Cover</td>
+            <td>1</td>
+            <td><a href ="../stl/P-Joint Cover.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>34</td>
+            <td>P-Joint Mid Long</td>
+            <td>1</td>
+            <td><a href ="../stl/P-Joint Mid Long.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>35</td>
+            <td>Syringe Piston</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>36</td>
+            <td>Cover Rear</td>
+            <td>1</td>
+            <td><a href ="../dxf/Cover Rear.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>37</td>
+            <td>Paper Rail</td>
+            <td>2</td>
+            <td><a href ="../stl/Paper Rail.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>38</td>
+            <td>THS70160</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h4><a name = mech3-2-3>3-2-3. ARM ASSY</a></h4>
+ARM ASSYをfig.14からfig.17に示す。<br>
+<br>
+<center>
+    <img src="../picture/Arm Assy1.png" width="1000"><br>
+    fig.14 ARM ASSY 左前<br>
+    <img src="../picture/ARM ASSY2.png" width="1000"><br>
+    fig.15 ARM ASSY 右前<br>
+    <img src="../picture/ARM ASSY3.png" width="1000"><br>
+    fig.16 ARM ASSY 右後ろ<br>
+    <img src="../picture/ARM ASSY4.png" width="1000"><br>
+    fig.17 ARM ASSY 左後ろ
+</center>
+<br>
+ARM ASSY部品リストをtable.3に示す。<br>
+<br>
+<center>
+    table.3 ARM ASSY部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>STL又はDXF</th>
+            <th>URL</th>
+            <th>f3z</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Aluminum Square Pipe 400mm</td>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Shaft Arm Joint 1-2</td>
+            <td>2</td>
+            <td><a href ="../dxf/Shaft Arm Joint 1-2.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Aluminum Bar φ12 x 108.6mm</td>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Timing Pulley Drive</td>
+            <td>1</td>
+            <td><a href ="../dxf/Timing Pulley Drive.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Timing Pulley Drive Wall</td>
+            <td>2</td>
+            <td><a href ="../dxf/Timing Pulley Drive Wall.dxf">DXF</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Spacer φ3.2 x 18.75mm</td>
+            <td>12</td>
+            <td><a href ="../stl/Spacer φ3.2 x 18.75mm.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Aluminum Square Pipe 426.5mm</td>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Arm Joint 2-3</td>
+            <td>1</td>
+            <td><a href ="../stl/Arm Joint 2-3.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Spacer φ12.2 x 39.3mm</td>
+            <td>2</td>
+            <td><a href ="../stl/Spacer φ12.2 x 39.3mm.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Aluminum Bar φ8 x 90.6mm</td>
+            <td>6</td>
+            <td></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Air Chuck Switcher 2x</td>
+            <td>1</td>
+            <td><a href ="../stl/Air Chuck Switcher 2x.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h4><a name = mech3-2-4>3-2-4. AIR CHUCK ASSY</a></h4>
+Control AIR CHUCK ASSYをfig.18からfig.21に示す。<br>
+<br>
+<center>
+    <img src="../picture/AIR CHUCK ASSY1.png" width="1000"><br>
+    fig.18 AIR CHUCK ASSY 左前<br>
+    <img src="../picture/AIR CHUCK ASSY2.png" width="1000"><br>
+    fig.19 AIR CHUCK ASSY 右前<br>
+    <img src="../picture/AIR CHUCK ASSY3.png" width="1000"><br>
+    fig.20 AIR CHUCK ASSY 右後ろ<br>
+    <img src="../picture/AIR CHUCK ASSY4.png" width="1000"><br>
+    fig.21 AIR CHUCK ASSY 左後ろ
+</center>
+<br>
+AIR CHUCK ASSY部品リストをtable.4に示す。<br>
+<br>
+<center>
+    table.4 AIR CHUCK ASSY部品リスト
+    <table class="table010">
+        <tr>
+            <th>部品番号</th>
+            <th>部品名</th>
+            <th>個数</th>
+            <th>STL又はDXF</th>
+            <th>URL</th>
+            <th>f3z</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>FEETECH SCS215</td>
+            <td>2</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>SCS215 Joint</td>
+            <td>1</td>
+            <td><a href ="../stl/SCS215 Joint.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Air Chuck Joint</td>
+            <td>1</td>
+            <td><a href ="../stl/Air Chuck Joint.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Air Chuck Mount</td>
+            <td>1</td>
+            <td><a href ="../stl/Air Chuck Mount.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>VP30BN</td>
+            <td>2</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>VP30BN Urethane Tube Joint</td>
+            <td>2</td>
+            <td><a href ="../stl/VP30BN Urethane Tube Joint.stl">STL</a></td>
+            <td></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>SRF02</td>
+            <td>1</td>
+            <td></td>
+            <td><a href ="">リンク</a></td>
+            <td><a href ="../f3z/">f3z</a></td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h2><a name = mech4>4. 購入物品</a></h2>
+購入物品をtable.5に示す。<br>
+<br>
+<center>
+    table.5 購入物品
+    <table class="table010">
+        <tr>
+            <th>物品名</th>
+            <th>単価</th>
+            <th>個数</th>
+            <th>小計</th>
+            <th>ショップURL</th>
+        </tr>
+        <tr>
+            <td>FEETECH-SCS215</td>
+            <td>2420円</td>
+            <td>2</td>
+            <td>4840円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>アルミ丸棒</td>
+            <td>615円</td>
+            <td>1</td>
+            <td>615円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>ポリウレタンチューブ</td>
+            <td>582円</td>
+            <td>1</td>
+            <td>582円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>VP30BN</td>
+            <td>483円</td>
+            <td>2</td>
+            <td>966円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>注射器</td>
+            <td>550円</td>
+            <td>1</td>
+            <td>550円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>タイミングベルト</td>
+            <td>1055円</td>
+            <td>1</td>
+            <td>1055円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>ベアリング</td>
+            <td>56円</td>
+            <td>3</td>
+            <td>168円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>DCファン</td>
+            <td>1124円</td>
+            <td>1</td>
+            <td>1124円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>HBLFSN5</td>
+            <td>77円</td>
+            <td>20</td>
+            <td>1540円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>トラスM4</td>
+            <td>692円</td>
+            <td>1</td>
+            <td>692円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>トラスM5</td>
+            <td>692円</td>
+            <td>1</td>
+            <td>692円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>シリコンチューブ</td>
+            <td>131円</td>
+            <td>1</td>
+            <td>131円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>ホースクランプ</td>
+            <td>190円</td>
+            <td>10</td>
+            <td>1900円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td>シリコンシート</td>
+            <td>296円</td>
+            <td>1</td>
+            <td>296円</td>
+            <td><a href ="">リンク</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15151円</td>
+            <td></td>
+        </tr>
+    </table>
+</center>
+<br>
+
+
+<h2><a name = mech5>5.参考文献</a></h2>
+<address>
+    <a href="" target="_self"></a>
+</address>
+<address>
+    <a href="" target="_self"></a>
+</address>
+
+
+<br><br><br>
+<hr>
+
+<address>
+    <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405/" target="_self">MIRS2405ドキュメント管理台帳へ</a>
+</address>
+
+
+</BODY></html>

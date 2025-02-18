@@ -1,0 +1,277 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-MECH-0002 MIRS2405 メカニクス開発完了報告書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+</head>
+
+  <body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <table class="table010">
+      <tr>
+        <th>名称</th>
+        <td class="title">メカニクス開発報告書</td>
+      </tr>
+      <tr>
+        <th>番号</th>
+        <td class="title">MIRS2405-MECH-0002</td>
+      </tr>
+    </table>
+    <br>
+
+    <table class="table010">
+      <tr>
+        <th>版数</th>
+        <th>最終更新日</th>
+        <th>作成</th>
+        <th>承認</th>
+        <th>改訂記事</th>
+      </tr>
+      <tr>
+        <td>A01</td>
+        <td>2024.2.14</td>
+        <td>清拓実、横山翔琉</td>
+        <td></td>
+        <td>初版</td>
+      </tr>
+      <tr>
+        <td>A02</td>
+        <td>2024.2.16</td>
+        <td>横山翔琉</td>
+        <td></td>
+        <td>最終版</td>
+      </tr>
+    </table>
+
+    <h3>目次</h3>
+    <ul>
+      <li>
+        <a href="#1">1.初めに</a><br>
+      </li>
+      <li>
+        <a href="#2">2.外観図</a><br>
+      </li>
+      <li>
+        <a href="#3">3.各部の完成度評価</a><br>
+       </li>
+      <li>
+        <a href="#3.1">3.1 ロボットアーム</a><br>
+      </li>
+      <li>
+        <a href="#3.2">3.2 エアーチャック</a><br>
+      </li>
+      <li>
+        <a href="#3.3">3.3 ポンプ</a><br>
+      </li>
+      <li>
+        <a href="#3.4">3.4 走行体</a><br>
+      </li>
+      <li>
+        <a href="#4">4.工数分析</a><br>
+      </li>
+      <li>
+        <a href="#5">5.総括</a><br>
+      </li>
+    </ul>
+  
+    <a name="1">
+      <h3>1.初めに</h3>
+    </a>
+    <dl>
+    <dd>
+    <p>
+      本ドキュメントはmirs2405 𝔊𝔘𝔏𝔏ℭのメカニクス開発報告書である。
+  	</p>
+    </dd>
+    </dl>
+  
+      <a name="2">
+        <h3>2.外観図</h3>
+      </a>
+      <dl>
+        <dd>
+          <p>
+            以下に𝔊𝔘𝔏𝔏ℭの外観図を示す。
+          </p>
+          <center>
+            <img src="./../picture/IMG_E3480.JPG"width="1000">
+            <p>図1.全体図</p>
+          </center>
+          <p>
+            以下に𝔊𝔘𝔏𝔏ℭの主なスペックを示す。<br>
+            ＜サイズ＞<br>
+            全長：516.0mm<br>
+            全幅：520.5mm<br>
+            高さ：804.0mm（最小）<br>
+            　　　1335.7mm（最大）<br>
+            ＜重さ＞<br>
+            17.1kg(メカ部品のみ)<br>
+            21.5kg(全部品込み)<br>
+            ＜アーム可搬質量＞<br>
+            0.5kg以下<br>
+            ＜ポンプ容量＞<br>
+            120ml(設計)<br>
+            90ml(実用)<br>
+            <br>
+            サイズと重さについての評価<br>
+            ＜サイズ＞<br>
+            載せなければいけないエレキ部品が多く重心を低く保たなければいけないため、大きくなった。<br>
+            バッテリーが隠れていることやLiDARの死角が走交体の斜め方向にしかない事を考えると無駄のない設計であった。<br>
+            ＜重さ＞<br>
+            CUGO V3が5.2kg、ユニット質量が16.3kg、CUGO V3の積載荷重が80.0kgであることを考えると何の問題もない重量となった。<br>
+            重くなった原因は、剛性を上げるためにアルミとアクリルを多用した事である。<br>
+          </p>
+        </dd>
+      </dl>
+
+    <a name="3">
+      <h3>3.各部の完成度評価</h3>
+    </a>
+    
+      <a name="3.1">
+        <h3>3.1 ロボットアーム</h3>
+      </a>
+      <d1>
+        <dd>
+          <center>
+            <img src="./../picture/nemoto.JPG"width="1000">
+            <p>図2.ロボットアーム根元</p>
+            <br>
+            <img src="./../picture/tyuukan.JPG"width="1000">
+            <p>図3.ロボットアーム中間</p> 
+            <br>
+            <img src="./../picture/sentan.JPG"width="1000">
+            <p>図4.ロボットアーム先端</p> 
+          </center>
+          <p>
+            ＜評価＞<br>
+            ・根元部分の剛性が思ったよりも足りず、タイミングベルトにテンションをかけるとタイミングプーリーが傾く<br>
+            ・中間部分は設計通り何も問題が起こらなかった<br>
+            ・先端部分ではSCS215のホルダーが3Dプリンタでは精度が出ずガタガタだったため接着剤で妥協したが、剛性に問題は無かった<br>
+            ・ポテンションメータがずれることが多くシステムキャリブレーションに時間がかかった<br>
+            6.0点/10.0点<br>
+          </p>
+        </dd>
+      </d1> 
+    
+      <a name="3.2">
+        <h3>3.2 エアーチャック</h3>
+      </a>
+      <d1>
+        <dd>
+          <center>
+            <img src="./../picture/airchuck.JPG"width="1000">
+            <p>図5.エアーチャック</p>
+          </center>
+          <p>
+            ＜評価＞<br>
+            ・吸盤の面積が小さいため普通紙は保持できず、光沢紙限定となってしまった<br>
+            ・空気の漏れがあるため保持時間が短くなった<br>
+            8.0点/10.0点<br>
+          </p>
+        </dd>
+      </d1> 
+    
+      <a name="3.3">
+        <h3>3.3 ポンプ</h3>
+      </a>
+      <d1>
+        <dd>
+          <center>
+            <img src="./../picture/pump.JPG"width="1000">
+            <p>図6.ポンプ</p>
+          </center>          
+          <p>
+            ＜評価＞<br>
+            ・ナットの摩耗が激しい<br>
+            ・RS540-SHのdutyを下げないと20Aヒューズが飛ぶ<br>
+            9.5点/10.0点<br>
+          </p>
+        </dd>
+      </d1>
+
+      <a name="3.4">
+        <h3>3.3 走行体</h3>
+      </a>
+      <d1>
+        <dd>
+          <center>
+            <img src="./../picture/base_top.JPG"width="1000">
+            <p>図7.走行体-上</p><br>
+            <img src="./../picture/base_left.JPG"width="1000">
+            <p>図8.走行体-左</p><br>
+            <img src="./../picture/base_right.JPG"width="1000">
+            <p>図9.走行体-右</p><br>
+            <img src="./../picture/base_front.JPG"width="1000">
+            <p>図10.走行体-前</p><br>
+            <img src="./../picture/base_back.JPG"width="1000">
+            <p>図11.走行体-後</p>
+          </center>          
+          <p>
+            ＜評価＞<br>
+            ・バッテリーを隠し、エレキ部品が見え、マイコン系のI/Oが引き出しやすい設計になっている<br>
+            ・死角はあるもののLiDARで360°見渡せる<br>
+            ・配線作業はとても時間がかかる<br>
+            ・ターンテーブルの剛性に問題がある<br>
+            6.0点/10.0点
+          </p>
+        </dd>
+      </d1>
+
+    <a name="4">
+      <h3>4.工数分析</h3>
+    </a>
+      <d1>
+        <dd>
+          <p>
+            メカに関する作業割合を示す。<br>
+          </p>
+          <center>
+            <img src="../picture/fig16.png"width="1000">
+            <p>図12.詳細設計作業割合</p>
+            <img src="../picture/fig17.png"width="1000">
+            <p>図13.製造・試験作業割合</p>
+            <img src="../picture/fig18.png"width="1000">
+            <p>図14.メカの作業の種類別割合</p>
+          </center> 
+
+          <p>
+            ・ポンプの基本設計は横山、改良は松浦、他の全ての設計を横山が行った<br>
+            ・部品の加工は横山と松浦が行った<br>
+            ・組み立ては横山が行った<br>
+            ・設計と工場での加工に時間がかかった(参考：アルミはワイヤカットで10mm/min)<br>
+            ・メカに関する総作業時間は横山231時間、松浦86.5時間であった。<br>
+          </p>
+        </dd>
+      </d1> 
+    
+    <a name="5">
+        <h3>5.総括</h3>
+    </a>
+      <d1>
+        <dd>
+          <p>
+            ＜横山＞<br>
+            計画的に作業しようと6月の終わりから設計を始めたが、夏休み中に全く作業をしなかったせいで後期に大変な思いをした。<br>
+            夏休みが明けてから急いで設計したためか、設計の段階でのミスが多く、製造の段階での手戻りが多かった。<br>
+            度重なるミスでASSYの組み立てが遅れ、全体が組み上がったのは発表会1週間前であった。<br>
+            しかし、最終的には剛性や可動域に問題がなく、初めてのロボットアームにしては完成度は高いと思う。<br>
+            エアチャックへの挑戦も成功し、ポンプも問題なく動作した。<br>
+            よって全体的には満足のいく結果であった。<br>
+            ＜松浦＞<br>
+          </p>
+        </dd>
+      </d1>
+
+    <hr>
+    <br>
+    <address>
+      <a href="http://www2.denshi.numazu-ct.ac.jp/mirsdoc2/" target="_self">MIRS DATABASE</a>
+    </address>
+  </body>
+</html>

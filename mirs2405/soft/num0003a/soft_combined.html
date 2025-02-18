@@ -1,0 +1,197 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-SOHT-0001 MIRS2405 ソフト開発報告書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 ソフト開発報告書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-soft-0003</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>B01</td>
+<td>2025.1.27</td>
+<td>清拓実、平沢快斗、幸航輝</td>
+<td>香川</td>
+<td>初版</td>
+</tr>
+</table>
+
+<br>
+
+
+  <!-- ここから本文-->
+  <h3>目次</h3>
+  <ol>
+      <li><a href="#1">ドキュメント概要  </a><br></li>
+      <li>
+        <a href="#2">作成した主なプログラムと評価</a>
+        <ul>
+          <li><a href="#2-1">ロボットアーム</a></li>
+          <li><a href="#2-2">デバイス間の通信</a></li>
+          <li><a href="#2-3">年齢、性別の測定(対象者選別)</a></li>
+          <li><a href="#2-4">身長の測定(対象者選別)</a></li>
+        </ul>
+      </li>
+      <li><a href="#3">総括</a></li>
+      <li><a href="#4">プログラムのソースコード</a></li>
+  </ol>
+  <hr>
+
+
+
+  <h2><a name="1">1.ドキュメント概要</a></h2>
+  <dd>
+      <p>
+          本ドキュメントはmirs2405𝔊𝔘𝔏𝔏ℭのソフトウェア開発報告書である。
+      </p>
+
+  </dd>
+  
+  <h2><a name="2">2.作成したプログラムと評価</a></h2>
+  <div>
+      <ul>
+          <li>
+              <h3><a name="2-1">ロボットアーム</a></h3>
+              <!-- <iframe src="https://www.youtube.com/embed/yn59zjOSwMk?&autoplay=1&mute=1&controls=0&loop=1&playlist=yn59zjOSwMk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+              <p>
+                  ＜概要＞<br>
+                  根本の関節と第二関節をポテンショメータの値を読み取って角度制御し、第3関節とエアーチャックはシリアルサーボモータで制御、ターンテーブルはエンコーダで制御した。根本の関節と第二関節は地面に対して鉛直の時を0度とした。角度偏差のPID制御のほかに、三角関数を用いて、アームの位置による負荷の変化に対応した。<br>
+                  <br>
+                  ＜評価＞<br>
+                  紙の取得や、目的の高さへ持っていくことができたため、角度制御の精度は高い。一方、移動角度が大きい場合のアームの動作が速く、安全性にかけている。<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  移動角度が大きい場合のアームの動作速度について、PID制御の割合が高いことが考えられるため、全体的にパラメータを下げ、アームの位置による制御の割合をあげることが対応策として考えられる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  Arduino UNO: turntable.ino, gripper.ino<br>
+                  Raspberry Pi Pico: arm.ino, joint.ino, difine.h<br>
+              </p>
+          </li>
+          <br>
+          <li>
+            <h3><a name="2-2">デバイス間の通信</a></h3>
+            <p>
+                ＜概要＞<br>
+                USBシリアル通信を用いてraspiから各マイコンに指令を送ることでシステムの統合を行った。配列に識別番号、指令値を入れることでマイコン側がどの処理を行うかを決定した。esp32で取得したラジコン入力をraspiが受信することで動作開始のタイミングを決定できるようにした。<br>
+                <br>
+                ＜評価＞<br>
+                デバイス間の通信ではraspiで設定した識別番号通りの処理をマイコンが行い、指令値通りに制御することができた。ラジコン入力を加えたときに動作が開始することも確認した。<br>
+                <br>
+                ＜改良・改善案＞<br>
+                ラジコン入力で動作中のシステムを遠隔終了させることで、安全面が向上すると考えられる。<br>
+                <br>
+                ＜対象プログラム＞<br>
+                Arduino: raspi.ino<br>
+                pico: raspi.ino<br>
+                esp32: raspi.ino, radicon.ino<br>
+                raspi: send.py, receive.py<br>
+            </p>
+        </li>
+          <br>
+          <li>
+              <h3><a name="2-3">年齢、性別の測定(対象者選別)</a></h3>
+              <p>
+                  ＜概要＞<br>
+                  deepfaceのライブラリを用いて年齢検出,性別判定を行いデータの通信を行うプログラム<br>
+                  <br>
+                  ＜評価＞<br>
+                  基本的に1人について検出しており、10fps程でた<br>
+                  同じ画面に2人以上入っている場合、先に画面に入っている人をトラッキングし測定する<br>
+                  cuda,tensorflowを用いることでgpuで処理がてき処理速度が早くなり、30fps程でた<br>
+                  性別判定の精度は高いが、年齢検出の精度はそこまで高くなかった<br>
+                  また、IPv4を用いることでデータ通信ができる<br>
+                  <br>
+                  ＜改良・改善案＞<br>
+                  公開されているモデル(deepfaceのモデル)は、西洋人のデータセットを主に学習されており、男女判定は問題なかったが年齢検出はそこまで精度が出なかったと考えられる。<br>
+                  アジア人の写真を用いて追加学習を行うことで年齢推定の精度改善が期待できる。<br>
+                  <br>
+                  ＜対象プログラム＞<br>
+                  server_deepface.py(サーバー側), client_deepface.py(クライアント側)<br>
+              </p>
+          </li>
+          <br>
+          <li>
+            <h3><a name="2-4">身長の測定(対象者選別)</a></h3>
+            <center>
+              <img src="../document_3/skeleton_estimation.png" height="300"><br>
+              ※この画像は骨格推定の機能です</br></center>
+            <p>
+                ＜概要＞<br>
+                googleのmediapipe(骨格推定モデル)と深度カメラを用いた身長測定<br>
+                <br>
+                ＜評価＞<br>
+                骨格推定で検出された顔の中心の座標と足先の座標を用いて、深度カメラの値より身長を算出するプログラムを作成した。<br>
+                顔の中心の座標を用いているため、正確な身長は測定されないため、定数倍と定数を足すことで実際に近い身長を予測した。<br>
+                顔の中心と足先がカメラに映りさえすれば、人物が前後に移動しても、身長測定の精度は非常に高くなる。<br>
+                cuda,pytorchを用いることでgpuで処理がてき処理速度が早くなった。<br>
+                また、IPv4を用いることでデータ通信ができる。<br>
+                <br>
+                ＜改良・改善案＞<br>
+                身長測定を行うプロフラムのアルゴリズム上、顔の中心と足先がカメラに映らないと計測できない。<br>
+                骨格推定で検出された顔の中心の座標と足先の座標を用いていたが、他の部位の座標も用いることでより正確な身長測定が可能となり、全身が入らなくても測定できるになると考えられる。<br>
+                <br>
+                ＜対象プログラム＞<br>
+                main_height_server_plus.py,zed_hight_class_plus.py,server_value_update.py(サーバー側) <br>
+                client_json.py(クライアント側)
+            </p>
+        </li>
+        </ul>
+  </div>
+
+  <h2><a name="3">3.総括</a></h2>
+  <dd>
+      安全性については、Liderを用いた衝突回避や、電流検知での衝突検知など、改善の余地があったと思う。<br>
+      走行については実現したかったが時間がなく、実現をあきらめた。<br>
+      一方、一番重要な機能であるロボットアームの角度制御と、対象の身長測定については、実装できたのでよかった。<br>
+      全体的に開発時間が足りなかったので、必要機能を絞り、開発計画を立てることがとても重要であると感じた。<br>
+      全体を通して、不満な点もあったが、満足のいく結果だったと思う。<br>
+      <br>
+  </dd>
+
+  <h2><a name="4">4.プログラムのソースコード</a></h2>
+  <dd>
+      <p>
+          プログラムのソースコードを以下に示す。<br>
+          <a href="https://github.com/puwaer/mirs2405">MIRS2405 𝔊𝔘𝔏𝔏ℭで使用したリポジトリ</a><br>
+          <a href="https://github.com/puwaer/mirs2405/tree/main/program/honban">MIRS2405 𝔊𝔘𝔏𝔏ℭで最終的に使用したプログラム</a>
+      </p>
+  </dd>
+
+ </body>
+ <br>
+ <hr>
+ <br>
+ <address>
+  <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405">MIRS2031ドキュメント管理台帳</a>
+
+</address>
+ </html>

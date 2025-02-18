@@ -1,0 +1,357 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MIRS2405-SOHT-0001 MIRS2405 ソフト詳細設計書</title>
+<link rel=stylesheet href="../../style.css" type="text/css">
+<link rel="shortcut icon" href="../../gullc_rogo.jpg" />
+<script>
+    setInterval("elm=document.getElementById('izutani');if(elm.style.visibility=='visible'){elm.style.visibility='hidden';}else{elm.style.visibility='visible';}",10000)
+</script>
+
+</head>
+
+<body bgcolor="#000000" text="#ff00ff" link="#ff0000" vlink="#ffff00" alink="#0000ff">
+
+    <img src="../../gullc_rogo.jpg" width="100">
+
+<table class="table010">
+<tr>
+<th>名称</th>
+<td class="title">MIRS2405 ソフト詳細設計書</td>
+</tr>
+<tr>
+<th>番号</th>
+<td class="title">MIRS2405-soft-0002</td>
+</tr>
+</table>
+<br>
+
+<table class="table010">
+<tr>
+<th>版数</th>
+<th>最終更新日</th>
+<th>作成</th>
+<th>承認</th>
+<th>改訂記事</th>
+</tr>
+<tr>
+<td>B01</td>
+<td>2025.1.24</td>
+<td>清拓実、平沢快斗、幸航輝</td>
+<td>香川</td>
+<td>初版</td>
+</tr>
+</table>
+
+<br>
+
+
+  <!-- ここから本文-->
+  <h3>目次</h3>
+  <li><a href = "#1">1.ドキュメント</a></li>
+  <li><a href = "#2">2.機能概要</a></li>
+  <li><a href = "#3">3.モジュール構成</a></li>
+  <li><a href = "#4">4.フローチャート</a></li>
+
+  <a name="1">
+    <h3>1.ドキュメント</h3>
+
+     <p> 本ドキュメントはmirs2405𝔊𝔘𝔏𝔏ℭのソフトウェア詳細設計書である。</p>
+  </a>
+  <a name="2">
+    <h3>2.機能概要</h3>
+    <p>機能と概要をTable1に示す。</p>
+    <table class="table010">
+      <caption><center><b>Table.1:機能と概要</b></center></caption>
+      <tr>
+      <th>機能</th>
+      <th>概要</th>
+      <th>記述言語</th>
+      </tr>
+
+      <tr>
+        <td>ロボットアーム</td>
+        <td>ロボットアームで、その人が受け取りやすい高さで人に渡す<br>
+            配布物を自動で補充
+        </td>
+        <td>python, Arduino言語</td>
+        </tr>
+
+      <tr>
+        <td>対象者選別</td>
+        <td>配る対象を年齢、性別、身長を選別する</td>
+        <td>python</td>
+        </tr>
+
+      <tr>
+      <td>ラジコン操作</td>
+      <td>緊急時や、持ち運びのために、ラジコンで操作可能</td>
+      <td>python, Arduino言語</td>
+      </tr>
+
+      </table>
+  </a><br>
+
+  <a name="3">
+    <h3>3.モジュール構成</h3>
+    <a name="3.1">
+        <h3>3.1.Raspberry Pi 4 modleB</h3>
+            <p>Raspberry Piのモジュール構成をfigure1, Table2に示す。</p>
+            <center>
+            <img src="../document_2/module_rapi.png" width="800"><br>
+              figure.1 :Raspberry Piのモジュール構成</br></center>
+             <table class="table010">
+               <caption><center><b>Table.2:Raspberry Piのモジュール詳細</b></center></caption>
+               <tr>
+               <th>モジュール名</th>
+               <th>概要</th>
+               </tr>
+  
+               <tr>
+               <td>main.py</td>
+               <td>全体のメインプログラム</td>
+               </tr>
+               
+               <tr>
+                 <td>config.py</td>
+                 <td>各マイコンのポート、ボーレートを定義</td>
+               </tr>
+
+               <tr>
+                <td>send.py</td>
+                <td>各マイコンにシリアル通信で指令を送信</td>
+              </tr>
+  
+              <tr>
+                <td>receive.py</td>
+                <td>各マイコンからシリアル通信で値を受信</td>
+              </tr>
+
+  
+              <tr>
+                <td>read_json.py</td>
+                <td>身長,年齢、性別のデータをjsonファイルから読み取るプログラム</td>
+              </tr>
+
+              <tr>
+                <td>client_json.py</td>
+                <td>ipアドレスを用いて文字列を通信しjsonファイルに書き込むプログラム(身長データを受け取る),クライアント側</td>
+              </tr>     
+
+              <tr>
+                <td>client_deepface.py</td>
+                <td>ipアドレスを用いて文字列を通信しjsonファイルに書き込むプログラム(年齢,性別データを受け取る),クライアント側</td>
+              </tr>
+
+                </table> 
+          </a><br>
+
+          
+        <a name="3.2">
+          <h3>3.2.Arduino UNO</h3>
+          <p>Arduinoのモジュール構成をfigure2, Table3に示す。</p>
+          <center>
+          <img src="../document_2/module_arduino.png" width="800"><br>
+            figure.2 :Arduinoのモジュール構成</br></center>
+          
+           <table class="table010">
+            <caption><center><b>Table.3:プログラムの説明</b></center></caption>
+             <tr>
+            <th>モジュール名</th>
+             <th>概要</th>
+             </tr>
+
+            <tr>
+              <td>main.ino</td>
+              <td>setup関数および、loop関数の定義</td>
+              </tr>
+            <tr>
+              <td>init.ino</td>
+              <td>ピンの初期化や、シリアル通信の転送レートの定義。一度だけ実行される</td>
+              </tr>
+            <tr>
+              <td>raspi.ino</td>
+              <td>raspiとのUSBシリアル通信</td>
+              </tr>
+            <tr>
+              <td>turntable.ino</td>
+              <td>ターンテーブルの制御</td>
+              </tr>
+            <tr>
+              <td>gripper.ino</td>
+              <td>グリッパー、エアーチャック、ポンプの制御</td>
+              </tr>
+            <tr>
+              <td>radicon.ino</td>
+              <td>ラジコン操作</td>
+              </tr>
+            <tr>
+              <td>defiine.h</td>
+              <td>ゲインやパラメータ、ピンの定義</td>
+              </tr>
+            </table>   
+        </a><br>
+
+        <a name="3.3">
+          <h3>3.3.Raspberry Pi pico</h3>
+          <p>Raspberry Pi picoのモジュール構成をfigure3, Table4に示す。</p>
+          <center>
+          <img src="../document_2/module_pico.png" width="800"><br>
+            figure.3 :Raspberry Pi picoのモジュール構成</br></center>
+          
+           <table class="table010">
+            <caption><center><b>Table.4:プログラムの説明</b></center></caption>
+             <tr>
+            <th>モジュール名</th>
+             <th>概要</th>
+             </tr>
+
+             <tr>
+              <td>main.ino</td>
+              <td>setup関数および、loop関数の定義</td>
+              </tr>
+            <tr>
+              <td>init.ino</td>
+              <td>ピンの初期化や、シリアル通信の転送レートの定義。一度だけ実行される</td>
+              </tr>
+            <tr>
+              <td>raspi.ino</td>
+              <td>raspiとのUSBシリアル通信</td>
+              </tr>
+            <tr>
+              <td>run.ino</td>
+              <td>x,y座標を取得し、極座標に変換して走行する</td>
+              </tr>
+            <tr>
+              <td>encoder.ino</td>
+              <td>クローラのエンコーダの読み取り</td>
+              </tr>
+            <tr>
+              <td>PID.ino</td>
+              <td>クローラをPID制御</td>
+              </tr>
+            <tr>
+              <td>motor.ino</td>
+              <td>クローラを制御</td>
+              </tr>
+            <tr>
+              <td>arm.ino</td>
+              <td>各関節に角度を送る</td>
+              </tr>
+            <tr>
+              <td>joint.ino</td>
+              <td>各関節のモータ制御</td>
+              </tr>
+            <tr>
+              <td>radicon.ino</td>
+              <td>ラジコン操作</td>
+              </tr>
+            <tr>
+              <td>define.h</td>
+              <td>ゲインやパラメータ、ピンの定義</td>
+              </tr>
+            </table> 
+        </a><br>
+
+        <a name="3.4">
+            <h3>3.4.jetson nano</h3>
+            <p>jetson nanoのモジュール構成をfigure4,Table5に示す。</p>
+            <center>
+            <img src="../document_2/module_jetson_pc.png" height="300"><br>
+              figure.4 :jetsonのモジュール構成</br></center>
+            <br>
+              
+             <table class="table010">
+              <caption><center><b>Table.5:プログラムの説明</b></center></caption>
+               <tr>
+              <th>モジュール名</th>
+               <th>概要</th>
+               </tr>
+  
+               <tr>
+                <td>main_height_server_plus.py</td>
+                <td>server_value_update.pyとzed_hight_class_plus.pyを用いて身長を推定し送信するプログラム</td>
+              </tr>
+              <tr>
+                <td>server_value_update.py</td>
+                <td>ipアドレスを用いて文字列を通信するプログラム、サーバー側</td>
+              </tr>
+              <tr>
+                <td>zed_hight_class_plus.py</td>
+                <td>骨格推定を用いて身長を推定する</td>
+              </tr>
+              <tr>
+                <td>server_deepface.py</td>
+                <td>年齢、性別を推定し送信するプログラム、サーバー側</td>
+              </tr>
+
+              </table> 
+          </a><br>
+
+          <a name="3.5">
+            <h3>3.5.esp32</h3>
+            <p>esp32のモジュール構成をfigure5,Table6に示す。</p>
+            <center>
+            <img src="../document_2/module_esp.png" height="300"><br>
+              figure.5 :esp32のモジュール構成</br></center>
+            <br>
+              
+             <table class="table010">
+              <caption><center><b>Table.6:プログラムの説明</b></center></caption>
+               <tr>
+              <th>モジュール名</th>
+               <th>概要</th>
+               </tr>
+  
+               <tr>
+                <td>main.ino</td>
+                <td>setup関数および、loop関数の定義</td>
+              </tr>
+              <tr>
+                <td>defind.h</td>
+                <td>ゲインやパラメータ、ピンの定義</td>
+              </tr>
+              <tr>
+                <td>init.ino</td>
+                <td>ピンの初期化や、シリアル通信の転送レートの定義。一度だけ実行される</td>
+              </tr>
+              <tr>
+                <td>raspi.ino</td>
+                <td>raspiからの指令を受信</td>
+              </tr>
+              <tr>
+                <td>radicon.ino</td>
+                <td>ラジコン入力の取得とraspiへの送信</td>
+              </tr>
+              </table> 
+          </a><br>
+
+  <a name="4">
+    <h3>4.フローチャート</h3>
+        <h3>4.1.全体</h3>
+        <p>全体のフローチャートをfigure7に示す。</p>
+        <center>
+            <img src="../document_2/フローチャート_メイン.jpeg" width="800"><br>
+            figure.6 :フローチャート(全体)</br></center>
+        <h3>4.2.衝突回避</h3>
+        <p>衝突回避のフローチャートをfigure8に示す。</p>
+        <center>
+            <img src="../document_2/フローチャート_衝突回避.jpeg" width="800"><br>
+            figure.7 :フローチャート(衝突回避)</br></center>
+        <h3>4.3.ラジコン操作</h3>
+        <p>ラジコン操作ののフローチャートをfigure9に示す。</p>
+        <center>
+            <img src="../document_2/フローチャート_ラジコン操作.jpeg" width="800"><br>
+            figure.8 :フローチャート(ラジコン操作)</br></center>
+  </a>
+
+ </body>
+ <br>
+ <hr>
+ <br>
+ <address>
+  <a href="https://www2.denshi.numazu-ct.ac.jp/mirsdoc2/mirs2405">MIRS2031ドキュメント管理台帳</a>
+
+</address>
+ </html>
